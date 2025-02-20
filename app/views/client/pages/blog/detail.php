@@ -1,0 +1,1 @@
+<h2>TRANG CHI TIẾT BÀI VIẾT</h2>
