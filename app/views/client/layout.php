@@ -50,68 +50,66 @@
         </div>
       </div>
     </div>
-  </div>
+    
+    <?php require_once "./app/views/client/pages/" . $data["page"] . ".php" ?>
 
-
-  <?php require_once "./app/views/client/pages/" . $data["page"] . ".php" ?>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__wrapper">
-        <div class="footer__info">
-          <div class="footer__contact">
-            <div class="footer__logo">
-              <a href="home">
-                <img src="./public/images/logo.svg" alt="">
-              </a>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__wrapper">
+          <div class="footer__info">
+            <div class="footer__contact">
+              <div class="footer__logo">
+                <a href="home">
+                  <img src="./public/images/logo.svg" alt="">
+                </a>
+              </div>
+              <h2>Subscribe to Our Newsletter:</h2>
+              <p>Receive Updates on New Arrivals and Special Promotions!</p>
+              <form action="#" class="footer__form">
+                <input type="text" name="email-contact" id="email-contact" placeholder="Your email here">
+                <button type="submit">Submit</button>
+              </form>
+              <div class="footer__social">
+                <i class="facebook fa-brands fa-facebook-f"></i>
+                <i class="instagram fa-brands fa-instagram"></i>
+              </div>
             </div>
-            <h2>Subscribe to Our Newsletter:</h2>
-            <p>Receive Updates on New Arrivals and Special Promotions!</p>
-            <form action="#" class="footer__form">
-              <input type="text" name="email-contact" id="email-contact" placeholder="Your email here">
-              <button type="submit">Submit</button>
-            </form>
-            <div class="footer__social">
-              <i class="facebook fa-brands fa-facebook-f"></i>
-              <i class="instagram fa-brands fa-instagram"></i>
+            <div class="footer__nav">
+              <div class="footer__col footer__shopping">
+                <h3>Shopping</h3>
+                <ul>
+                  <li>Payments</li>
+                  <li>Delivery options</li>
+                  <li>Buyer protection</li>
+                </ul>
+              </div>
+              <div class="footer__col footer__customer">
+                <h3>Customer care</h3>
+                <ul>
+                  <li>FAQ</li>
+                  <li>Contact Us</li>
+                </ul>
+              </div>
+              <div class=" footer__col footer__pages">
+                <h3>Pages</h3>
+                <ul>
+                  <li>Home</li>
+                  <li>About Us</li>
+                  <li>Shop</li>
+                  <li>Blog</li>
+                </ul>
+              </div>
             </div>
           </div>
-          <div class="footer__nav">
-            <div class="footer__col footer__shopping">
-              <h3>Shopping</h3>
-              <ul>
-                <li>Payments</li>
-                <li>Delivery options</li>
-                <li>Buyer protection</li>
-              </ul>
-            </div>
-            <div class="footer__col footer__customer">
-              <h3>Customer care</h3>
-              <ul>
-                <li>FAQ</li>
-                <li>Contact Us</li>
-              </ul>
-            </div>
-            <div class=" footer__col footer__pages">
-              <h3>Pages</h3>
-              <ul>
-                <li>Home</li>
-                <li>About Us</li>
-                <li>Shop</li>
-                <li>Blog</li>
-              </ul>
-            </div>
+          <div class="footer__copyright">
+            2025 Perfumé Inc. All rights reserved
           </div>
-        </div>
-        <div class="footer__copyright">
-          2025 Perfumé Inc. All rights reserved
         </div>
       </div>
-    </div>
-  </footer>
-
+    </footer>
+  </div>
   <script src="public/js/client/script.js"></script>
-  <?php if (isset($data['task'])) echo '<script src="public/js/client/script'.$data['task'].'.js"></script>'; ?>
+  <?php if (isset($data['task'])) echo '<script src="public/js/client/script' . $data['task'] . '.js"></script>'; ?>
 </body>
 
 </html>
