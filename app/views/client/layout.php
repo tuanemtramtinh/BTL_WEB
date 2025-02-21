@@ -12,30 +12,46 @@
 </head>
 
 <body>
-  <header class="header">
-    <div class="container">
-      <div class="header__wrapper">
-        <div class="header__logo">
-          <a href="home">
-            <img src="public/images/logo.svg" alt="">
-          </a>
+  <div class="wrapper">
+    <header class="header">
+      <div class="container">
+        <div class="header__wrapper">
+          <div class="header__logo">
+            <a href="home">
+              <img src="public/images/logo.svg" alt="">
+            </a>
+          </div>
+          <ul class="header__nav">
+            <li><a href="home">Home</a></li>
+            <li><a href="product">Shop</a></li>
+            <li><a href="about">About us</a></li>
+            <li><a href="blog">Blog</a></li>
+            <li><a href="contact">Contact</a></li>
+            <li><a href="question">FAQ</a></li>
+          </ul>
+          <div class="header__utility">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
         </div>
-        <ul class="header__nav">
-          <li><a href="home">Home</a></li>
-          <li><a href="product">Shop</a></li>
-          <li><a href="about">About us</a></li>
-          <li><a href="blog">Blog</a></li>
-          <li><a href="contact">Contact</a></li>
-          <li><a href="question">FAQ</a></li>
-        </ul>
-        <div class="header__utility">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <i class="fa-solid fa-user"></i>
-          <i class="fa-solid fa-cart-shopping"></i>
+      </div>
+    </header>
+    <div class="search">
+      <div class="search__wrapper">
+        <div class="container">
+          <form class="search__text">
+            <input type="text" name="product" id="product">
+            <button type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <i class="fa-solid fa-xmark close"></i>
+          </form>
         </div>
       </div>
     </div>
-  </header>
+  </div>
+
 
   <?php require_once "./app/views/client/pages/" . $data["page"] . ".php" ?>
 
