@@ -72,6 +72,67 @@ ul {
 
 /* End Header */
 
+/* Auth */
+
+.auth__wrapper {
+  width: 100%;
+  /* background-color: wheat; */
+}
+
+.auth__nav {
+  font-size: 30px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.auth__nav a {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.auth__nav .active {
+  color: white;
+}
+
+.auth__form {
+  width: 35%;
+  background-image: url('../../images/bg-1.png');
+  background-color: rgba(0, 0, 0, 0.7);
+  background-blend-mode:darken;
+  background-size: cover;
+  background-position: center;
+  padding: 100px 0px;
+  margin: 50px auto;
+  height: 600px;
+}
+
+.auth__form input {
+  margin-bottom: 30px;
+}
+
+.auth__form input[type="text"],
+input[type="password"] {
+  width: 100%;
+  font-size: 20px;
+  background: transparent;
+  outline: none;
+  border: 3px solid white;
+  font-weight: 500;
+  padding: 10px;
+}
+
+.auth__form button {
+  background-color: #AB572D;
+  outline: none;
+  border: 0;
+  width: 100%;
+  font-size: 20px;
+  padding: 5px;
+}
+
+
+/* End Auth */
+
 /* Footer */
 .footer {
   background: radial-gradient(circle at center,

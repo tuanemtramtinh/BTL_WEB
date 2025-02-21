@@ -8,7 +8,7 @@
   <base href="<?= BASE_URL ?>/">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="public/css/client/style.css">
-  <?php if (isset($data['task'])) echo '<link rel="stylesheet" href="public/css/client/style_'.$data['task'].'.css">'; ?>
+  <?php if (isset($data['task'])) echo '<link rel="stylesheet" href="public/css/client/style_' . $data['task'] . '.css">'; ?>
 </head>
 
 <body>
@@ -16,7 +16,9 @@
     <div class="container">
       <div class="header__wrapper">
         <div class="header__logo">
-          <img src="public/images/logo.svg" alt="">
+          <a href="home">
+            <img src="public/images/logo.svg" alt="">
+          </a>
         </div>
         <ul class="header__nav">
           <li><a href="home">Home</a></li>
@@ -43,12 +45,14 @@
         <div class="footer__info">
           <div class="footer__contact">
             <div class="footer__logo">
-              <img src="./public/images/logo.svg" alt="">
+              <a href="home">
+                <img src="./public/images/logo.svg" alt="">
+              </a>
             </div>
             <h2>Subscribe to Our Newsletter:</h2>
             <p>Receive Updates on New Arrivals and Special Promotions!</p>
             <form action="#" class="footer__form">
-              <input type="text" name="email" id="email" placeholder="Your email here">
+              <input type="text" name="email-contact" id="email-contact" placeholder="Your email here">
               <button type="submit">Submit</button>
             </form>
             <div class="footer__social">
