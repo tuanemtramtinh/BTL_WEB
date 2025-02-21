@@ -5,7 +5,7 @@
       <div class="product__list">
         <div class="product__item">
           <div class="product__item-image">
-            <img src="" alt="">
+            <img src="public/images/fragment-1.png" alt="">
           </div>
           <h3 class="product__item-title">
 
