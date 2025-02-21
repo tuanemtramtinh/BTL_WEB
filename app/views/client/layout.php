@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $data["title"] ?></title>
   <base href="<?= BASE_URL ?>/">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="public/css/client/style.css">
   <?php if (isset($data['task'])) echo '<link rel="stylesheet" href="public/css/client/style_' . $data['task'] . '.css">'; ?>
@@ -108,6 +111,8 @@
       </div>
     </footer>
   </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="public/js/client/script.js"></script>
   <?php if (isset($data['task'])) echo '<script src="public/js/client/script_' . $data['task'] . '.js"></script>'; ?>
 </body>
