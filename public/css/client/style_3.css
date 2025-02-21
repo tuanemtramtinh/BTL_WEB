@@ -1,0 +1,28 @@
+.product {
+  margin: 90px 0px;
+}
+
+.product__title {
+  color: #AB572D;
+  font-size: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #AB572D;
+  text-align: center;
+}
+
+.product__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 65px;
+  margin: 75px 0;
+}
+
+.product__item {
+  background: linear-gradient(180deg,
+      /* Direction: top to bottom */
+      #000000 0%,
+      /* Starting color (pure black) */
+      #1a1a1a 100%
+      /* Slightly lighter black at the bottom */
+    );
+}
