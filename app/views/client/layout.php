@@ -50,7 +50,7 @@
         </div>
       </div>
     </div>
-    
+
     <?php require_once "./app/views/client/pages/" . $data["page"] . ".php" ?>
 
     <footer class="footer">
@@ -109,7 +109,7 @@
     </footer>
   </div>
   <script src="public/js/client/script.js"></script>
-  <?php if (isset($data['task'])) echo '<script src="public/js/client/script' . $data['task'] . '.js"></script>'; ?>
+  <?php if (isset($data['task'])) echo '<script src="public/js/client/script_' . $data['task'] . '.js"></script>'; ?>
 </body>
 
 </html>
