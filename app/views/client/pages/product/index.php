@@ -45,8 +45,8 @@
             <span class="product__item-price">$ 220.00</span>
             <span class="product__item-volume">100ml</span>
           </div>
-        </a>
-         -->
+        </a> -->
+        
       </div>
       <div class="product__pagination">
         <a href="">
