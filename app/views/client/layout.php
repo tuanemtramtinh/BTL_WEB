@@ -16,7 +16,7 @@
 
 <body>
   <div class="wrapper">
-    <header class="header">
+    <header class="header sticky">
       <div class="container">
         <div class="header__wrapper">
           <div class="header__logo">
