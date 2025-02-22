@@ -19,25 +19,30 @@ var swiper2 = new Swiper(".mySwiper2", {
   },
 });
 var swiper3 = new Swiper(".mySwiper3", {
-  loop:true,
+  loop: true,
   slidesPerView: 4,
   spaceBetween: 45,
 });
 
-// End Swiper 
+// End Swiper
 
-const quantityAdjustDecrease = document.querySelector(".quantity-adjust .fa-minus");
-const quantityAdjustIncrease = document.querySelector(".quantity-adjust .fa-plus");
-const quanityNum = document.querySelector(".quantity-adjust input");
+// Quantity Adjust
 
-if (quanityNum) {
-  quantityAdjustIncrease.addEventListener("click", () => {
-    quanityNum.value = +quanityNum.value + 1;
-  })
-  quantityAdjustDecrease.addEventListener("click", () => {
-    if (+quanityNum.value > 1)
-    quanityNum.value = +quanityNum.value - 1;
-  })
+const quantityAdjust = document.querySelectorAll(".quantity-adjust");
+if (quantityAdjust.length > 0) {
+  quantityAdjust.forEach((item) => {
+    const decreaseButton = item.querySelector(".fa-minus");
+    const increaseButton = item.querySelector(".fa-plus");
+    const input = item.querySelector("input");
+
+    increaseButton.addEventListener("click", () => {
+      input.value = +input.value + 1;
+    });
+
+    decreaseButton.addEventListener("click", () => {
+      if (+input.value > 1) input.value = +input.value - 1;
+    });
+  });
 }
 
-
+// End Quantity Adjust
