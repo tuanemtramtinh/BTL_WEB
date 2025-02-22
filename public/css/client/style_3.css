@@ -363,7 +363,8 @@ input[type="number"] {
 .cart__table-total{
   flex: 2;
   font-size: 18px;
-  color: #AB572D;
+  color: white;
+  opacity: 0.8;
   font-weight: 700;
   text-align: right;
 }
@@ -382,9 +383,17 @@ input[type="number"] {
   justify-content: space-between;
 }
 
+.cart__subtotal span:last-child{
+  font-weight: 700;
+}
+
 .cart__shipping {
   display: flex;
   justify-content: space-between;
+}
+
+.cart__shipping span:last-child{
+  font-weight: 700;
 }
 
 .cart__promo{
