@@ -36,6 +36,11 @@ ul {
   padding: 0 100px;
 }
 
+.sticky{
+  position: sticky;
+  top: 0;
+}
+
 /* Wrapper  */
 
 .wrapper {
@@ -45,15 +50,6 @@ ul {
 /* End Wrapper */
 
 /* Header */
-
-.header{
-  position: fixed;
-  top: 0px;
-  left: 0;
-  right: 0;
-  background-color: black;
-  z-index: 10;
-}
 
 .header__wrapper {
   display: flex;
