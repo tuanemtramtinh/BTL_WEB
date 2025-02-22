@@ -39,6 +39,7 @@ ul {
 .sticky{
   position: sticky;
   top: 0;
+  z-index: 10;
 }
 
 /* Wrapper  */
@@ -50,6 +51,10 @@ ul {
 /* End Wrapper */
 
 /* Header */
+
+.header{
+  background: black;
+}
 
 .header__wrapper {
   display: flex;
