@@ -13,7 +13,8 @@ input[type="number"] {
 /* Product List */
 
 .product {
-  margin: 90px 0px;
+  margin-top: 180px;
+  margin-bottom: 90px;
 }
 
 .product__title {
@@ -145,7 +146,8 @@ input[type="number"] {
 
 .product-detail__buy {
   display: flex;
-  margin: 90px 0px;
+  margin-top: 185px;
+  margin-bottom: 90px;
   justify-content: space-between;
 }
 

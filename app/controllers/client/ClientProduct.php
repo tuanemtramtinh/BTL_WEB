@@ -11,7 +11,7 @@ class ClientProduct extends Controller {
     ]);
   }
 
-  public function detail() {
+  public function detail($productId = '') {
     $this->view("layout", [
       "title" => "Chi Tiết Sản Phẩm",
       "page" => "product/detail",
