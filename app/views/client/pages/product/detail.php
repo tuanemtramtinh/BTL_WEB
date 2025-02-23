@@ -1,10 +1,10 @@
 <div class="product-detail">
-  <div class="container">
+  <div class="container" >
     <div class="product-detail__wrapper">
       <div class="product-detail__buy">
         <div class="product-detail__image">
-          <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
-            <div class="swiper-wrapper">
+          <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2" id="image">
+            <div class="swiper-wrapper" >
               <div class="swiper-slide">
                 <img src="public/images/fragment-1.png" alt="">
               </div>

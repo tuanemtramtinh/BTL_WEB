@@ -1,8 +1,8 @@
 <div class="product">
   <div class="container">
     <div class="product__wrapper">
-      <h2 class="product__title">Products</h2>
-      <div class="product__filter">
+      <h2 data-aos="fade-down" data-aos-duration="1000" class="product__title">Products</h2>
+      <div data-aos="fade-left" data-aos-duration="1000" class="product__filter">
         <label for="filter">Sort by</label>
         <div class="product__filter-wrapper">
           <select name="filter" id="filter">
@@ -16,9 +16,10 @@
       </div>
       <div class="product__list">
         <?php
+        $delay = 50;
         for ($i=0; $i < 8; $i++) { 
           echo '
-          <a href="#" class="product__item">
+          <a href="product/detail" class="product__item">
             <div class="product__item-image">
               <img src="public/images/fragment-1.png" alt="">
             </div>

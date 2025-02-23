@@ -26,6 +26,10 @@ var swiper3 = new Swiper(".mySwiper3", {
 
 // End Swiper
 
+// ViewerJs
+const viewer = new Viewer(document.getElementById('image'));
+// End ViewerJs
+
 // Quantity Adjust
 
 const quantityAdjust = document.querySelectorAll(".quantity-adjust");
