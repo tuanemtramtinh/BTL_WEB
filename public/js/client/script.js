@@ -1,3 +1,8 @@
+// AOS
+AOS.init();
+// End AOS
+
+// Header Search
 const headerSearch = document.querySelector(".header__utility i");
 const search = document.querySelector(".search");
 
@@ -14,3 +19,4 @@ if (search) {
     search.classList.toggle("active");
   })
 }
+// End Header Search
