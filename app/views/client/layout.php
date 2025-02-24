@@ -8,7 +8,9 @@
   <base href="<?= BASE_URL ?>/">
   <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" >
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="public/css/client/style.css">
   <?php if (isset($data['task'])) echo '<link rel="stylesheet" href="public/css/client/style_' . $data['task'] . '.css">'; ?>
@@ -112,6 +114,8 @@
     </footer>
   </div>
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="public/js/client/script.js"></script>
   <?php if (isset($data['task'])) echo '<script src="public/js/client/script_' . $data['task'] . '.js"></script>'; ?>
