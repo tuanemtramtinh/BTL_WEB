@@ -8,7 +8,7 @@
   <base href="<?= BASE_URL ?>/">
   <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" >
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -43,15 +43,126 @@
       </div>
     </header>
     <div class="search">
-      <div class="search__wrapper">
-        <div class="container">
+      <div class="container">
+        <div class="search__wrapper">
+          <div class="search__logo">
+            <img src="public/images/logo.svg" alt="">
+          </div>
+
           <form class="search__text">
-            <input type="text" name="product" id="product">
+            <input type="text" name="product" id="product" placeholder="Search...">
             <button type="submit">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
             <i class="fa-solid fa-xmark close"></i>
           </form>
+
+          <div class="search__popular">
+            <h3>Popular tag: </h3>
+            <ul>
+              <li>Men Perfume</li>
+              <li>Women Perfume</li>
+              <li>Unisex Perfume</li>
+              <li>Unisex Perfume</li>
+              <li>Gucci</li>
+            </ul>
+          </div>
+
+          <div class="search__new-product">
+            <h3>New Product</h3>
+            <div class="search__product-list">
+              <a href="product/detail" class="search__product-item">
+                <div class="search__product-wrapper">
+                  <img src="public/images/product.png" alt="">
+                </div>
+                <div class="search__product-content">
+                  <h4>Luxurious Perfume</h4>
+                  <p>$599</p>
+                </div>
+              </a>
+              <?php
+              for ($i = 0; $i < 3; $i++) {
+                echo '
+                  <a href="product/detail" class="search__product-item">
+                    <div class="search__product-wrapper">
+                      <img src="public/images/product.png" alt="">
+                    </div>
+                    <div class="search__product-content">
+                      <h4>Luxurious Perfume</h4>
+                      <p>$599</p>
+                    </div>
+                  </a>
+                  ';
+              }
+              ?>
+            </div>
+          </div>
+
+          <div class="search__category">
+            <h3>Category</h3>
+            <div class="search__product-list">
+              <a href="product/detail" class="search__product-item">
+                <div class="search__product-wrapper">
+                  <img src="public/images/product.png" alt="">
+                </div>
+                <div class="search__product-content">
+                  <h4>Luxurious Perfume</h4>
+                  <p>$599</p>
+                </div>
+              </a>
+
+              <?php
+              for ($i = 0; $i < 3; $i++) {
+                echo '
+                <a href="product/detail" class="search__product-item">
+                  <div class="search__product-wrapper">
+                    <img src="public/images/product.png" alt="">
+                  </div>
+                  <div class="search__product-content">
+                    <h4>Luxurious Perfume</h4>
+                    <p>$599</p>
+                  </div>
+                </a>
+                ';
+              }
+              ?>
+            </div>
+          </div>
+
+          <div class="search__result">
+            <h3>Search Result</h3>
+            <div class="search__product-list">
+              <a href="product/detail" class="search__product-item">
+                <div class="search__product-wrapper">
+                  <img src="public/images/product.png" alt="">
+                </div>
+                <div class="search__product-content">
+                  <h4>Luxurious Perfume</h4>
+                  <p>$599</p>
+                </div>
+              </a>
+
+              <?php
+              for ($i = 0; $i < 3; $i++) {
+                echo '
+                <a href="product/detail" class="search__product-item">
+                  <div class="search__product-wrapper">
+                    <img src="public/images/product.png" alt="">
+                  </div>
+                  <div class="search__product-content">
+                    <h4>Luxurious Perfume</h4>
+                    <p>$599</p>
+                  </div>
+                </a>
+                ';
+              }
+              ?>
+            </div>
+          </div>
+
+          <div class="search__footer">
+            2025 Perfumé Inc. All rights reserved
+          </div>
         </div>
       </div>
     </div>
@@ -113,7 +224,7 @@
       </div>
     </footer>
   </div>
-  
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
