@@ -45,8 +45,10 @@
         </div>
         <div class="blog__search-chua">
             <div class="blog__search">
-                <input type="text" placeholder="Search here" class="blog__search-input">
-                <i class="fa-solid fa-magnifying-glass blog__search-icon"></i>
+                <input type="text" placeholder="Search here" class="blog__search-input" id="search-input">
+                <label for="search-input" class="blog__search-label">
+                    <i class="fa-solid fa-magnifying-glass blog__search-icon" id="blog__search-icon-js"></i>
+                </label>
             </div>
             <div class="blog__search-keyword">
                 <ul class="blog__search-list">

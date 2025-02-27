@@ -1,9 +1,13 @@
 <div class="container">
     <div class="detail_page">
-        <p class="detail_info-date">January 5, 2023</p>
-        <p class="detail_info-author">Perfume Collections</p>
-
-        <h2 class="detail__header">The Art of Curating a Luxury Perfume Collection: A Symphony of Scents and Stories</h2>
+        <div class="detail_page-header">
+            <div class="detail_page-info">
+                <p class="detail_info-date">January 5, 2023</p>
+                <p class="detail_info-author">Perfume Collections</p>
+            </div>
+    
+            <h2 class="detail__header">The Art of Curating a Luxury Perfume Collection: A Symphony of Scents and Stories</h2>
+        </div>
         <img src="public/images/mau 2.png" alt="" class="detail__bg-img">
         <p class="detail__content">
 Welcome, fragrance aficionados, to an exquisite journey into the captivating world of luxury perfume collections. A symphony of scents awaits as we delve into the art of curating a fragrance collection that reflects your essence, evokes cherished memories, and embraces the finest olfactory masterpieces. Just as a maestro conducts an orchestra, we invite you to become the conductor of your very own perfume symphony.
