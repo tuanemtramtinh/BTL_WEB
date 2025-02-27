@@ -137,19 +137,39 @@
 .blog__search-list{
     display: flex;
     flex-wrap: wrap;
+    transition: opacity 0.6s ease;
 }
 
 .blog__search-item{
     color:#fff;
     padding: 10px 20px;
-    background: rgba(171, 87, 45, 0.6);
+    background: rgba(171, 87, 45, 0.8);
     border-radius: 20px;
     margin: 23px 20px 0;
     cursor: pointer;
+    transition: opacity 0.6s ease;
 }
 
-.blog__search-item:hover{
+.blog__search-label:hover .blog__search-icon {
+    animation: shake 0.5s;
+}
+  
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+
+/* .blog__search-item:hover{
     background: rgba(171, 87, 45, 1);
+} */
+
+
+.blog__search-list:hover > :not(:hover){
+    opacity: 0.4;
 }
 
 .blog__search{
@@ -429,4 +449,187 @@
 
 .detail__cmt-react-text{
     margin-left: 8px;
+}
+
+.header__wrapper{
+    display: none;
+    /* bo */
+}
+
+.footer__wrapper{
+    display: none;
+    /* bo */
+}
+
+.container{
+    max-width: 1440px; 
+    /* bo */
+}
+
+@media (max-width: 1024px) {
+    .blog__best{
+        grid-template-columns:100%;
+    }
+
+    .blog__best-left-header, .blog__best-left-text{
+        text-align: center;
+    }
+
+    .blog__posts{
+        grid-template-columns: repeat(2, 1fr);
+        
+    }
+
+    .blog__best-left{
+        padding-right: 0;
+    }
+
+    .container{
+        width: 100%;
+        /* bo */
+    }
+
+    .blog__header{
+        font-weight: 800;
+        margin-bottom: 12px;
+    }
+
+    .blog__search-list{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+
+    .blog__best-left-header{
+        margin-bottom: 12px;
+    }
+    .blog__search-item{
+        min-width: 120px;
+        text-align: center;
+    }
+
+    .blog__search{
+        width: 100%;
+        height: 60px;
+        background: #333333;
+        flex-direction: row-reverse;
+    }
+
+    .blog__search-input{
+        color:#ccc;
+    }
+
+    .blog__search-chua{
+        margin-top: 32px;
+        margin-bottom: 28px;
+    }
+
+    .blog__search-input::placeholder {
+        color: #ccc; 
+        opacity: 1;   
+      }
+
+    .blog__search-icon{
+        color:#ccc;
+        margin-right: 8px;
+        margin-left: 16px;
+    }
+
+    .blog__search-icon:hover{
+        color:#ccc;
+    }
+
+    .blog__post-img{
+        border-radius: 12px;
+        width: 100%;
+        aspect-ratio: 1 / 2;
+    }
+
+    .blog__post-content{
+        font-size: 28px;
+    }
+
+    .blog__post-note{
+        font-size: 24px;
+        color: #ccc;
+    }
+
+    .blog__post-readmore{
+        width: 100%;
+        font-size: 24px;
+        padding: 16px 35px;
+    }
+
+    /* detail */
+    .detail_page-header{
+        display: flex;
+        flex-direction: column-reverse;
+        margin-top: 73px;
+    }
+    .detail__header{
+        margin: 0;
+        font-weight: 700;
+    }
+    .detail_info-date{
+        margin-top: 12px;
+        padding-right: 6px;
+        border-right: #ccc solid 2px;
+        color: #ccc;
+    }
+
+    .detail_info-author{
+        padding-left: 6px;
+        color: #ccc;
+
+    }
+
+    .detail_page-info{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .detail__content{
+        margin-bottom: 0;
+    }
+
+    .detail__control{
+        margin-bottom: 40px;
+    }
+
+    .detail__control-post{
+        font-size: 20px;
+    }
+
+    .detail__cmt-header{
+        font-size: 24px;
+    }
+
+    .detail__cmt-btn{
+        width: 100%;
+        border-radius: 5px;
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .detail__cmt-btn-post{
+        margin-left: 42px;
+    }
+}
+
+@media (max-width: 767px) {
+    .blog__posts{
+        grid-template-columns: repeat(1, 1fr);
+        
+    }
+
+    .container{
+        width: 100%;
+        /* bo */
+    }
+
+    .blog__search-list{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
