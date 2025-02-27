@@ -451,20 +451,7 @@
     margin-left: 8px;
 }
 
-.header__wrapper{
-    display: none;
-    /* bo */
-}
 
-.footer__wrapper{
-    display: none;
-    /* bo */
-}
-
-.container{
-    max-width: 1440px; 
-    /* bo */
-}
 
 @media (max-width: 1024px) {
     .blog__best{
@@ -484,10 +471,6 @@
         padding-right: 0;
     }
 
-    .container{
-        width: 100%;
-        /* bo */
-    }
 
     .blog__header{
         font-weight: 800;
@@ -621,11 +604,6 @@
     .blog__posts{
         grid-template-columns: repeat(1, 1fr);
         
-    }
-
-    .container{
-        width: 100%;
-        /* bo */
     }
 
     .blog__search-list{
