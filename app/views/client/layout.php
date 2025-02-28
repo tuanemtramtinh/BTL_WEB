@@ -21,6 +21,8 @@
     <header class="header sticky">
       <div class="container">
         <div class="header__wrapper">
+          <label for="header__nav-mobile-input" class="header__menu-bar fa-solid fa-bars"></label>
+          <input hidden type="checkbox" name="nav" id="header__nav-mobile-input" class="header__nav-input">
           <div class="header__logo">
             <a href="home">
               <img src="public/images/logo.svg" alt="">
@@ -39,6 +41,24 @@
             <i class="fa-solid fa-user"></i>
             <i class="fa-solid fa-cart-shopping"></i>
           </div>
+
+          <label for="header__nav-mobile-input" class="header__overlay">
+
+          </label>
+
+          <div class="header__nav-mobile">
+            <label for="header__nav-mobile-input" class="header__nav-mobile-close fa-solid fa-x"></label>
+            <ul class="header__nav-mobile-list">
+              <li><a href="home">Home</a></li>
+              <li><a href="product">Shop</a></li>
+              <li><a href="about">About us</a></li>
+              <li><a href="blog">Blog</a></li>
+              <li><a href="contact">Contact</a></li>
+              <li><a href="question">FAQ</a></li>
+            </ul>
+          </div>
+
+          
         </div>
       </div>
     </header>
@@ -179,12 +199,21 @@
                   <img src="./public/images/logo.svg" alt="">
                 </a>
               </div>
-              <h2>Subscribe to Our Newsletter:</h2>
-              <p>Receive Updates on New Arrivals and Special Promotions!</p>
-              <form action="#" class="footer__form">
-                <input type="text" name="email-contact" id="email-contact" placeholder="Your email here">
-                <button type="submit">Submit</button>
-              </form>
+              <div class="footer__subscribe">
+                <h2>Subscribe to Our Newsletter:</h2>
+                <p>Receive Updates on New Arrivals and Special Promotions!</p>
+                <form action="#" class="footer__form">
+                  <input type="text" name="email-contact" id="email-contact" placeholder="Your email here">
+                  <button type="submit">Submit</button>
+                </form>
+              </div>
+              <div class="footer__mobile">
+                <ul>
+                  <li><a href="">Contact Us</a></li>
+                  <li><a href="">Blog</a></li>
+                  <li><a href="">FAQ</a></li>
+                </ul>
+              </div>
               <div class="footer__social">
                 <i class="facebook fa-brands fa-facebook-f"></i>
                 <i class="instagram fa-brands fa-instagram"></i>
