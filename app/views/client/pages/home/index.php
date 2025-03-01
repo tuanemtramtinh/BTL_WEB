@@ -1,1 +1,3 @@
-<h2>TRANG CHỦ</h2>
+<div class="container">
+  <h2 class="h2">Trang Chủ</h2>
+</div>

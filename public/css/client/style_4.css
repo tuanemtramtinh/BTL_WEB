@@ -479,7 +479,7 @@
 
     .blog__search-list{
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
     }
 
 
@@ -487,10 +487,15 @@
         margin-bottom: 12px;
     }
     .blog__search-item{
-        min-width: 120px;
+        max-width: 120px;
         text-align: center;
+        padding: 10px;
     }
 
+
+    .blog__slide{
+        margin-top: 20px;
+    }
     .blog__search{
         width: 100%;
         height: 60px;
