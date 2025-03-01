@@ -1,10 +1,10 @@
 <div class="product-detail">
-  <div class="container" >
+  <div class="container">
     <div class="product-detail__wrapper">
       <div class="product-detail__buy">
-        <div class="product-detail__image">
+        <div data-aos="fade-down" data-aos-duration="800" class="product-detail__image">
           <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2" id="image">
-            <div class="swiper-wrapper" >
+            <div class="swiper-wrapper">
               <div class="swiper-slide">
                 <img src="public/images/fragment-1.png" alt="">
               </div>
@@ -44,7 +44,7 @@
             </div>
           </div>
         </div>
-        <div class="product-detail__bag">
+        <div data-aos="fade-down" data-aos-duration="800" class="product-detail__bag">
           <h3 class="product-detail__name">
             Luxurious Elixir
           </h3>
@@ -55,18 +55,20 @@
             $ <span>250.00</span>
           </div>
           <form action="" method="post" class="product-detail__form">
-            <label for="quantity">Qty</label>
-            <div class="quantity-adjust">
-              <i class="fa-solid fa-minus"></i>
-              <input min="1" value="1" type="number" name="quantity" id="quantity">
-              <i class="fa-solid fa-plus"></i>
+            <div class="quantity__wrapper">
+              <label for="quantity">Qty</label>
+              <div class="quantity-adjust">
+                <i class="fa-solid fa-minus"></i>
+                <input min="1" value="1" type="number" name="quantity" id="quantity">
+                <i class="fa-solid fa-plus"></i>
+              </div>
             </div>
             <br>
             <button class="" type="submit">Add to Bag</button>
           </form>
         </div>
       </div>
-      <div class="product-detail__content">
+      <div data-aos="fade-down" data-aos-duration="800" data-aos-delay="200" class="product-detail__content">
         <div class="product-detail__section">
           <h3>Product Details</h3>
           <p>Step into a world of unparalleled opulence with Luxurious Elixir, an exquisite fragrance that weaves an enchanting symphony of gold and luxury. This gilded elixir is a celebration of sophistication, crafted with the finest essences and imbued with the allure of precious golden hues. From the first spritz to the lingering dry-down, Luxurious Elixir promises an intoxicating experience that embodies the essence of lavish indulgence.</p>
@@ -91,13 +93,13 @@
 <div class="product-discover">
   <div class="container">
     <div class="product-discover__wrapper">
-      <h2 class="product-discover__title">
+      <h2 data-aos="fade-down" data-aos-duration="800" class="product-discover__title">
         Discover More
       </h2>
-      <div class="product-discover__list swiper mySwiper3">
+      <div data-aos="fade-down" data-aos-duration="800" data-aos-delay="300" class="product-discover__list swiper mySwiper3">
         <div class="swiper-wrapper">
           <?php
-          for ($i=0; $i < 5; $i++) { 
+          for ($i = 0; $i < 5; $i++) {
             echo '
             <a href="#" class="product__item swiper-slide">
               <div class="product__item-image">

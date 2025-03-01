@@ -1,8 +1,8 @@
 <div class="product">
   <div class="container">
     <div class="product__wrapper">
-      <h2 data-aos="fade-down" data-aos-duration="1000" class="product__title">Products</h2>
-      <div data-aos="fade-left" data-aos-duration="1000" class="product__filter">
+      <h2 data-aos="fade-down" data-aos-duration="500" class="product__title">Products</h2>
+      <div data-aos="fade-left" data-aos-duration="500" class="product__filter">
         <label for="filter">Sort by</label>
         <div class="product__filter-wrapper">
           <select name="filter" id="filter">
@@ -19,7 +19,27 @@
         $delay = 50;
         for ($i=0; $i < 8; $i++) { 
           echo '
-          <a href="product/detail" class="product__item">
+          
+          <div data-aos="fade-down" data-aos-duration="500" class="product__item-wrapper">
+            <a href="product/detail" class="product__item">
+              <div class="product__item-image">
+                <img src="public/images/fragment-1.png" alt="">
+              </div>
+              <h3 class="product__item-title">
+                Luxurious Elixir Rough
+              </h3>
+              <div class="product__item-content">
+                <span class="product__item-price">$ 220.00</span>
+                <span class="product__item-volume">100ml</span>
+              </div>
+            </a>
+          </div>
+          ';
+        }
+        ?>
+
+        <!-- <div data-aos="fade-down" data-aos-duration="1000" class="product__item-wrapper">
+          <a href="#" class="product__item">
             <div class="product__item-image">
               <img src="public/images/fragment-1.png" alt="">
             </div>
@@ -31,22 +51,7 @@
               <span class="product__item-volume">100ml</span>
             </div>
           </a>
-          ';
-        }
-        ?>
-
-        <!-- <a href="#" class="product__item">
-          <div class="product__item-image">
-            <img src="public/images/fragment-1.png" alt="">
-          </div>
-          <h3 class="product__item-title">
-            Luxurious Elixir Rough
-          </h3>
-          <div class="product__item-content">
-            <span class="product__item-price">$ 220.00</span>
-            <span class="product__item-volume">100ml</span>
-          </div>
-        </a> -->
+        </div> -->
         
       </div>
       <div class="product__pagination">

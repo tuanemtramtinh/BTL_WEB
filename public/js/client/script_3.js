@@ -22,6 +22,21 @@ var swiper3 = new Swiper(".mySwiper3", {
   loop: true,
   slidesPerView: 4,
   spaceBetween: 45,
+  breakpoints: {
+    0: {
+      slidesPerView: 2,
+      spaceBetween: 25
+    },
+    767.98: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
+    // >= 1199.98
+    1199.98: {
+      slidesPerView: 4,
+      spaceBetween: 40,
+    },
+  },
 });
 
 // End Swiper

@@ -1,7 +1,3 @@
-<div class="home">
-  <div class="container">
-    <div class="home__wrapper">
-      Trang hỏi/đáp
-    </div>
-  </div>
+<div class="container">
+  <h2 class="h2">Trang Chủ</h2>
 </div>
