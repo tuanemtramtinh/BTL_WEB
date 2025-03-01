@@ -80,10 +80,9 @@
           <div class="search__popular">
             <h3>Popular tag: </h3>
             <ul>
-              <li>Men Perfume</li>
-              <li>Women Perfume</li>
-              <li>Unisex Perfume</li>
-              <li>Unisex Perfume</li>
+              <li>Dior</li>
+              <li>Louis Vuitton</li>
+              <li>Goyard</li>
               <li>Gucci</li>
             </ul>
           </div>
