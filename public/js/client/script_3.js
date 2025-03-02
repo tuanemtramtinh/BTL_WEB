@@ -25,7 +25,7 @@ var swiper3 = new Swiper(".mySwiper3", {
   breakpoints: {
     0: {
       slidesPerView: 2,
-      spaceBetween: 25
+      spaceBetween: 25,
     },
     767.98: {
       slidesPerView: 3,
@@ -42,7 +42,9 @@ var swiper3 = new Swiper(".mySwiper3", {
 // End Swiper
 
 // ViewerJs
-const viewer = new Viewer(document.getElementById('image'));
+if (document.getElementById("image")) {
+  const viewer = new Viewer(document.getElementById("image"));
+}
 // End ViewerJs
 
 // Quantity Adjust

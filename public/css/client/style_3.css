@@ -407,7 +407,6 @@ input[type="number"] {
 }
 
 .cart__table-item{
-  width: 100%;
   display: flex;
   align-items: center;
 }
@@ -514,6 +513,86 @@ input[type="number"] {
   background-color: white;
   color: #AB572D;
 }
+
+.cart__table-price-mobile{
+  display: none;
+}
+
+@media (max-width: 1199.98px) {
+
+}
+
+@media (max-width: 991.98px) {
+
+}
+
+@media (max-width: 767.98px) {
+
+  .cart__title{
+     margin-bottom: 40px;
+  }
+
+  .cart__submit{
+    width: 100%;
+  }
+
+  .cart__submit button {
+    padding: 20px 0px;
+    width: 100%;
+  }
+
+  .cart__table-header{
+    display: none;
+  }
+
+  .cart__table-name h4{
+    font-size: 18px;
+  }
+
+  .cart__table-title:last-child{
+    display: none;
+  }
+
+  .cart__table-item{
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .cart__table-item .cart__table-total{
+    display: none;
+  }
+
+  .cart__table-item .cart__table-name{
+    width: 50%;
+    flex: unset;
+    margin-bottom: 20px;
+  }
+  
+  .cart__table-item-title h4{
+    margin-bottom: 10px;
+  }
+
+  .cart__table-item .cart__table-price{
+    display: none;
+  }
+
+  .cart__table-item .cart__table-quantity{
+    width: 50%;
+    flex: unset;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .cart__table-price-mobile{
+    display: block;
+  }
+}
+
+@media (max-width: 575.98px) {
+
+}
+
 
 /* End Cart */
 
