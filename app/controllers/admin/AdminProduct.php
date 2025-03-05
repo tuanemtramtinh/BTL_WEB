@@ -7,4 +7,8 @@ class AdminProduct extends Controller{
       "page" => "product/index"
     ]);
   }
+
+  public function createProduct() {
+    
+  }
 }
