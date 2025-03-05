@@ -373,6 +373,10 @@
     cursor: pointer;
 }
 
+.detail__cmt-btn:hover{
+    background: #ffffffb0;
+}
+
 .detail__cmt-btn-post {
     display: flex;
     justify-content: end;
