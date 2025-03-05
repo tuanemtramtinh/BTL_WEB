@@ -8,36 +8,28 @@
                 <p class="blog__best-left-text">At Local Face, we believe that perfumery is an extraordinary fusion of art, science, and emotion. Our passion for exquisite fragrances has inspired us to curate a treasure trove of blog posts, each designed to ignite your senses.</p>
             </div>
             <div class="blog__slider">
-                <div class="blog__slider-track">
-                    <div class="blog__slide">
-                        <img src="public/images/Frame 481.png" alt="" class="blog__best-right">
-                    </div>
-                    <div class="blog__slide">
-                        <img src="public/images/mau 2.png" alt="" class="blog__best-right">
-                    </div>
-                    
-                    <div class="blog__slide">
-                        <img src="public/images/Frame 481.png" alt="" class="blog__best-right">
-                    </div>
-                    <div class="blog__slide">
-                        <img src="public/images/mau 2.png" alt="" class="blog__best-right">
-                    </div>
-
-                    <div class="blog__slide">
-                        <img src="public/images/Frame 481.png" alt="" class="blog__best-right">
-                    </div>
-                    <div class="blog__slide">
-                        <img src="public/images/mau 2.png" alt="" class="blog__best-right">
-                    </div>
-
-                    <div class="blog__slide">
-                        <img src="public/images/Frame 481.png" alt="" class="blog__best-right">
-                    </div>
-                    <div class="blog__slide">
-                        <img src="public/images/mau 2.png" alt="" class="blog__best-right">
-                    </div>
-
-                </div>
+                <?php
+                    $lengthBlogPostList = 3;
+                    $tileBlogPostPhone = $lengthBlogPostList * 2;
+                    $withBlogPost = $lengthBlogPostList * 2 * 100;
+                    echo "<div class=\"blog__slider-track\" style=\"width: {$withBlogPost}%;\">";
+                    for($i=0; $i < $lengthBlogPostList; $i++){
+                        echo "<div class=\"blog__slide\">
+                            <img src=\"public/images/Frame 481.png\" alt=\"\" class=\"blog__best-right\">
+                        </div>
+                        <div class=\"blog__slide\">
+                            <img src=\"public/images/mau 2.png\" alt=\"\" class=\"blog__best-right\">
+                        </div>";
+                    }
+                    echo "</div>";
+                    echo "<style>
+                            @media (max-width: 767px) {
+                                .blog__slider-track {
+                                    aspect-ratio: {$tileBlogPostPhone} / 1;
+                                }
+                            }
+                        </style>";
+                    ?>
                 <div class="slide-overlay">
                     <p class="slide-text">This is a display product image</p>
                 </div>
@@ -52,14 +44,20 @@
             </div>
             <div class="blog__search-keyword">
                 <ul class="blog__search-list">
-                    <li class="blog__search-item">All</li>
+                    <!-- <li class="blog__search-item">All</li>
                     <li class="blog__search-item">Perfume</li>
                     <li class="blog__search-item">Event</li>
                     <li class="blog__search-item">Sale</li>
                     <li class="blog__search-item">All</li>
                     <li class="blog__search-item">Perfume</li>
                     <li class="blog__search-item">Event</li>
-                    <li class="blog__search-item">Sale</li>
+                    <li class="blog__search-item">Sale</li> -->
+                    <?php
+                        $lengthSearchList = 8;
+                        for($i=0; $i < $lengthSearchList; $i++){
+                            echo "<li class=\"blog__search-item\">Perfume</li>";
+                        }
+                    ?>
                 </ul>
             </div>
         </div>
@@ -68,11 +66,11 @@
             <?php
                 for($i=0;$i<10;$i++){
                     echo "<div class=\"blog__post-item\">
-                <img src=\"public/images/dartistana_create_a_professional_product_shoot_of_3_perfume_bot_3e6bf181-e7e3-410a-96fa-977eb5e88c24 1.png\" alt=\"\" class=\"blog__post-img\">
-                <p class=\"blog__post-content\">Finding Your Signature Scent: A Guide to Perfume Personalities</p>
-                <p class=\"blog__post-note\">Embark on a journey of self-discovery as we delve into the concept of perfume personalities. From bold and adventurous to elegant and timeless, there's a fragrance that perfectly complements your essence. Let us help you find your signature scent, a fragrant expression of your unique style.</p>
-                <a href=\"http://localhost/BTL_WEB/blog/detail\" class=\"blog__post-readmore-link\"><button class=\"blog__post-readmore\">Read More</button></a>
-            </div>
+                            <img src=\"public/images/dartistana_create_a_professional_product_shoot_of_3_perfume_bot_3e6bf181-e7e3-410a-96fa-977eb5e88c24 1.png\" alt=\"\" class=\"blog__post-img\">
+                            <p class=\"blog__post-content\">Finding Your Signature Scent: A Guide to Perfume Personalities</p>
+                            <p class=\"blog__post-note\">Embark on a journey of self-discovery as we delve into the concept of perfume personalities. From bold and adventurous to elegant and timeless, there's a fragrance that perfectly complements your essence. Let us help you find your signature scent, a fragrant expression of your unique style.</p>
+                            <a href=\"http://localhost/BTL_WEB/blog/detail\" class=\"blog__post-readmore-link\"><button class=\"blog__post-readmore\">Read More</button></a>
+                        </div>
                     ";
                 }
             ?>

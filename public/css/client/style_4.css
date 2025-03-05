@@ -478,6 +478,8 @@ color: #fff;
 
 
 @media (max-width: 1024px) {
+
+
     .blog__best{
         grid-template-columns:100%;
     }
@@ -639,4 +641,8 @@ color: #fff;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
     }
+
+    /* .blog__slider-track{
+        aspect-ratio: 8 / 1;
+    } */
 }
