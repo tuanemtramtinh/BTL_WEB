@@ -65,72 +65,41 @@ Kiara Smith
                     </div>
                 </div>
                 <div class="detail__cmt-list">
-                    <div class="detail__cmt-item">
-                        <img src="public/images/mau avt.png" alt="" class="detail__cmt-user-img">
-                        <div class="detail__cmt-content">
-                            <div class="detail__cmt-user-info">
-                                <p class="detail__cmt-user">John Doe</p>
-                                <p class="detail__cmt-time">2023-01-05 12:00:00</p>
+                    <?php
+                        $nameClassLike= "react-toggle-like";
+                        $nameClassDislike= "react-toggle-dislike";
+                        $nameClass= "like-dislike";
+                        for($i=0; $i < 4; $i++){
+                            echo "<div class=\"detail__cmt-item\">
+                        <img src=\"public/images/mau avt.png\" alt=\"\" class=\"detail__cmt-user-img\">
+                        <div class=\"detail__cmt-content\">
+                            <div class=\"detail__cmt-user-info\">
+                                <p class=\"detail__cmt-user\">John Doe</p>
+                                <p class=\"detail__cmt-time\">2023-01-05 12:00:00</p>
                             </div>
-                            <p class="detail__cmt-text">This is a great post! Thank you for sharing your knowledge.</p>
+                            <p class=\"detail__cmt-text\">This is a great post! Thank you for sharing your knowledge.</p>
 
-                            <div class="detail__cmt-react">
-                                <div class="detail__cmt-react-item">
-                                    <i class="fa-regular fa-thumbs-up"></i>
-                                    <p class="detail__cmt-react-text">12</p>
-                                </div>
-                                <div class="detail__cmt-react-item">
-                                    <i class="fa-regular fa-thumbs-down"></i>
-                                    <p class="detail__cmt-react-text">12</p>
-                                </div>
-                            </div> 
+                            <div class=\"detail__cmt-react\">
+                                
+                                <input type=\"radio\" id=\"{$nameClassLike}-{$i}\" class=\"react-toggle\" name=\"{$nameClass}-{$i}\" />
+                                <label for=\"{$nameClassLike}-{$i}\" class=\"detail__cmt-react-item\">
+                                    <i class=\"fa-regular fa-thumbs-up\"></i>
+                                    <p class=\"detail__cmt-react-text\">12</p>
+                                </label>
+                                
+                                <input type=\"radio\" id=\"{$nameClassDislike}-{$i}\" class=\"react-toggle\" name=\"{$nameClass}-{$i}\" />
+                                <label for=\"{$nameClassDislike}-{$i}\" class=\"detail__cmt-react-item\">
+                                    <i class=\"fa-regular fa-thumbs-down\"></i> <!-- Thường là thumbs-down -->
+                                    <p class=\"detail__cmt-react-text\">12</p>
+                                </label>
+                            </div>
+
                         </div>
     
-                    </div>
-                    <div class="detail__cmt-item">
-                        <img src="public/images/mau avt.png" alt="" class="detail__cmt-user-img">
-                        <div class="detail__cmt-content">
-                            <div class="detail__cmt-user-info">
-                                <p class="detail__cmt-user">John Doe</p>
-                                <p class="detail__cmt-time">2023-01-05 12:00:00</p>
-                            </div>
-                            <p class="detail__cmt-text">This is a great post! Thank you for sharing your knowledge.</p>
+                    </div>";
+                        }
 
-                            <div class="detail__cmt-react">
-                                <div class="detail__cmt-react-item">
-                                    <i class="fa-regular fa-thumbs-up"></i>
-                                    <p class="detail__cmt-react-text">12</p>
-                                </div>
-                                <div class="detail__cmt-react-item">
-                                    <i class="fa-regular fa-thumbs-down"></i>
-                                    <p class="detail__cmt-react-text">12</p>
-                                </div>
-                            </div> 
-                        </div>
-    
-                    </div>
-                    <div class="detail__cmt-item">
-                        <img src="public/images/mau avt.png" alt="" class="detail__cmt-user-img">
-                        <div class="detail__cmt-content">
-                            <div class="detail__cmt-user-info">
-                                <p class="detail__cmt-user">John Doe</p>
-                                <p class="detail__cmt-time">2023-01-05 12:00:00</p>
-                            </div>
-                            <p class="detail__cmt-text">This is a great post! Thank you for sharing your knowledge.</p>
-
-                            <div class="detail__cmt-react">
-                                <div class="detail__cmt-react-item">
-                                    <i class="fa-regular fa-thumbs-up"></i>
-                                    <p class="detail__cmt-react-text">12</p>
-                                </div>
-                                <div class="detail__cmt-react-item">
-                                    <i class="fa-regular fa-thumbs-down"></i>
-                                    <p class="detail__cmt-react-text">12</p>
-                                </div>
-                            </div> 
-                        </div>
-    
-                    </div>
+                    ?>
                 </div>
         </div>
     </div>

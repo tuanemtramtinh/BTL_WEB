@@ -429,22 +429,47 @@
     width: 127px;
     justify-content: space-between;
     margin-top: 8px;
-    opacity: 0.6;
     font-size: 16px;
+    color: #cccccc86;
+
 }
+
 
 .detail__cmt-react-item{
     display: flex;
+    color: #cccccc86;
+    transition: filter 0.5s ease;
+
 }
 
 .detail__cmt-react-item i{
     cursor: pointer;
+    color: #cccccc86;
 }
 
-.detail__cmt-react-item:hover{
-    opacity: 0.4;
+.detail__cmt-react-item p{
+    color: #cccccc86;
+
 }
 
+.detail__cmt-react-item.clicked i,
+.detail__cmt-react-item.clicked p {
+  color: #ccc;
+}
+
+.react-toggle {
+    display: none; 
+  }
+  
+.react-toggle:checked + .detail__cmt-react-item i,
+.react-toggle:checked + .detail__cmt-react-item p {
+color: #fff;
+}
+
+.react-toggle:checked + .detail__cmt-react-item i,
+.react-toggle:checked + .detail__cmt-react-item p {
+color: #fff; 
+}
 
 .detail__cmt-react-text{
     margin-left: 8px;
