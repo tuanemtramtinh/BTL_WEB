@@ -65,48 +65,17 @@
         </div>
         
         <div class="blog__posts">
-            <div class="blog__post-item">
-                <img src="public/images/dartistana_create_a_professional_product_shoot_of_3_perfume_bot_3e6bf181-e7e3-410a-96fa-977eb5e88c24 1.png" alt="" class="blog__post-img">
-                <p class="blog__post-content">Finding Your Signature Scent: A Guide to Perfume Personalities</p>
-                <p class="blog__post-note">Embark on a journey of self-discovery as we delve into the concept of perfume personalities. From bold and adventurous to elegant and timeless, there's a fragrance that perfectly complements your essence. Let us help you find your signature scent, a fragrant expression of your unique style.</p>
-                <a href="http://localhost/BTL_WEB/blog/detail" class="blog__post-readmore-link"><button class="blog__post-readmore">Read More</button></a>
+            <?php
+                for($i=0;$i<10;$i++){
+                    echo "<div class=\"blog__post-item\">
+                <img src=\"public/images/dartistana_create_a_professional_product_shoot_of_3_perfume_bot_3e6bf181-e7e3-410a-96fa-977eb5e88c24 1.png\" alt=\"\" class=\"blog__post-img\">
+                <p class=\"blog__post-content\">Finding Your Signature Scent: A Guide to Perfume Personalities</p>
+                <p class=\"blog__post-note\">Embark on a journey of self-discovery as we delve into the concept of perfume personalities. From bold and adventurous to elegant and timeless, there's a fragrance that perfectly complements your essence. Let us help you find your signature scent, a fragrant expression of your unique style.</p>
+                <a href=\"http://localhost/BTL_WEB/blog/detail\" class=\"blog__post-readmore-link\"><button class=\"blog__post-readmore\">Read More</button></a>
             </div>
-            <div class="blog__post-item">
-                <img src="public/images/dartistana_create_a_professional_product_shoot_of_3_perfume_bot_3e6bf181-e7e3-410a-96fa-977eb5e88c24 1.png" alt="" class="blog__post-img">
-                <p class="blog__post-content">Finding Your Signature Scent: A Guide to Perfume Personalities</p>
-                <p class="blog__post-note">Embark on a journey of self-discovery as we delve into the concept of perfume personalities. From bold and adventurous to elegant and timeless, there's a fragrance that perfectly complements your essence. Let us help you find your signature scent, a fragrant expression of your unique style.</p>
-                <a href="http://localhost/BTL_WEB/blog/detail" class="blog__post-readmore-link"><button class="blog__post-readmore">Read More</button></a>
-            </div>
-            <div class="blog__post-item">
-                <img src="public/images/dartistana_create_a_professional_product_shoot_of_3_perfume_bot_3e6bf181-e7e3-410a-96fa-977eb5e88c24 1.png" alt="" class="blog__post-img">
-                <p class="blog__post-content">Finding Your Signature Scent: A Guide to Perfume Personalities</p>
-                <p class="blog__post-note">Embark on a journey of self-discovery as we delve into the concept of perfume personalities. From bold and adventurous to elegant and timeless, there's a fragrance that perfectly complements your essence. Let us help you find your signature scent, a fragrant expression of your unique style.</p>
-                <a href="http://localhost/BTL_WEB/blog/detail" class="blog__post-readmore-link"><button class="blog__post-readmore">Read More</button></a>
-            </div>
-            <div class="blog__post-item">
-                <img src="public/images/dartistana_create_a_professional_product_shoot_of_3_perfume_bot_3e6bf181-e7e3-410a-96fa-977eb5e88c24 1.png" alt="" class="blog__post-img">
-                <p class="blog__post-content">Finding Your Signature Scent: A Guide to Perfume Personalities Finding Your Signature Scent: A Guide to Perfume Personalities</p>
-                <p class="blog__post-note">Embark on a journey of self-discovery as we delve into the concept of perfume personalities. Embark on a journey of self-discovery as we delve into the concept of perfume personalities. From bold and adventurous to elegant and timeless, there's a fragrance that perfectly complements your essence. Let us help you find your signature scent, a fragrant expression of your unique style.</p>
-                <a href="http://localhost/BTL_WEB/blog/detail" class="blog__post-readmore-link"><button class="blog__post-readmore">Read More</button></a>
-            </div>
-            <div class="blog__post-item">
-                <img src="public/images/dartistana_create_a_professional_product_shoot_of_3_perfume_bot_3e6bf181-e7e3-410a-96fa-977eb5e88c24 1.png" alt="" class="blog__post-img">
-                <p class="blog__post-content">Finding Your Signature Scent: A Guide to Perfume Personalities</p>
-                <p class="blog__post-note">Embark on a journey of self-discovery as we delve into the concept of perfume personalities. From bold and adventurous to elegant and timeless, there's a fragrance that perfectly complements your essence. Let us help you find your signature scent, a fragrant expression of your unique style.</p>
-                <a href="http://localhost/BTL_WEB/blog/detail" class="blog__post-readmore-link"><button class="blog__post-readmore">Read More</button></a>
-            </div>
-            <div class="blog__post-item">
-                <img src="public/images/dartistana_create_a_professional_product_shoot_of_3_perfume_bot_3e6bf181-e7e3-410a-96fa-977eb5e88c24 1.png" alt="" class="blog__post-img">
-                <p class="blog__post-content">Finding Your Signature Scent: A Guide to Perfume Personalities</p>
-                <p class="blog__post-note">Embark on a journey of self-discovery as we delve into the concept of perfume personalities. From bold and adventurous to elegant and timeless, there's a fragrance that perfectly complements your essence. Let us help you find your signature scent, a fragrant expression of your unique style.</p>
-                <a href="http://localhost/BTL_WEB/blog/detail" class="blog__post-readmore-link"><button class="blog__post-readmore">Read More</button></a>
-            </div>
-            <div class="blog__post-item">
-                <img src="public/images/dartistana_create_a_professional_product_shoot_of_3_perfume_bot_3e6bf181-e7e3-410a-96fa-977eb5e88c24 1.png" alt="" class="blog__post-img">
-                <p class="blog__post-content">Finding Your Signature Scent: A Guide to Perfume Personalities</p>
-                <p class="blog__post-note">Embark on a journey of self-discovery as we delve into the concept of perfume personalities. From bold and adventurous to elegant and timeless, there's a fragrance that perfectly complements your essence. Let us help you find your signature scent, a fragrant expression of your unique style.</p>
-                <a href="http://localhost/BTL_WEB/blog/detail" class="blog__post-readmore-link"><button class="blog__post-readmore">Read More</button></a>
-            </div>
+                    ";
+                }
+            ?>
         </div>
     </div>
 </div>
