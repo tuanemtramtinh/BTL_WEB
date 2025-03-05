@@ -637,11 +637,17 @@ color: #fff;
     }
 
     .blog__search-list{
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        /* grid-template-columns: repeat(3, 1fr); */
     }
 
-    /* .blog__slider-track{
-        aspect-ratio: 8 / 1;
-    } */
+    .blog__search-item{
+        margin: 20px 10px 0;
+    }
+
+    .blog__slider-track{
+        margin-top: 24px;
+    }
 }
