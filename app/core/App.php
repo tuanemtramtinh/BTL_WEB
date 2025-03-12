@@ -12,16 +12,16 @@ class App
 
     if (isset($url[0]) && $url[0] == 'admin') {
       unset($url[0]);
-      $url[1] = ucfirst($url[1]);
+      $url[1] = isset($url[1]) ? ucfirst($url[1]) : 'Dashboard';
       $url[1] = 'Admin' . $url[1];
       if (isset($url[1]) && file_exists('./app/controllers/admin/' . $url[1] . '.php')) {
         $this->controller = $url[1];
         unset($url[1]);
       }
-      require_once './app/controllers/admin' . $this->controller . '.php';
+      require_once './app/controllers/admin/' . $this->controller . '.php';
       $this->controller = new $this->controller;
       if (isset($url[2]) && method_exists($this->controller, $url[2])) {
-        $this->method = $url[21];
+        $this->method = $url[2];
         unset($url[2]);
       }
     } else {
