@@ -7,7 +7,7 @@
             <h5 class="card-title">
                 Blog List
             </h5>
-            <a href="../admin/blog/detail" class="btn btn-primary">Add blog</a>
+            <a href="../admin/blog/add" class="btn btn-primary">Add blog</a>
         </div>
         <div class="card-body">
             <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
