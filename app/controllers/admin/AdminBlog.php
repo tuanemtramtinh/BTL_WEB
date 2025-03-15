@@ -16,4 +16,11 @@ class AdminBlog extends Controller
       "page" => "blog/detail"
     ]);
   }
+
+  public function add() {
+    $this->viewAdmin("layout", [
+      "title" => "Tạo Blog",
+      "page" => "blog/add"
+    ]);
+  }
 }
