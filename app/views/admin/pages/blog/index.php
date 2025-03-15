@@ -7,7 +7,7 @@
             <h5 class="card-title">
                 Blog List
             </h5>
-            <button type="button" class="btn btn-primary">Thêm bài viết</button>
+            <a href="../admin/blog/detail" class="btn btn-primary">Add blog</a>
         </div>
         <div class="card-body">
             <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
@@ -46,14 +46,14 @@
                                 <td>Finding Your Signature Scent: A Guide to Perfume Personalities</td>
                                 <td class="text-bold-500">Animation</td>
                                 <td>27/05/2004</td>
-                                <td><a href="#">View Full Detail <i class="bi bi-chevron-double-right"></i></a></td>
+                                <td><a href="../admin/blog/detail">View Full Detail <i class="bi bi-chevron-double-right"></i></a></td>
                             </tr>';
                             }
                             ?>
                         </tbody>
                     </table>
                 </div>
-                <div class="dataTable-bottom">
+                <div class="dataTable-bottom" style="display: flex;justify-content: space-between;">
                     <div class="dataTable-info">Showing 1 to 10 of 10 entries</div>
                     <nav class="dataTable-pagination">
                         <ul class="dataTable-pagination-list pagination pagination-primary">
