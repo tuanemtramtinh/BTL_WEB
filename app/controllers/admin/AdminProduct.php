@@ -8,6 +8,13 @@ class AdminProduct extends Controller{
     ]);
   }
 
+  public function detail(){
+    $this->viewAdmin("layout", [
+      "title" => "Product",
+      "page" => "product/detail"
+    ]);
+  }
+
   public function createProduct() {
     
   }
