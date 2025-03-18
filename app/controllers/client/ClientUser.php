@@ -10,4 +10,12 @@ class ClientUser extends Controller {
       "task" => 2
     ]);
   }
+
+  public function profile(){
+    $this->view("layout", [
+      "title" => "Trang Cá Nhân",
+      "page" => "user/profile",
+      "task" => 2
+    ]);
+  }
 }
