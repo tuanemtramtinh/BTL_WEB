@@ -225,3 +225,163 @@
   border-radius: 20px;
 }
 /* End Contact */
+
+/*Start user overview*/
+.section1__wrapper {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 35px;
+}
+
+.section1__avatar {
+  width: 225px;
+  height: 225px;
+  margin-right: 50px;
+  position: relative;
+}
+
+.section1__info-name {
+  font-weight: 900;
+  font-size: 36px;
+}
+.section1__info-status {
+  font-weight: 500;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.user-overview__section2 {
+  margin-top: 25px;
+}
+.section2__wrapper {
+  display: flex;
+}
+
+.section2__left-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  margin-right: 25px;
+}
+
+.left-section__option {
+  display: flex;
+  justify-self: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.option__icon {
+  width: 20px;
+  height: 23px;
+  margin-right: 25px;
+}
+
+.option__text {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.right-section__info-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.right-section__order-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 40px;
+}
+
+.right-section__password-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 40px;
+}
+
+.section__title {
+  font-weight: 900;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.info-section__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.form-group__lable {
+  font-weight: 500;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.form-group__input {
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  width: 405px;
+  height: 60px;
+}
+
+.form-submit__btn {
+  background-color: rgba(171, 87, 45, 1);
+  border-radius: 8px;
+  margin-top: 35px;
+  padding: 30px 20px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.order-section__table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #111;
+}
+
+.order-section__table th,
+.order-section__table td {
+  padding: 12px;
+  border-bottom: 1px solid #333;
+  text-align: left;
+}
+
+.order-section__table th {
+  background: #222;
+}
+
+.order-section__table a {
+  color: rgba(171, 87, 45, 1);
+  text-decoration: none;
+}
+
+.order-section__table a:hover {
+  text-decoration: underline;
+}
+
+input[type="password"] {
+  all: unset;
+}
+
+/*End user overview*/
+
+/*Start user profile*/
+
+.user-profile__section2 {
+  margin-top: 25px;
+}
+
+.right-section__user-details {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 30px;
+}
+
+/*End user profile*/
