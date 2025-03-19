@@ -271,6 +271,7 @@
   justify-self: space-between;
   align-items: center;
   margin-bottom: 15px;
+  padding: 15px;
 }
 
 .option__icon {
@@ -384,4 +385,21 @@ input[type="password"] {
   padding: 30px;
 }
 
+.active__option {
+  background-color: rgba(171, 87, 45, 1);
+  border-radius: 10px;
+}
+
 /*End user profile*/
+
+/*Start history order*/
+.history__section2 {
+  margin-top: 25px;
+}
+/*End history order*/
+
+/*Start password*/
+.password__section2 {
+  margin-top: 25px;
+}
+/*End password*/

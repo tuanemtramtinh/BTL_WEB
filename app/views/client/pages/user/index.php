@@ -21,13 +21,13 @@
                     <img src="public/images/tt-option-1.png" alt="user icon" class="option__icon">
                     <p class="option__text">Personal Information</p>
                 </a>
-                <a href="" class="left-section__option">
+                <a href="user/history" class="left-section__option">
                     <img src="public/images/tt-option-2.png" alt="user icon" class="option__icon">
                     <p class="option__text">Order History</p>
                 </a>
-                <a href="" class="left-section__option" style="margin: 0;">
+                <a href="user/password" class="left-section__option" style="margin: 0;">
                     <img src="public/images/tt-option-3.png" alt="user icon" class="option__icon">
-                    <p class="option__text">Personal Information</p>
+                    <p class="option__text">Change Password</p>
                 </a>
             </div>
             <div class="section2__right-section">
