@@ -12,6 +12,73 @@
         </div>
     </div>
 </div>
+
+<div class="about__section-bonus">
+    <div class="container">
+        <div class="about__section-bonus-wrapper">
+            <h4 class="section-bonus__title">
+                The Executive Team
+            </h4>
+            <div class="section-bonus__team">
+                <div class="team__card">
+                    <img src="public/images/tt-avatar-3.png" alt="" class="card__avatar">
+                    <div class="card__info-detail">
+                        <h4 class="info-detail__name">
+                            Trieu Man cute
+                        </h4>
+                        <p class="info-detail__job">
+                            Boss
+                        </p>
+                        <p class="info-detail__describe">
+                            Artist is a term applied to a person who engages in an activity deemed to be an art.
+                        </p>
+                    </div>
+                </div>
+                <div class="team__card">
+                    <img src="public/images/tt-avatar-3.png" alt="" class="card__avatar">
+                    <div class="card__info-detail">
+                        <h4 class="info-detail__name">
+                            Trieu Man cute
+                        </h4>
+                        <p class="info-detail__job">
+                            Boss
+                        </p>
+                        <p class="info-detail__describe">
+                            Artist is a term applied to a person who engages in an activity deemed to be an art.
+                        </p>
+                    </div>
+                </div>
+                <div class="team__card">
+                    <img src="public/images/tt-avatar-3.png" alt="" class="card__avatar">
+                    <div class="card__info-detail">
+                        <h4 class="info-detail__name">
+                            Trieu Man cute
+                        </h4>
+                        <p class="info-detail__job">
+                            Boss
+                        </p>
+                        <p class="info-detail__describe">
+                            Artist is a term applied to a person who engages in an activity deemed to be an art.
+                        </p>
+                    </div>
+                </div>
+                <div class="team__card">
+                    <img src="public/images/tt-avatar-3.png" alt="" class="card__avatar">
+                    <div class="card__info-detail">
+                        <h4 class="info-detail__name">
+                            Trieu Man cute
+                        </h4>
+                        <p class="info-detail__job">
+                            Boss
+                        </p>
+                        <p class="info-detail__describe">
+                            Artist is a term applied to a person who engages in an activity deemed to be an art.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="about__section2">
