@@ -17,7 +17,7 @@ class UserModel extends DB {
   }
 
   public function findUserByEmail($email) {
-    $query = "SELECT ID, FirstName, LastName, Email FROM Customer WHERE Email = ?";
+    $query = "SELECT * FROM Customer WHERE Email = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("s", $email);
     $stmt->execute();
