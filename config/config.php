@@ -13,6 +13,16 @@ session_set_cookie_params([
   'httponly' => true
 ]);
 
+
+// if ($_GET['url']) {
+//   $url = explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
+//   if ($url[0] === 'admin' || $url[1] === 'admin') {
+//     session_name('admin_session');
+//   } else {
+//     session_name('user_session');
+//   }
+// }
+
 session_start();
 
 // if (isset($_SESSION['used_id'])) {

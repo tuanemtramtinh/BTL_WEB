@@ -35,8 +35,10 @@ class ClientAuth extends Controller
   public function logout()
   {
     session_start();
-    session_unset();
-    session_destroy();
+    unset($_SESSION['userId']);
+    unset($_SESSION['user_email']);
+    // session_unset();
+    // session_destroy();
     $_SESSION['success_message'] = 'Logout successfully';
     header('Location: ../home/index');
   }

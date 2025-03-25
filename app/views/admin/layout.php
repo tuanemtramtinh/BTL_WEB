@@ -23,137 +23,153 @@
         <link rel="stylesheet" href="assets/extensions/simple-datatables/style.css">
         <link rel="stylesheet" href="./assets/compiled/css/table-datatable.css">';
     }
+    if ($data['page'] === 'auth/login') {
+        echo '<link rel="stylesheet" href="./assets/compiled/css/auth.css" />';
+    }
     ?>
 
     <link rel="stylesheet" href="assets/compiled/css/app.css">
     <link rel="stylesheet" href="assets/compiled/css/app-dark.css">
-
 </head>
 
 <body>
     <script src="assets/static/js/initTheme.js"></script>
     <!-- Start content here -->
 
-    <div id="app">
-        <?php
+    <?php
+    if ($data['page'] !== 'auth/login') {
+    ?>
+        <!-- Main -->
+        <div id="app">
+            <?php
             if (isset($data['error'])) {
-                echo '<input type="hidden" name="sessionMessage" class="sessionMessage" value="'.$data['error'].'">';
+                echo '<input type="hidden" name="sessionMessageError" class="sessionMessageError" value="' . $data['error'] . '">';
             }
             if (isset($data['success'])) {
-                echo '<input type="hidden" name="sessionMessage" class="sessionMessage" value="'.$data['success'].'">';
+                echo '<input type="hidden" name="sessionMessageSuccess" class="sessionMessageSuccess" value="' . $data['success'] . '">';
             }
-        ?>
-        <div id="sidebar">
-            <div class="sidebar-wrapper active">
-                <div class="sidebar-header position-relative">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="logo">
-                            <a href="../admin/dashboard"><img src="./assets/compiled/svg/logo.svg" alt="Logo" srcset=""></a>
-                        </div>
-                        <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20"
-                                height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
-                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path
-                                        d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2"
-                                        opacity=".3"></path>
-                                    <g transform="translate(-210 -1)">
-                                        <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
-                                        <circle cx="220.5" cy="11.5" r="4"></circle>
-                                        <path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2">
-                                        </path>
-                                    </g>
-                                </g>
-                            </svg>
-                            <div class="form-check form-switch fs-6">
-                                <input class="form-check-input  me-0" type="checkbox" id="toggle-dark"
-                                    style="cursor: pointer">
-                                <label class="form-check-label"></label>
+            ?>
+            <div id="sidebar">
+                <div class="sidebar-wrapper active">
+                    <div class="sidebar-header position-relative">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="logo">
+                                <a href="../admin/dashboard"><img src="./assets/compiled/svg/logo.svg" alt="Logo" srcset=""></a>
                             </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                aria-hidden="true" role="img" class="iconify iconify--mdi" width="20" height="20"
-                                preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                                <path fill="currentColor"
-                                    d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31Z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div class="sidebar-toggler  x">
-                            <span class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></span>
+                            <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20"
+                                    height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
+                                    <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2"
+                                            opacity=".3"></path>
+                                        <g transform="translate(-210 -1)">
+                                            <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
+                                            <circle cx="220.5" cy="11.5" r="4"></circle>
+                                            <path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2">
+                                            </path>
+                                        </g>
+                                    </g>
+                                </svg>
+                                <div class="form-check form-switch fs-6">
+                                    <input class="form-check-input  me-0" type="checkbox" id="toggle-dark"
+                                        style="cursor: pointer">
+                                    <label class="form-check-label"></label>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    aria-hidden="true" role="img" class="iconify iconify--mdi" width="20" height="20"
+                                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31Z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="sidebar-toggler  x">
+                                <span class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="sidebar-menu">
-                    <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
+                    <div class="sidebar-menu">
+                        <ul class="menu">
+                            <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item <?php echo str_contains($data["page"], "dashboard") ?  "active" : "" ?>">
-                            <a href="../admin/dashboard" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "dashboard") ?  "active" : "" ?>">
+                                <a href="../admin/dashboard" class='sidebar-link'>
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
 
-                        <li class="sidebar-item <?php echo str_contains($data["page"], "about") ?  "active" : "" ?>">
-                            <a href="../admin/about" class='sidebar-link'>
-                                <i class="bi bi-info-circle-fill"></i>
-                                <span>About</span>
-                            </a>
-                        </li>
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "about") ?  "active" : "" ?>">
+                                <a href="../admin/about" class='sidebar-link'>
+                                    <i class="bi bi-info-circle-fill"></i>
+                                    <span>About</span>
+                                </a>
+                            </li>
 
-                        <li class="sidebar-item <?php echo str_contains($data["page"], "blog") ?  "active" : "" ?>">
-                            <a href="../admin/blog" class='sidebar-link'>
-                                <i class="bi bi-newspaper"></i>
-                                <span>Blog</span>
-                            </a>
-                        </li>
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "blog") ?  "active" : "" ?>">
+                                <a href="../admin/blog" class='sidebar-link'>
+                                    <i class="bi bi-newspaper"></i>
+                                    <span>Blog</span>
+                                </a>
+                            </li>
 
-                        <li class="sidebar-item <?php echo str_contains($data["page"], "contact") ?  "active" : "" ?>">
-                            <a href="../admin/contact" class='sidebar-link'>
-                                <i class="bi bi-telephone-fill"></i>
-                                <span>Contact</span>
-                            </a>
-                        </li>
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "contact") ?  "active" : "" ?>">
+                                <a href="../admin/contact" class='sidebar-link'>
+                                    <i class="bi bi-telephone-fill"></i>
+                                    <span>Contact</span>
+                                </a>
+                            </li>
 
-                        <li class="sidebar-item <?php echo str_contains($data["page"], "home") ?  "active" : "" ?>">
-                            <a href="../admin/home" class='sidebar-link'>
-                                <i class="bi bi-house-fill"></i>
-                                <span>Home</span>
-                            </a>
-                        </li>
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "home") ?  "active" : "" ?>">
+                                <a href="../admin/home" class='sidebar-link'>
+                                    <i class="bi bi-house-fill"></i>
+                                    <span>Home</span>
+                                </a>
+                            </li>
 
-                        <li class="sidebar-item <?php echo str_contains($data["page"], "question") ?  "active" : "" ?>">
-                            <a href="../admin/question" class='sidebar-link'>
-                                <i class="bi bi-question-circle-fill"></i>
-                                <span>Question</span>
-                            </a>
-                        </li>
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "question") ?  "active" : "" ?>">
+                                <a href="../admin/question" class='sidebar-link'>
+                                    <i class="bi bi-question-circle-fill"></i>
+                                    <span>Question</span>
+                                </a>
+                            </li>
 
-                        <li class="sidebar-item <?php echo str_contains($data["page"], "product") ?  "active" : "" ?>">
-                            <a href="../admin/product" class='sidebar-link'>
-                                <i class="bi bi-bag-fill"></i>
-                                <span>Product</span>
-                            </a>
-                        </li>
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "product") ?  "active" : "" ?>">
+                                <a href="../admin/product" class='sidebar-link'>
+                                    <i class="bi bi-bag-fill"></i>
+                                    <span>Product</span>
+                                </a>
+                            </li>
 
-                        <li class="sidebar-item <?php echo str_contains($data["page"], "user") ?  "active" : "" ?>">
-                            <a href="../admin/user" class='sidebar-link'>
-                                <i class="bi bi-person-fill"></i>
-                                <span>User</span>
-                            </a>
-                        </li>
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "user") ?  "active" : "" ?>">
+                                <a href="../admin/user" class='sidebar-link'>
+                                    <i class="bi bi-person-fill"></i>
+                                    <span>User</span>
+                                </a>
+                            </li>
 
-                        <li class="sidebar-item <?php echo str_contains($data["page"], "employee") ?  "active" : "" ?>">
-                            <a href="../admin/employee" class='sidebar-link'>
-                                <i class="bi bi-person-badge"></i>
-                                <span>Employee</span>
-                            </a>
-                        </li>
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "employee") ?  "active" : "" ?>">
+                                <a href="../admin/employee" class='sidebar-link'>
+                                    <i class="bi bi-person-badge"></i>
+                                    <span>Employee</span>
+                                </a>
+                            </li>
+                            
+                            <?php
+                            if (isset($_SESSION['employeeId'])) {
+                            ?>
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "logout") ?  "active" : "" ?>">
+                                <a href="../admin/auth/logout" class='sidebar-link'>
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                            <?php } ?>
 
-
-                        <!-- <li class="sidebar-item  has-sub">
+                            <!-- <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
                                 <span>Components</span>
@@ -332,9 +348,9 @@
 
                         </li> -->
 
-                        <!-- <li class="sidebar-title">Forms &amp; Tables</li> -->
+                            <!-- <li class="sidebar-title">Forms &amp; Tables</li> -->
 
-                        <!-- <li class="sidebar-item  has-sub">
+                            <!-- <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-hexagon-fill"></i>
                                 <span>Form Elements</span>
@@ -377,38 +393,107 @@
 
                         </li> -->
 
-                    </ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="main">
+                <header class="mb-3">
+                    <span href="" class="burger-btn d-block d-xl-none">
+                        <i class="bi bi-justify fs-3"></i>
+                    </span>
+                </header>
+
+                <div class="page-heading">
+                    <h3><?php echo $data["title"]; ?></h3>
+                </div>
+                <div class="page-content">
+                    <?php require_once "./app/views/admin/pages/" . $data["page"] . ".php"; ?>
+                </div>
+
+                <footer>
+                    <div class="footer clearfix mb-0 text-muted">
+                        <div class="float-start">
+                            <p>2023 &copy; Mazer</p>
+                        </div>
+                        <div class="float-end">
+                            <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
+                                by <a href="https://saugi.me">Saugi</a></p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    <?php } else { ?>
+        <!-- Login -->
+        <script src="assets/static/js/initTheme.js"></script>
+        <div id="auth">
+            <div class="row h-100">
+                <div class="col-lg-5 col-12">
+                    <div id="auth-left">
+                        <div class="auth-logo">
+                            <a href="index.html"><img src="./assets/compiled/svg/logo.svg" alt="Logo" /></a>
+                        </div>
+                        <h1 class="auth-title">Log in.</h1>
+                        <p class="auth-subtitle mb-5">
+                            Log in with your data that you entered during registration.
+                        </p>
+
+                        <form action="../admin/auth/loginPost" method="post">
+                            <div class="form-group position-relative has-icon-left mb-4">
+                                <input
+                                    type="text"
+                                    class="form-control form-control-xl"
+                                    placeholder="Username" 
+                                    name="username"/>
+                                <div class="form-control-icon">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                            </div>
+                            <div class="form-group position-relative has-icon-left mb-4">
+                                <input
+                                    type="password"
+                                    class="form-control form-control-xl"
+                                    placeholder="Password" 
+                                    name="password"/>
+                                <div class="form-control-icon">
+                                    <i class="bi bi-shield-lock"></i>
+                                </div>
+                            </div>
+                            <div class="form-check form-check-lg d-flex align-items-end">
+                                <input
+                                    class="form-check-input me-2"
+                                    type="checkbox"
+                                    value=""
+                                    id="flexCheckDefault" />
+                                <label
+                                    class="form-check-label text-gray-600"
+                                    for="flexCheckDefault">
+                                    Keep me logged in
+                                </label>
+                            </div>
+                            <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">
+                                Log in
+                            </button>
+                        </form>
+                        <div class="text-center mt-5 text-lg fs-4">
+                            <p class="text-gray-600">
+                                Don't have an account?
+                                <a href="auth-register.html" class="font-bold">Sign up</a>.
+                            </p>
+                            <p>
+                                <a class="font-bold" href="auth-forgot-password.html">Forgot password?</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 d-none d-lg-block">
+                    <div id="auth-right"></div>
                 </div>
             </div>
         </div>
-
-        <div id="main">
-            <header class="mb-3">
-                <span href="" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
-                </span>
-            </header>
-
-            <div class="page-heading">
-                <h3><?php echo $data["title"]; ?></h3>
-            </div>
-            <div class="page-content">
-                <?php require_once "./app/views/admin/pages/" . $data["page"] . ".php"; ?>
-            </div>
-
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2023 &copy; Mazer</p>
-                    </div>
-                    <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                            by <a href="https://saugi.me">Saugi</a></p>
-                    </div>
-                </div>
-            </footer>
-        </div>
-    </div>
+    <?php } ?>
 
     <!-- End content -->
     <script src="assets/static/js/components/dark.js"></script>
@@ -421,7 +506,6 @@
     <script src="assets/static/js/pages/dashboard.js"></script>
 
     <script src="assets/extensions/toastify-js/src/toastify.js"></script>
-    <script src="assets/static/js/pages/toastify.js"></script>
 
     <?php
     if ($data['page'] === 'employee/index') {
