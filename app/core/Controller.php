@@ -29,4 +29,20 @@ class Controller
       'success' => $success
     ];
   }
+
+  public function checkAuthClient()
+  {
+    if (!isset($_SESSION['userId'])) {
+      header("Location: " . BASE_URL . "/auth/login");
+      exit;
+    }
+  }
+
+  public function checkAuthAdmin()
+  {
+    if (!isset($_SESSION['employeeId'])) {
+      header("Location: " . BASE_URL . "/admin/auth/login");
+      exit;
+    }
+  }
 }

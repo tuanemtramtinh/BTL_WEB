@@ -54,7 +54,12 @@
                     <div class="sidebar-header position-relative">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="logo">
-                                <a href="../admin/dashboard"><img src="./assets/compiled/svg/logo.svg" alt="Logo" srcset=""></a>
+                                <a href="../admin/dashboard">
+                                    <!-- <img src="./assets/compiled/svg/logo.svg" alt="Logo" srcset=""> -->
+                                    <?php if (isset($_SESSION['employee_username'])) {
+                                        echo $_SESSION['employee_username'];
+                                    } ?>
+                                </a>
                             </div>
                             <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -157,16 +162,16 @@
                                     <span>Employee</span>
                                 </a>
                             </li>
-                            
+
                             <?php
                             if (isset($_SESSION['employeeId'])) {
                             ?>
-                            <li class="sidebar-item <?php echo str_contains($data["page"], "logout") ?  "active" : "" ?>">
-                                <a href="../admin/auth/logout" class='sidebar-link'>
-                                    <i class="bi bi-box-arrow-right"></i>
-                                    <span>Logout</span>
-                                </a>
-                            </li>
+                                <li class="sidebar-item <?php echo str_contains($data["page"], "logout") ?  "active" : "" ?>">
+                                    <a href="../admin/auth/logout" class='sidebar-link'>
+                                        <i class="bi bi-box-arrow-right"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </li>
                             <?php } ?>
 
                             <!-- <li class="sidebar-item  has-sub">
@@ -427,7 +432,6 @@
         </div>
     <?php } else { ?>
         <!-- Login -->
-        <script src="assets/static/js/initTheme.js"></script>
         <div id="auth">
             <div class="row h-100">
                 <div class="col-lg-5 col-12">
@@ -445,8 +449,8 @@
                                 <input
                                     type="text"
                                     class="form-control form-control-xl"
-                                    placeholder="Username" 
-                                    name="username"/>
+                                    placeholder="Username"
+                                    name="username" />
                                 <div class="form-control-icon">
                                     <i class="bi bi-person"></i>
                                 </div>
@@ -455,8 +459,8 @@
                                 <input
                                     type="password"
                                     class="form-control form-control-xl"
-                                    placeholder="Password" 
-                                    name="password"/>
+                                    placeholder="Password"
+                                    name="password" />
                                 <div class="form-control-icon">
                                     <i class="bi bi-shield-lock"></i>
                                 </div>

@@ -1,17 +1,17 @@
 <?php
-
 class AdminDashboard extends Controller
 {
   public function index()
   {
+    //Check if the employee is logged in
+    $this->checkAuthAdmin();
+
     $message = $this->getSessionMessage();
-    print_r($message);
     $this->viewAdmin("layout", [
       "title" => "Dashboard",
       "page" => "dashboard/index",
       "error" => $message['error'],
       "success" => $message['success']
     ]);
-    // echo "Admin Dashboard Page";
   }
 }
