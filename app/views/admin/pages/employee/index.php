@@ -35,21 +35,22 @@
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
-            <th>City</th>
-            <th>Status</th>
+            <th>Username</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Graiden</td>
-            <td>vehicula.aliquet@semconsequat.co.uk</td>
-            <td>076 4820 8838</td>
-            <td>Offenburg</td>
-            <td>
-              <span class="badge bg-success">Active</span>
-            </td>
-          </tr>
-          <tr>
+          <?php foreach ($data['users'] as $user) { ?>
+            <tr>
+              <td><?php echo $user['FirstName'] . ' ' . $user['LastName'] ?></td>
+              <td><?php echo $user['Email'] ?></td>
+              <td><?php echo $user['PhoneNo'] ?></td>
+              <td><?php echo $user['Username'] ?></td>
+              <!-- <td>
+                <span class="badge bg-success">Active</span>
+              </td> -->
+            </tr>
+          <?php } ?>
+          <!-- <tr>
             <td>Dale</td>
             <td>fringilla.euismod.enim@quam.ca</td>
             <td>0500 527693</td>
@@ -273,7 +274,7 @@
             <td>
               <span class="badge bg-success">Active</span>
             </td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>

@@ -9,9 +9,12 @@ class AdminAuth extends Controller
 
   public function login()
   {
+    $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
       "page" => "auth/login",
-      "title" => "Login"
+      "title" => "Login",
+      "error" => $message['error'],
+      "success" => $message['success']
     ]);
   }
 
