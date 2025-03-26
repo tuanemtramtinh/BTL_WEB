@@ -1,0 +1,785 @@
+/* About */
+
+.about__section1 {
+  background-image: url("../../images/tt-bg-1.png");
+  background-color: rgba(0, 0, 0, 0.9);
+  background-blend-mode: darken;
+  background-size: cover;
+  margin: 100px 0 0 0;
+}
+
+.about__section1-wrapper {
+  padding: 200px 0;
+}
+
+.about__section1-content {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.about__section1-title {
+  font-size: 50px;
+  font-weight: 500;
+  text-align: center;
+  text-transform: capitalize;
+  margin-bottom: 55px;
+}
+
+.about__section-bonus {
+  margin-top: 90px;
+}
+
+.section-bonus__title {
+  font-weight: 500;
+  font-size: 32px;
+  text-align: center;
+  color: rgba(171, 87, 45, 1);
+}
+
+.section-bonus__team {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-top: 60px;
+}
+
+.team__card {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+
+.info-detail__name {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.info-detail__job {
+  font-weight: 600;
+  font-size: 16px;
+  color: rgba(171, 87, 45, 1);
+  margin-bottom: 10px;
+}
+
+.info-detail__describe {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.about__section1-desc {
+  font-size: 20px;
+  font-family: 400;
+  text-align: center;
+}
+
+.about__section2 {
+  margin: 100px 0 0 0;
+}
+
+.about__section2-wrapper {
+  padding: 150px 0;
+}
+
+.about__section2-content {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.about__section2-story {
+  font-size: 32px;
+  font-family: 500;
+  color: #ab572d;
+  text-transform: capitalize;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.about__section2-story-desc {
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.about__section3 {
+  margin: 100px 0 0 0;
+}
+
+.about__section3-wrapper {
+  width: 100%;
+}
+
+.about__section3-image {
+  width: 100%;
+}
+
+.about__section4 {
+  margin: 100px 0 100px 0;
+}
+
+.about__section4-wrapper {
+}
+
+.about__section4-unique {
+  margin: 0 auto;
+}
+
+.about__section4-unique-title {
+  margin-bottom: 30px;
+}
+
+.about__section4-unique-title {
+  font-size: 32px;
+  font-weight: 500;
+  color: #ab572d;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.about__section4-unique-items {
+  display: flex;
+  gap: 100px;
+}
+
+.about__section4-unique-item {
+  width: 340px;
+}
+
+.about__section4-unique-strong {
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.about__section4-unique-normal {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.about__section4-invite {
+  margin-top: 65px;
+}
+
+.about__section4-invite-paraph {
+  font-size: 20px;
+  font-weight: 400;
+}
+/* End About */
+
+/* Start QA */
+
+.contact__section1 {
+  margin: 100px 0 200px 0;
+}
+
+.contact__section1-wrapper {
+  margin: 0 auto;
+}
+
+.contact__section1-title {
+  font-size: 50px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.contact__section1-accordion:last-child {
+  padding: 0;
+  margin: 0;
+}
+
+.contact__section1-content {
+  display: flex;
+  margin-top: 120px;
+  align-items: start;
+  gap: 50px;
+}
+
+.contact__section1-item {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.contact__section1-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px;
+  font-size: 22px;
+  font-weight: 800;
+  font-weight: bold;
+  cursor: pointer;
+  height: 75px;
+}
+
+.contact__section1-header-button {
+  background: none;
+  border: none;
+  font-size: 32px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+}
+
+.contact__section1-item-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 18px;
+  background-color: #292929;
+  width: 100%;
+  border-radius: 0 0 10px 10px;
+  transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.contact__section1-email {
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  border-radius: 20px;
+  width: 400px;
+  padding: 0 32px;
+}
+
+.contact__section1-email-icon {
+  width: 67px;
+  height: 63px;
+  margin-top: 65px;
+}
+
+.contact__section1-email-header {
+  margin-top: 45px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.contact__section1-email-detail {
+  margin-top: 25px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.contact__section1-email-button {
+  margin-top: 60px;
+  width: 300px;
+  height: 60px;
+  background-color: rgba(171, 87, 45, 1);
+  text-transform: capitalize;
+  font-size: 28px;
+  font-weight: 800;
+  border-radius: 20px;
+  margin-bottom: 40px;
+}
+/* End QA */
+
+/*Start user overview*/
+.section1__wrapper {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 35px;
+}
+
+.avatar__user-image {
+  width: 225px;
+  height: 225px;
+  border-radius: 50%;
+  border: 5px solid rgba(171, 87, 45, 1);
+}
+
+.avatar__decorator {
+  position: absolute;
+  left: 150px;
+  top: 160px;
+}
+
+.section1__avatar {
+  width: 225px;
+  height: 225px;
+  margin-right: 50px;
+  position: relative;
+}
+
+.section1__info-name {
+  font-weight: 900;
+  font-size: 36px;
+}
+.section1__info-status {
+  font-weight: 500;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.user-overview__section2 {
+  margin-top: 25px;
+}
+.section2__wrapper {
+  display: flex;
+}
+
+.section2__left-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  margin-right: 25px;
+}
+
+.left-section__option {
+  display: flex;
+  justify-self: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+.option__icon {
+  width: 20px;
+  height: 23px;
+  margin-right: 25px;
+}
+
+.option__text {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.right-section__info-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.right-section__order-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 40px;
+}
+
+.right-section__password-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 40px;
+}
+
+.section__title {
+  font-weight: 900;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.info-section__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.form-group__lable {
+  font-weight: 500;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.right-section__info-section
+  .info-section__form
+  .info-section__form-group:last-child {
+  grid-column: 1 / span 2;
+}
+
+.form-group__input {
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  width: 100%;
+  height: 60px;
+}
+
+.form-submit__btn {
+  background-color: rgba(171, 87, 45, 1);
+  border-radius: 8px;
+  margin-top: 35px;
+  padding: 30px 20px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.order-section__table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #111;
+}
+
+.order-section__table th,
+.order-section__table td {
+  padding: 12px;
+  border-bottom: 1px solid #333;
+  text-align: left;
+}
+
+.order-section__table th {
+  background: #222;
+}
+
+.order-section__table a {
+  color: rgba(171, 87, 45, 1);
+  text-decoration: none;
+}
+
+.order-section__table a:hover {
+  text-decoration: underline;
+}
+
+input[type="password"] {
+  all: unset;
+}
+
+.section2__right-section {
+  width: 75%;
+}
+
+/*End user overview*/
+
+/*Start user profile*/
+
+.user-profile__section2 {
+  margin-top: 25px;
+}
+
+.right-section__user-details {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.active__option {
+  background-color: rgba(171, 87, 45, 1);
+  border-radius: 10px;
+}
+
+.order-section__items-reponsive {
+  display: none;
+}
+
+/*End user profile*/
+
+/*Start history order*/
+.history__section2 {
+  margin-top: 25px;
+}
+/*End history order*/
+
+/*Start password*/
+.password__section2 {
+  margin-top: 25px;
+}
+/*End password*/
+@media (max-width: 767.98px) {
+  /* Start about page */
+  .about__section1 {
+    margin: 0;
+  }
+  .about__section1-wrapper {
+    padding: 100px 15px;
+  }
+  .about__section1-title {
+    font-weight: 800;
+    font-size: 45px;
+    margin-bottom: 10px;
+  }
+  .about__section1-desc {
+    font-size: 14px;
+  }
+  .about__section-bonus {
+    margin-top: 30px;
+  }
+  .section-bonus__title {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .section-bonus__team {
+    margin-top: 20px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .team__card {
+    gap: 10px;
+  }
+  .about__section2 {
+    margin-top: 30px;
+  }
+  .about__section2-wrapper {
+    padding: 0 16px;
+  }
+  .about__section2-story {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .about__section2-story-desc {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .about__section3 {
+    margin-top: 30px;
+  }
+  .about__section4 {
+    margin-top: 30px;
+  }
+  .about__section4-unique-title {
+    font-weight: 700;
+    font-size: 22px;
+  }
+  .about__section4-unique-items {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .about__section4-unique-item {
+    width: 100%;
+  }
+  .about__section4-unique-strong {
+    font-size: 16px;
+    font-weight: 800;
+  }
+  .about__section4-unique-normal {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .about__section4-invite {
+    margin-top: 30px;
+    gap: 20px;
+  }
+  .about__section4-invite-paraph {
+    font-weight: 400;
+    font-size: 16px;
+  }
+  /* End about */
+
+  /* Start QA */
+  .contact__section1 {
+    margin-top: 0px;
+    margin-bottom: 50px;
+  }
+  .contact__section1-title {
+    font-weight: 700;
+    font-size: 32px;
+  }
+  .contact__section1-content {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  .contact__section1-item-header {
+    font-weight: 500;
+    font-size: 14px;
+  }
+  .contact__section1-item-answer {
+    font-weight: 400;
+    font-size: 14px;
+    background-color: black;
+  }
+  .contact__section1-item-answer p {
+    color: rgba(204, 204, 204, 1);
+  }
+  .contact__section1-email-header {
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .contact__section1-email-detail {
+    text-align: start;
+    margin-top: 5px;
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(204, 204, 204, 1);
+  }
+  .contact__section1-email-button {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 1);
+    color: black;
+    font-weight: 500;
+    font-size: 14px;
+    width: 170px;
+    height: 32px;
+    border: 0;
+  }
+  .contact__section1-email {
+    width: 100%;
+    background-color: black;
+    border: 1px solid grey;
+    align-items: start;
+  }
+  .contact__section1-item {
+    background-color: black;
+    border: 1px solid grey;
+  }
+  .contact__section1-item-header {
+    padding: 5px 15px;
+  }
+  .contact__activate {
+    display: none;
+  }
+  /* End QA */
+  /* Start User info */
+  .section1__wrapper {
+    background-color: black;
+  }
+  .section1__info-name {
+    font-weight: 700;
+    font-size: 20px;
+  }
+  .section1__info-status {
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(156, 163, 175, 1);
+  }
+  .section1__avatar {
+    width: 80px;
+    height: 80px;
+  }
+  .avatar__user-image {
+    width: 80px;
+    height: 80px;
+  }
+  .avatar__decorator {
+    width: 20px;
+    height: 20px;
+    left: 60px;
+    top: 55px;
+  }
+  .user-overview__section2 {
+    margin-top: 10px;
+  }
+  .section2__left-section {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  .option__icon[alt*="user"] {
+    content: url("../../images/tt-icon-4.png");
+  }
+  .option__icon[alt*="history"] {
+    content: url("../../images/tt-icon-5.png");
+  }
+  .option__icon[alt*="password"] {
+    content: url("../../images/tt-icon-6.png");
+  }
+  .option__text {
+    font-weight: 400;
+    font-size: 16px;
+  }
+  .section2__wrapper {
+    flex-direction: column;
+  }
+  .info-section__form {
+    grid-template-columns: 1fr;
+  }
+
+  .section__title {
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .form-group__label {
+    font-weight: 500;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .form-submit__btn {
+    width: 100%;
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .right-section__info-section
+    .info-section__form
+    .info-section__form-group:last-child {
+    grid-column: 1 / span 1;
+  }
+
+  .order-section__table {
+    display: none;
+  }
+  .order-section__items-reponsive {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .order-section__item {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .item__basic-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .item__id {
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(171, 87, 45, 1);
+  }
+
+  .item__date {
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  .item__product {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .product__name {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .item__price {
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(171, 87, 45, 1);
+    justify-self: end;
+  }
+
+  .right-section__password-section {
+  }
+
+  .section2__left-section {
+    width: 100%;
+  }
+  .section2__right-section {
+    width: 100%;
+  }
+  .right-section__info-section {
+    background-color: black;
+  }
+  .right-section__order-section {
+    background-color: black;
+  }
+  .right-section__password-section {
+    background-color: black;
+  }
+  .active__option img[alt*="user"] {
+    content: url("../../images/tt-option-1.png");
+  }
+  .active__option img[alt*="history"] {
+    content: url("../../images/tt-option-2.png");
+  }
+  .active__option img[alt*="password"] {
+    content: url("../../images/tt-option-3.png");
+  }
+  /* End User info */
+}
