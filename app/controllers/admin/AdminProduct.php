@@ -15,4 +15,15 @@ class AdminProduct extends Controller
       "success" => $message['success']
     ]);
   }
+
+  public function detail(){
+    $this->viewAdmin("layout", [
+      "title" => "Product",
+      "page" => "product/detail"
+    ]);
+  }
+
+  public function createProduct() {
+    
+  }
 }
