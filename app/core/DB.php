@@ -2,25 +2,24 @@
 
 class DB{
 
-  protected $pdo;
+  protected $conn;
   protected $host = '103.140.249.159';
-  protected $dbname = 'test';
+  protected $dbname = 'PERFUME';
   protected $username = 'tuanemtramtinh';
   protected $password = 'Anh2004@nh';
 
   public function __construct(){
-    $this->pdo = new PDO("mysql:host={$this->host};dbname={$this->dbname};charset=utf8", 
-    $this->username, 
-    $this->password,
-    [
-    //   PDO::ATTR_PERSISTENT => true,
-      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,  // Enable error reporting
-      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // Fetch associative arrays
-      PDO::ATTR_EMULATE_PREPARES => false, // Use native prepared statements
-    ]);
+    $this->conn = new mysqli($this->host, $this->username, $this->password, $this->dbname);
+
   } 
 
   public function getConnection(){
-    return $this->pdo;
+    return $this->conn;
+  }
+
+  public function closeConnection() {
+    if ($this->conn) {
+      $this->conn->close();
+    }
   }
 }
