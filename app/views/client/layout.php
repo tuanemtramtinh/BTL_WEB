@@ -18,6 +18,26 @@
 
 <body>
   <div class="wrapper">
+
+    <?php
+    if (isset($data['error'])) {
+      echo '
+      <div class="alert danger">
+          <span class="closebtn">&times;</span>'
+        . $data['error'] .
+      '</div>';
+    }
+
+    if (isset($data['success'])) {
+      echo '
+      <div class="alert success">
+          <span class="closebtn">&times;</span>'
+        . $data['success'] .
+      '</div>';
+    }
+    ?>
+
+
     <header class="header sticky">
       <div class="container">
         <div class="header__wrapper">
@@ -40,6 +60,13 @@
             <i class="fa-solid fa-magnifying-glass"></i>
             <i class="fa-solid fa-user"></i>
             <i class="fa-solid fa-cart-shopping"></i>
+            <?php if (isset($_SESSION['userId'])) { ?>
+              <form action="auth/logout" method="get">
+                <button type="submit">
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+              </form>
+            <?php } ?>
           </div>
 
           <label for="header__nav-mobile-input" class="header__overlay">
@@ -58,7 +85,7 @@
             </ul>
           </div>
 
-          
+
         </div>
       </div>
     </header>

@@ -1,7 +1,7 @@
 <div class="auth">
   <div class="container">
     <div class="auth__wrapper">
-      <form action="" class="auth__form">
+      <form action="auth/loginPost" class="auth__form" method="post">
         <div class="auth__nav">
           <a href="auth/login" class="active">Sign in</a>
           <a href="auth/register" class="">Sign up</a>
