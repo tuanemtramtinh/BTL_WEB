@@ -15,6 +15,19 @@ class AdminBlog extends Controller
     ]);
   }
 
+  public function content() {
+
+    $this->checkAuthAdmin();
+
+    $message = $this->getSessionMessage();
+    $this->viewAdmin("layout", [
+      "title" => "Blog's Content",
+      "page" => "blog/content",
+      "error" => $message['error'],
+      "success" => $message['success']
+    ]);
+  }
+
   public function detail()
   {
     //Check if the employee is logged in

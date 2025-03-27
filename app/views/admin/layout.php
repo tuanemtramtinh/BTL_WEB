@@ -97,6 +97,7 @@
                     </div>
                     <div class="sidebar-menu">
                         <ul class="menu">
+
                             <li class="sidebar-title">Menu</li>
 
                             <li class="sidebar-item <?php echo str_contains($data["page"], "dashboard") ?  "active" : "" ?>">
@@ -113,12 +114,31 @@
                                 </a>
                             </li>
 
-                            <li class="sidebar-item <?php echo str_contains($data["page"], "blog") ?  "active" : "" ?>">
+                            <li class="sidebar-item has-sub <?php echo str_contains($data["page"], "blog") ?  "active" : "" ?>">
+                                <span style="cursor: pointer;" class='sidebar-link'>
+                                    <i class="bi bi-stack"></i>
+                                    <span>Blog</span>
+                                </span>
+                                <ul class="submenu">
+                                    <li class="submenu-item <?php echo $data['page'] === 'blog/content' ? "active" : "" ?>">
+                                        <a href="../admin/blog/content" class="submenu-link">Content</a>
+
+                                    </li>
+
+                                    <li class="submenu-item <?php echo $data['page'] === 'blog/index' ?  "active" : "" ?>">
+                                        <a href="../admin/blog/index" class="submenu-link">Blog List</a>
+                                    </li>
+                                </ul>
+
+                            </li>
+
+
+                            <!-- <li class="sidebar-item <?php echo str_contains($data["page"], "blog") ?  "active" : "" ?>">
                                 <a href="../admin/blog" class='sidebar-link'>
                                     <i class="bi bi-newspaper"></i>
                                     <span>Blog</span>
                                 </a>
-                            </li>
+                            </li> -->
 
                             <li class="sidebar-item <?php echo str_contains($data["page"], "contact") ?  "active" : "" ?>">
                                 <a href="../admin/contact" class='sidebar-link'>
