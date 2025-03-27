@@ -1,6 +1,7 @@
 <?php
 
 define("BASE_URL", dirname($_SERVER['SCRIPT_NAME']));
+define("ADMIN_ID", '00000000000');
 
 ini_set('session.use_only_cookies', 1);
 ini_set('session.use_strict_mode', 1);

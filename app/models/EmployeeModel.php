@@ -46,4 +46,19 @@ class EmployeeModel extends DB
     $stmt = null;
     return $result;
   }
+
+  public function getEmployeeList()
+  {
+    $query = "SELECT PhoneNo, Email, FirstName, LastName, Username FROM Employee WHERE Username != 'admin'";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $users = [];
+    while ($row = $result->fetch_assoc()) {
+      $users[] = $row;
+    }
+    $stmt->close();
+    return !empty($users) ? $users : null;;
+  }
 }

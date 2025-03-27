@@ -35,26 +35,25 @@
 <body>
     <script src="assets/static/js/initTheme.js"></script>
     <!-- Start content here -->
-
+    <?php
+    if (isset($data['error'])) {
+        echo '<input type="hidden" name="sessionMessageError" class="sessionMessageError" value="' . $data['error'] . '">';
+    }
+    if (isset($data['success'])) {
+        echo '<input type="hidden" name="sessionMessageSuccess" class="sessionMessageSuccess" value="' . $data['success'] . '">';
+    }
+    ?>
     <?php
     if ($data['page'] !== 'auth/login') {
     ?>
         <!-- Main -->
         <div id="app">
-            <?php
-            if (isset($data['error'])) {
-                echo '<input type="hidden" name="sessionMessageError" class="sessionMessageError" value="' . $data['error'] . '">';
-            }
-            if (isset($data['success'])) {
-                echo '<input type="hidden" name="sessionMessageSuccess" class="sessionMessageSuccess" value="' . $data['success'] . '">';
-            }
-            ?>
             <div id="sidebar">
                 <div class="sidebar-wrapper active">
                     <div class="sidebar-header position-relative">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="logo">
-                                <a href="../admin/dashboard">
+                                <a href="../admin/dashboard" class="fs-4 text">
                                     <!-- <img src="./assets/compiled/svg/logo.svg" alt="Logo" srcset=""> -->
                                     <?php if (isset($_SESSION['employee_username'])) {
                                         echo $_SESSION['employee_username'];
@@ -156,12 +155,16 @@
                                 </a>
                             </li>
 
-                            <li class="sidebar-item <?php echo str_contains($data["page"], "employee") ?  "active" : "" ?>">
-                                <a href="../admin/employee" class='sidebar-link'>
-                                    <i class="bi bi-person-badge"></i>
-                                    <span>Employee</span>
-                                </a>
-                            </li>
+                            <?php
+                            if ($_SESSION['employeeId'] === ADMIN_ID) {
+                            ?>
+                                <li class="sidebar-item <?php echo str_contains($data["page"], "employee") ?  "active" : "" ?>">
+                                    <a href="../admin/employee" class='sidebar-link'>
+                                        <i class="bi bi-person-badge"></i>
+                                        <span>Employee</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
 
                             <?php
                             if (isset($_SESSION['employeeId'])) {
