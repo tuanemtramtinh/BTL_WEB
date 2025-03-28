@@ -25,7 +25,7 @@ if (sessionMessageError) {
 //End Toastify
 
 // TinyMCE
-const themeOptions =  themeTest === 'dark'
+const themeOptions = document.body.classList.contains("dark")
   ? {
       skin: "oxide-dark",
       content_css: "dark",
