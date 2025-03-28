@@ -117,7 +117,6 @@ class AdminBlog extends Controller
       $content  = trim($_POST['content']);
       $category = (int)$_POST['category'];
       $dateCreated = date("Y-m-d H:i:s");
-
       $cover_image = "";
       if (isset($_FILES['cover_image']) && $_FILES['cover_image']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = "/BTL_WEB/public/images";
