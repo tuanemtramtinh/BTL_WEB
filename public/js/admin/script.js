@@ -25,15 +25,15 @@ if (sessionMessageError) {
 //End Toastify
 
 // TinyMCE
-// const themeOptions =  themeTest === 'dark'
-//   ? {
-//       skin: "oxide-dark",
-//       content_css: "dark",
-//     }
-//   : {
-//       skin: "oxide",
-//       content_css: "default",
-//     };
+const themeOptions =  themeTest === 'dark'
+  ? {
+      skin: "oxide-dark",
+      content_css: "dark",
+    }
+  : {
+      skin: "oxide",
+      content_css: "default",
+    };
 
 tinymce.init({
   selector: "#content",
