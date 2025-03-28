@@ -24,16 +24,16 @@ if (sessionMessageError) {
 }
 //End Toastify
 
-//TinyMCE
-const themeOptions = document.body.classList.contains("theme-dark")
-  ? {
-      skin: "oxide-dark",
-      content_css: "dark",
-    }
-  : {
-      skin: "oxide",
-      content_css: "default",
-    };
+// TinyMCE
+// const themeOptions =  themeTest === 'dark'
+//   ? {
+//       skin: "oxide-dark",
+//       content_css: "dark",
+//     }
+//   : {
+//       skin: "oxide",
+//       content_css: "default",
+//     };
 
 tinymce.init({
   selector: "#content",
@@ -43,4 +43,4 @@ tinymce.init({
     "undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat",
   ...themeOptions,
 });
-//End TinyMCE
+// End TinyMCE
