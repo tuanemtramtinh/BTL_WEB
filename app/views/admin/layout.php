@@ -34,6 +34,13 @@
 
     <link rel="stylesheet" href="assets/compiled/css/app.css">
     <link rel="stylesheet" href="assets/compiled/css/app-dark.css">
+
+    <style>
+        .tox .tox-toolbar-overlord .tox-toolbar:not(.tox-toolbar--scrolling):first-child,
+        .tox .tox-toolbar-overlord .tox-toolbar__primary {
+            background-position: center top 40px !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -303,7 +310,6 @@
     <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
     <script src="assets/static/js/pages/dashboard.js"></script>
 
-    <script src="assets/extensions/tinymce/tinymce.min.js"></script>
     <script src="assets/extensions/toastify-js/src/toastify.js"></script>
     <script src="assets/extensions/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js"></script>
     <script src="assets/extensions/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js"></script>
@@ -314,9 +320,9 @@
     <script src="assets/extensions/filepond-plugin-image-resize/filepond-plugin-image-resize.min.js"></script>
     <script src="assets/extensions/filepond/filepond.js"></script>
     <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
-
+    <script src="assets/extensions/tinymce/tinymce.min.js"></script>
     <script src="js/admin/script.js"></script>
-    <?php if (isset($data['task'])) echo '<script src="public/js/client/script_' . $data['task'] . '.js"></script>'; ?>
+    <?php if (isset($data['task'])) echo '<script src="js/client/script_' . $data['task'] . '.js"></script>'; ?>
 </body>
 
 </html>
