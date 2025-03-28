@@ -34,6 +34,13 @@
 
     <link rel="stylesheet" href="assets/compiled/css/app.css">
     <link rel="stylesheet" href="assets/compiled/css/app-dark.css">
+
+    <style>
+        .tox .tox-toolbar-overlord .tox-toolbar:not(.tox-toolbar--scrolling):first-child,
+        .tox .tox-toolbar-overlord .tox-toolbar__primary {
+            background-position: center top 40px !important;
+        }
+    </style>
 </head>
 
 <body>
