@@ -37,10 +37,9 @@ const themeOptions = document.body.classList.contains("dark")
 
 tinymce.init({
   selector: "#content",
-  height: 300,
-  plugins: "advlist autolink lists link image charmap print preview anchor",
+  plugins: "advlist autolink lists link image charmap preview anchor",
   toolbar:
-    "undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat",
+    "undo redo | styles | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat",
   ...themeOptions,
 });
 // End TinyMCE
