@@ -55,13 +55,12 @@
   FilePond.registerPlugin(FilePondPluginImagePreview);
   FilePond.parse(document.body);
 </script>
-<script src="assets/extensions/tinymce/tinymce.min.js"></script>
-<script>
+<!-- <script>
   tinymce.init({
     selector: '#content',
     height: 300,
     plugins: 'advlist autolink lists link image charmap print preview anchor',
     toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat'
   });
-</script>
+</script> -->
 
