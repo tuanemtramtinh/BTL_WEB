@@ -23,3 +23,24 @@ if (sessionMessageError) {
   }).showToast();
 }
 //End Toastify
+
+// TinyMCE
+// const themeOptions =  themeTest === 'dark'
+//   ? {
+//       skin: "oxide-dark",
+//       content_css: "dark",
+//     }
+//   : {
+//       skin: "oxide",
+//       content_css: "default",
+//     };
+
+tinymce.init({
+  selector: "#content",
+  height: 300,
+  plugins: "advlist autolink lists link image charmap print preview anchor",
+  toolbar:
+    "undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat",
+  ...themeOptions,
+});
+// End TinyMCE

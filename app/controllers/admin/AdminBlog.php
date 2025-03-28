@@ -30,6 +30,7 @@ class AdminBlog extends Controller
     $this->viewAdmin("layout", [
       "title" => "Blog",
       "page" => "blog/index",
+      "task" => 4,
       "blogs" => $blogs,
       "totalBlogs" => $totalBlogs,
       "currentPage" => $currentPage,
@@ -48,6 +49,7 @@ class AdminBlog extends Controller
     $this->viewAdmin("layout", [
       "title" => "Blog's Content",
       "page" => "blog/content",
+      "task" => 4,
       "error" => $message['error'],
       "success" => $message['success']
     ]);
@@ -79,6 +81,7 @@ class AdminBlog extends Controller
     $this->viewAdmin("layout", [
       "title" => "Detail Blog",
       "page" => "blog/detail",
+      "task" => 4,
       "blog"        => $blog,
       "error"       => $message['error'],
       "success"     => $message['success']
@@ -96,6 +99,9 @@ class AdminBlog extends Controller
     $categories = $Blog->getCategories();
 
     $this->viewAdmin("layout", [
+      "title" => "Tạo Blog",
+      "page" => "blog/add",
+      "task" => 4,
         "title" => "Add Blog",
         "page" => "blog/add",
         "categories" => $categories,
