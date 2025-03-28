@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" data-aos="fade-down" data-aos-duration="500">
     <div class="detail_page">
         <div class="detail_page-header">
             <div class="detail_page-info">
