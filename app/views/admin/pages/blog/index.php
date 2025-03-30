@@ -7,7 +7,7 @@
             <h5 class="card-title">
                 Blog List
             </h5>
-            <a href="../admin/blog/add" class="btn btn-primary">Add blog</a>
+            <a href="admin/blog/add" class="btn btn-primary">Add blog</a>
         </div>
         <div class="card-body">
             <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
@@ -79,7 +79,7 @@
                                             <?php endif; ;?>
                                         </td>
                                         <td>
-                                            <a href="../admin/blog/detail?id=<?php echo $blog['BlogID'] ;?>">
+                                            <a href="admin/blog/detail?id=<?php echo $blog['BlogID'] ;?>">
                                                 View Full Detail <i class="bi bi-chevron-double-right"></i>
                                             </a>
                                         </td>
@@ -111,12 +111,12 @@
                         <ul class="dataTable-pagination-list pagination pagination-primary">
                            
                             <li class="page-item <?php echo ($currentPage <= 1) ? 'disabled' : '' ;?>">
-                            <a class="page-link" href="/BTL_WEB/admin/blog?limit=<?php echo $data['limit'];?>&page=<?php echo max($currentPage - 1, 1);?>">Prev</a>
+                            <a class="page-link" href="admin/blog?limit=<?php echo $data['limit'];?>&page=<?php echo max($currentPage - 1, 1);?>">Prev</a>
                             </li>
 
                             <?php for ($page = 1; $page <= $totalPages; $page++):;?>
                                 <li class="page-item <?php echo ($page == $currentPage) ? 'active' : '';?>">
-                                    <a class="page-link" href="/BTL_WEB/admin/blog?limit=<?php echo $data['limit'];?>&page=<?php echo $page;?>">
+                                    <a class="page-link" href="admin/blog?limit=<?php echo $data['limit'];?>&page=<?php echo $page;?>">
                                         <?php echo $page;?>
                                     </a>
                                 </li>
@@ -124,7 +124,7 @@
 
 
                             <li class="page-item <?php echo ($currentPage >= $totalPages) ? 'disabled' : '' ;?>">
-                            <a class="page-link" href="/BTL_WEB/admin/blog?limit=<?php echo $data['limit'];?>&page=<?php echo min($currentPage + 1, $totalPages);?>">Next</a>
+                            <a class="page-link" href="admin/blog?limit=<?php echo $data['limit'];?>&page=<?php echo min($currentPage + 1, $totalPages);?>">Next</a>
                             </li>
                         </ul>
                     </nav>

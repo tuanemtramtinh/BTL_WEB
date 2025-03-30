@@ -1,7 +1,7 @@
 
   <nav class="navbar navbar-light" style="padding: 0;">
     <div class="d-flex align-items-center">
-      <a href="../admin/blog/index" style="margin-right:5px;">
+      <a href="admin/blog/index" style="margin-right:5px;">
         <i class="bi bi-chevron-left"></i>
       </a>
       <h5 class="card-title mb-0">Blog Detail</h5>
@@ -13,7 +13,7 @@
       <h4 class="card-title">Blog Details</h4>
     </div>
     <div class="card-body">
-      <form action="../admin/blog/updatePost" method="post" enctype="multipart/form-data">
+      <form action="admin/blog/updatePost" method="post" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="article_id" class="form-label">Article ID</label>
           <input type="text" class="form-control" id="article_id" name="article_id" 
