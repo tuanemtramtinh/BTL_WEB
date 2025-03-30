@@ -22,7 +22,7 @@
                     <td>1</td>
                     <td>
                       <div>
-                        <img width="100px" height="auto" src="images/product.png" alt="">
+                        <img width="100px" height="auto" src="public/images/product.png" alt="">
                       </div>
                     </td>
                     <td>Best Perfume Ever</td>
@@ -53,10 +53,9 @@
         </div>
         <div class="card-content">
           <div class="card-body">
-            <a class="w-100 btn btn-success btn-sm py-2 fs-6">
+            <a href="admin/product/add" class="w-100 btn btn-success btn-sm py-2 fs-6">
               Add Product
             </a>
-            
           </div>
         </div>
       </div>
