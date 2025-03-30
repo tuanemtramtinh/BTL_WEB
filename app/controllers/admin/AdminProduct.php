@@ -13,6 +13,7 @@ class AdminProduct extends Controller
       "page" => "product/index",
       "error" => $message['error'],
       "success" => $message['success'],
+      "task" => 3
     ]);
   }
 
@@ -27,6 +28,7 @@ class AdminProduct extends Controller
       "page" => "product/detail",
       "error" => $message['error'],
       "success" => $message['success'],
+      "task" => 3
     ]);
   }
 
@@ -41,6 +43,7 @@ class AdminProduct extends Controller
       "page" => "product/create",
       "error" => $message['error'],
       "success" => $message['success'],
+      "task" => 3
     ]);
   }
 
@@ -55,6 +58,7 @@ class AdminProduct extends Controller
       "page" => "product/add",
       "error" => $message['error'],
       "success" => $message['success'],
+      "task" => 3
     ]);
   }
 }

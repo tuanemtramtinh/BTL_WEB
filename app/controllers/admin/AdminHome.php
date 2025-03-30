@@ -11,7 +11,8 @@ class AdminHome extends Controller
       "title" => "Home",
       "page" => "home/index",
       "error" => $message['error'],
-      "success" => $message['success']
+      "success" => $message['success'],
+      "task" => 1
     ]);
   }
 }
