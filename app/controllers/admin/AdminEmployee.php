@@ -4,17 +4,28 @@ class AdminEmployee extends Controller
 {
   public function index()
   {
+    if ($_SESSION['employeeId'] !== ADMIN_ID) {
+      header('Location: dashboard/index');
+      exit;
+    }
     $message = $this->getSessionMessage();
+    $Employee = $this->model("EmployeeModel");
+    $users = $Employee->getEmployeeList();
     $this->viewAdmin("layout", [
       "title" => "Employee List",
       "page" => "employee/index",
+      "users" => $users,
       "error" => $message['error'],
-      "success" => $message['success']
+      "success" => $message['success'],
     ]);
   }
 
   public function create()
   {
+    if ($_SESSION['employeeId'] !== ADMIN_ID) {
+      header('Location: ../dashboard/index');
+      exit;
+    }
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
       "title" => "Create Employee",
