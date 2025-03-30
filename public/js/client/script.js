@@ -17,6 +17,31 @@ if (search) {
   console.log(closeButton);
   closeButton.addEventListener("click", () => {
     search.classList.toggle("active");
-  })
+  });
 }
 // End Header Search
+
+//Alert
+const closeBtn = document.querySelector(".closebtn");
+if (closeBtn) {
+  const alertDiv = closeBtn.parentElement;
+
+  function hideAlert() {
+    if (alertDiv) {
+      alertDiv.style.opacity = "0";
+      setTimeout(() => {
+        alertDiv.style.display = "none";
+      }, 600);
+    }
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function () {
+      hideAlert();
+    });
+  }
+
+  setTimeout(hideAlert, 3000);
+}
+
+//End Alert
