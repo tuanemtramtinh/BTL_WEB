@@ -322,7 +322,7 @@
     <script src="public/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
     <script src="public/assets/extensions/tinymce/tinymce.min.js"></script>
     <script src="public/js/admin/script.js"></script>
-    <?php if (isset($data['task'])) echo '<script src="public/js/client/script_' . $data['task'] . '.js"></script>'; ?>
+    <?php if (isset($data['task'])) echo '<script src="public/js/admin/script_' . $data['task'] . '.js"></script>'; ?>
 </body>
 
 </html>
