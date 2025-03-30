@@ -11,7 +11,8 @@ class AdminContact extends Controller
       "title" => "Contact",
       "page" => "contact/index",
       "error" => $message['error'],
-      "success" => $message['success']
+      "success" => $message['success'],
+      "task" => 1
     ]);
   }
 }

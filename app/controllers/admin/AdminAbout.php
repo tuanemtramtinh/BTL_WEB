@@ -11,7 +11,8 @@ class AdminAbout extends Controller
       "title" => "About",
       "page" => "about/index",
       "error" => $message['error'],
-      "success" => $message['success']
+      "success" => $message['success'],
+      "task" => 2
     ]);
   }
 }
