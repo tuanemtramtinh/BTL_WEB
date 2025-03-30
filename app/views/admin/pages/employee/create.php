@@ -5,7 +5,7 @@
     </div>
     <div class="card-content">
       <div class="card-body">
-        <form action="../admin/employee/createPost" method="post" class="form form-vertical">
+        <form action="admin/employee/createPost" method="post" class="form form-vertical">
           <div class="form-body">
             <div class="row">
               <div class="col-12">

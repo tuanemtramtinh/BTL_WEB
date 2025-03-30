@@ -23,3 +23,24 @@ if (sessionMessageError) {
   }).showToast();
 }
 //End Toastify
+
+// TinyMCE
+const themeOptions = document.body.classList.contains("dark")
+  ? {
+      skin: "oxide-dark",
+      content_css: "dark",
+    }
+  : {
+      skin: "oxide",
+      content_css: "default",
+    };
+
+tinymce.init({
+  selector: "#content",
+  plugins: "advlist autolink lists link image charmap preview anchor",
+  toolbar:
+    "undo redo | styles | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat",
+  images_upload_url: "admin/upload/image",
+  ...themeOptions,
+});
+// End TinyMCE

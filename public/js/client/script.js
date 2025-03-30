@@ -23,23 +23,25 @@ if (search) {
 
 //Alert
 const closeBtn = document.querySelector(".closebtn");
-const alertDiv = closeBtn.parentElement;
-
-function hideAlert() {
-  if (alertDiv) {
-    alertDiv.style.opacity = "0";
-    setTimeout(() => {
-      alertDiv.style.display = "none";
-    }, 600);
-  }
-}
-
 if (closeBtn) {
-  closeBtn.addEventListener("click", function () {
-    hideAlert();
-  });
-}
+  const alertDiv = closeBtn.parentElement;
 
-setTimeout(hideAlert, 3000);
+  function hideAlert() {
+    if (alertDiv) {
+      alertDiv.style.opacity = "0";
+      setTimeout(() => {
+        alertDiv.style.display = "none";
+      }, 600);
+    }
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function () {
+      hideAlert();
+    });
+  }
+
+  setTimeout(hideAlert, 3000);
+}
 
 //End Alert

@@ -16,5 +16,5 @@
     </div>
   </div>
 </section>
-<script src="assets/extensions/tinymce/tinymce.min.js"></script>
-<script src="assets/static/js/pages/tinymce.js"></script>
+<script src="public/assets/extensions/tinymce/tinymce.min.js"></script>
+<script src="public/assets/static/js/pages/tinymce.js"></script>

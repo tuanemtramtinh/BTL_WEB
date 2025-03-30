@@ -56,6 +56,7 @@
             <a class="w-100 btn btn-success btn-sm py-2 fs-6">
               Add Product
             </a>
+            
           </div>
         </div>
       </div>
