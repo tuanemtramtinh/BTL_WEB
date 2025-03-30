@@ -164,12 +164,33 @@
                                 </a>
                             </li>
 
-                            <li class="sidebar-item <?php echo str_contains($data["page"], "product") ?  "active" : "" ?>">
+                            <li class="sidebar-item has-sub <?php echo str_contains($data["page"], "product") ?  "active" : "" ?>">
+                                <span style="cursor: pointer;" class='sidebar-link'>
+                                    <i class="bi bi-stack"></i>
+                                    <span>Product</span>
+                                </span>
+                                <ul class="submenu">
+                                    <li class="submenu-item <?php echo $data['page'] === 'product/index' ?  "active" : "" ?>">
+                                        <a href="admin/product/index" class="submenu-link">Product List</a>
+                                    </li>
+
+                                    <li class="submenu-item <?php echo $data['page'] === 'product/category' ? "active" : "" ?>">
+                                        <a href="admin/product/category" class="submenu-link">Category List</a>
+                                    </li>
+
+                                    <li class="submenu-item <?php echo $data['page'] === 'product/brand' ? "active" : "" ?>">
+                                        <a href="admin/product/brand" class="submenu-link">Brand List</a>
+                                    </li>
+                                </ul>
+
+                            </li>
+
+                            <!-- <li class="sidebar-item <?php echo str_contains($data["page"], "product") ?  "active" : "" ?>">
                                 <a href="admin/product" class='sidebar-link'>
                                     <i class="bi bi-bag-fill"></i>
                                     <span>Product</span>
                                 </a>
-                            </li>
+                            </li> -->
 
                             <li class="sidebar-item <?php echo str_contains($data["page"], "user") ?  "active" : "" ?>">
                                 <a href="admin/user" class='sidebar-link'>
@@ -322,7 +343,7 @@
     <script src="public/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
     <script src="public/assets/extensions/tinymce/tinymce.min.js"></script>
     <script src="public/js/admin/script.js"></script>
-    <?php if (isset($data['task'])) echo '<script src="public/js/client/script_' . $data['task'] . '.js"></script>'; ?>
+    <?php if (isset($data['task'])) echo '<script src="public/js/admin/script_' . $data['task'] . '.js"></script>'; ?>
 </body>
 
 </html>

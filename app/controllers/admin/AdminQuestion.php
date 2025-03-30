@@ -11,7 +11,8 @@ class AdminQuestion extends Controller
       "title" => "Question",
       "page" => "question/index",
       "error" => $message['error'],
-      "success" => $message['success']
+      "success" => $message['success'],
+      "task" => 2
     ]);
   }
 }

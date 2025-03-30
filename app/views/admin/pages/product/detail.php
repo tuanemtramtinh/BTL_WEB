@@ -16,5 +16,3 @@
     </div>
   </div>
 </section>
-<script src="public/assets/extensions/tinymce/tinymce.min.js"></script>
-<script src="public/assets/static/js/pages/tinymce.js"></script>
