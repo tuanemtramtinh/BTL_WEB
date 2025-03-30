@@ -27,7 +27,7 @@
     </div>
     <div class="card-body">
 
-      <a href="../admin/employee/create" class="btn btn-primary mb-3">Create New Employee Account</a>
+      <a href="admin/employee/create" class="btn btn-primary mb-3">Create New Employee Account</a>
 
       <table class="table table-striped" id="table1">
         <thead>
@@ -56,4 +56,5 @@
   </div>
 </section>
 
-<script src="assets/static/js/pages/simple-datatables.js"></script>';
+<script src="public/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
+<script src="public/assets/static/js/pages/simple-datatables.js"></script>

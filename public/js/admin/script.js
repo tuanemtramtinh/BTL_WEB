@@ -40,7 +40,7 @@ tinymce.init({
   plugins: "advlist autolink lists link image charmap preview anchor",
   toolbar:
     "undo redo | styles | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat",
-  images_upload_url: "../admin/upload/image",
+  images_upload_url: "admin/upload/image",
   ...themeOptions,
 });
 // End TinyMCE

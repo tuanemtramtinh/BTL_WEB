@@ -5,35 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $data["title"]; ?></title>
-    <base href="<?= BASE_URL ?>/public/">
-    <link rel="shortcut icon" href="assets/compiled/svg/favicon.svg" type="image/x-icon">
+    <base href="<?= BASE_URL ?>/">
+    <link rel="shortcut icon" href="public/assets/compiled/svg/favicon.svg" type="image/x-icon">
     <link rel="shortcut icon"
         href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAiCAYAAADRcLDBAAAEs2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS41LjAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgZXhpZjpQaXhlbFhEaW1lbnNpb249IjMzIgogICBleGlmOlBpeGVsWURpbWVuc2lvbj0iMzQiCiAgIGV4aWY6Q29sb3JTcGFjZT0iMSIKICAgdGlmZjpJbWFnZVdpZHRoPSIzMyIKICAgdGlmZjpJbWFnZUxlbmd0aD0iMzQiCiAgIHRpZmY6UmVzb2x1dGlvblVuaXQ9IjIiCiAgIHRpZmY6WFJlc29sdXRpb249Ijk2LjAiCiAgIHRpZmY6WVJlc29sdXRpb249Ijk2LjAiCiAgIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiCiAgIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIKICAgeG1wOk1vZGlmeURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiCiAgIHhtcDpNZXRhZGF0YURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiPgogICA8eG1wTU06SGlzdG9yeT4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJwcm9kdWNlZCIKICAgICAgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWZmaW5pdHkgRGVzaWduZXIgMS4xMC4xIgogICAgICBzdEV2dDp3aGVuPSIyMDIyLTAzLTMxVDEwOjUwOjIzKzAyOjAwIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cjw/eHBhY2tldCBlbmQ9InIiPz5V57uAAAABgmlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kc8rRFEUxz9maORHo1hYKC9hISNGTWwsRn4VFmOUX5uZZ36oeTOv954kW2WrKLHxa8FfwFZZK0WkZClrYoOe87ypmWTO7dzzud97z+nec8ETzaiaWd4NWtYyIiNhZWZ2TvE946WZSjqoj6mmPjE1HKWkfdxR5sSbgFOr9Ll/rXoxYapQVik8oOqGJTwqPL5i6Q5vCzeo6dii8KlwpyEXFL519LjLLw6nXP5y2IhGBsFTJ6ykijhexGra0ITl5bRqmWU1fx/nJTWJ7PSUxBbxJkwijBBGYYwhBgnRQ7/MIQIE6ZIVJfK7f/MnyUmuKrPOKgZLpEhj0SnqslRPSEyKnpCRYdXp/9++msneoFu9JgwVT7b91ga+LfjetO3PQ9v+PgLvI1xkC/m5A+h7F32zoLXug38dzi4LWnwHzjeg8UGPGbFfySvuSSbh9QRqZ6H+Gqrm3Z7l9zm+h+iafNUV7O5Bu5z3L/wAdthn7QIme0YAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAJTSURBVFiF7Zi9axRBGIefEw2IdxFBRQsLWUTBaywSK4ubdSGVIY1Y6HZql8ZKCGIqwX/AYLmCgVQKfiDn7jZeEQMWfsSAHAiKqPiB5mIgELWYOW5vzc3O7niHhT/YZvY37/swM/vOzJbIqVq9uQ04CYwCI8AhYAlYAB4Dc7HnrOSJWcoJcBS4ARzQ2F4BZ2LPmTeNuykHwEWgkQGAet9QfiMZjUSt3hwD7psGTWgs9pwH1hC1enMYeA7sKwDxBqjGnvNdZzKZjqmCAKh+U1kmEwi3IEBbIsugnY5avTkEtIAtFhBrQCX2nLVehqyRqFoCAAwBh3WGLAhbgCRIYYinwLolwLqKUwwi9pxV4KUlxKKKUwxC6ZElRCPLYAJxGfhSEOCz6m8HEXvOB2CyIMSk6m8HoXQTmMkJcA2YNTHm3congOvATo3tE3A29pxbpnFzQSiQPcB55IFmFNgFfEQeahaAGZMpsIJIAZWAHcDX2HN+2cT6r39GxmvC9aPNwH5gO1BOPFuBVWAZue0vA9+A12EgjPadnhCuH1WAE8ivYAQ4ohKaagV4gvxi5oG7YSA2vApsCOH60WngKrA3R9IsvQUuhIGY00K4flQG7gHH/mLytB4C42EgfrQb0mV7us8AAMeBS8mGNMR4nwHamtBB7B4QRNdaS0M8GxDEog7iyoAguvJ0QYSBuAOcAt71Kfl7wA8DcTvZ2KtOlJEr+ByyQtqqhTyHTIeB+ONeqi3brh+VgIN0fohUgWGggizZFTplu12yW8iy/YLOGWMpDMTPXnl+Az9vj2HERYqPAAAAAElFTkSuQmCC"
         type="image/png">
 
-    <link rel="stylesheet" href="assets/extensions/filepond/filepond.css" />
+    <link rel="stylesheet" href="public/assets/extensions/filepond/filepond.css" />
     <link
         rel="stylesheet"
-        href="assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.css" />
-    <link rel="stylesheet" href="assets/extensions/toastify-js/src/toastify.css">
+        href="public/assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.css" />
+    <link rel="stylesheet" href="public/assets/extensions/toastify-js/src/toastify.css">
 
     <?php
     if ($data['page'] === 'dashboard/index') {
-        echo '<link rel="stylesheet" href="assets/compiled/css/iconly.css">';
+        echo '<link rel="stylesheet" href="public/assets/compiled/css/iconly.css">';
     }
 
     if ($data['page'] === 'employee/index') {
         echo '
-        <link rel="stylesheet" href="assets/extensions/simple-datatables/style.css">
-        <link rel="stylesheet" href="assets/compiled/css/table-datatable.css">';
+        <link rel="stylesheet" href="public/assets/extensions/simple-datatables/style.css">
+        <link rel="stylesheet" href="public/assets/compiled/css/table-datatable.css">';
     }
     if ($data['page'] === 'auth/login') {
-        echo '<link rel="stylesheet" href="./assets/compiled/css/auth.css" />';
+        echo '<link rel="stylesheet" href="public/assets/compiled/css/auth.css" />';
     }
     ?>
 
-    <link rel="stylesheet" href="assets/compiled/css/app.css">
-    <link rel="stylesheet" href="assets/compiled/css/app-dark.css">
+    <link rel="stylesheet" href="public/assets/compiled/css/app.css">
+    <link rel="stylesheet" href="public/assets/compiled/css/app-dark.css">
 
     <style>
         .tox .tox-toolbar-overlord .tox-toolbar:not(.tox-toolbar--scrolling):first-child,
@@ -44,7 +44,7 @@
 </head>
 
 <body>
-    <script src="assets/static/js/initTheme.js"></script>
+    <script src="public/assets/static/js/initTheme.js"></script>
     <!-- Start content here -->
     <?php
     if (isset($data['error'])) {
@@ -64,7 +64,7 @@
                     <div class="sidebar-header position-relative">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="logo">
-                                <a href="../admin/dashboard" class="fs-4 text">
+                                <a href="admin/dashboard" class="fs-4 text">
                                     <!-- <img src="./assets/compiled/svg/logo.svg" alt="Logo" srcset=""> -->
                                     <?php if (isset($_SESSION['employee_username'])) {
                                         echo $_SESSION['employee_username'];
@@ -112,14 +112,14 @@
                             <li class="sidebar-title">Menu</li>
 
                             <li class="sidebar-item <?php echo str_contains($data["page"], "dashboard") ?  "active" : "" ?>">
-                                <a href="../admin/dashboard" class='sidebar-link'>
+                                <a href="admin/dashboard" class='sidebar-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
 
                             <li class="sidebar-item <?php echo str_contains($data["page"], "about") ?  "active" : "" ?>">
-                                <a href="../admin/about" class='sidebar-link'>
+                                <a href="admin/about" class='sidebar-link'>
                                     <i class="bi bi-info-circle-fill"></i>
                                     <span>About</span>
                                 </a>
@@ -132,47 +132,47 @@
                                 </span>
                                 <ul class="submenu">
                                     <li class="submenu-item <?php echo $data['page'] === 'blog/content' ? "active" : "" ?>">
-                                        <a href="../admin/blog/content" class="submenu-link">Content</a>
+                                        <a href="admin/blog/content" class="submenu-link">Content</a>
 
                                     </li>
 
                                     <li class="submenu-item <?php echo $data['page'] === 'blog/index' ?  "active" : "" ?>">
-                                        <a href="../admin/blog/index" class="submenu-link">Blog List</a>
+                                        <a href="admin/blog/index" class="submenu-link">Blog List</a>
                                     </li>
                                 </ul>
 
                             </li>
 
                             <li class="sidebar-item <?php echo str_contains($data["page"], "contact") ?  "active" : "" ?>">
-                                <a href="../admin/contact" class='sidebar-link'>
+                                <a href="admin/contact" class='sidebar-link'>
                                     <i class="bi bi-telephone-fill"></i>
                                     <span>Contact</span>
                                 </a>
                             </li>
 
                             <li class="sidebar-item <?php echo str_contains($data["page"], "home") ?  "active" : "" ?>">
-                                <a href="../admin/home" class='sidebar-link'>
+                                <a href="admin/home" class='sidebar-link'>
                                     <i class="bi bi-house-fill"></i>
                                     <span>Home</span>
                                 </a>
                             </li>
 
                             <li class="sidebar-item <?php echo str_contains($data["page"], "question") ?  "active" : "" ?>">
-                                <a href="../admin/question" class='sidebar-link'>
+                                <a href="admin/question" class='sidebar-link'>
                                     <i class="bi bi-question-circle-fill"></i>
                                     <span>Question</span>
                                 </a>
                             </li>
 
                             <li class="sidebar-item <?php echo str_contains($data["page"], "product") ?  "active" : "" ?>">
-                                <a href="../admin/product" class='sidebar-link'>
+                                <a href="admin/product" class='sidebar-link'>
                                     <i class="bi bi-bag-fill"></i>
                                     <span>Product</span>
                                 </a>
                             </li>
 
                             <li class="sidebar-item <?php echo str_contains($data["page"], "user") ?  "active" : "" ?>">
-                                <a href="../admin/user" class='sidebar-link'>
+                                <a href="admin/user" class='sidebar-link'>
                                     <i class="bi bi-person-fill"></i>
                                     <span>User</span>
                                 </a>
@@ -182,7 +182,7 @@
                             if ($_SESSION['employeeId'] === ADMIN_ID) {
                             ?>
                                 <li class="sidebar-item <?php echo str_contains($data["page"], "employee") ?  "active" : "" ?>">
-                                    <a href="../admin/employee" class='sidebar-link'>
+                                    <a href="admin/employee" class='sidebar-link'>
                                         <i class="bi bi-person-badge"></i>
                                         <span>Employee</span>
                                     </a>
@@ -193,7 +193,7 @@
                             if (isset($_SESSION['employeeId'])) {
                             ?>
                                 <li class="sidebar-item <?php echo str_contains($data["page"], "logout") ?  "active" : "" ?>">
-                                    <a href="../admin/auth/logout" class='sidebar-link'>
+                                    <a href="admin/auth/logout" class='sidebar-link'>
                                         <i class="bi bi-box-arrow-right"></i>
                                         <span>Logout</span>
                                     </a>
@@ -206,7 +206,7 @@
 
             <div id="main">
                 <header class="mb-3">
-                    <span href="" class="burger-btn d-block d-xl-none">
+                    <span class="burger-btn d-block d-xl-none">
                         <i class="bi bi-justify fs-3"></i>
                     </span>
                 </header>
@@ -238,14 +238,14 @@
                 <div class="col-lg-5 col-12">
                     <div id="auth-left">
                         <div class="auth-logo">
-                            <a href="index.html"><img src="/assets/compiled/svg/logo.svg" alt="Logo" /></a>
+                            <a href="index.html"><img src="public/assets/compiled/svg/logo.svg" alt="Logo" /></a>
                         </div>
                         <h1 class="auth-title">Log in.</h1>
                         <p class="auth-subtitle mb-5">
                             Log in with your data that you entered during registration.
                         </p>
 
-                        <form action="../admin/auth/loginPost" method="post">
+                        <form action="admin/auth/loginPost" method="post">
                             <div class="form-group position-relative has-icon-left mb-4">
                                 <input
                                     type="text"
@@ -301,28 +301,28 @@
     <?php } ?>
 
     <!-- End content -->
-    <script src="assets/static/js/components/dark.js"></script>
-    <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="public/assets/static/js/components/dark.js"></script>
+    <script src="public/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
-    <script src="assets/compiled/js/app.js"></script>
+    <script src="public/assets/compiled/js/app.js"></script>
 
     <!-- Need: Apexcharts -->
-    <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
-    <script src="assets/static/js/pages/dashboard.js"></script>
+    <script src="public/assets/extensions/apexcharts/apexcharts.min.js"></script>
+    <script src="public/assets/static/js/pages/dashboard.js"></script>
 
-    <script src="assets/extensions/toastify-js/src/toastify.js"></script>
-    <script src="assets/extensions/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js"></script>
-    <script src="assets/extensions/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js"></script>
-    <script src="assets/extensions/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js"></script>
-    <script src="assets/extensions/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js"></script>
-    <script src="assets/extensions/filepond-plugin-image-filter/filepond-plugin-image-filter.min.js"></script>
-    <script src="assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js"></script>
-    <script src="assets/extensions/filepond-plugin-image-resize/filepond-plugin-image-resize.min.js"></script>
-    <script src="assets/extensions/filepond/filepond.js"></script>
-    <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
-    <script src="assets/extensions/tinymce/tinymce.min.js"></script>
-    <script src="js/admin/script.js"></script>
-    <?php if (isset($data['task'])) echo '<script src="js/client/script_' . $data['task'] . '.js"></script>'; ?>
+    <script src="public/assets/extensions/toastify-js/src/toastify.js"></script>
+    <script src="public/assets/extensions/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js"></script>
+    <script src="public/assets/extensions/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js"></script>
+    <script src="public/assets/extensions/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js"></script>
+    <script src="public/assets/extensions/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js"></script>
+    <script src="public/assets/extensions/filepond-plugin-image-filter/filepond-plugin-image-filter.min.js"></script>
+    <script src="public/assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js"></script>
+    <script src="public/assets/extensions/filepond-plugin-image-resize/filepond-plugin-image-resize.min.js"></script>
+    <script src="public/assets/extensions/filepond/filepond.js"></script>
+    <script src="public/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
+    <script src="public/assets/extensions/tinymce/tinymce.min.js"></script>
+    <script src="public/js/admin/script.js"></script>
+    <?php if (isset($data['task'])) echo '<script src="public/js/client/script_' . $data['task'] . '.js"></script>'; ?>
 </body>
 
 </html>
