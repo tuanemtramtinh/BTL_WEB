@@ -30,7 +30,7 @@ class AdminUpload extends Controller
 
     // Check if $uploadOk is set to 0 by an error{
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-      $file_url = BASE_URL . $target_file; // Adjust with your actual domain
+      $file_url = $target_file; // Adjust with your actual domain
       echo json_encode(["location" => $file_url]);
       exit;
     } else {
