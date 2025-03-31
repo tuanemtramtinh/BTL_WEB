@@ -14,6 +14,8 @@ class AdminUpload extends Controller
         echo json_encode(["error" => "Failed to create upload directory."]);
         exit;
       }
+    } else {
+      chmod($target_dir, 0777); // Ensure the directory is writable
     }
 
     $original_name = pathinfo($_FILES["file"]["name"], PATHINFO_FILENAME); // Get filename without extension
