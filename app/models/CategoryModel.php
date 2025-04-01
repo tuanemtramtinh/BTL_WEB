@@ -6,25 +6,18 @@ class CategoryModel extends DB
   {
     $slugName = strtolower(str_replace(' ', '-', $categoryName));
 
-    $query = "INSERT INTO ProductCategory(Name, Slug) VALUES (?, ?)";
+    $query = "INSERT INTO ProductCategory(Name, Slug, SocialNo) VALUES (?, ?, ?)";
     $stmt = $this->conn->prepare($query);
-    $stmt->bind_param("ss", $categoryName, $slugName);
+    $stmt->bind_param("sss", $categoryName, $slugName, $employeeId);
     $result = $stmt->execute();
 
-    $categoryId = $stmt->insert_id;
     $stmt->close();
-
-    $query_1 = "INSERT INTO ProductCategory_History(ProductCategory_ID, SocialNo) VALUES (?, ?)";
-    $stmt_1 = $this->conn->prepare($query_1);
-    $stmt_1->bind_param("is", $categoryId, $employeeId);
-    $result_1 = $stmt_1->execute();
-    $stmt_1->close();
-    return $result && $result_1;
+    return $result;
   }
 
   public function getCategoryList()
   {
-    $query = "SELECT * FROM ProductCategory";
+    $query = "SELECT ProductCategory.ID, ProductCategory.Name, ProductCategory.CreatedAt, ProductCategory.UpdatedAt, Employee.Username FROM ProductCategory INNER JOIN Employee WHERE ProductCategory.SocialNo = Employee.SocialNo";
     $stmt = $this->conn->prepare($query);
     $stmt->execute();
 

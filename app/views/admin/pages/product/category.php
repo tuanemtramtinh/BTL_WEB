@@ -31,14 +31,22 @@
             <div class="table-responsive">
               <table class="w-100 table">
                 <thead>
-                  <th>No.</th>
+                  <th>ID</th>
                   <th>Name</th>
+                  <th>Created At</th>
+                  <th>Updated At</th>
+                  <th>Updated By</th>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td> Men’s Fragrances</td>
-                  </tr>
+                  <?php if (isset($data['categories'])) foreach ($data['categories'] as $category) { ?>
+                    <tr>
+                      <td><?= $category['ID'] ?></td>
+                      <td><?= $category['Name'] ?></td>
+                      <td><?= $category['CreatedAt'] ?></td>
+                      <td><?= $category['UpdatedAt'] ?></td>
+                      <td><?= $category['Username'] ?></td>
+                    </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>

@@ -6,18 +6,27 @@
       </h5>
     </div>
     <div class="card-body">
-      <form action="">
+      <form action="admin/product/addPost" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="name" class="form-label">Product Name</label>
           <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name">
         </div>
         <div class="mb-3">
           <label for="category" class="form-label">Category</label>
-          <select id="category" name="category" class="form-select" >
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <select id="category" name="category" class="form-select">
+            <option selected value="">Open this select menu</option>
+            <?php if (isset($data['categories'])) foreach ($data['categories'] as $category) { ?>
+              <option value="<?= $category['ID'] ?>"><?= $category['Name'] ?></option>
+            <?php } ?>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="brand" class="form-label">Brand</label>
+          <select id="brand" name="brand" class="form-select">
+            <option selected value="">Open this select menu</option>
+            <?php if (isset($data['brands'])) foreach ($data['brands'] as $brand) { ?>
+              <option value="<?= $brand['Name'] ?>"><?= $brand['Name'] ?></option>
+            <?php } ?>
           </select>
         </div>
         <div class="mb-3">
@@ -33,9 +42,10 @@
           <input type="number" name="quantity" class="form-control" id="quantity" min="0">
         </div>
         <div class="mb-3">
-          <label for="image" class="form-label">Image</label>
-          <input type="file" class="image-preview-filepond" name="image" id="image">
+          <label for="images" class="form-label">Image</label>
+          <input type="file" class="image-preview-filepond" name="images[]" id="images" multiple>
         </div>
+        <button type="submit" class="btn btn-success w-100">Add Product</button>
       </form>
     </div>
   </div>

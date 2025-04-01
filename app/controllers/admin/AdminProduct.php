@@ -7,13 +7,18 @@ class AdminProduct extends Controller
     //Check if the employee is logged in
     $this->checkAuthAdmin();
 
+    $Product = $this->model("ProductModel");
+
+    $products = $Product->getProductList();
+
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
       "title" => "Product",
       "page" => "product/index",
       "error" => $message['error'],
       "success" => $message['success'],
-      "task" => 3
+      "task" => 3,
+      "products" => $products
     ]);
   }
 
@@ -37,14 +42,66 @@ class AdminProduct extends Controller
     //Check if the employee is logged in
     $this->checkAuthAdmin();
 
+    $Category = $this->model("CategoryModel");
+    $Brand = $this->model("BrandModel");
+
+    $categories = $Category->getCategoryList();
+    $brands = $Brand->getBrandList();
+
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
       "title" => "Create Product",
       "page" => "product/add",
       "error" => $message['error'],
       "success" => $message['success'],
-      "task" => 3
+      "task" => 3,
+      "categories" => $categories,
+      "brands" => $brands
     ]);
+  }
+
+  public function addPost()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      //Check if the employee is logged in
+      $this->checkAuthAdmin();
+
+      $productImages = $this->uploadImages($_FILES['images'], 'add');
+      $productImagesJson = json_encode($productImages, JSON_PRETTY_PRINT);
+
+      $productName = $_POST['name'];
+      $productCategory = $_POST['category'];
+      $productBrand = $_POST['brand'];
+      $productDesc = $_POST['description'];
+      $productPrice = $_POST['price'];
+      $productQuantity = $_POST['quantity'];
+
+      $Product = $this->model("ProductModel");
+
+      //ERROR HANDLERS
+      $error = null;
+
+      if (empty($productName) || empty($productCategory) || empty($productBrand) || empty($productDesc) || empty($productDesc) || empty($productPrice) || empty($productQuantity)) {
+        $error = 'Fail to create: Fill in all fields!';
+      }
+
+      //Check if the brand name is already taken
+      $existProduct = $Product->findProductByName($productName);
+      if (isset($existProduct)) {
+        $error = 'Fail to create: Product name already taken!';
+      }
+
+      if (isset($error)) {
+        $_SESSION["error_message"] = $error;
+        header("Location: add");
+        exit;
+      }
+
+      $Product->createProduct($productName, $productPrice, $productQuantity, $productDesc, $productImagesJson, $productBrand, $productCategory, $_SESSION['employeeId']);
+      $Product->closeConnection();
+      $_SESSION['success_message'] = 'Add Product successfully';
+      header('Location: index');
+    }
   }
 
   public function category()
@@ -52,13 +109,17 @@ class AdminProduct extends Controller
     //Check if the employee is logged in
     $this->checkAuthAdmin();
 
+    $Category = $this->model("CategoryModel");
+    $categories = $Category->getCategoryList();
+
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
       "title" => "Product Category",
       "page" => "product/category",
       "error" => $message['error'],
       "success" => $message['success'],
-      "task" => 3
+      "task" => 3,
+      "categories" => $categories
     ]);
   }
 

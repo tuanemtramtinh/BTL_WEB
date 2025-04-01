@@ -57,7 +57,7 @@ class AdminAuth extends Controller
       }
 
       if (isset($error)) {
-        $_SESSION["errors_message"] = $error;
+        $_SESSION["error_message"] = $error;
         $Employee->closeConnection();
         header("Location: login");
         exit;
