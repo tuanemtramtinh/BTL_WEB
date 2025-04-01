@@ -32,12 +32,7 @@
         </div>
         <div class="mb-3">
           <label for="cover_image" class="form-label">Cover Image</label>
-          <input type="file" class="form-control" id="cover_image" name="cover_image" accept="image/*" onchange="previewImage(event)">
-          <?php if (!empty($data['blog']['Image'])): ?>
-            <img id="cover_image_preview" src="<?= htmlspecialchars($data['blog']['Image']) ?>" alt="Cover Image Preview" style="max-width: 100%; margin-top: 10px;">
-          <?php else: ?>
-            <img id="cover_image_preview" src="#" alt="Cover Image Preview" style="max-width: 100%; display: none; margin-top: 10px;">
-          <?php endif; ?>
+          <input type="file" class="filepond" id="cover_image" name="image" accept="image/*" required>
         </div>
         <div class="mb-3">
           <label for="category" class="form-label">Category</label>
@@ -99,21 +94,8 @@
       </div>
     </div>
   </div>
+<script>
+const existingImage = "<?= isset($data['blog']['Image']) ? htmlspecialchars($data['blog']['Image']) : '' ?>";
+</script>
 
-  <script>
-    function previewImage(event) {
-      var output = document.getElementById('cover_image_preview');
-      output.src = URL.createObjectURL(event.target.files[0]);
-      output.style.display = 'block';
-    }
-  </script>
 
-  <script src="assets/extensions/tinymce/tinymce.min.js"></script>
-  <script>
-    tinymce.init({
-      selector: '#content',
-      height: 300,
-      plugins: 'advlist autolink lists link image charmap print preview anchor',
-      toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat'
-    });
-  </script>

@@ -71,6 +71,7 @@ class AdminBlog extends Controller
     $id = (int)$_GET['id'];
 
     $blog = $Blog->getBlogDetail($id);
+    $categories = $Blog->getCategories();
 
     if (!$blog) {
       $_SESSION["error_message"] = "Blog not found.";
@@ -84,6 +85,7 @@ class AdminBlog extends Controller
       "page" => "blog/detail",
       "task" => 4,
       "blog"        => $blog,
+      "categories" => $categories,
       "error"       => $message['error'],
       "success"     => $message['success']
     ]);
@@ -100,7 +102,7 @@ class AdminBlog extends Controller
     $categories = $Blog->getCategories();
 
     $this->viewAdmin("layout", [
-      "title" => "Tạo Blog",
+      "title" => "Add Blog",
       "page" => "blog/add",
       "task" => 4,
       "categories" => $categories,

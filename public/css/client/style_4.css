@@ -1,4 +1,49 @@
 
+.pagination-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 94px;
+}
+
+.loading-spinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+  }
+
+.pagination-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 2px solid #fff;
+    color: #fff;
+    width: 28px;
+    height: 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.pagination-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+.pagination-button.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+.pagination-text {
+    color: #fff;
+    font-size: 16px;
+    padding: 8px 21px;
+    border: #fff solid 1px;
+    border-radius: 8px;
+}
+
 /* Trang Blog */
 .blog__header{
     text-align: center;
@@ -139,6 +184,24 @@
     transition: opacity 0.6s ease;
 }
 
+.clear-filter {
+    background: #962727;
+    transition: all 0.3s;
+    /* background: transparent; */
+    /* text-decoration: underline; */
+    font-size: 16.5px;
+    border: transparent;
+    /* margin-bottom: -5px; */
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 23px;
+    border-radius: 20px;
+  }
+
+
+  
+
 .blog__search-item{
     color:#fff;
     padding: 10px 20px;
@@ -147,7 +210,14 @@
     margin: 23px 20px 0;
     cursor: pointer;
     transition: opacity 0.6s ease;
+    cursor: pointer;
 }
+
+/* .blog__search-item:last-child{
+    background: #962727;
+    color: #fff;
+    padding: 0;
+} */
 
 .blog__search-label:hover .blog__search-icon {
     animation: shake 0.5s;
@@ -211,7 +281,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 55px;
-    margin-bottom: 167px;
+    margin-bottom: 43px;
 }
 
 .blog__post-img {

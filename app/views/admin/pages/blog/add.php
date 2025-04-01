@@ -48,19 +48,8 @@
     </form>
   </div>
 </div>
-
-<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
 <script>
-  FilePond.registerPlugin(FilePondPluginImagePreview);
-  FilePond.parse(document.body);
+  const existingImage = undefined;
 </script>
-<!-- <script>
-  tinymce.init({
-    selector: '#content',
-    height: 300,
-    plugins: 'advlist autolink lists link image charmap print preview anchor',
-    toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat'
-  });
-</script> -->
+
 

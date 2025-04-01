@@ -78,9 +78,9 @@
                                                 No Image
                                             <?php endif; ;?>
                                         </td>
-                                        <td>
+                                        <td style="width: 10%;">
                                             <a href="admin/blog/detail?id=<?php echo $blog['BlogID'] ;?>">
-                                                View Full Detail <i class="bi bi-chevron-double-right"></i>
+                                                View <i class="bi bi-chevron-double-right"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -133,3 +133,6 @@
         </div>
     </div>
 </section>
+<script>
+  const existingImage = undefined;
+</script>
