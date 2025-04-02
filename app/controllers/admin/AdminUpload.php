@@ -14,8 +14,6 @@ class AdminUpload extends Controller
         echo json_encode(["error" => "Failed to create upload directory."]);
         exit;
       }
-    } else {
-      chmod($target_dir, 0777); // Ensure the directory is writable
     }
 
     $original_name = pathinfo($_FILES["file"]["name"], PATHINFO_FILENAME); // Get filename without extension
@@ -36,7 +34,7 @@ class AdminUpload extends Controller
     }
 
     // Generate a unique filename with the original name
-    $unique_name = $original_name . "_" . uniqid() . "." . $imageFileType;
+    $unique_name =  uniqid("img_", true) . '.' . $imageFileType;
     $target_file = $target_dir . $unique_name;
 
     // Check if $uploadOk is set to 0 by an error{
