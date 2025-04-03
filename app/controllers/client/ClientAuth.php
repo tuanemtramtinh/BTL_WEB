@@ -37,6 +37,7 @@ class ClientAuth extends Controller
     session_start();
     unset($_SESSION['userId']);
     unset($_SESSION['user_email']);
+    unset($_SESSION['user_cart']);
     // session_unset();
     // session_destroy();
     $_SESSION['success_message'] = 'Logout successfully';
@@ -91,7 +92,7 @@ class ClientAuth extends Controller
 
       $User->closeConnection();
       $Cart->closeConnection();
-      
+
       $_SESSION['success_message'] = 'Login Successfully';
       header('Location: ../home/index');
     } else {

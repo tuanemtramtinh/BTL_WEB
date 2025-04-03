@@ -65,7 +65,7 @@
           </div>
         </div>
         <div data-aos="fade-down" data-aos-duration="800" class="cart__submit">
-          <a href="">
+          <a href="order/orderPost/<?= $data['cart']['ID'] ?>">
             Checkout
           </a>
         </div>

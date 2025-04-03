@@ -13,6 +13,17 @@ class CartModel extends DB
     return $result;
   }
 
+  public function resetCart($userId)
+  {
+    $query = "UPDATE Cart SET Total = 0 WHERE ID_Customer = ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("i", $userId);
+    $result = $stmt->execute();
+    $stmt->close();
+
+    return $result;
+  }
+
   public function findCartByUserId($userId)
   {
     $query = "SELECT * FROM Cart WHERE ID_Customer = ?";

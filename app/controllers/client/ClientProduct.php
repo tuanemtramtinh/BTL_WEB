@@ -11,6 +11,8 @@ class ClientProduct extends Controller
 
     $products = $Product->getProductList();
 
+    $Product->closeConnection();
+
     $this->view("layout", [
       "title" => "Sản Phẩm",
       "page" => "product/index",
@@ -29,6 +31,8 @@ class ClientProduct extends Controller
     $Product = $this->model("ProductModel");
 
     $product = $Product->findProductBySlug($productSlug);
+
+    $Product->closeConnection();
 
     $message = $this->getSessionMessage();
     $this->view("layout", [

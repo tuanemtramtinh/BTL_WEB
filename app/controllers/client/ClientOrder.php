@@ -13,18 +13,14 @@ class ClientOrder extends Controller
       exit;
     }
 
-
-    $Order = $this->model("OrderModel");
-    $OrderItem = $this->model("OrderItemModel");
     $CartItem = $this->model("CartItemModel");
     $Cart = $this->model("CartModel");
 
     $cart = $Cart->findCartByUserId($_SESSION['userId']);
     $items = $CartItem->getCartListByCartId($_SESSION['user_cart']);
 
-    $order = $Order->createOrder($_SESSION['userId'], $cart['Total']);
-    foreach ($items as $item) {
-    }
+    $CartItem->closeConnection();
+    $Cart->closeConnection();
 
     $message = $this->getSessionMessage();
     $this->view("layout", [
@@ -36,6 +32,45 @@ class ClientOrder extends Controller
       "cart" => $cart,
       "items" => $items
     ]);
+  }
+
+  public function orderPost($cartId = '')
+  {
+    if ($cartId === '') {
+      $_SESSION['error_message'] = 'Invalid Cart';
+      header("Location: ../../cart/index");
+      exit;
+    }
+
+    $Product = $this->model("ProductModel");
+
+    $Order = $this->model("OrderModel");
+    $OrderItem = $this->model("OrderItemModel");
+
+    $CartItem = $this->model("CartItemModel");
+    $Cart = $this->model("CartModel");
+
+    $cart = $Cart->findCartByUserId($_SESSION['userId']);
+    $items = $CartItem->getCartListByCartId($_SESSION['user_cart']);
+    $order = $Order->createOrder($_SESSION['userId'], $cart['Total']);
+
+    foreach ($items as $item) {
+      $OrderItem->addItemToOrder($order, $item['ProductID'], $item['ProductQuantity'], $item['ProductName'], $item['ProductPrice'], $item['ProductImage']);
+
+      $currentProduct = $Product->findProductById($item['ProductID']);
+      $Product->updateProductQuantity($item['ProductID'], $currentProduct['Inventory'] - $item['ProductQuantity']);
+    }
+
+    $CartItem->resetCartItem($cart['ID']);
+    $Cart->resetCart($_SESSION['userId']);
+
+    $Cart->closeConnection();
+    $CartItem->closeConnection();
+    $Product->closeConnection();
+    $Order->closeConnection();
+    $OrderItem->closeConnection();
+
+    
   }
 
   public function success() {}
