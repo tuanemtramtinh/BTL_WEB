@@ -70,8 +70,32 @@ class ClientOrder extends Controller
     $Order->closeConnection();
     $OrderItem->closeConnection();
 
-    
+    header("Location: ../../order/success/" . $order);
   }
 
-  public function success() {}
+  public function success($orderId = '')
+  {
+    if ($orderId === '') {
+      $_SESSION['error_message'] = 'Invalid Order';
+      header('../../cart/index');
+      exit;
+    }
+
+    $Order = $this->model("OrderModel");
+    $OrderItem = $this->model("OrderItemModel");
+
+    $items = $OrderItem->getOrderListByOrderId($orderId);
+    $order = $Order->findOrderById($orderId);
+
+    $message = $this->getSessionMessage();
+    $this->view("layout", [
+      "title" => "Giỏ Hàng",
+      "page" => "order/success",
+      "task" => 3,
+      "success" => $message['success'],
+      "error" => $message['error'],
+      "items" => $items,
+      "order" => $order
+    ]);
+  }
 }

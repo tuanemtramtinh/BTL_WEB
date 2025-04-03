@@ -302,7 +302,7 @@ input[type="number"] {
   margin-bottom: 50px;
 }
 
-.product-detail__content-title{
+.product-detail__content-title {
   color: #AB572D;
   padding-bottom: 30px;
   border-bottom: 3px solid #AB572D;
@@ -563,6 +563,19 @@ input[type="number"] {
 
 .cart__table-price-mobile {
   display: none;
+}
+
+.order__success-alert {
+  margin: 30px 0px;
+  background-color: #AB572D;
+  font-size: larger;
+  padding: 20px;
+}
+
+.order__success-info {
+  font-size: larger;
+  background-color: #AB572D;
+  padding: 20px;
 }
 
 @media (max-width: 1199.98px) {}
