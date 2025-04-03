@@ -59,6 +59,6 @@ class EmployeeModel extends DB
       $users[] = $row;
     }
     $stmt->close();
-    return !empty($users) ? $users : null;;
+    return !empty($users) ? $users : null;
   }
 }

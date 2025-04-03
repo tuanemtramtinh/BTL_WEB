@@ -13,7 +13,8 @@ if (imagePreview) {
     allowImageFilter: false,
     allowImageExifOrientation: false,
     allowImageCrop: false,
-    acceptedFileTypes: ["image/png", "image/jpg", "image/jpeg"],
+    itemInsertLocation: "after",
+    acceptedFileTypes: ["image/png", "image/jpg", "image/jpeg", "image/webp"],
     fileValidateTypeDetectType: (source, type) =>
       new Promise((resolve, reject) => {
         // Do custom type detection here and return with promise
@@ -25,7 +26,7 @@ if (imagePreview) {
 
 const imagePreviewEdit = document.querySelector(".image-preview-filepond-edit");
 const imageLink = document.querySelector(".image-link");
-const base = document.querySelector('base');
+const base = document.querySelector("base");
 if (imagePreviewEdit) {
   const imageLinkParse = JSON.parse(imageLink.value);
   const imageObject = imageLinkParse.map((item) => {
@@ -43,13 +44,13 @@ if (imagePreviewEdit) {
     allowImageFilter: false,
     allowImageExifOrientation: false,
     allowImageCrop: false,
-    acceptedFileTypes: ["image/png", "image/jpg", "image/jpeg"],
+    acceptedFileTypes: ["image/png", "image/jpg", "image/jpeg", "image/webp"],
     fileValidateTypeDetectType: (source, type) =>
       new Promise((resolve, reject) => {
         // Do custom type detection here and return with promise
         resolve(type);
       }),
     storeAsFile: true,
-    files: imageObject
+    files: imageObject,
   });
 }

@@ -42,7 +42,7 @@ tinymce.init({
   relative_urls: false,
   convert_urls: false,
   document_base_url: baseTag.href,
-  plugins: "advlist autolink lists link image charmap preview anchor",
+  plugins: "advlist autolink lists table link image charmap preview anchor",
   toolbar:
     "undo redo | styles | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat",
   images_upload_url: "admin/upload/image",
