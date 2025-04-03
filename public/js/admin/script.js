@@ -1,3 +1,5 @@
+const baseTag = document.querySelector('base');
+
 //Toastify
 const sessionMessageSuccess = document.querySelector(".sessionMessageSuccess");
 if (sessionMessageSuccess) {
@@ -37,11 +39,13 @@ const themeOptions = document.body.classList.contains("dark")
 
 tinymce.init({
   selector: "#content",
+  relative_urls: false,
+  convert_urls: false,
+  document_base_url: baseTag.href,
   plugins: "advlist autolink lists link image charmap preview anchor",
   toolbar:
     "undo redo | styles | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat",
   images_upload_url: "admin/upload/image",
-  image_dimensions: true,
   ...themeOptions,
 });
 // End TinyMCE
