@@ -5,7 +5,6 @@ class AdminUpload extends Controller
   public function image()
   {
     header('Content-Type: application/json');
-    // echo json_encode(["file" => BASE_URL]);
     $target_dir = "./storage/";
 
     // Check if the directory exists, if not, create it
@@ -40,8 +39,8 @@ class AdminUpload extends Controller
     // Check if $uploadOk is set to 0 by an error{
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
       // $file_url = substr($target_file, 2); // Adjust with your actual domain
-      $file_url = BASE_URL . substr($target_file, 1);
-      echo json_encode(["location" => $file_url]);
+      $file_url = BASE_URL . substr($target_file, 2);
+      echo json_encode(["location" => substr($target_file, 2)]);
       exit;
     } else {
       echo json_encode(["error" => "Error uploading file."]);

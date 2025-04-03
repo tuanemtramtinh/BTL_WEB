@@ -22,7 +22,7 @@
         echo '<link rel="stylesheet" href="public/assets/compiled/css/iconly.css">';
     }
 
-    if ($data['page'] === 'employee/index') {
+    if ($data['page'] === 'employee/index' || $data['page'] === 'product/index') {
         echo '
         <link rel="stylesheet" href="public/assets/extensions/simple-datatables/style.css">
         <link rel="stylesheet" href="public/assets/compiled/css/table-datatable.css">';

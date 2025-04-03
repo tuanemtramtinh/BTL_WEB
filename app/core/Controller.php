@@ -72,7 +72,7 @@ class Controller
 
           // Move file to upload directory
           if (move_uploaded_file($fileTmp, $fileDestination)) {
-            $uploadedFiles[] = BASE_URL . substr($fileDestination, 1);
+            $uploadedFiles[] = substr($fileDestination, 2);
           } else {
             $_SESSION['error_message'] = "Failed to upload {$fileName}.";
             header('Location: ' . $location);

@@ -22,10 +22,13 @@ class AdminProduct extends Controller
     ]);
   }
 
-  public function detail()
+  public function detail($productId)
   {
     //Check if the employee is logged in
     $this->checkAuthAdmin();
+
+    $Product = $this->model("ProductModel");
+    $product = $Product->findProductById($productId);
 
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
@@ -33,7 +36,8 @@ class AdminProduct extends Controller
       "page" => "product/detail",
       "error" => $message['error'],
       "success" => $message['success'],
-      "task" => 3
+      "task" => 3,
+      "product" => $product
     ]);
   }
 
@@ -101,6 +105,100 @@ class AdminProduct extends Controller
       $Product->closeConnection();
       $_SESSION['success_message'] = 'Add Product successfully';
       header('Location: index');
+    }
+  }
+
+  public function edit($productId = '')
+  {
+    //Check if the employee is logged in
+    $this->checkAuthAdmin();
+
+
+    $Category = $this->model("CategoryModel");
+    $Product = $this->model("ProductModel");
+    $Brand = $this->model("BrandModel");
+
+    $categories = $Category->getCategoryList();
+    $product = $Product->findProductById($productId);
+    $brands = $Brand->getBrandList();
+
+    $message = $this->getSessionMessage();
+    $this->viewAdmin("layout", [
+      "title" => "Product Edit",
+      "page" => "product/edit",
+      "error" => $message['error'],
+      "success" => $message['success'],
+      "task" => 3,
+      "product" => $product,
+      "categories" => $categories,
+      "brands" => $brands
+    ]);
+  }
+
+  public function editPost($productId = '')
+  {
+    if ($productId === '') {
+      header("Location: ../index");
+      $_SESSION["error_message"] = "Invalid Product ID";
+      exit;
+    }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+      //Check if the employee is logged in
+      $this->checkAuthAdmin();
+
+      $productImageLinkJson = $_POST['imageLink'];
+      $productImageLink = json_decode($productImageLinkJson);
+      if (count($productImageLink) != count($_FILES['images']['name'])) {
+        $productImages = $this->uploadImages($_FILES['images'], 'edit');
+        $productImagesJson = json_encode($productImages, JSON_PRETTY_PRINT);
+      } else {
+        $isDifferent = false;
+        foreach ($_FILES['images']['name'] as $index => $fileName) {
+          $imageLinkFileName = basename($productImageLink[$index]);
+          echo $imageLinkFileName, $fileName;
+          if ($fileName !== $imageLinkFileName) {
+            $isDifferent = true;
+            break;
+          }
+        }
+        if ($isDifferent) {
+          $productImages = $this->uploadImages($_FILES['images'], 'edit');
+          $productImagesJson = json_encode($productImages, JSON_PRETTY_PRINT);
+        } else {
+          header('Location: ../edit/' . $productId);
+          $_SESSION["error_message"] = "No new fields to update";
+          exit;
+        }
+      }
+
+
+      $productName = $_POST['name'];
+      $productCategory = $_POST['category'];
+      $productBrand = $_POST['brand'];
+      $productDesc = $_POST['description'];
+      $productPrice = $_POST['price'];
+      $productQuantity = $_POST['quantity'];
+
+      $Product = $this->model("ProductModel");
+
+      //ERROR HANDLERS
+      $error = null;
+
+      if (empty($productName) || empty($productCategory) || empty($productBrand) || empty($productDesc) || empty($productDesc) || empty($productPrice) || empty($productQuantity)) {
+        $error = 'Fail to create: Fill in all fields!';
+      }
+
+      if (isset($error)) {
+        $_SESSION["error_message"] = $error;
+        header("Location: add");
+        exit;
+      }
+
+      $Product->updateProductById($productId, $productName, $productCategory, $productBrand, $productDesc, $productPrice, $productQuantity, $productImagesJson, $_SESSION['employeeId']);
+      $Product->closeConnection();
+      $_SESSION['success_message'] = 'Edit Product successfully';
+      header('Location: ../index');
     }
   }
 
