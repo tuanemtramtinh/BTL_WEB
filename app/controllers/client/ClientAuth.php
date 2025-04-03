@@ -50,6 +50,7 @@ class ClientAuth extends Controller
       $password = $_POST['password'];
 
       $User = $this->model("UserModel");
+      $Cart = $this->model("CartModel");
 
       //ERROR HANDLERS
 
@@ -77,6 +78,8 @@ class ClientAuth extends Controller
         exit;
       }
 
+      $existCart = $Cart->findCartByUserId($existUser['ID']);
+
       // $newSessionId = session_create_id();
       // $sessionId = $newSessionId . '_' . $existUser['ID'];
       // session_id($sessionId);
@@ -84,8 +87,11 @@ class ClientAuth extends Controller
 
       $_SESSION['userId'] = $existUser['ID'];
       $_SESSION['user_email'] = htmlspecialchars($existUser['Email']);
+      $_SESSION['user_cart'] = $existCart['ID'];
 
       $User->closeConnection();
+      $Cart->closeConnection();
+      
       $_SESSION['success_message'] = 'Login Successfully';
       header('Location: ../home/index');
     } else {
@@ -101,6 +107,7 @@ class ClientAuth extends Controller
       $password = $_POST['password'];
 
       $User = $this->model("UserModel");
+      $Cart = $this->model("CartModel");
 
       //ERROR HANDLERS
       $error = null;
@@ -127,8 +134,11 @@ class ClientAuth extends Controller
         exit;
       }
 
-      $User->createUser($firstName, $lastName, $email, $password);
+      $userId = $User->createUser($firstName, $lastName, $email, $password);
+      $Cart->createCart($userId);
+
       $User->closeConnection();
+      $Cart->closeConnection();
 
       $_SESSION['success_message'] = 'Register successfully';
       header('Location: login');

@@ -4,7 +4,7 @@ var swiper = new Swiper(".mySwiper", {
   loop: true,
   spaceBetween: 10,
   slidesPerView: 4,
-  freeMode: true,
+  // freeMode: true,
   watchSlidesProgress: true,
 });
 var swiper2 = new Swiper(".mySwiper2", {
