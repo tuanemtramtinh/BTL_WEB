@@ -134,18 +134,18 @@ class AdminProduct extends Controller
       "brands" => $brands
     ]);
   }
-
   public function editPost($productId = '')
   {
-    if ($productId === '') {
-      header("Location: ../index");
-      $_SESSION["error_message"] = "Invalid Product ID";
-      exit;
-    }
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       //Check if the employee is logged in
       $this->checkAuthAdmin();
+
+      if ($productId === '') {
+        header("Location: ../index");
+        $_SESSION["error_message"] = "Invalid Product ID";
+        exit;
+      }
 
       $productImageLinkJson = $_POST['imageLink'];
       $productImageLink = json_decode($productImageLinkJson);
@@ -166,9 +166,10 @@ class AdminProduct extends Controller
           $productImages = $this->uploadImages($_FILES['images'], 'edit');
           $productImagesJson = json_encode($productImages, JSON_PRETTY_PRINT);
         } else {
-          header('Location: ../edit/' . $productId);
-          $_SESSION["error_message"] = "No new fields to update";
-          exit;
+          $productImagesJson = $productImageLinkJson;
+          // header('Location: ../edit/' . $productId);
+          // $_SESSION["error_message"] = "No new fields to update";
+          // exit;
         }
       }
 
@@ -200,6 +201,41 @@ class AdminProduct extends Controller
       $_SESSION['success_message'] = 'Edit Product successfully';
       header('Location: ../index');
     }
+  }
+
+  public function delete($productId = '')
+  {
+    //Check if the employee is logged in
+    $this->checkAuthAdmin();
+
+    $Product = $this->model("ProductModel");
+
+    // $product = $Product->findProductById($productId);
+
+    // $urlPattern = '/storage\/img_[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+/';
+    // preg_match_all($urlPattern, $product['Description'], $matches);
+    // $foundUrl = $matches[0];
+
+    // $imageUrl = json_decode($product['Image']);
+
+    // $urls = array_merge($imageUrl, $foundUrl);
+
+    // foreach ($urls as $file) {
+    //   unlink('./' . $file);
+    // }
+
+    $status = $Product->deleteProductById($productId);
+
+    $Product->closeConnection();
+
+    if ($status) {
+      $_SESSION['success_message'] = 'Delete Product Successfully';
+      header('Location: ../index');
+      exit;
+    }
+
+    $_SESSION['error_message'] = 'Error on deleting Product';
+    header('Location: ../index');
   }
 
   public function category()
@@ -246,12 +282,66 @@ class AdminProduct extends Controller
     ]);
   }
 
-  public function category_edit($categoryId = '') {
+  public function category_edit($categoryId = '')
+  {
+    //Check if the employee is logged in
+    $this->checkAuthAdmin();
 
+    if ($categoryId === '') {
+      header('Location: category');
+      $_SESSION['error_message'] = 'Invalid category Id';
+      exit;
+    }
+
+    $Category = $this->model("CategoryModel");
+    $category = $Category->findCategoryById($categoryId);
+
+    $message = $this->getSessionMessage();
+    $this->viewAdmin("layout", [
+      "title" => "Product Category",
+      "page" => "product/category_edit",
+      "error" => $message['error'],
+      "success" => $message['success'],
+      "task" => 3,
+      "category" => $category
+    ]);
   }
 
-  public function category_editPost() {}
+  public function category_editPost($categoryId = '')
+  {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      //Check if the employee is logged in
+      $this->checkAuthAdmin();
 
+      if ($categoryId === '') {
+        header('Location: category');
+        $_SESSION['error_message'] = 'Invalid category Id';
+        exit;
+      }
+
+      $categoryName = $_POST['name'];
+
+      $Category = $this->model("CategoryModel");
+
+      //ERROR HANDLERS
+      $error = null;
+
+      if (empty($categoryName)) {
+        $error = 'Fail to create: Fill in all fields!';
+      }
+
+      if (isset($error)) {
+        $_SESSION["error_message"] = $error;
+        header("Location: add");
+        exit;
+      }
+
+      $Category->updateCategoryById($categoryId, $categoryName, $_SESSION['employeeId']);
+      $Category->closeConnection();
+      $_SESSION['success_message'] = 'Edit Category successfully';
+      header('Location: ../category');
+    }
+  }
   public function category_add()
   {
     //Check if the employee is logged in
@@ -337,7 +427,6 @@ class AdminProduct extends Controller
       "task" => 3
     ]);
   }
-
   public function brand_addPost()
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

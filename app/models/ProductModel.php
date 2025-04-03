@@ -41,9 +41,32 @@ class ProductModel extends DB
     return $result;
   }
 
+  public function updateProductQuantity($productId, $productQuantity)
+  {
+    $query = "UPDATE Product SET Inventory = ? WHERE ID = ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("ii", $productQuantity, $productId);
+    $result = $stmt->execute();
+    $stmt->close();
+
+    return $result;
+  }
+
+  public function deleteProductById($productId)
+  {
+    $query = "DELETE FROM Product WHERE ID = ?";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("i", $productId);
+    $result = $stmt->execute();
+    $stmt->close();
+
+    return $result;
+  }
+
   public function getProductList()
   {
-    $query = "SELECT ID, Image, Name, PriceUnit, CreatedAt, UpdatedAt, Employee.Username FROM Product INNER JOIN Employee ON Product.SocialNo = Employee.SocialNo";
+    $query = "SELECT ID, Image, Name, PriceUnit, CreatedAt, UpdatedAt, Employee.Username, Slug FROM Product INNER JOIN Employee ON Product.SocialNo = Employee.SocialNo ORDER BY ID ASC";
 
     $stmt = $this->conn->prepare($query);
     $stmt->execute();

@@ -25,7 +25,7 @@
       <div class="alert danger">
           <span class="closebtn">&times;</span>'
         . $data['error'] .
-      '</div>';
+        '</div>';
     }
 
     if (isset($data['success'])) {
@@ -33,7 +33,7 @@
       <div class="alert success">
           <span class="closebtn">&times;</span>'
         . $data['success'] .
-      '</div>';
+        '</div>';
     }
     ?>
 
@@ -58,14 +58,18 @@
           </ul>
           <div class="header__utility">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <i class="fa-solid fa-user"></i>
-            <i class="fa-solid fa-cart-shopping"></i>
             <?php if (isset($_SESSION['userId'])) { ?>
+              <i class="fa-solid fa-user"></i>
+              <i class="fa-solid fa-cart-shopping"></i>
               <form action="auth/logout" method="get">
                 <button type="submit">
                   <i class="fa-solid fa-right-from-bracket"></i>
                 </button>
               </form>
+            <?php } else { ?>
+              <a href="auth/login">
+                Login
+              </a>
             <?php } ?>
           </div>
 

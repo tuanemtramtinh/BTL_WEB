@@ -5,28 +5,29 @@
         <div data-aos="fade-down" data-aos-duration="800" class="product-detail__image">
           <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2" id="image">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
+              <?php
+              $productImages = json_decode($data['product']['Image']);
+              foreach ($productImages as $image) {
+              ?>
+                <div class="swiper-slide">
+                  <img src="<?= $image ?>" alt="">
+                </div>
+              <?php } ?>
+              <!-- <div class="swiper-slide">
                 <img src="public/images/fragment-1.png" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="public/images/fragment-1.png" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="public/images/fragment-1.png" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="public/images/fragment-1.png" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="public/images/fragment-1.png" alt="">
-              </div>
+              </div> -->
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
           </div>
           <div thumbsSlider="" class="swiper mySwiper">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
+              <?php foreach ($productImages as $image) { ?>
+                <div class="swiper-slide">
+                  <img src="<?= $image ?>" alt="">
+                </div>
+              <?php } ?>
+              <!-- <div class="swiper-slide">
                 <img src="public/images/fragment-1.png" alt="">
               </div>
               <div class="swiper-slide">
@@ -40,7 +41,7 @@
               </div>
               <div class="swiper-slide">
                 <img src="public/images/fragment-1.png" alt="">
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -48,13 +49,25 @@
           <h3 class="product-detail__name">
             Luxurious Elixir
           </h3>
-          <p class="product-detail__desc">
-            Step into a world of unparalleled opulence with Luxurious Elixir, an exquisite fragrance that weaves an enchanting symphony of gold and luxury. This gilded elixir is a celebration of sophistication, crafted with the finest essences and imbued with the allure of precious golden hues.
-          </p>
-          <div class="product-detail__price">
-            $ <span>250.00</span>
+          <div class="product-detail__info">
+            <div class="product-detail__info-item">
+              <strong>Brand</strong>
+              <br>
+              <span><?= $data['product']['Brand'] ?></span>
+            </div>
+            <div class="product-detail__info-item">
+              <strong>Category</strong>
+              <br>
+              <span><?= $data['product']['ID_ProductCategory'] ?></span>
+            </div>
           </div>
-          <form action="" method="post" class="product-detail__form">
+          <!-- <p class="product-detail__desc">
+            Step into a world of unparalleled opulence with Luxurious Elixir, an exquisite fragrance that weaves an enchanting symphony of gold and luxury. This gilded elixir is a celebration of sophistication, crafted with the finest essences and imbued with the allure of precious golden hues.
+          </p> -->
+          <div class="product-detail__price">
+            <?= number_format($data['product']['PriceUnit']) ?> VND
+          </div>
+          <form action="cart/add/<?= $data['product']['ID'] ?>" method="get" class="product-detail__form">
             <div class="quantity__wrapper">
               <label for="quantity">Qty</label>
               <div class="quantity-adjust">
@@ -69,7 +82,13 @@
         </div>
       </div>
       <div data-aos="fade-down" data-aos-duration="800" data-aos-delay="200" class="product-detail__content">
-        <div class="product-detail__section">
+        <h2 class="product-detail__content-title">
+          Product Description
+        </h2>
+        <div class="product-detail__content-body">
+          <?= $data['product']['Description'] ?>
+        </div>
+        <!-- <div class="product-detail__section">
           <h3>Product Details</h3>
           <p>Step into a world of unparalleled opulence with Luxurious Elixir, an exquisite fragrance that weaves an enchanting symphony of gold and luxury. This gilded elixir is a celebration of sophistication, crafted with the finest essences and imbued with the allure of precious golden hues. From the first spritz to the lingering dry-down, Luxurious Elixir promises an intoxicating experience that embodies the essence of lavish indulgence.</p>
         </div>
@@ -84,7 +103,7 @@
         <div class="product-detail__section">
           <h3>The Ultimate Expression of Luxury</h3>
           <p>Luxurious Elixir makes an extraordinary gift, an expression of your discerning taste and admiration for the extraordinary. Delight your loved ones with this lavish elixir, a symbol of admiration and adoration.</p>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
