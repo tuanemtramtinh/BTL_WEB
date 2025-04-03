@@ -30,11 +30,46 @@ class CategoryModel extends DB
     return !empty($categories) ? $categories : null;
   }
 
+  public function updateCategoryById($categoryId, $categoryName, $employeeId)
+  {
+    $existCategory = $this->findCategoryById($categoryId);
+
+    if ($existCategory['Name'] == $categoryName) {
+      return false;
+    }
+
+    $slug = strtolower(str_replace(' ', '-', $categoryName));
+
+    $query = "UPDATE Category SET Name = ?, Slug = ?, SocialNo = ? WHERE ID = ?";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("sssi", $categoryName, $slug, $employeeId, $categoryId);
+    $result = $stmt->execute();
+    $stmt->close();
+
+    return $result;
+  }
+
   public function findCategoryByName($categoryName)
   {
     $query = "SELECT * FROM ProductCategory WHERE Name = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("s", $categoryName);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $stmt = null;
+    if ($result->num_rows > 0) {
+      return $result->fetch_assoc();
+    }
+    return null;
+  }
+
+  public function findCategoryById($categoryId)
+  {
+    $query = "SELECT * FROM ProductCategory WHERE ID = ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("s", $categoryId);
     $stmt->execute();
 
     $result = $stmt->get_result();

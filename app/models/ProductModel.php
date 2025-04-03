@@ -28,7 +28,7 @@ class ProductModel extends DB
       $existProduct['Inventory'] == $productQuantity &&
       $existProduct['Image'] == $productImage
     ) {
-      return;
+      return false;
     }
 
     $query = "UPDATE Product SET Name = ?, ID_ProductCategory = ?, Brand = ?, Description = ?, PriceUnit = ?, Inventory = ?, Image = ?, SocialNo = ? WHERE ID = ?";

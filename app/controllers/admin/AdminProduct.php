@@ -221,6 +221,37 @@ class AdminProduct extends Controller
     ]);
   }
 
+  public function category_detail($categoryId = '')
+  {
+    //Check if the employee is logged in
+    $this->checkAuthAdmin();
+
+    if ($categoryId === '') {
+      header('Location: category');
+      $_SESSION['error_message'] = 'Invalid category Id';
+      exit;
+    }
+
+    $Category = $this->model("CategoryModel");
+    $category = $Category->findCategoryById($categoryId);
+
+    $message = $this->getSessionMessage();
+    $this->viewAdmin("layout", [
+      "title" => "Product Category",
+      "page" => "product/category_detail",
+      "error" => $message['error'],
+      "success" => $message['success'],
+      "task" => 3,
+      "category" => $category
+    ]);
+  }
+
+  public function category_edit($categoryId = '') {
+
+  }
+
+  public function category_editPost() {}
+
   public function category_add()
   {
     //Check if the employee is logged in
