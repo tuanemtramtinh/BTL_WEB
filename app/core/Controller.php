@@ -48,7 +48,7 @@ class Controller
 
   public function uploadImages($files, $location, $uploadDir = "./storage/")
   {
-    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif']; // Allowed file types
+    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']; // Allowed file types
     $uploadedFiles = []; // Store uploaded file paths
 
     if (!is_dir($uploadDir)) {

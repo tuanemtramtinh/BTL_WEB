@@ -55,9 +55,46 @@
                     <td><?= $product['UpdatedAt'] ?></td>
                     <td><?= $product['Username'] ?></td>
                     <td>
-                      <a class="btn btn-info btn-sm" href="admin/product/detail/<?= $product['ID'] ?>">Detail</a>
-                      <a class="btn btn-warning btn-sm ml-1" href="admin/product/edit/<?= $product['ID'] ?>">Edit</a>
-                      <a class="btn btn-danger btn-sm ml-1" href="admin/product/delete/<?= $product['ID'] ?>">Delete</a>
+                      <a class="btn btn-info " href="admin/product/detail/<?= $product['ID'] ?>">Detail</a>
+                      <a class="btn btn-warning  ml-1" href="admin/product/edit/<?= $product['ID'] ?>">Edit</a>
+                      <div class="modal-danger me-1 mb-1 d-inline-block">
+                        <!-- Button trigger for danger theme modal -->
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#danger">
+                          Delete
+                        </button>
+                        <!--Danger theme Modal -->
+                        <div class="modal fade text-left" id="danger" tabindex="-1" aria-labelledby="myModalLabel120" style="display: none;" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header bg-danger">
+                                <h5 class="modal-title white" id="myModalLabel120">
+                                  Confirm Product Deletion
+                                </h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                  </svg>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                Are you sure you want to delete this product <span style="font-weight: 700; font-style: italic;"><?= $product['Name'] ?></span> ? This action cannot be undone.
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                  <i class="bx bx-x d-block d-sm-none"></i>
+                                  <span class="d-none d-sm-block">Cancel</span>
+                                </button>
+                                <a href="admin/product/delete/<?= $product['ID'] ?>" type="button" class="btn btn-danger ms-1">
+                                  <i class="bx bx-check d-block d-sm-none"></i>
+                                  <span class="d-none d-sm-block">Delete</span>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <a class="btn btn-danger btn-sm ml-1" href="admin/product/delete/<?= $product['ID'] ?>">Delete</a> -->
                     </td>
                   </tr>
                 <?php } ?>

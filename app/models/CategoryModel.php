@@ -17,7 +17,7 @@ class CategoryModel extends DB
 
   public function getCategoryList()
   {
-    $query = "SELECT ProductCategory.ID, ProductCategory.Name, ProductCategory.CreatedAt, ProductCategory.UpdatedAt, Employee.Username FROM ProductCategory INNER JOIN Employee WHERE ProductCategory.SocialNo = Employee.SocialNo";
+    $query = "SELECT ProductCategory.ID, ProductCategory.Name, ProductCategory.CreatedAt, ProductCategory.UpdatedAt, Employee.Username FROM ProductCategory INNER JOIN Employee WHERE ProductCategory.SocialNo = Employee.SocialNo ORDER BY ProductCategory.ID ASC";
     $stmt = $this->conn->prepare($query);
     $stmt->execute();
 
@@ -40,7 +40,7 @@ class CategoryModel extends DB
 
     $slug = strtolower(str_replace(' ', '-', $categoryName));
 
-    $query = "UPDATE Category SET Name = ?, Slug = ?, SocialNo = ? WHERE ID = ?";
+    $query = "UPDATE ProductCategory SET Name = ?, Slug = ?, SocialNo = ? WHERE ID = ?";
 
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("sssi", $categoryName, $slug, $employeeId, $categoryId);

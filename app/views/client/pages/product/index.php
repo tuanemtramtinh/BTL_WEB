@@ -15,29 +15,26 @@
         </div>
       </div>
       <div class="product__list">
-        <?php
-        $delay = 50;
-        for ($i=0; $i < 8; $i++) { 
-          echo '
-          
+        <?php if (isset($data['products'])) foreach ($data['products'] as $product) { ?>
+          <?php
+          $productImagesJson = $product['Image'];
+          $productImages = json_decode($productImagesJson);
+          ?>
           <div data-aos="fade-down" data-aos-duration="500" class="product__item-wrapper">
-            <a href="product/detail" class="product__item">
+            <a href="product/detail/<?= $product['Slug'] ?>" class="product__item">
               <div class="product__item-image">
-                <img src="public/images/fragment-1.png" alt="">
+                <img src="<?= $productImages[0] ?>" alt="">
               </div>
               <h3 class="product__item-title">
-                Luxurious Elixir Rough
+                <?= $product['Name'] ?>
               </h3>
               <div class="product__item-content">
-                <span class="product__item-price">$ 220.00</span>
-                <span class="product__item-volume">100ml</span>
+                <span class="product__item-price"><?=number_format($product['PriceUnit']) ?> VND</span>
+                <!-- <span class="product__item-volume">100ml</span> -->
               </div>
             </a>
           </div>
-          ';
-        }
-        ?>
-
+        <?php } ?>
         <!-- <div data-aos="fade-down" data-aos-duration="1000" class="product__item-wrapper">
           <a href="#" class="product__item">
             <div class="product__item-image">
@@ -52,7 +49,7 @@
             </div>
           </a>
         </div> -->
-        
+
       </div>
       <div class="product__pagination">
         <a href="">

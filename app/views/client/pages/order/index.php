@@ -2,7 +2,7 @@
   <div class="container">
     <div class="cart__wrapper">
       <h2 data-aos="fade-down" data-aos-duration="800" class="cart__title">
-        Shopping Bag
+        Order Detail
       </h2>
       <div class="cart__main">
         <div class="cart__table">
@@ -41,17 +41,7 @@
                   <?= number_format($item['ProductPrice']) ?> VND
                 </div>
                 <div class="cart__table-quantity">
-                  <div class="quantity-adjust">
-                    <?php
-                    if ($item['ProductQuantity'] > 0) {
-                    ?>
-                      <a href="cart/add/<?= $item['ProductID'] ?>?quantity=-1&inCart=true" class="fa-solid fa-minus"></a>
-                    <?php } else { ?>
-                      <i class="fa-solid fa-minus"></i>
-                    <?php } ?>
-                    <input min="1" value="<?= $item['ProductQuantity'] ?>" type="number" name="quantity" id="quantity">
-                    <a href="cart/add/<?= $item['ProductID'] ?>?quantity=1&inCart=true" class="fa-solid fa-plus"></a>
-                  </div>
+                  <p><?= $item['ProductQuantity'] ?></p>
                 </div>
                 <div class="cart__table-total">
                   <?= number_format($item['Total']) ?> VND
@@ -75,8 +65,8 @@
           </div>
         </div>
         <div data-aos="fade-down" data-aos-duration="800" class="cart__submit">
-          <a href="order/<?= $data['cart']['ID'] ?>">
-            Proceed to Checkout
+          <a href="order/orderPost/<?= $data['cart']['ID'] ?>">
+            Checkout
           </a>
         </div>
       </div>

@@ -1,7 +1,9 @@
 <?php
-class UserModel extends DB {
+class UserModel extends DB
+{
 
-  public function createUser($firstName, $lastName, $email, $password){
+  public function createUser($firstName, $lastName, $email, $password)
+  {
     $query = "INSERT INTO Customer(FirstName, LastName, Email, Password) VALUES (?, ?, ?, ?)";
     $stmt = $this->conn->prepare($query);
 
@@ -12,11 +14,13 @@ class UserModel extends DB {
 
     $stmt->bind_param("ssss", $firstName, $lastName, $email, $hashedPwd);
     $result = $stmt->execute();
-    $stmt = null;
-    return $result;
+    $userId = $stmt->insert_id;
+    $stmt->close();
+    return $userId;
   }
 
-  public function findUserByEmail($email) {
+  public function findUserByEmail($email)
+  {
     $query = "SELECT * FROM Customer WHERE Email = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("s", $email);

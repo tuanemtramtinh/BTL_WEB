@@ -17,7 +17,7 @@ class AdminUpload extends Controller
 
     $original_name = pathinfo($_FILES["file"]["name"], PATHINFO_FILENAME); // Get filename without extension
     // $target_file = $target_dir . basename($_FILES["file"]["name"]);
-    $imageFileType = strtolower(pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION));
+    $imageFileType = strtolower(string: pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION));
 
     $check = getimagesize($_FILES["file"]["tmp_name"]);
     if ($check === false) {
@@ -26,9 +26,9 @@ class AdminUpload extends Controller
     }
 
     // Allow certain file formats
-    $allowed_types = ["jpg", "jpeg", "png", "gif"];
+    $allowed_types = ["jpg", "jpeg", "png", "gif", "webp"];
     if (!in_array($imageFileType, $allowed_types)) {
-      echo json_encode(["error" => "Only JPG, JPEG, PNG & GIF files are allowed."]);
+      echo json_encode(["error" => "Only JPG, JPEG, PNG, WEBP & GIF files are allowed."]);
       exit;
     }
 
