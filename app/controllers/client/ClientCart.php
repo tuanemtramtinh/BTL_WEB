@@ -60,8 +60,6 @@ class ClientCart extends Controller
       $CartItem->closeConnection();
       $Cart->closeConnection();
 
-
-
       if (isset($inCart)) {
         $_SESSION['success_message'] = 'Update cart successfully';
         header("Location: ../cart/index");

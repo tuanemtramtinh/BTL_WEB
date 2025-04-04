@@ -54,3 +54,25 @@ if (imagePreviewEdit) {
     files: imageObject,
   });
 }
+
+//Update Quantity
+const productUpdate = document.querySelectorAll(".product-update");
+if (productUpdate) {
+  productUpdate.forEach((input) => {
+    const oldValue = input.value;
+    input.addEventListener("change", async (e) => {
+      const newValue = input.value;
+      const quantity = newValue - oldValue;
+      const productId = input.getAttribute("product-id");
+      const cartId = input.getAttribute("cart-id");
+      const data = await axios.get(
+        `admin/cart/updateQuantity/${productId}?quantity=${quantity}&cartId=${cartId}`
+      );
+      if (data.status === 200) {
+        location.reload();
+      }
+    });
+  });
+}
+
+//End Update Quantity

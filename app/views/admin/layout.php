@@ -22,7 +22,7 @@
         echo '<link rel="stylesheet" href="public/assets/compiled/css/iconly.css">';
     }
 
-    if ($data['page'] === 'employee/index' || $data['page'] === 'product/index' || $data['page'] === 'product/category') {
+    if ($data['page'] === 'employee/index' || $data['page'] === 'product/index' || $data['page'] === 'product/category' || $data['page'] === 'order/index' || $data['page'] === 'cart/index') {
         echo '
         <link rel="stylesheet" href="public/assets/extensions/simple-datatables/style.css">
         <link rel="stylesheet" href="public/assets/compiled/css/table-datatable.css">';
@@ -192,6 +192,21 @@
 
                             </li>
 
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "order") ?  "active" : "" ?>">
+                                <a href="admin/order" class='sidebar-link'>
+                                    <i class="bi bi-bag-fill"></i>
+                                    <span>Order</span>
+                                </a>
+                            </li>
+
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "cart") ?  "active" : "" ?>">
+                                <a href="admin/cart" class='sidebar-link'>
+                                    <i class="bi bi-cart-fill"></i>
+                                    <span>Cart</span>
+                                </a>
+                            </li>
+
+
                             <!-- <li class="sidebar-item <?php echo str_contains($data["page"], "product") ?  "active" : "" ?>">
                                 <a href="admin/product" class='sidebar-link'>
                                     <i class="bi bi-bag-fill"></i>
@@ -349,6 +364,7 @@
     <script src="public/assets/extensions/filepond/filepond.js"></script>
     <script src="public/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
     <script src="public/assets/extensions/tinymce/tinymce.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="public/js/admin/script.js"></script>
     <?php if (isset($data['task'])) echo '<script src="public/js/admin/script_' . $data['task'] . '.js"></script>'; ?>
 </body>

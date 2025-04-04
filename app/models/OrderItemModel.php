@@ -4,7 +4,7 @@ class OrderItemModel extends DB
 {
   public function getOrderListByOrderId($orderId)
   {
-    $query = "SELECT ProductName, ProductPrice, ProductImage, Quantity, (Quantity * ProductPrice) as Total FROM OrderItem WHERE Order_ID = ?";
+    $query = "SELECT ID, ProductName, ProductPrice, ProductImage, Quantity, (Quantity * ProductPrice) as Total FROM OrderItem WHERE Order_ID = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param('i', $orderId);
     $stmt->execute();
