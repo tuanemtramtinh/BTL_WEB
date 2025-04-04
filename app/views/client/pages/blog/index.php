@@ -78,19 +78,22 @@
     <div class="blog__posts">
       <?php if (!empty($data['blogs'])): ?>
         <?php foreach ($data['blogs'] as $blog): ?>
+          <?php
+          $imageData = json_decode($blog['Image'], true);
+          $imageUrl = !empty($imageData) ? $imageData[0] : ''; 
+          ?>
           <a href="http://localhost/BTL_WEB/blog/detail?id=<?= htmlspecialchars($blog['BlogID']) ?>" class="blog__post-item" data-aos="fade-down" data-aos-duration="500" style="display: flex;flex-direction: column;justify-content: space-around;">
-            <img src="<?= htmlspecialchars($blog['Image']) ?>" alt="" class="blog__post-img">
+            <img src="<?= htmlspecialchars($imageUrl) ?>" alt="" class="blog__post-img">
             <p class="blog__post-content"><?= htmlspecialchars($blog['Title']) ?></p>
             <p class="blog__post-note"><?= htmlspecialchars($blog['Desc']) ?></p>
-            <!-- <a href="http://localhost/BTL_WEB/blog/detail?id=<?= htmlspecialchars($blog['BlogID']) ?>" class="blog__post-readmore-link"> -->
-              <button class="blog__post-readmore" class="blog__post-readmore-link">Read More</button>
-            <!-- </a> -->
+            <button class="blog__post-readmore">Read More</button>
           </a>
         <?php endforeach; ?>
       <?php else: ?>
         <p>No blog posts found.</p>
       <?php endif; ?>
     </div>
+
     <?php if ($data['totalPages'] > 1): ?>
     <div class="pagination-custom" data-aos="fade-up" data-aos-duration="500">
         <?php
