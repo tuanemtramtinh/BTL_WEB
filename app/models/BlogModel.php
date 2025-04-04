@@ -73,16 +73,54 @@ class BlogModel extends DB
         return (int)$data['total'];
     }
 
-    public function createBlog($author, $dateCreated, $title, $content, $category, $cover_image)
+    public function createBlog($author, $dateCreated, $title, $content, $category, $cover_image, $desc)
     {
-        $query = "INSERT INTO Blog (Author, DateCreated, Title, Content, ID_BlogCategory, Image)
-                  VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO Blog(Author, DateCreated, Title, Content, ID_BlogCategory, Image, `Desc`)
+                  VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("ssssis", $author, $title, $content, $category, $cover_image, $dateCreated);
+        $stmt->bind_param("ssssiss", $author, $dateCreated, $title, $content, $category, $cover_image, $desc);
         $result = $stmt->execute();
         $stmt->close();
         return $result;
     }
+
+    public function updateBlog($blogID, $author, $title, $content, $category, $cover_image, $desc)
+    {
+        $query = "UPDATE Blog SET 
+                    Author = ?, 
+                    Title = ?, 
+                    Content = ?, 
+                    ID_BlogCategory = ?, 
+                    Image = ?, 
+                    `Desc` = ?
+                  WHERE ID = ?";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param(
+            "sssissi",
+            $author, 
+            $title, 
+            $content, 
+            $category, 
+            $cover_image, 
+            $desc, 
+            $blogID
+        );
+        
+        $result = $stmt->execute();
+        $stmt->close();
+        
+        return $result;
+    }
+
+    public function deleteBlog($blogID)
+    {
+        $stmt = $this->conn->prepare("DELETE FROM Blog WHERE ID = ?");
+        return $stmt->execute([$blogID]);
+    }
+
 
     public function getCategories()
     {

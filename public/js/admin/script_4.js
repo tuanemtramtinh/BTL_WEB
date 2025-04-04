@@ -5,22 +5,30 @@ function previewImage(event) {
 }
 
 
-FilePond.registerPlugin(FilePondPluginImagePreview);
-FilePond.parse(document.body);
+FilePond.registerPlugin(
+    FilePondPluginImagePreview,
+    FilePondPluginFileValidateSize,
+    FilePondPluginFileValidateType
+  );
+// FilePond.parse(document.body);
 
-const existingImageUrl = (typeof existingImage !== 'undefined') ? existingImage : "";
+//const existingImageUrl = (typeof existingImage !== 'undefined') ? existingImage : "";
 //console.log('Image URL:', existingImage);
 
-if (existingImageUrl){
-    const pond = FilePond.create(document.getElementById('cover_image'), {
-        files: existingImage && existingImage.trim() !== "" ? [
-            {
-                source: existingImage,
-                options: {
-                    type: 'remote'
-                }
-            }
-        ] : []
-    });
-}
+FilePond.create(document.getElementById('images'), {
+    credits: null,
+    allowImagePreview: true,
+    allowImageFilter: false,
+    allowImageExifOrientation: false,
+    allowImageCrop: false,
+    itemInsertLocation: "after",
+    acceptedFileTypes: ["image/png", "image/jpg", "image/jpeg", "image/webp"],
+    fileValidateTypeDetectType: (source, type) =>
+        new Promise((resolve, reject) => {
+            // Do custom type detection here and return with promise
+            resolve(type);
+        }),
+    storeAsFile: true,
+});
+
 
