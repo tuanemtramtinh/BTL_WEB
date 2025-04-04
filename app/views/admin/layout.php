@@ -143,6 +143,13 @@
 
                             </li>
 
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "comment") ?  "active" : "" ?>">
+                                <a href="admin/comment" class='sidebar-link'>
+                                    <i class="bi bi-chat-left-dots-fill"></i>
+                                    <span>Comment</span>
+                                </a>
+                            </li>
+
                             <li class="sidebar-item <?php echo str_contains($data["page"], "contact") ?  "active" : "" ?>">
                                 <a href="admin/contact" class='sidebar-link'>
                                     <i class="bi bi-telephone-fill"></i>
