@@ -13,14 +13,25 @@
     <h4 class="card-title">Add Blog</h4>
   </div>
   <div class="card-body">
-    <form action="admin/blog/addPost" method="post" enctype="multipart/form-data" class="form form-vertical">
+    <form action="admin/blog/addPost" method="POST" enctype="multipart/form-data" class="form form-vertical">
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input type="text" class="form-control" id="title" name="title" placeholder="Enter article title" required>
       </div>
       <div class="mb-3">
-        <label for="cover_image" class="form-label">Cover Image</label>
-        <input type="file" class="filepond image-preview-filepond" id="cover_image" name="image" accept="image/*" required>
+          <label for="desc" class="form-label">Description</label>
+          <textarea 
+              class="form-control" 
+              id="desc" 
+              name="desc" 
+              rows="3" 
+              placeholder="Enter article description" 
+              required
+          ><?= isset($data['blog']['Desc']) ? htmlspecialchars($data['blog']['Desc']) : '' ?></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="images" class="form-label">Cover Image</label>
+        <input type="file" class="image-preview-filepond" id="images" name="images[]" required>
       </div>
       <div class="mb-3">
         <label for="category" class="form-label">Category</label>
@@ -48,19 +59,8 @@
     </form>
   </div>
 </div>
-
-<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
 <script>
-  FilePond.registerPlugin(FilePondPluginImagePreview);
-  FilePond.parse(document.body);
+  const existingImage = undefined;
 </script>
-<!-- <script>
-  tinymce.init({
-    selector: '#content',
-    height: 300,
-    plugins: 'advlist autolink lists link image charmap print preview anchor',
-    toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat'
-  });
-</script> -->
+
 

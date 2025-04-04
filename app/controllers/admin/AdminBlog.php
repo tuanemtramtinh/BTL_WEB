@@ -71,6 +71,7 @@ class AdminBlog extends Controller
     $id = (int)$_GET['id'];
 
     $blog = $Blog->getBlogDetail($id);
+    $categories = $Blog->getCategories();
 
     if (!$blog) {
       $_SESSION["error_message"] = "Blog not found.";
@@ -84,6 +85,7 @@ class AdminBlog extends Controller
       "page" => "blog/detail",
       "task" => 4,
       "blog"        => $blog,
+      "categories" => $categories,
       "error"       => $message['error'],
       "success"     => $message['success']
     ]);
@@ -94,13 +96,12 @@ class AdminBlog extends Controller
     //Check if the employee is logged in
     $this->checkAuthAdmin();
 
-    $message = $this->getSessionMessage();
     $Blog = $this->model("BlogModel");
-
     $categories = $Blog->getCategories();
 
+    $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
-      "title" => "Tạo Blog",
+      "title" => "Add Blog",
       "page" => "blog/add",
       "task" => 4,
       "categories" => $categories,
@@ -112,51 +113,135 @@ class AdminBlog extends Controller
   public function addPost()
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $author   = trim($_POST['author']);
-      $title    = trim($_POST['title']);
-      $content  = trim($_POST['content']);
-      $category = (int)$_POST['category'];
+
+      $this->checkAuthAdmin();
+
+      print_r($_FILES);
+  
+      // if (!isset($_FILES['cover_image']) || $_FILES['cover_image']['error'] !== UPLOAD_ERR_OK) {
+      //   $_SESSION["error_message"] = "Cover image is missing or upload failed.";
+      //   header("Location: add");
+      //   exit;
+      // }
+  
+      $blogImages = $this->uploadImages($_FILES['images'], 'add');
+      $blogImagesJson = json_encode($blogImages, JSON_PRETTY_PRINT);
+  
+      $author      = $_POST['author'];
+      $title       = $_POST['title'];
+      $content     = $_POST['content'];
+      $category    = (int)$_POST['category'];
       $dateCreated = date("Y-m-d H:i:s");
-      $cover_image = "";
-      if (isset($_FILES['cover_image']) && $_FILES['cover_image']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = "/BTL_WEB/public/images";
-        if (!is_dir($uploadDir)) {
-          mkdir($uploadDir, 0777, true);
-        }
-
-        $filename   = time() . "_" . basename($_FILES['cover_image']['name']);
-        $targetPath = $uploadDir . $filename;
-        if (move_uploaded_file($_FILES['cover_image']['tmp_name'], $targetPath)) {
-          $cover_image = $targetPath;
-        } else {
-          $_SESSION["error_message"] = "Error uploading cover image.";
-          header("Location: add");
-          exit;
-        }
-      } else {
-        $_SESSION["error_message"] = "Cover image is required.";
-        header("Location: add");
-        exit;
-      }
-
-      if (empty($author) || empty($title) || empty($content) || empty($category)) {
-        $_SESSION["error_message"] = "Fail to create: Fill in all fields!";
-        header("Location: add");
-        exit;
-      }
-
+      $desc        = $_POST['desc'];
+  
       $Blog = $this->model("BlogModel");
-      $insertResult = $Blog->createBlog($author, $title, $content, $category, $cover_image, $dateCreated);
+  
+      $error = null;
 
-      if ($insertResult) {
-        $_SESSION['success_message'] = "Blog added successfully!";
-        header("Location: index");
-        exit;
-      } else {
-        $_SESSION["error_message"] = "Failed to add blog. Please try again.";
+      if (empty($author) || empty($title) || empty($content) || empty($category) || empty($dateCreated) || empty($blogImagesJson) || empty($desc)){
+        $error = 'Fail to create: Fill in all fields!';
+      }
+
+      if (isset($error)){
+        $_SESSION["error_message"] = $error;
         header("Location: add");
         exit;
       }
+
+      $Blog->createBlog($author, $dateCreated, $title, $content, $category, $blogImagesJson, $desc);
+
+      $_SESSION['success_message'] = 'Add Blog successfully';
+      header('Location: index');
     }
   }
+
+  public function updatePost()
+  {
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+          $this->checkAuthAdmin();
+
+          if (!isset($_POST['article_id']) || empty($_POST['article_id'])) {
+              $_SESSION["error_message"] = "Invalid Blog ID";
+              header("Location: index");
+              exit;
+          }
+
+          $blogID = (int)$_POST['article_id'];
+
+          $author   = trim($_POST['author']);
+          $title    = trim($_POST['title']);
+          $content  = trim($_POST['content']);
+          $category = (int)$_POST['category'];
+          $desc     = trim($_POST['desc']);
+
+          // Nếu có ảnh cũ thì lấy danh sách
+          $existingImages = json_decode($_POST['existing_images'], true) ?? [];
+
+          // Nếu có ảnh mới được tải lên
+          $uploadedImages = [];
+          if (!empty($_FILES['images']['name'][0])) { 
+              $uploadedImages = $this->uploadImages($_FILES['images'], 'edit');
+
+              // Xóa ảnh cũ trước đó và chỉ giữ lại ảnh mới
+              $finalImages = $uploadedImages;
+          } else {
+              $finalImages = $existingImages;
+          }
+
+          $blogImageJson = !empty($finalImages) ? json_encode($finalImages) : '[]';
+
+          if (empty($author) || empty($title) || empty($content) || $category <= 0 || empty($desc)) {
+              $_SESSION["error_message"] = "Vui lòng điền đầy đủ thông tin bắt buộc!";
+              header("Location: detail?id=" . $blogID);
+              exit;
+          }
+
+          $Blog = $this->model("BlogModel");
+          $updateSuccess = $Blog->updateBlog(
+              $blogID, 
+              $author, 
+              $title, 
+              $content, 
+              $category, 
+              $blogImageJson, 
+              $desc
+          );
+
+          if ($updateSuccess) {
+              $_SESSION['success_message'] = "Post updated successfully!";
+          } else {
+              $_SESSION['error_message'] = "Post update failed!";
+          }
+
+          header("Location: detail?id=" . $blogID);
+          exit;
+      }
+  }
+  public function deletePost()
+  {
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+          $this->checkAuthAdmin();
+
+          if (!isset($_POST['article_id']) || empty($_POST['article_id'])) {
+              $_SESSION["error_message"] = "Invalid Blog ID";
+              header("Location: index");
+              exit;
+          }
+
+          $blogID = (int)$_POST['article_id'];
+          $Blog = $this->model("BlogModel");
+
+          $deleteSuccess = $Blog->deleteBlog($blogID);
+
+          if ($deleteSuccess) {
+              $_SESSION['success_message'] = "The post has been deleted!";
+          } else {
+              $_SESSION['error_message'] = "Delete post failed!";
+          }
+
+          header("Location: index");
+          exit;
+      }
+  }
+
 }
