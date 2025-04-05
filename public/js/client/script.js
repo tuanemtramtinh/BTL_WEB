@@ -25,14 +25,17 @@ console.log(searchInput);
 if (searchInput) {
   searchInput.addEventListener("keyup", () => {
     const searchValue = searchInput.value.toLowerCase();
+    const searchResult = document.querySelector(".search__result");
+    const searchProductList = searchResult.querySelector(
+      ".search__product-list"
+    );
+
+    if (searchValue === "") {
+      searchProductList.innerHTML =  "";
+    };
 
     axios.get(`product/search?keyword=${searchValue}`).then((response) => {
-      console.log(response);
       const productList = response.data;
-      const searchResult = document.querySelector(".search__result");
-      const searchProductList = searchResult.querySelector(
-        ".search__product-list"
-      );
 
       searchProductList.innerHTML = ""; // Clear previous results
 
@@ -40,13 +43,13 @@ if (searchInput) {
         const image = JSON.parse(product.Image)[0];
 
         return `
-          <a href="product/detail/${product.ID}" class="search__product-item">
+          <a href="product/detail/${product.Slug}" class="search__product-item">
             <div class="search__product-wrapper">
               <img src="${image}" alt="${product.Name}" />
             </div>
             <div class="search__product-content">
               <h4>${product.Name}</h4>
-              <p>${product.PriceUnit}</p>
+              <p>${product.PriceUnit.toLocaleString()} VND</p>
             </div>
           </a>
         `;

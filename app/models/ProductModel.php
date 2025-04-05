@@ -64,11 +64,25 @@ class ProductModel extends DB
     return $result;
   }
 
-  public function getProductList()
+  public function countProduct()
   {
-    $query = "SELECT ID, Image, Name, PriceUnit, CreatedAt, UpdatedAt, Employee.Username, Slug FROM Product INNER JOIN Employee ON Product.SocialNo = Employee.SocialNo ORDER BY ID ASC";
+    $query = "SELECT COUNT(*) AS total FROM Product";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $total = $row['total'];
+    $stmt->close();
+
+    return $total;
+  }
+
+  public function getProductList($skip = 0, $limit = 2147483647)
+  {
+    $query = "SELECT ID, Image, Name, PriceUnit, CreatedAt, UpdatedAt, Employee.Username, Slug FROM Product INNER JOIN Employee ON Product.SocialNo = Employee.SocialNo ORDER BY ID ASC LIMIT ?, ?";
 
     $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("ii", $skip, $limit);
     $stmt->execute();
     $result = $stmt->get_result();
     $products = [];

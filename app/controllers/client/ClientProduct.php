@@ -9,7 +9,12 @@ class ClientProduct extends Controller
 
     $Product = $this->model("ProductModel");
 
-    $products = $Product->getProductList();
+    $limit = $_GET['limit'] ?? 12;
+    $page = $_GET['page'] ?? 1;
+    $skip = ($page - 1) * $limit;
+    $totalPages = ceil($Product->countProduct() / $limit);
+
+    $products = $Product->getProductList($skip, $limit);
 
     $Product->closeConnection();
 
@@ -17,7 +22,9 @@ class ClientProduct extends Controller
       "title" => "Sản Phẩm",
       "page" => "product/index",
       "task" => 3,
-      "products" => $products
+      "products" => $products,
+      "pages" => $totalPages,
+      "currentPage" => $page
     ]);
   }
 

@@ -29,7 +29,7 @@
                 <?= $product['Name'] ?>
               </h3>
               <div class="product__item-content">
-                <span class="product__item-price"><?=number_format($product['PriceUnit']) ?> VND</span>
+                <span class="product__item-price"><?= number_format($product['PriceUnit']) ?> VND</span>
                 <!-- <span class="product__item-volume">100ml</span> -->
               </div>
             </a>
@@ -52,15 +52,30 @@
 
       </div>
       <div class="product__pagination">
-        <a href="">
-          <i class="product__pagination-prev fa-solid fa-chevron-left"></i>
-        </a>
+        <?php
+        if ($data['currentPage'] > 1) {
+        ?>
+          <a href="product/index?page=<?= $data['currentPage'] - 1 ?>">
+            <i class="product__pagination-prev fa-solid fa-chevron-left"></i>
+          </a>
+        <?php } else { ?>
+          <span>
+          </span>
+        <?php } ?>
         <div class="product__pagination-current">
-          Page <span>1</span> of <span>4</span>
+          Page <span> <?= $data['currentPage'] ?></span> of <span><?= $data['pages'] ?></span>
         </div>
-        <a href="">
-          <i class="product__pagination-next fa-solid fa-chevron-right"></i>
-        </a>
+        <?php
+        if ($data['pages'] > $data['currentPage']) {
+        ?>
+          <a href="product/index?page=<?= $data['currentPage'] + 1 ?>">
+            <i class="product__pagination-next fa-solid fa-chevron-right"></i>
+          </a>
+        <?php } else { ?>
+          <span>
+          </span>
+        <?php } ?>
+
       </div>
     </div>
   </div>
