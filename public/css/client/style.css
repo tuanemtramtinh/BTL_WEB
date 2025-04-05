@@ -383,6 +383,7 @@ ul {
 }
 
 .search__product-item{
+  padding: 15px;
   color: black;
   background: linear-gradient(to bottom, gray, black);
   display: block;

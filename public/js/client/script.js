@@ -19,6 +19,42 @@ if (search) {
     search.classList.toggle("active");
   });
 }
+
+const searchInput = search.querySelector(".search__text input");
+console.log(searchInput);
+if (searchInput) {
+  searchInput.addEventListener("keyup", () => {
+    const searchValue = searchInput.value.toLowerCase();
+
+    axios.get(`product/search?keyword=${searchValue}`).then((response) => {
+      console.log(response);
+      const productList = response.data;
+      const searchResult = document.querySelector(".search__result");
+      const searchProductList = searchResult.querySelector(
+        ".search__product-list"
+      );
+
+      searchProductList.innerHTML = ""; // Clear previous results
+
+      const htmls = productList.map((product) => {
+        const image = JSON.parse(product.Image)[0];
+
+        return `
+          <a href="product/detail/${product.ID}" class="search__product-item">
+            <div class="search__product-wrapper">
+              <img src="${image}" alt="${product.Name}" />
+            </div>
+            <div class="search__product-content">
+              <h4>${product.Name}</h4>
+              <p>${product.PriceUnit}</p>
+            </div>
+          </a>
+        `;
+      });
+      searchProductList.innerHTML = htmls.join("");
+    });
+  });
+}
 // End Header Search
 
 //Alert

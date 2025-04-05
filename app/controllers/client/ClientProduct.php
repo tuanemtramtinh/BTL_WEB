@@ -21,6 +21,21 @@ class ClientProduct extends Controller
     ]);
   }
 
+  public function search()
+  {
+
+    header("Content-Type: application/json");
+    $keyword = $_GET['keyword'] ?? '';
+    $Product = $this->model("ProductModel");
+    $products = $Product->findProductByKeyword($keyword);
+    $Product->closeConnection();
+    if ($products) {
+      echo json_encode($products);
+    } else {
+      echo json_encode([]);
+    }
+  }
+
   public function detail($productSlug = '')
   {
     if ($productSlug === '') {
