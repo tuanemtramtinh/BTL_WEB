@@ -8,21 +8,28 @@
     
             <h2 class="detail__header"><?= htmlspecialchars($data['blog']['Title']) ?></h2>
         </div>
-        <img src="public/images/mau 2.png" alt="" class="detail__bg-img">
-        <p class="detail__content">
-<?= htmlspecialchars($data['blog']['Content']) ?>
+        <!-- <img src="public/images/mau 2.png" alt="" class="detail__bg-img"> -->
+        <div class="detail__content">
+            <?= $data['blog']['Content'] ?>
 
-        </p>
-        <div class="detail__control">
-            <button class="detail__control-post">
-                <i class="fa-solid fa-chevron-left"></i>
-                Previous Post
-            </button>
-            <button class="detail__control-post">
-                Next Post
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
         </div>
+        <div class="detail__control">
+            <?php if (!empty($data['previousPost'])): ?>
+                <a href="http://localhost/BTL_WEB/blog/detail?id=<?= htmlspecialchars($data['previousPost']['ID']) ?>" class="detail__control-post">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    <?= htmlspecialchars($data['previousPost']['Title']) ?>
+                </a>
+            <?php endif; ?>
+
+            <?php if (!empty($data['nextPost'])): ?>
+                <a href="http://localhost/BTL_WEB/blog/detail?id=<?= htmlspecialchars($data['nextPost']['ID']) ?>" class="detail__control-post">
+                    <?= htmlspecialchars($data['nextPost']['Title']) ?>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
+            <?php endif; ?>
+        </div>
+
+
         <div class="detail__cmt">
                 <p class="detail__cmt-header">Comments</p>
                 <div class="detail__cmt-box">

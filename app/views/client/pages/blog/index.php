@@ -1,10 +1,10 @@
 <!-- views/blog/index.php -->
 <div class="container">
   <div class="blog_page">
-    <h2 class="blog__header" data-aos="fade-down" data-aos-duration="500">Our Blog Collection</h2>
+    <h2 class="blog__header" data-aos="fade-down" data-aos-duration="300">Our Blog Collection</h2>
     
     <div class="blog__best">
-      <div class="blog__best-left" data-aos="fade-right" data-aos-duration="500">
+      <div class="blog__best-left" data-aos="fade-right" data-aos-duration="300">
         <p class="blog__best-left-header">Discover the Art of Perfumery</p>
         <p class="blog__best-left-text">
           Welcome to Local Face's Perfumery Blog Collection! Here, we invite you to immerse yourself in the captivating world of fragrances, where each blog post is a sensory journey that unveils the magic and allure of perfumes.
@@ -13,7 +13,7 @@
           At Local Face, we believe that perfumery is an extraordinary fusion of art, science, and emotion. Our passion for exquisite fragrances has inspired us to curate a treasure trove of blog posts.
         </p>
       </div>
-      <div class="blog__slider" data-aos="fade-left" data-aos-duration="500">
+      <div class="blog__slider" data-aos="fade-left" data-aos-duration="300">
       <?php
         $lengthBlogPostList = 3;
         $tileBlogPostPhone = $lengthBlogPostList * 2;
@@ -42,7 +42,7 @@
       </div>
     </div>
     
-    <div class="blog__search-chua" data-aos="fade-down" data-aos-duration="500">
+    <div class="blog__search-chua" data-aos="fade-down" data-aos-duration="300">
       <div class="blog__search">
         <form method="get" action="" id="search-form" 
         onsubmit="return false;" style="width: 100%;justify-content: space-between;display: flex;">
@@ -82,7 +82,7 @@
           $imageData = json_decode($blog['Image'], true);
           $imageUrl = !empty($imageData) ? $imageData[0] : ''; 
           ?>
-          <a href="http://localhost/BTL_WEB/blog/detail?id=<?= htmlspecialchars($blog['BlogID']) ?>" class="blog__post-item" data-aos="fade-down" data-aos-duration="500" style="display: flex;flex-direction: column;justify-content: space-around;">
+          <a href="http://localhost/BTL_WEB/blog/detail?id=<?= htmlspecialchars($blog['BlogID']) ?>" class="blog__post-item" data-aos="fade-down" data-aos-duration="300" style="display: flex;flex-direction: column;justify-content: space-around;">
             <img src="<?= htmlspecialchars($imageUrl) ?>" alt="" class="blog__post-img">
             <p class="blog__post-content"><?= htmlspecialchars($blog['Title']) ?></p>
             <p class="blog__post-note"><?= htmlspecialchars($blog['Desc']) ?></p>
@@ -95,7 +95,7 @@
     </div>
 
     <?php if ($data['totalPages'] > 1): ?>
-    <div class="pagination-custom" data-aos="fade-up" data-aos-duration="500">
+    <div class="pagination-custom" data-aos="fade-up" data-aos-duration="300">
         <?php
         $currentPage = $data['currentPage'];
         $totalPages = $data['totalPages'];

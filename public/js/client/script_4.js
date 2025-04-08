@@ -1,12 +1,15 @@
-document.addEventListener('DOMContentLoaded', function() {
-  let currentRequest = null;
+document.addEventListener('DOMContentLoaded', function () {
+  let currentController = null;
 
   function handleFilter() {
-    if (currentRequest) currentRequest.abort();
+    if (currentController) currentController.abort();
+
+    currentController = new AbortController();
+    const { signal } = currentController;
 
     const spinner = document.createElement('div');
     spinner.className = 'loading-spinner';
-    spinner.innerHTML = '⏳ Loading...';
+    spinner.innerHTML = 'Loading...';
     document.body.appendChild(spinner);
 
     const searchValue = document.getElementById('search-input').value;
@@ -19,22 +22,24 @@ document.addEventListener('DOMContentLoaded', function() {
     url.searchParams.set('category', category);
     url.searchParams.set('page', page);
 
-    currentRequest = fetch(url)
+    fetch(url, { signal })
       .then(response => response.text())
       .then(html => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
-        
+
         document.querySelector('.blog__posts').innerHTML = doc.querySelector('.blog__posts').innerHTML;
         document.querySelector('.pagination-custom').innerHTML = doc.querySelector('.pagination-custom').innerHTML;
         document.querySelector('.blog__search-list').innerHTML = doc.querySelector('.blog__search-list').innerHTML;
-        
+
         AOS.refresh();
       })
-      .catch(err => { if (!err.name === 'AbortError') console.error(err) })
+      .catch(err => {
+        if (err.name !== 'AbortError') console.error(err);
+      })
       .finally(() => {
         document.body.removeChild(spinner);
-        currentRequest = null;
+        currentController = null;
       });
   }
 
@@ -46,7 +51,14 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   };
 
-  document.getElementById('search-input').addEventListener('input', debounce(handleFilter, 500));
+  document.getElementById('search-input').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleFilter();
+    }
+  });
+
+  // document.getElementById('search-input').addEventListener('input', debounce(handleFilter, 100));
 
   document.body.addEventListener('click', e => {
     if (e.target.closest('.blog__search-item')) {

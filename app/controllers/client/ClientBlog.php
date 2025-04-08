@@ -10,14 +10,14 @@ class ClientBlog extends Controller {
     $category = $_GET['category'] ?? null;
     $currentPage = max((int)($_GET['page'] ?? 1), 1);
     
-    $limit = empty($search) ? 9 : PHP_INT_MAX;
+    $limit = empty($search) ? 6 : PHP_INT_MAX;
     $offset = empty($search) ? ($currentPage - 1) * $limit : 0;
 
     $totalBlogs = $Blog->getTotalFilteredBlogs($search, $category);
     $blogs = $Blog->getFilteredBlogs($search, $category, $limit, $offset);
     
     $totalPages = empty($search) 
-        ? ceil($totalBlogs / 9) 
+        ? ceil($totalBlogs / 6) 
         : 1;
 
     $this->view("layout", [
