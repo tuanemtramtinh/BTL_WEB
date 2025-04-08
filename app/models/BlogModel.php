@@ -289,16 +289,26 @@ class BlogModel extends DB
         return $posts;
     }
 
-    public function getComments($blogId) {
-        $query = "SELECT c.*, cu.FirstName, cu.LastName
-                FROM Comment c
-                JOIN Customer cu ON c.ID = cu.ID
-                WHERE c.ID_Blog = ?";
-        $stmt = $this->conn->prepare($query);
+    public function updateBlogIntro($img, $content){
+        $sql = "UPDATE Section SET Images = ?, Content = ? WHERE ID = 1";
+        print($sql);
+        $stmt = $this->conn->prepare($sql);
+        $imagesJson = json_encode($img, JSON_PRETTY_PRINT);
+        $stmt->bind_param("ss", $imagesJson, $content);
+        $result = $stmt->execute();
+        $stmt->close();
+
+        return $result;
+    }
+    public function getBlogIntro($blogId) {
+        $sql = "SELECT ID, Images, Content FROM Section WHERE ID = ?";
+
+        $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $blogId);
         $stmt->execute();
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    }
-
+        $result = $stmt->get_result();
+        $blog = $result->fetch_assoc();
+        return $blog;
+    }  
 }
 ?>

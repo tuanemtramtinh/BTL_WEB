@@ -51,12 +51,15 @@ document.addEventListener('DOMContentLoaded', function () {
     };
   };
 
-  document.getElementById('search-input').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      handleFilter();
-    }
-  });
+  if (document.getElementById('search-input')){
+    document.getElementById('search-input').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleFilter();
+      }
+    });
+    
+  }
 
   // document.getElementById('search-input').addEventListener('input', debounce(handleFilter, 100));
 

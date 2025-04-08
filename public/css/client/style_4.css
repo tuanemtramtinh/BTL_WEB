@@ -16,6 +16,10 @@
     z-index: 9999;
   }
 
+.blog__best br{
+    display: none;
+}
+
 .pagination-button {
     display: flex;
     align-items: center;
@@ -85,16 +89,27 @@
     background: #AB572D;
 }
 
-.blog__best-left-header{
+.blog__best-left-header, .blog__best-left h2{
     font-size: 32px;
-    font-weight: 300;
-    margin-bottom: 43px;                         
+    /* font-weight: 300; */
+    margin-bottom: 43px;      
+    text-align: justify;                   
 }
 
-.blog__best-left-text{
+.blog__best-left-header, .blog__best-left h3{
+    font-size: 20px;
+    /* font-weight: 200; */
+    margin-bottom: 24px;    
+    text-align: justify;                   
+
+}
+
+.blog__best-left-text, .blog__best-left p{
     font-size: 20px;
     font-weight: 200;
     margin-bottom: 24px;
+    text-align: justify;                   
+
 }
 
 .blog__slider{
@@ -326,7 +341,7 @@
 .blog__post-readmore {
     background: transparent;
     border: 1px #fff solid;
-    padding: 8.5px 35px;
+    padding: 10px 35px;
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;

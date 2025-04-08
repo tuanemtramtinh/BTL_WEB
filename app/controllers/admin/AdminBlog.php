@@ -45,11 +45,15 @@ class AdminBlog extends Controller
   {
 
     $this->checkAuthAdmin();
+    $Blog = $this->model("BlogModel");
+
+    $blogIntro = $Blog->getBlogIntro(1);
 
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
-      "title" => "Blog's Content",
+      "title" => "Blog introduction",
       "page" => "blog/content",
+      "blogIntro"=> $blogIntro,
       "task" => 4,
       "error" => $message['error'],
       "success" => $message['success']
@@ -242,6 +246,36 @@ class AdminBlog extends Controller
           header("Location: index");
           exit;
       }
+  }
+
+  public function addPostHead(){
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      $this->checkAuthAdmin();
+
+      $uploadedImages = $this->uploadImages($_FILES['images'], 'blog'); 
+      $imagesArray = !empty($uploadedImages) ? $uploadedImages : json_decode($_POST['existing_images'] ?? '[]', true);
+
+      $content = isset($_POST['content']) ? trim($_POST['content']) : '';
+
+      if (empty($content) || empty($imagesArray)) {
+        $_SESSION["error_message"] = "Please enter text and ensure at least 1 image is available!";
+        header("Location: content");
+        exit;
+    }    
+
+      $BlogModel = $this->model("BlogModel");
+
+      $updateSuccess = $BlogModel->updateBlogIntro($imagesArray, $content);
+
+      if ($updateSuccess) {
+        $_SESSION["success_message"] = "Blog intro has been updated successfully!";
+      } else {
+        $_SESSION["error_message"] = "Update failed!";
+      }
+
+      header("Location: content");
+      exit;
+    }
   }
 
 }

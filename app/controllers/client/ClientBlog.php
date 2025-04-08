@@ -15,6 +15,7 @@ class ClientBlog extends Controller {
 
     $totalBlogs = $Blog->getTotalFilteredBlogs($search, $category);
     $blogs = $Blog->getFilteredBlogs($search, $category, $limit, $offset);
+    $blogIntro = $Blog->getBlogIntro(1);
     
     $totalPages = empty($search) 
         ? ceil($totalBlogs / 6) 
@@ -24,6 +25,7 @@ class ClientBlog extends Controller {
         "title" => "Danh Sách Bài Viết",
         "page" => "blog/index",
         "blogs" => $blogs,
+        "blogIntro" => $blogIntro,
         "categories" => $Blog->getCategories(),
         "currentPage" => $currentPage,
         "totalPages" => $totalPages,

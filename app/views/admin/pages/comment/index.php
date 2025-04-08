@@ -2,13 +2,13 @@
     <div class="card-header border-bottom">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="#">All Comments</a>
+                <a class="nav-link active" href="http://localhost/BTL_WEB/admin/comment">All Comments</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pending Review</a>
+                <a class="nav-link" href="http://localhost/BTL_WEB/admin/comment">Pending Review</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Approved</a>
+                <a class="nav-link" href="http://localhost/BTL_WEB/admin/comment">Approved</a>
             </li>
         </ul>
     </div>
@@ -24,12 +24,6 @@
                 <button class="btn btn-outline-secondary">Filter
                 </button>
             </div>
-            <div class="dataTable-search">
-                <form method="get" action="">
-                    <input class="dataTable-input" name="search" placeholder="Search..." type="text" value="">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </form>
-            </div>
         </div>
 
         <div class="table-responsive rounded-3">
@@ -39,7 +33,7 @@
                         <th style="width: 40px;"><input type="checkbox" class="form-check-input"></th>
                         <th style="width: 120px;">Date</th>
                         <th>Comment</th>
-                        <th style="width: 150px;">Status</th>
+                        <th style="width: 100px;">Status</th>
                         <th style="width: 100px;">Actions</th>
                     </tr>
                 </thead>
@@ -53,15 +47,19 @@
                                 <p class="text-muted mb-0">Great article! Really enjoyed reading this piece.</p>
                             </div>
                         </td>
+                        
                         <td>
                             <span class="badge bg-success">Approved</span>
                         </td>
                         <td>
                             <div class="d-flex gap-2">
-                                <button class="btn  btn-outline-primary">
+                                <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#commentDetailModal">
+                                    View
+                                </button>
+                                <button class="btn btn-outline-primary">
                                     Edit
                                 </button>
-                                <button class="btn  btn-outline-danger">
+                                <button class="btn btn-outline-danger">
                                     Delete
                                 </button>
                             </div>
@@ -83,10 +81,13 @@
                         </td>
                         <td>
                             <div class="d-flex gap-2">
-                                <button class="btn  btn-outline-primary">
+                                <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#commentDetailModal">
+                                    View
+                                </button>
+                                <button class="btn btn-outline-primary">
                                     Edit
                                 </button>
-                                <button class="btn  btn-outline-danger">
+                                <button class="btn btn-outline-danger">
                                     Delete
                                 </button>
                             </div>
@@ -111,6 +112,29 @@
                     </li>
                 </ul>
             </nav>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="commentDetailModal" tabindex="-1" aria-labelledby="commentDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="commentDetailModalLabel">Detail Comment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>ID:</strong> 1</li>
+                    <li class="list-group-item"><strong>Content:</strong> Great article! Really enjoyed reading this piece.</li>
+                    <li class="list-group-item"><strong>ID Customer:</strong> 10</li>
+                    <li class="list-group-item"><strong>ID Blog:</strong> 2</li>
+                    <li class="list-group-item"><strong>Like:</strong> 5</li>
+                    <li class="list-group-item"><strong>Dislike:</strong> 0</li>
+                    <li class="list-group-item"><strong>Status:</strong> Approved</li>
+                    <li class="list-group-item"><strong>Created At:</strong> 2023-10-11 12:00:00</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

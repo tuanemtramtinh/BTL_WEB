@@ -2,30 +2,31 @@
 <div class="container">
   <div class="blog_page">
     <h2 class="blog__header" data-aos="fade-down" data-aos-duration="300">Our Blog Collection</h2>
-    
+    <?php
+      $introImages = json_decode($data['blogIntro']['Images'] ?? '[]', true);
+      $introImages = is_array($introImages) ? $introImages : [];
+      $introContent = $data['blogIntro']['Content'] ?? '';
+    ?>
     <div class="blog__best">
       <div class="blog__best-left" data-aos="fade-right" data-aos-duration="300">
-        <p class="blog__best-left-header">Discover the Art of Perfumery</p>
-        <p class="blog__best-left-text">
-          Welcome to Local Face's Perfumery Blog Collection! Here, we invite you to immerse yourself in the captivating world of fragrances, where each blog post is a sensory journey that unveils the magic and allure of perfumes.
-        </p>
-        <p class="blog__best-left-text">
-          At Local Face, we believe that perfumery is an extraordinary fusion of art, science, and emotion. Our passion for exquisite fragrances has inspired us to curate a treasure trove of blog posts.
-        </p>
+        <!-- <p class="blog__best-left-text"> -->
+        <!-- </p> -->
+        <?= $introContent ?>
       </div>
+      
+
       <div class="blog__slider" data-aos="fade-left" data-aos-duration="300">
       <?php
-        $lengthBlogPostList = 3;
+        $lengthBlogPostList = count($introImages);
         $tileBlogPostPhone = $lengthBlogPostList * 2;
         $withBlogPost = $lengthBlogPostList * 2 * 100;
         echo "<div class=\"blog__slider-track\" style=\"width: {$withBlogPost}%;\">";
-        for($i=0; $i < $lengthBlogPostList; $i++){
-            echo "<div class=\"blog__slide\">
-                <img src=\"public/images/Frame 481.png\" alt=\"\" class=\"blog__best-right\">
-            </div>
-            <div class=\"blog__slide\">
-                <img src=\"public/images/mau 2.png\" alt=\"\" class=\"blog__best-right\">
-            </div>";
+        for ($i = 0; $i < 2; $i++) {
+          foreach($introImages as $img){
+              echo "<div class=\"blog__slide\">
+                  <img src=\"" . htmlspecialchars($img) . "\" alt=\"\" class=\"blog__best-right\">
+              </div>";
+          }
         }
         echo "</div>";
         echo "<style>
