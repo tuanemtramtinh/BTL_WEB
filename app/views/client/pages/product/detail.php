@@ -58,7 +58,7 @@
             <div class="product-detail__info-item">
               <strong>Category</strong>
               <br>
-              <span><?= $data['product']['ID_ProductCategory'] ?></span>
+              <span><?= $data['product']['CategoryName'] ?></span>
             </div>
           </div>
           <!-- <p class="product-detail__desc">

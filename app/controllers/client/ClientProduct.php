@@ -9,7 +9,12 @@ class ClientProduct extends Controller
 
     $Product = $this->model("ProductModel");
 
-    $products = $Product->getProductList();
+    $limit = $_GET['limit'] ?? 12;
+    $page = $_GET['page'] ?? 1;
+    $skip = ($page - 1) * $limit;
+    $totalPages = ceil($Product->countProduct() / $limit);
+
+    $products = $Product->getProductList($skip, $limit);
 
     $Product->closeConnection();
 
@@ -17,8 +22,25 @@ class ClientProduct extends Controller
       "title" => "Sản Phẩm",
       "page" => "product/index",
       "task" => 3,
-      "products" => $products
+      "products" => $products,
+      "pages" => $totalPages,
+      "currentPage" => $page
     ]);
+  }
+
+  public function search()
+  {
+
+    header("Content-Type: application/json");
+    $keyword = $_GET['keyword'] ?? '';
+    $Product = $this->model("ProductModel");
+    $products = $Product->findProductByKeyword($keyword);
+    $Product->closeConnection();
+    if ($products) {
+      echo json_encode($products);
+    } else {
+      echo json_encode([]);
+    }
   }
 
   public function detail($productSlug = '')
