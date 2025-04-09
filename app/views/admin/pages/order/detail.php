@@ -57,9 +57,9 @@
                       <img class="w-100" src="<?= $productImage ?>" alt="">
                     </td>
                     <td><?= $item['ProductName'] ?></td>
-                    <td><?= $item['ProductPrice'] ?></td>
+                    <td><?= number_format($item['ProductPrice']) ?> VND</td>
                     <td><?= $item['Quantity'] ?></td>
-                    <td><?= $item['Total'] ?></td>
+                    <td><?= number_format($item['Total']) ?> VND</td>
                   </tr>
                 <?php } ?>
               </tbody>

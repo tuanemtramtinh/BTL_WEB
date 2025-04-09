@@ -7,6 +7,9 @@ class ClientProduct extends Controller
   public function index()
   {
 
+    $brand = $_GET['brand'] ?? '';
+    $category = $_GET['category'] ?? '';
+
     $Product = $this->model("ProductModel");
 
     $limit = $_GET['limit'] ?? 12;
@@ -14,8 +17,7 @@ class ClientProduct extends Controller
     $skip = ($page - 1) * $limit;
     $totalPages = ceil($Product->countProduct() / $limit);
 
-    $products = $Product->getProductList($skip, $limit);
-
+    $products = $Product->getProductListClient($category, $brand, $skip, $limit);
     $Product->closeConnection();
 
     $this->view("layout", [

@@ -7,9 +7,23 @@ class AdminProduct extends Controller
     //Check if the employee is logged in
     $this->checkAuthAdmin();
 
-    $Product = $this->model("ProductModel");
+    $category = $_GET['category'] ?? '';
+    $brand = $_GET['brand'] ?? '';
 
+    $Product = $this->model("ProductModel");
     $products = $Product->getProductList();
+
+    if ($category !== '') {
+      $products = array_filter($products, function ($product) use ($category) {
+        return $product['CategoryID'] == $category;
+      });
+    }
+
+    if ($brand !== '') {
+      $products = array_filter($products, function ($product) use ($brand) {
+        return $product['Brand'] === $brand;
+      });
+    }
 
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [

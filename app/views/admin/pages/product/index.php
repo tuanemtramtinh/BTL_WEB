@@ -35,6 +35,8 @@
                   <th>Image</th>
                   <th>Name</th>
                   <th>Price</th>
+                  <th>Category</th>
+                  <th>Brand</th>
                   <th>CreatedAt</th>
                   <th>UpdatedAt</th>
                   <th>UpdatedBy</th>
@@ -48,18 +50,20 @@
                 ?>
                   <tr>
                     <td><?= $product['ID'] ?></td>
-                    <td><img style="aspect-ratio: 1/1; object-fit: contain; width: 150px;" src="<?= $productImage ?>" alt=""></td>
+                    <td><img style="aspect-ratio: 1/1; object-fit: contain; width: 100px;" src="<?= $productImage ?>" alt=""></td>
                     <td><?= $product['Name'] ?></td>
-                    <td><?= $product['PriceUnit'] ?></td>
+                    <td><?= number_format($product['PriceUnit']) ?> VND</td>
+                    <td><?= $product['Brand'] ?></td>
+                    <td><?= $product['Category'] ?></td>
                     <td><?= $product['CreatedAt'] ?></td>
                     <td><?= $product['UpdatedAt'] ?></td>
                     <td><?= $product['Username'] ?></td>
                     <td>
-                      <a class="btn btn-info " href="admin/product/detail/<?= $product['ID'] ?>">Detail</a>
-                      <a class="btn btn-warning  ml-1" href="admin/product/edit/<?= $product['ID'] ?>">Edit</a>
+                      <a class="btn btn-sm btn-info " href="admin/product/detail/<?= $product['ID'] ?>">Detail</a>
+                      <a class="btn btn-sm btn-warning  ml-1" href="admin/product/edit/<?= $product['ID'] ?>">Edit</a>
                       <div class="modal-danger me-1 mb-1 d-inline-block">
                         <!-- Button trigger for danger theme modal -->
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#danger">
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#danger">
                           Delete
                         </button>
                         <!--Danger theme Modal -->
