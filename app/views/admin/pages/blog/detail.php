@@ -24,8 +24,8 @@
       </div>
       <div class="mb-3">
         <label for="post_date" class="form-label">Posted Date</label>
-        <input type="date" class="form-control" id="post_date" name="post_date" 
-               value="<?= date('Y-m-d', strtotime($data['blog']['DateCreated'])) ?>" disabled>
+        <input type="text" class="form-control" id="post_date" name="post_date" 
+               value="<?= $data['blog']['DateCreated'] ?>" disabled>
       </div>
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>

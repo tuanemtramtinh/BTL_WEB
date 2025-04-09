@@ -59,7 +59,7 @@
                                         <td><?php echo $blog['Title'] ;?></td>
                                         <td><?php echo $blog['Author'] ;?></td>
                                         <td>
-                                            <?php echo date('d/m/Y', strtotime($blog['DateCreated'])) ;?>
+                                            <?php echo date('Y-m-d H:i:s', strtotime($blog['DateCreated'])) ;?>
                                         </td>
                                         
                                         <td><?php echo $blog['CategoryName'] ;?></td>

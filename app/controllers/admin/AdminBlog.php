@@ -135,14 +135,14 @@ class AdminBlog extends Controller
       $title       = $_POST['title'];
       $content     = $_POST['content'];
       $category    = (int)$_POST['category'];
-      $dateCreated = date("Y-m-d H:i:s");
+      // $dateCreated = date("Y-m-d H:i:s");
       $desc        = $_POST['desc'];
   
       $Blog = $this->model("BlogModel");
   
       $error = null;
 
-      if (empty($author) || empty($title) || empty($content) || empty($category) || empty($dateCreated) || empty($blogImagesJson) || empty($desc)){
+      if (empty($author) || empty($title) || empty($content) || empty($category) || empty($blogImagesJson) || empty($desc)){
         $error = 'Fail to create: Fill in all fields!';
       }
 
@@ -152,7 +152,7 @@ class AdminBlog extends Controller
         exit;
       }
 
-      $Blog->createBlog($author, $dateCreated, $title, $content, $category, $blogImagesJson, $desc);
+      $Blog->createBlog($author, $title, $content, $category, $blogImagesJson, $desc);
 
       $_SESSION['success_message'] = 'Add Blog successfully';
       header('Location: index');

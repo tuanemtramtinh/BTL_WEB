@@ -4,12 +4,6 @@
             <li class="nav-item">
                 <a class="nav-link active" href="http://localhost/BTL_WEB/admin/comment">All Comments</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="http://localhost/BTL_WEB/admin/comment">Pending Review</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="http://localhost/BTL_WEB/admin/comment">Approved</a>
-            </li>
         </ul>
     </div>
     
@@ -102,7 +96,7 @@
             <nav>
                 <ul class="dataTable-pagination-list pagination pagination-primary">
                     <li class="page-item disabled">
-                        <a class="page-link" href="#">Previous</a>
+                        <a class="page-link" href="#">Prev</a>
                     </li>
                     <li class="page-item active"><a class="page-link" href="#">1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -128,7 +122,7 @@
                     <li class="list-group-item"><strong>ID:</strong> 1</li>
                     <li class="list-group-item"><strong>Content:</strong> Great article! Really enjoyed reading this piece.</li>
                     <li class="list-group-item"><strong>ID Customer:</strong> 10</li>
-                    <li class="list-group-item"><strong>ID Blog:</strong> 2</li>
+                    <li class="list-group-item"><strong>ID Blog:</strong> <a href="http://localhost/BTL_WEB/admin/blog/detail?id=27"> 27 </a></li>
                     <li class="list-group-item"><strong>Like:</strong> 5</li>
                     <li class="list-group-item"><strong>Dislike:</strong> 0</li>
                     <li class="list-group-item"><strong>Status:</strong> Approved</li>

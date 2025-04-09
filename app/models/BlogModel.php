@@ -73,14 +73,14 @@ class BlogModel extends DB
         return (int)$data['total'];
     }
 
-    public function createBlog($author, $dateCreated, $title, $content, $category, $cover_image, $desc)
+    public function createBlog($author, $title, $content, $category, $cover_image, $desc)
     {
-        $query = "INSERT INTO Blog(Author, DateCreated, Title, Content, ID_BlogCategory, Image, `Desc`)
-                  VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO Blog(Author, Title, Content, ID_BlogCategory, Image, `Desc`)
+                  VALUES (?, ?, ?, ?, ?, ?)";
 
         
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("ssssiss", $author, $dateCreated, $title, $content, $category, $cover_image, $desc);
+        $stmt->bind_param("sssiss", $author, $title, $content, $category, $cover_image, $desc);
         $result = $stmt->execute();
         $stmt->close();
         return $result;
