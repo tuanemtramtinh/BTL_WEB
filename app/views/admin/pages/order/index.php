@@ -24,16 +24,16 @@
                     <td><?= $order['ID'] ?></td>
                     <td><?= $order['Email'] ?></td>
                     <td>
-                      <select class="form-select" name="status" id="status">
+                      <select class="form-select order-select" name="status" id="status" order-id="<?= $order['ID'] ?>">
                         <option value="processing" <?= $order['Status'] === 'processing' ? "selected" : "" ?>>Processing</option>
-                        <option value="finish" <?= $order['Status'] === 'processing' ? "finish" : "" ?>>Finish</option>
-                        <option value="fail" <?= $order['Status'] === 'processing' ? "fail" : "" ?>>Fail</option>
+                        <option value="finish" <?= $order['Status'] === 'finish' ? "selected" : "" ?>>Finish</option>
+                        <option value="fail" <?= $order['Status'] === 'fail' ? "selected" : "" ?>>Fail</option>
                       </select>
                     </td>
                     <td><?= $order['CreatedAt'] ?></td>
-                    <td><?= $order['Total'] ?></td>
+                    <td><?= number_format($order['Total']) ?> VND</td>
                     <td>
-                      <a class="btn btn-info " href="admin/order/detail/<?=$order['ID']?>">Detail</a>
+                      <a class="btn btn-info " href="admin/order/detail/<?= $order['ID'] ?>">Detail</a>
                     </td>
                   </tr>
                 <?php } ?>

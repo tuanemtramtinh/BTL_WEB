@@ -30,6 +30,17 @@ class OrderModel extends DB
     return $insertId;
   }
 
+  public function updateOrderStatus($orderId, $status)
+  {
+    $query = "UPDATE `Order` SET `Status` = ? WHERE ID = ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("si", $status, $orderId);
+    $result = $stmt->execute();
+    $stmt->close();
+
+    return $result;
+  }
+
   public function findOrderById($orderId)
   {
     $query = "SELECT O.ID, O.ID_Customer, O.Total, O.CreatedAt, O.UpdatedAt, O.`Status`, CONCAT(C.LastName, ' ',C.FirstName) as FullName, C.Email FROM `Order` AS O INNER JOIN Customer AS C ON O.ID_Customer = C.ID WHERE O.ID = ?";

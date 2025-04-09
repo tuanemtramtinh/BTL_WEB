@@ -8,9 +8,11 @@
         <div class="card-body pt-4">
           <div class="card-text mb-3">
             <strong class="me-3">Status: </strong>
-            <span style="text-transform: capitalize;" class="btn <?php if ($data['order']['Status'] === 'processing') echo "btn-warning";
-                                                                  else if ($data['order']['Status'] === 'finish') echo "btn-success";
-                                                                  else echo "btn-danger"; ?>"><?= $data['order']['Status'] ?></span>
+            <select style="display: inline-block; width: 150px;" class="form-select order-select" name="status" id="status" order-id="<?= $data['order']['ID'] ?>">
+              <option value="processing" <?= $data['order']['Status'] === 'processing' ? "selected" : "" ?>>Processing</option>
+              <option value="finish" <?= $data['order']['Status'] === 'finish' ? "selected" : "" ?>>Finish</option>
+              <option value="fail" <?= $data['order']['Status'] === 'fail' ? "selected" : "" ?>>Fail</option>
+            </select>
           </div>
           <div class="card-text mb-3">
             <strong class="me-3">Email: </strong>

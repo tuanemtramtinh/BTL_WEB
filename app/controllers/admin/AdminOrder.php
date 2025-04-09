@@ -24,6 +24,40 @@ class AdminOrder extends Controller
     ]);
   }
 
+  public function changeStatus($orderId = '', $status = '')
+  {
+    header("Content-Type: application/json");
+    //Check if the employee is logged in
+    $this->checkAuthAdmin();
+
+    if ($orderId === '' || $status === '') {
+      echo json_encode([
+        "status" => false,
+        "message" => "Invalid Order"
+      ]);
+      $_SESSION['error_message'] = "Invalid Order";
+      exit;
+    }
+
+    $Order = $this->model("OrderModel");
+
+    if ($Order->updateOrderStatus($orderId, $status)) {
+      $Order->closeConnection();
+      echo json_encode([
+        "status" => true,
+        "message" => "Order status updated successfully"
+      ]);
+      $_SESSION['success_message'] = "Order status updated successfully";
+    } else {
+      $Order->closeConnection();
+      echo json_encode([
+        "status" => false,
+        "message" => "Failed to update order status"
+      ]);
+      $_SESSION['error_message'] = "Failed to update order status";
+    }
+  }
+
   public function detail($orderId = '')
   {
     //Check if the employee is logged in
