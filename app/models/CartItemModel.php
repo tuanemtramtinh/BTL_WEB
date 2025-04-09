@@ -41,6 +41,17 @@ class CartItemModel extends DB
     return $result;
   }
 
+  public function deleteCartItem($productId, $cartId)
+  {
+    $query = "DELETE FROM CartItem WHERE ID_Product = ? AND Cart = ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("ii", $productId, $cartId);
+    $result = $stmt->execute();
+    $stmt->close();
+
+    return $result;
+  }
+
   public function resetCartItem($cartId)
   {
     $query = "DELETE FROM CartItem WHERE Cart = ?";

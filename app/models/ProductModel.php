@@ -64,11 +64,25 @@ class ProductModel extends DB
     return $result;
   }
 
-  public function getProductList()
+  public function countProduct()
   {
-    $query = "SELECT ID, Image, Name, PriceUnit, CreatedAt, UpdatedAt, Employee.Username, Slug FROM Product INNER JOIN Employee ON Product.SocialNo = Employee.SocialNo ORDER BY ID ASC";
+    $query = "SELECT COUNT(*) AS total FROM Product";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $total = $row['total'];
+    $stmt->close();
+
+    return $total;
+  }
+
+  public function getProductList($skip = 0, $limit = 2147483647)
+  {
+    $query = "SELECT ID, Image, Name, PriceUnit, CreatedAt, UpdatedAt, Employee.Username, Slug FROM Product INNER JOIN Employee ON Product.SocialNo = Employee.SocialNo ORDER BY ID ASC LIMIT ?, ?";
 
     $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("ii", $skip, $limit);
     $stmt->execute();
     $result = $stmt->get_result();
     $products = [];
@@ -77,6 +91,27 @@ class ProductModel extends DB
     }
     $stmt->close();
     return !empty($products) ? $products : null;
+  }
+
+  public function findProductByKeyword($keyword)
+  {
+    $keyword = trim($keyword);
+    $keyword = strtolower(str_replace(' ', '-', $keyword));
+    $keyword = "%$keyword%";
+    $query = "SELECT * FROM Product WHERE Name LIKE ? OR Slug LIKE ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("ss", $keyword, $keyword);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt = null;
+    if ($result->num_rows > 0) {
+      $products = [];
+      while ($row = $result->fetch_assoc()) {
+        $products[] = $row;
+      }
+      return $products;
+    }
+    return null;
   }
 
   public function findProductByName($productName)
@@ -111,7 +146,7 @@ class ProductModel extends DB
 
   public function findProductBySlug($productSlug)
   {
-    $query = "SELECT * FROM Product WHERE Slug = ?";
+    $query = "SELECT P.ID, P.PriceUnit, P.Inventory, P.`Name`, P.Description, P.Slug, P.Image, P.CreatedAt, P.UpdatedAt, P.Brand, PC.`Name` as CategoryName, P.ID_ProductCategory FROM Product as P INNER JOIN ProductCategory as PC ON P.ID_ProductCategory = PC.ID WHERE P.Slug = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("s", $productSlug);
     $stmt->execute();
