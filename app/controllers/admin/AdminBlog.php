@@ -178,15 +178,12 @@ class AdminBlog extends Controller
           $category = (int)$_POST['category'];
           $desc     = trim($_POST['desc']);
 
-          // Nếu có ảnh cũ thì lấy danh sách
           $existingImages = json_decode($_POST['existing_images'], true) ?? [];
 
-          // Nếu có ảnh mới được tải lên
           $uploadedImages = [];
           if (!empty($_FILES['images']['name'][0])) { 
               $uploadedImages = $this->uploadImages($_FILES['images'], 'edit');
 
-              // Xóa ảnh cũ trước đó và chỉ giữ lại ảnh mới
               $finalImages = $uploadedImages;
           } else {
               $finalImages = $existingImages;

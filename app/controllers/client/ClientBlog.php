@@ -39,6 +39,8 @@ class ClientBlog extends Controller {
 
   public function detail() {
     $Blog = $this->model("BlogModel");
+    $Comment = $this->model("CommentModel");
+
 
     if (!isset($_GET['id']) || empty($_GET['id'])) {
       $_SESSION["error_message"] = "Blog ID is missing.";
@@ -60,16 +62,47 @@ class ClientBlog extends Controller {
       exit;
     }
 
+    $comments = $Comment->getCommentsByBlogId($id);
+
     $this->view("layout", [
-      "title" => "Chi Tiết Bài Viết",
+      "title" => "Detail Blog",
       "page" => "blog/detail",
       "blog" => $blog,
-      "blog"        => $blog,
       "categories" => $categories,
       "previousPost" => $previousPost,
       "nextPost" => $nextPost,
+      "comments" => $comments,
       "task" => 4
     ]);
   }
+
+  public function addComment() {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      if (empty($_SESSION['userId'])) {
+          header("Location: http://localhost/BTL_WEB/auth/login");
+          exit();
+      }
+
+      $Content = $_POST['Content'];
+      $ID_Customer = $_SESSION['userId'];  
+      $ID_Blog = $_POST['ID_Blog'];
+      $Status = $_POST['Status']; 
+
+      $addSuccess = $this->model("CommentModel")->addComment($Content, $ID_Customer, $ID_Blog, $Status);
+
+      if (!$addSuccess) {
+        $_SESSION['error_message'] = 'Failed to add comment.';
+      }
+      else{
+        $_SESSION['success_message'] = 'Comment successful pending approval!';
+      }
+
+      header("Location: http://localhost/BTL_WEB/blog/detail?id=$ID_Blog#comment");
+      exit();
+    }
+  }
+
+
+
 
 }

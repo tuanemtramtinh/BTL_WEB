@@ -195,8 +195,17 @@
 
 .blog__search-list{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     transition: opacity 0.6s ease;
+}
+
+.blog-kococmt{
+    font-size: 24px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
 }
 
 .clear-filter {
@@ -364,16 +373,52 @@
 
 /* Trang chi tiet blog */
 
+.detail_page-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.detail__share-btn {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+    text-decoration: underline;
+}
+
+.detail__share-btn:hover {
+    background-color: #555;
+}
+
 .detail_info-date, .detail_info-author{
     font-size: 20px;
     font-weight: 200;
     text-align: center;
+    margin-bottom: 13px;
     
+}
+
+.detail_info-cata{
+    font-size: 18px;
+    font-weight: 200;
+    text-align: center;
+    text-decoration: underline;
+    color: rgb(117, 117, 202);
+}
+
+.detail_info-cata a{
+    color: rgb(117, 117, 202);
 }
 
 .detail_info-date{
     margin-top: 73px;
-    margin-bottom: 13px;
+    /* margin-bottom: 13px; */
 }
 
 .detail__header{
@@ -394,6 +439,13 @@
     font-size: 20px;
     font-weight: 200;
     margin-bottom: 56px;
+}
+
+.detail__content img{
+    width: 100%;
+    height: 100%;
+    /* aspect-ratio: 1 / 1; */
+    object-fit: cover;
 }
 
 .detail__control{
@@ -691,6 +743,22 @@ color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .detail_page-info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .detail_page-info .detail_page-info-DEBUG{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+    
+    .detail_page-info .detail_page-info-DEBUG p{
+        margin: 12px 0;
     }
 
     .detail__content{

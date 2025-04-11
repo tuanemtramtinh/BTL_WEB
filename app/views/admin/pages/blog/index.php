@@ -11,7 +11,7 @@
         </div>
         <div class="card-body">
             <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                <div class="dataTable-top" style="display: flex;justify-content: space-between;">
+                <div class="dataTable-top">
                 <div class="dataTable-dropdown">
                     <select class="dataTable-selector form-select" id="entriesPerPage" onchange="changeEntriesPerPage(this.value)">
                         <option value="5" <?php echo ($data['limit'] == 5) ? 'selected' : '' ;?>>5</option>
@@ -59,7 +59,7 @@
                                         <td><?php echo $blog['Title'] ;?></td>
                                         <td><?php echo $blog['Author'] ;?></td>
                                         <td>
-                                            <?php echo date('Y-m-d H:i:s', strtotime($blog['DateCreated'])) ;?>
+                                            <?php echo $blog['DateCreated'] ;?>
                                         </td>
                                         
                                         <td><?php echo $blog['CategoryName'] ;?></td>
@@ -103,7 +103,7 @@
                     $start = ($currentPage - 1) * $limit + 1;
                     $end   = min($start + $limit - 1, $totalBlogs);
                 ;?>
-                <div class="dataTable-bottom" style="display: flex;justify-content: space-between;">
+                <div class="dataTable-bottom">
                     <div class="dataTable-info">
                         Showing <?php echo $start ;?> to <?php echo $end ;?> of <?php echo $totalBlogs ;?> entries
                     </div>
