@@ -71,20 +71,22 @@
                         </thead>
                         <tbody>
                             <!-- Render using api / database is  -->
-                            <tr>
-                                <td data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter">1</a></td>
-                                <td data-sortable="" style="width: 10%">
-                                    <img src="public/images/tt-avatar-3.png" alt="" class="card__avatar">
-                                </td>
-                                <td data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter">Duong Thanh Tu</a></td>
-                                <td data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter">Boss</a></td>
-                                <td data-sortable="" style="width: 50%"><a href="#" class="dataTable-sorter">Artist is a term applied to a person who engages in an activity deemed to be an art.</a></td>
-                                <td data-sortable="" style="width: 10%">
-                                    <a href="" class="btn btn-success">View</a>
-                                    <a href="#" class="btn btn-primary">Edit</a>
-                                    <a href="#" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
+                            <?php foreach ($data['member'] as $member) {
+                                $image = json_decode($member['Image']) ?>
+                                <tr>
+                                    <td data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter"><?= $member['ID'] ?></a></td>
+                                    <td data-sortable="" style="width: 10%">
+                                        <img src="<?= $image[0] ?>" alt="" class="card__avatar" style="width: 150px; height: 150px;">
+                                    </td>
+                                    <td data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter"><?= $member['Name'] ?></a></td>
+                                    <td data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter"><?= $member['Role'] ?></a></td>
+                                    <td data-sortable="" style="width: 50%"><a href="#" class="dataTable-sorter"><?= $member['Description'] ?></a></td>
+                                    <td data-sortable="" style="width: 10%">
+                                        <a href="admin/about/editMem?id=<?= $member['ID'] ?>" class="btn btn-primary">Edit</a>
+                                        <a href="admin/about/deleteMem?id=<?= $member['ID'] ?>" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa thành viên này ?')">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

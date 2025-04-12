@@ -36,6 +36,12 @@
   color: rgba(171, 87, 45, 1);
 }
 
+.card__avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
 .section-bonus__team {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -505,6 +511,11 @@ input[type="password"] {
   .section-bonus__title {
     font-size: 22px;
     font-weight: 700;
+  }
+  .card__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 10%;
   }
   .section-bonus__team {
     margin-top: 20px;

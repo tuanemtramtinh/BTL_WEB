@@ -20,62 +20,24 @@
                 The Executive Team
             </h4>
             <div class="section-bonus__team">
-                <div class="team__card">
-                    <img src="public/images/tt-avatar-3.png" alt="" class="card__avatar">
-                    <div class="card__info-detail">
-                        <h4 class="info-detail__name">
-                            Trieu Man cute
-                        </h4>
-                        <p class="info-detail__job">
-                            Boss
-                        </p>
-                        <p class="info-detail__describe">
-                            Artist is a term applied to a person who engages in an activity deemed to be an art.
-                        </p>
+                <?php foreach ($data["member"] as $member) {
+                    $image = json_decode($member['Image']);
+                    $image = $image[0] ?>
+                    <div class="team__card">
+                        <img src="<?= $image ?>" alt="<?= $member["Name"] ?>'s avatar" class="card__avatar">
+                        <div class="card__info-detail">
+                            <h4 class="info-detail__name">
+                                <?= $member["Name"] ?>
+                            </h4>
+                            <p class="info-detail__job">
+                                <?= $member["Role"] ?>
+                            </p>
+                            <p class="info-detail__describe">
+                                <?= $member["Description"] ?>
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="team__card">
-                    <img src="public/images/tt-avatar-3.png" alt="" class="card__avatar">
-                    <div class="card__info-detail">
-                        <h4 class="info-detail__name">
-                            Trieu Man cute
-                        </h4>
-                        <p class="info-detail__job">
-                            Boss
-                        </p>
-                        <p class="info-detail__describe">
-                            Artist is a term applied to a person who engages in an activity deemed to be an art.
-                        </p>
-                    </div>
-                </div>
-                <div class="team__card">
-                    <img src="public/images/tt-avatar-3.png" alt="" class="card__avatar">
-                    <div class="card__info-detail">
-                        <h4 class="info-detail__name">
-                            Trieu Man cute
-                        </h4>
-                        <p class="info-detail__job">
-                            Boss
-                        </p>
-                        <p class="info-detail__describe">
-                            Artist is a term applied to a person who engages in an activity deemed to be an art.
-                        </p>
-                    </div>
-                </div>
-                <div class="team__card">
-                    <img src="public/images/tt-avatar-3.png" alt="" class="card__avatar">
-                    <div class="card__info-detail">
-                        <h4 class="info-detail__name">
-                            Trieu Man cute
-                        </h4>
-                        <p class="info-detail__job">
-                            Boss
-                        </p>
-                        <p class="info-detail__describe">
-                            Artist is a term applied to a person who engages in an activity deemed to be an art.
-                        </p>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </div>
