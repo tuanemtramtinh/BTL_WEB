@@ -69,6 +69,24 @@ class CommentModel extends DB {
         return $result;
     }
 
+    public function getStatusCMTinBlog($id)
+    {
+        $sql = "SELECT * FROM Customer_Comment WHERE CustomerID = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        $data = [];
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+    
+        $stmt->close();
+        return $data;
+    }
+    
+
     public function delete($id)
     {
         $sql = "DELETE FROM Comment WHERE ID = ?";
@@ -123,6 +141,39 @@ class CommentModel extends DB {
         return $comments ? $comments : [];
     }
     
-    
+
+    public function getUserReactStatus($userId, $commmentId){
+        $sql = "SELECT StatusCMT FROM Customer_Comment WHERE CustomerID = ? AND CommentID = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ii", $userId, $commmentId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+        return $row ? $row['StatusCMT'] : null;
+    }
+
+    public function upsertReact($userId, $commentId, $status) {
+        $sql = "INSERT INTO Customer_Comment (CustomerID, CommentID, StatusCMT) 
+                VALUES (?, ?, ?)
+                ON DUPLICATE KEY UPDATE StatusCMT = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("iiii", $userId, $commentId, $status, $status);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    public function countReact($commentId, $status) {
+        $sql = "SELECT COUNT(*) AS total FROM Customer_Comment WHERE CommentID = ? AND StatusCMT = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ii", $commentId, $status);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+        return (int)$row['total'];
+    }
+
 }
 ?>

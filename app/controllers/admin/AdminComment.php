@@ -34,6 +34,7 @@ class AdminComment extends Controller
       "totalPages" => $totalPages,
       "currentPage" => $currentPage,
       "filters" => $filters,
+      "status" => $status,
       "error" => $message['error'],
       "success" => $message['success'],
       "task" => 4
@@ -45,29 +46,28 @@ class AdminComment extends Controller
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $this->checkAuthAdmin();
 
-      if (!isset($_POST['article_id']) || empty($_POST['article_id'])) {
+      if (empty($_POST['article_id'])) {
         $_SESSION["error_message"] = "Invalid Comment ID";
-        header("Location: index");
+        header("Location: " . BASE_URL . "/admin/comment?status=all");
         exit;
       }
 
-      // $message = $this->getSessionMessage();
-  
+      $status = isset($_POST['status']) ? $_POST['status'] : 'all';
+
+      // $_SESSION["success_message"] = isset($_GET['status']);
+
       $id = $_POST['article_id'];
-      printf('', $id);
-  
       $Comment = $this->model("CommentModel");
       $deleteSuccess = $Comment->delete($id);
-  
+
       if ($deleteSuccess) {
         $_SESSION["success_message"] = "Comment deleted successfully";
-        header("Location: index");
-        exit;
       } else {
         $_SESSION["error_message"] = "Failed to delete Comment";
-        header("Location: index");
-        exit;
       }
+
+      header("Location: " . BASE_URL . "/admin/comment?status=" . urlencode($status));
+      exit;
     }
   }
 
@@ -79,6 +79,12 @@ class AdminComment extends Controller
       if (!isset($_POST['id']) || empty($_POST['id'])) {
         $_SESSION["error_message"] = $_POST['id'];
         header("Location: index");
+        exit;
+      }
+
+      if (empty($_POST['article_id'])) {
+        $_SESSION["error_message"] = "Invalid Comment ID";
+        header("Location: " . BASE_URL . "/admin/comment?status=all");
         exit;
       }
 
@@ -94,6 +100,7 @@ class AdminComment extends Controller
 
       $Comment = $this->model("CommentModel");
       $updateSuccess = $Comment->updateStatus($id, $status);
+      $status_id = isset($_POST['statusid']) ? $_POST['statusid'] : 'all';
 
       if ($updateSuccess) {
         $_SESSION["success_message"] = "Updated successfully!";
@@ -101,7 +108,7 @@ class AdminComment extends Controller
         $_SESSION["error_message"] = "Update failed!";
       }
 
-      header("Location: index");
+      header("Location: " . BASE_URL . "/admin/comment?status=" . urlencode($status_id));
       exit;
     }
   }

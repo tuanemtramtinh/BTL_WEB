@@ -41,12 +41,12 @@ class BlogModel extends DB
                     bc.ID AS CategoryID, bc.Name AS CategoryName, b.Image
                   FROM Blog b 
                   JOIN BlogCategory bc ON b.ID_BlogCategory = bc.ID
-                  WHERE (b.Title LIKE ?) OR (b.Author LIKE ?)
+                  WHERE (b.Title LIKE ?) OR (b.Author LIKE ?) OR (bc.Name LIKE ?)
                   ORDER BY b.ID ASC
                   LIMIT ?, ?";
         $stmt = $this->conn->prepare($query);
         $pattern = "%" . $searchTerm . "%"; 
-        $stmt->bind_param("ssii", $pattern, $pattern, $offset, $limit);
+        $stmt->bind_param("sssii", $pattern, $pattern, $pattern, $offset, $limit);
         $stmt->execute();
     
         $result = $stmt->get_result();
@@ -114,6 +114,17 @@ class BlogModel extends DB
         
         return $result;
     }
+
+    public function updateStatusCMT($status, $Idcmt, $IdCustomer){
+        $query = "UPDATE Comment SET Status = ? WHERE CustomerID = ? AND CommentID = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("iii", $status, $Idcmt, $IdCustomer);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    
 
     public function deleteBlog($blogID)
     {
@@ -217,12 +228,14 @@ class BlogModel extends DB
         $types = "";
     
         if (!empty($search)) {
-            $query .= " AND (b.Title LIKE ? OR b.Author LIKE ?)";
+            $query .= " AND (b.Title LIKE ? OR b.Author LIKE ? OR bc.Name LIKE ?)";
             $searchTerm = "%" . $search . "%";
             $params[] = $searchTerm;
             $params[] = $searchTerm;
-            $types .= "ss";
+            $params[] = $searchTerm;
+            $types .= "sss";
         }
+        
     
         if (!empty($category)) {
             $query .= " AND bc.ID = ?";

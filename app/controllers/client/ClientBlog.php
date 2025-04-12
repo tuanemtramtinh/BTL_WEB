@@ -16,6 +16,7 @@ class ClientBlog extends Controller {
     $totalBlogs = $Blog->getTotalFilteredBlogs($search, $category);
     $blogs = $Blog->getFilteredBlogs($search, $category, $limit, $offset);
     $blogIntro = $Blog->getBlogIntro(1);
+    $message = $this->getSessionMessage();
     
     $totalPages = empty($search) 
         ? ceil($totalBlogs / 6) 
@@ -40,6 +41,7 @@ class ClientBlog extends Controller {
   public function detail() {
     $Blog = $this->model("BlogModel");
     $Comment = $this->model("CommentModel");
+    $message = $this->getSessionMessage();
 
 
     if (!isset($_GET['id']) || empty($_GET['id'])) {
@@ -64,6 +66,18 @@ class ClientBlog extends Controller {
 
     $comments = $Comment->getCommentsByBlogId($id);
 
+    $user = $_SESSION['userId'] ?? null;
+    $userCommentStatus = [];
+    if ($user) {
+        $userCommentStatus = $Comment->getStatusCMTinBlog($user);
+    }
+
+    // echo "<pre>";
+    // print_r($Comment->getStatusCMTinBlog($_SESSION['userId']));
+    // echo "</pre>";
+
+
+
     $this->view("layout", [
       "title" => "Detail Blog",
       "page" => "blog/detail",
@@ -72,6 +86,9 @@ class ClientBlog extends Controller {
       "previousPost" => $previousPost,
       "nextPost" => $nextPost,
       "comments" => $comments,
+      "userCommentStatus" => $userCommentStatus,
+      "error" => $message['error'],
+      "success" => $message['success'],
       "task" => 4
     ]);
   }
@@ -79,7 +96,11 @@ class ClientBlog extends Controller {
   public function addComment() {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       if (empty($_SESSION['userId'])) {
-          header("Location: http://localhost/BTL_WEB/auth/login");
+        http_response_code(401);
+        echo json_encode([
+          'success' => false,
+          'message'=> 'Please login first.'
+        ]);
           exit();
       }
 
@@ -88,20 +109,104 @@ class ClientBlog extends Controller {
       $ID_Blog = $_POST['ID_Blog'];
       $Status = $_POST['Status']; 
 
+      if (empty($Content)) {
+        echo json_encode([
+          'success'=> false,
+          'message'=> 'Please enter comment content.'
+        ]);
+        exit();
+      }
+
       $addSuccess = $this->model("CommentModel")->addComment($Content, $ID_Customer, $ID_Blog, $Status);
 
       if (!$addSuccess) {
-        $_SESSION['error_message'] = 'Failed to add comment.';
+        echo json_encode([
+          "success"=> false,
+          "message"=> "Failed to add comment."
+        ]);
       }
       else{
-        $_SESSION['success_message'] = 'Comment successful pending approval!';
+        echo json_encode([
+          'success'=> true,
+          'message'=> 'Comment successfully pending approval!'
+        ]);
       }
-
-      header("Location: http://localhost/BTL_WEB/blog/detail?id=$ID_Blog#comment");
       exit();
     }
   }
 
+
+  public function toggleLike() {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(405);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Method not allowed.'
+        ]);
+        exit();
+    }
+    
+    if (empty($_SESSION['userId'])) {
+        http_response_code(401);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Please login first.'
+        ]);
+        exit();
+    }
+    
+    $userId = $_SESSION['userId'];
+    $commentId = $_POST['commentId'] ?? null;
+    $likeStatus = $_POST['likeStatus'] ?? null; 
+    
+    if (!$commentId || !$likeStatus) {
+        http_response_code(400);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Missing required parameters.'
+        ]);
+        exit();
+    }
+    
+    $Comment = $this->model("CommentModel");
+    $currentStatus = $Comment->getUserReactStatus($userId, $commentId);
+    
+    $newStatus = null;
+    if ($likeStatus === 'like') {
+        if ($currentStatus === 1) {
+            $Comment->deleteReact($userId, $commentId);
+        } else {
+            $Comment->upsertReact($userId, $commentId, 1);
+            $newStatus = 1;
+        }
+    } else if ($likeStatus === 'dislike') {
+        if ($currentStatus === 0) {
+            $Comment->deleteReact($userId, $commentId);
+        } else {
+            $Comment->upsertReact($userId, $commentId, 0);
+            $newStatus = 0;
+        }
+    } else {
+        http_response_code(400);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Invalid likeStatus value.'
+        ]);
+        exit();
+    }
+    
+    $likes = $Comment->countReact($commentId, 1);
+    $dislikes = $Comment->countReact($commentId, 0);
+    
+    echo json_encode([
+        'success' => true,
+        'message' => 'Reaction updated successfully.',
+        'status'  => $newStatus, 
+        'likes'   => $likes,
+        'dislikes'=> $dislikes
+    ]);
+    exit();
+}
 
 
 

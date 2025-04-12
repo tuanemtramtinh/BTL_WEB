@@ -2,7 +2,7 @@
     <div class="card-header border-bottom">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="admin/comment?status=all">All Comments</a>
+                <a class="nav-link active" href="admin/comment?status=all">Comments</a>
             </li>
         </ul>
     </div>
@@ -12,9 +12,9 @@
         <div class="d-flex gap-2">
         <form action="admin/comment" method="get" class="d-flex align-items-center gap-2">
             <select name="status" class="dataTable-selector form-select">
-                <option value="all" <?= (isset($filters['status']) && $filters['status'] == 'all') ? 'selected' : '' ?>>All Statuses</option>
-                <option value="approved" <?= (isset($filters['status']) && $filters['status'] == 'approved') ? 'selected' : '' ?>>Approved</option>
-                <option value="pending" <?= (isset($filters['status']) && $filters['status'] == 'pending') ? 'selected' : '' ?>>Pending</option>
+                <option value="all" <?= ($data['status'] ?? 'all') === 'all' ? 'selected' : '' ?>>All Statuses</option>
+                <option value="approved" <?= ($data['status'] ?? '') === 'approved' ? 'selected' : '' ?>>Approved</option>
+                <option value="pending" <?= ($data['status'] ?? '') === 'pending' ? 'selected' : '' ?>>Pending</option>
             </select>
             <button class="btn btn-outline-secondary">Filter</button>
         </form>
@@ -56,10 +56,11 @@
                 <td>
                 <div class="d-flex gap-2 align-items-center">
                     <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#commentDetailModal<?= htmlspecialchars($comment['ID']) ?>">
-                    Update
+                    <i class="bi bi-eye"></i> | <i class="bi bi-pencil-square"></i>
                     </button>
                     <form action="admin/comment/deleteCMT" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xoá bài viết này không?');">
                         <input type="hidden" name="article_id" value="<?= htmlspecialchars($comment['ID']) ?>">
+                        <input type="hidden" name="status" value="<?= htmlspecialchars($_GET['status'] ?? 'all') ?>">
                         <button type="submit" class="btn btn-outline-danger" data-comment-id="<?= htmlspecialchars($comment['ID']) ?>">
                         <i class="bi bi-trash-fill"></i>
                         </button>
@@ -76,6 +77,8 @@
                     <div class="modal-content">
                     
                         <form action="admin/comment/updatestatus" method="post">
+                            <input type="hidden" name="article_id" value="<?= htmlspecialchars($comment['ID']) ?>">
+                            <input type="hidden" name="statusid" value="<?= htmlspecialchars($_GET['status'] ?? 'all') ?>">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="commentDetailModalLabel<?= htmlspecialchars($comment['ID']) ?>">Detail Comment</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
