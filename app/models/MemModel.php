@@ -67,4 +67,12 @@ class MemModel extends DB
         $stmt->close();
         return $result;
     }
+    public function countMem()
+    {
+        $queries = "SELECT COUNT(ID) as total FROM Employee_Front";
+        $stmt = $this->conn->query($queries);
+        $result = $stmt->fetch_assoc();
+        $stmt->close();
+        return $result['total'];
+    }
 }

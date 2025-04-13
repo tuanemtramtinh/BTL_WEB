@@ -1,33 +1,21 @@
 <section class="section">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">About us</h4>
+            <h4 class="card-title">Title Section</h4>
         </div>
         <div class="card-body">
-            <form action="admin/about/">
+            <form action="admin/about/changeTitle" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title:</label>
-                    <input type="text" class="form-control" id="title" name="about-us-title" placeholder="Enter title" required>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
                 </div>
                 <div class="mb-3">
                     <label for="desc" class="form-label">Description:</label>
-                    <textarea class="form-control" id="content" name="about-us-content"></textarea>
+                    <textarea class="form-control" id="content" name="content"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="images" class="form-label">Background Image</label>
-                    <div class="filepond--root image-preview-filepond filepond--hopper" id="images" data-style-button-remove-item-position="left" data-style-button-process-item-position="right" data-style-load-indicator-position="right" data-style-progress-indicator-position="right" data-style-button-remove-item-align="false" style="height: 76px;"><input class="filepond--browser" type="file" id="filepond--browser-sq4200i1g" name="images[]" aria-controls="filepond--assistant-sq4200i1g" aria-labelledby="filepond--drop-label-sq4200i1g" accept="image/png,image/jpg,image/jpeg,image/webp" multiple="">
-                        <div class="filepond--drop-label" style="transform: translate3d(0px, 0px, 0px); opacity: 1;"><label for="filepond--browser-sq4200i1g" id="filepond--drop-label-sq4200i1g" aria-hidden="true">Drag &amp; Drop your files or <span class="filepond--label-action" tabindex="0">Browse</span></label></div>
-                        <div class="filepond--list-scroller" style="transform: translate3d(0px, 60px, 0px);">
-                            <ul class="filepond--list" role="list"></ul>
-                        </div>
-                        <div class="filepond--panel filepond--panel-root" data-scalable="true">
-                            <div class="filepond--panel-top filepond--panel-root"></div>
-                            <div class="filepond--panel-center filepond--panel-root" style="transform: translate3d(0px, 8px, 0px) scale3d(1, 0.6, 1);"></div>
-                            <div class="filepond--panel-bottom filepond--panel-root" style="transform: translate3d(0px, 68px, 0px);"></div>
-                        </div><span class="filepond--assistant" id="filepond--assistant-sq4200i1g" role="status" aria-live="polite" aria-relevant="additions"></span>
-                        <fieldset class="filepond--data"></fieldset>
-                        <div class="filepond--drip"></div>
-                    </div>
+                    <label for="images" class="form-label">Image</label>
+                    <input type="file" class="image-preview-filepond" name="images[]" id="images" multiple>
                 </div>
                 <button type="submit" class="btn btn-success w-100">Change Section</button>
             </form>
@@ -39,21 +27,11 @@
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">
-                The Executive Team
+                Member Section
             </h4>
         </div>
         <div class="card-body">
             <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                <div class="dataTable-top">
-                    <div class="dataTable-dropdown"><select class="dataTable-selector form-select">
-                            <option value="5">5</option>
-                            <option value="10" selected="">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                            <option value="25">25</option>
-                        </select><label> entries per page</label></div>
-                    <div class="dataTable-search"><input class="dataTable-input" placeholder="Search..." type="text"></div>
-                </div>
                 <a href="admin/about/addMem" class="w-100 btn btn-success btn-sm py-2 fs-6">
                     Add Member
                 </a>
@@ -70,7 +48,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Render using api / database is  -->
                             <?php foreach ($data['member'] as $member) {
                                 $image = json_decode($member['Image']) ?>
                                 <tr>
@@ -90,19 +67,103 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="dataTable-bottom">
-                    <!-- Need to be dynamic with the data in database -->
-                    <div class="dataTable-info">Showing 1 to 10 of 26 entries</div>
-                    <nav class="dataTable-pagination">
-                        <ul class="dataTable-pagination-list pagination pagination-primary">
-                            <li class="active page-item"><a href="#" data-page="1" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" data-page="2" class="page-link">2</a></li>
-                            <li class="page-item"><a href="#" data-page="3" class="page-link">3</a></li>
-                            <li class="pager page-item"><a href="#" data-page="2" class="page-link">›</a></li>
-                        </ul>
-                    </nav>
-                </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Story Section</h4>
+        </div>
+        <div class="card-body">
+            <form action="admin/about/changeStory" method="POST">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title:</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="desc" class="form-label">Content:</label>
+                    <textarea class="form-control" id="content" name="content"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Change Section</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Show case section</h4>
+        </div>
+        <div class="card-body">
+            <form action="admin/about/changeShowCase" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="images" class="form-label">Background:</label>
+                    <input type="file" class="image-preview-filepond" name="images[]" id="images" multiple>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Change Section</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Unique section</h4>
+        </div>
+        <div class="card-body">
+            <form action="admin/about/changeUnique" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title:</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
+                </div>
+                <div class="md-6">
+                    <label for="left-section-title" class="form-label">Left section title:</label>
+                    <input type="text" class="form-control" id="title" name="left-section-title" placeholder="Enter title" required>
+                </div>
+                <div class="md-6">
+                    <label for="left-section-content" class="form-label">Left section content: </label>
+                    <textarea class="form-control" id="content" name="left-section-content"></textarea>
+                </div>
+                <div class="md-6">
+                    <label for="mid-section-title" class="form-label">Mid section title:</label>
+                    <input type="text" class="form-control" id="title" name="mid-section-title" placeholder="Enter title" required>
+                </div>
+                <div class="md-6">
+                    <label for="mid-section-content" class="form-label">Mid section content: </label>
+                    <textarea class="form-control" id="content" name="mid-section-content"></textarea>
+                </div>
+                <div class="md-6">
+                    <label for="right-section-title" class="form-label">Right section title:</label>
+                    <input type="text" class="form-control" id="title" name="right-section-title" placeholder="Enter title" required>
+                </div>
+                <div class="md-6">
+                    <label for="right-section-content" class="form-label">Right section content: </label>
+                    <textarea class="form-control" id="content" name="right-section-content"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Change Section</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Invite section</h4>
+        </div>
+        <div class="card-body">
+            <form action="admin/about/changeInvite" method="POST" enctype="multipart/form-data">
+                <div class="md-6">
+                    <label for="invite" class="form-label">Invite: </label>
+                    <textarea class="form-control" id="content" name="invite"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Change Section</button>
+            </form>
         </div>
     </div>
 </section>

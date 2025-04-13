@@ -1,7 +1,6 @@
 /* About */
 
 .about__section1 {
-  background-image: url("../../images/tt-bg-1.png");
   background-color: rgba(0, 0, 0, 0.9);
   background-blend-mode: darken;
   background-size: cover;
