@@ -24,7 +24,12 @@ class AdminComment extends Controller
     ];
 
     $comments = $Comment->getAllComment($offset, $totalComments, $status);
-    $totalPages = ceil($totalComments / $totalComments);
+    if ($totalComments != 0){
+      $totalPages = ceil($totalComments / $totalComments);
+    }
+    else{
+      $totalPages = 0;
+    }
 
     $this->viewAdmin("layout", [
       "title" => "Comment Blog",

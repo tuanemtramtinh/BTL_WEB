@@ -6,7 +6,11 @@
                     <p class="detail_info-date"><?= htmlspecialchars($data['blog']['DateCreated']) ?></p>
                     <p class="detail_info-author"><?= htmlspecialchars($data['blog']['Author']) ?></p>
                 </div>
-                <p class="detail_info-cata"><a href="">##<?= htmlspecialchars($data['blog']['CategoryName']) ?></a></p>
+                <p class="detail_info-cata"><a href="javascript:void(0)" 
+                    class="category-link" 
+                    data-category="<?= htmlspecialchars($data['blog']['CategoryName']) ?>">
+                    ##<?= htmlspecialchars($data['blog']['CategoryName']) ?>
+                </a></p>
                 <div class="detail__share">
                     <button class="detail__share-btn" onclick="copyPostLink()">
                         <i class="fa-solid fa-link"></i> Copy Link
@@ -74,7 +78,7 @@
                                 }
                             ?>
                             <div class="detail__cmt-item">
-                                <img src="public/images/mau avt.png" alt="User Avatar" class="detail__cmt-user-img">
+                                <img src="<?= empty($comment['Avatar']) ? 'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg' : htmlspecialchars($comment['Avatar']) ?>" alt="User Avatar" class="detail__cmt-user-img">
                                 <div class="detail__cmt-content">
                                     <div class="detail__cmt-user-info">
                                         <p class="detail__cmt-user"><?= htmlspecialchars($comment['name_Customer'] ?? 'John Doe') ?></p>

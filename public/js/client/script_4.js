@@ -232,3 +232,53 @@ document.querySelectorAll('.react-toggle').forEach(radio => {
       });
   });
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.category-link').forEach(link => {
+    link.addEventListener('click', function () {
+      const category = this.dataset.category;
+      sessionStorage.setItem('selectedCategory', category);
+      window.location.href = '/BTL_WEB/blog';
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const selected = sessionStorage.getItem('selectedCategory');
+  if (selected) {
+    const allItems = document.querySelectorAll('.blog__search-item');
+    let matchedItem = null;
+
+    allItems.forEach(item => {
+      if (item.dataset.categoryName === selected) {
+        matchedItem = item;
+        item.click();
+      }
+    });
+
+    const postSection = document.querySelector('.blog__search-chua');
+    if (postSection) {
+      setTimeout(() => {
+        postSection.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
+    }
+
+    sessionStorage.removeItem('selectedCategory'); 
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const selectedCategory = sessionStorage.getItem('selectedCategory');
+  if (selectedCategory) {
+    const target = [...document.querySelectorAll('.blog__search-item')]
+      .find(el => el.dataset.categoryId === selectedCategory);
+
+    if (target) {
+      target.classList.add('active');
+      handleFilter();
+    }
+
+    sessionStorage.removeItem('selectedCategory');
+  }
+});

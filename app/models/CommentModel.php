@@ -98,6 +98,7 @@ class CommentModel extends DB {
     public function getCommentsByBlogId($ID_Blog) {
         $query = "SELECT Comment.*,
                     CONCAT(Customer.FirstName, ' ', Customer.LastName) as name_Customer,
+                    Customer.Avatar as Avatar,
                     (SELECT COUNT(*) FROM Customer_Comment cc WHERE cc.CommentID = Comment.ID AND cc.StatusCMT = 1) AS `Like`,
                     (SELECT COUNT(*) FROM Customer_Comment cc WHERE cc.CommentID = Comment.ID AND cc.StatusCMT = 0) AS Dislike
                 FROM Comment 

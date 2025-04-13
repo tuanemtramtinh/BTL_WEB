@@ -7,7 +7,7 @@ class BlogModel extends DB
                     bc.ID AS CategoryID, bc.Name AS CategoryName, b.Image
                     FROM Blog b
                     JOIN BlogCategory bc ON b.ID_BlogCategory = bc.ID
-                    ORDER BY b.ID ASC
+                    ORDER BY b.ID DESC
                     LIMIT ?, ?
                     ";
         $stmt = $this->conn->prepare($query);
@@ -42,7 +42,7 @@ class BlogModel extends DB
                   FROM Blog b 
                   JOIN BlogCategory bc ON b.ID_BlogCategory = bc.ID
                   WHERE (b.Title LIKE ?) OR (b.Author LIKE ?) OR (bc.Name LIKE ?)
-                  ORDER BY b.ID ASC
+                  ORDER BY b.ID DESC
                   LIMIT ?, ?";
         $stmt = $this->conn->prepare($query);
         $pattern = "%" . $searchTerm . "%"; 
@@ -191,12 +191,12 @@ class BlogModel extends DB
         }
     
         if (empty($search)) {
-            $query .= " ORDER BY b.ID ASC LIMIT ? OFFSET ?";
+            $query .= " ORDER BY b.ID DESC LIMIT ? OFFSET ?";
             $params[] = $limit;
             $params[] = $offset;
             $types .= "ii";
         } else {
-            $query .= " ORDER BY b.ID ASC";
+            $query .= " ORDER BY b.ID DESC";
         }
     
         $stmt = $this->conn->prepare($query);
