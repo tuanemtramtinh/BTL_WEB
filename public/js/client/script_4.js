@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
       })
       .catch(err => {
           console.error('Error:', err);
-          flashMessage.insertAdjacentHTML('beforeend', `<div class="alert error" style="display: block">
+          flashMessage.insertAdjacentHTML('beforeend', `<div class="alert danger" style="display: block">
                                         <span class="closebtn">×</span>
                                         An error occurred. Please try again.
                                     </div>`);
@@ -165,20 +165,41 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 document.querySelectorAll('.react-toggle').forEach(radio => {
-  radio.addEventListener('change', function() {
+  const flashMessage = document.querySelector(".wrapper");
+  radio.addEventListener('click', function() {
       const commentId = this.getAttribute('data-id');
       const action = this.getAttribute('data-action'); 
+      
+
+      const bodyData = `commentId=${commentId}&likeStatus=${action}`;
+      // console.log("Body Data:", bodyData);
 
       // console.log(`commentId=${commentId}&likeStatus=${action}`)
-      fetch('localhost/BTL_WEB/blog/detail?id=28/toggleLike', {
+      fetch("http://localhost/BTL_WEB/blog/toggleLike", {
           method: 'POST',
           headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
           },
           body: `commentId=${commentId}&likeStatus=${action}`
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
+        flashMessage.insertAdjacentHTML('beforeend', `
+          <div class="alert ${data.success ? 'success' : 'error'}" style="display: block">
+            <span class="closebtn">×</span>
+            ${data.message}
+          </div>
+        `);
+        setTimeout(() => {
+          const alert = document.querySelector('.alert');
+          alert.style.display = 'none';
+          alert.remove();
+        }, 3000);
           if (data.success) {
               document.getElementById(`like-count-${commentId}`).textContent = data.likes;
               document.getElementById(`dislike-count-${commentId}`).textContent = data.dislikes;
@@ -196,8 +217,18 @@ document.querySelectorAll('.react-toggle').forEach(radio => {
           }
       })
       .catch(err => {
-          console.error('Error:', err);
-          alert('An error occurred. Please try again.');
+        console.error('Error:', err);
+          flashMessage.insertAdjacentHTML('beforeend', `<div class="alert danger" style="display: block">
+                                        <span class="closebtn">×</span>
+                                        Please check your login!
+                                    </div>`);
+          setTimeout(() => {
+            const alert = document.querySelector('.alert');
+            alert.style.display = 'none';
+            // alert.remove();
+          }, 3000);
+          // console.error('Error:', err);
+          // alert('An error occurred. Please try again.');
       });
   });
 });

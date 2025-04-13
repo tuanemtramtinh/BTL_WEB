@@ -137,6 +137,7 @@ class ClientBlog extends Controller {
 
 
   public function toggleLike() {
+
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         http_response_code(405);
         echo json_encode([
@@ -170,21 +171,20 @@ class ClientBlog extends Controller {
     
     $Comment = $this->model("CommentModel");
     $currentStatus = $Comment->getUserReactStatus($userId, $commentId);
-    
+    $message = null;
     $newStatus = null;
-    if ($likeStatus === 'like') {
-        if ($currentStatus === 1) {
+
+    if ($likeStatus === 'like' || $likeStatus === 'dislike') {
+        $likeValue = $likeStatus === 'like' ? 1 : 0;
+
+        if ($currentStatus === $likeValue) {
             $Comment->deleteReact($userId, $commentId);
+            $newStatus = -1;
+            $message = 'Reaction removed successfully.';
         } else {
-            $Comment->upsertReact($userId, $commentId, 1);
-            $newStatus = 1;
-        }
-    } else if ($likeStatus === 'dislike') {
-        if ($currentStatus === 0) {
-            $Comment->deleteReact($userId, $commentId);
-        } else {
-            $Comment->upsertReact($userId, $commentId, 0);
-            $newStatus = 0;
+            $Comment->upsertReact($userId, $commentId, $likeValue);
+            $newStatus = $likeValue;
+            $message = 'Reaction added successfully.';
         }
     } else {
         http_response_code(400);
@@ -194,20 +194,19 @@ class ClientBlog extends Controller {
         ]);
         exit();
     }
+
     
     $likes = $Comment->countReact($commentId, 1);
     $dislikes = $Comment->countReact($commentId, 0);
     
     echo json_encode([
         'success' => true,
-        'message' => 'Reaction updated successfully.',
+        'message' => $message,
         'status'  => $newStatus, 
         'likes'   => $likes,
         'dislikes'=> $dislikes
     ]);
     exit();
 }
-
-
 
 }

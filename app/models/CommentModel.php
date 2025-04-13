@@ -153,6 +153,15 @@ class CommentModel extends DB {
         return $row ? $row['StatusCMT'] : null;
     }
 
+    public function deleteReact($userId, $commentId) {
+        $sql = "DELETE FROM Customer_Comment WHERE CustomerID = ? AND CommentID = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ii", $userId, $commentId);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }    
+
     public function upsertReact($userId, $commentId, $status) {
         $sql = "INSERT INTO Customer_Comment (CustomerID, CommentID, StatusCMT) 
                 VALUES (?, ?, ?)
