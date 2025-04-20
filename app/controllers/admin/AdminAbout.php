@@ -37,9 +37,9 @@ class AdminAbout extends Controller
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
       // Check if the employee is logged in
       $this->checkAuthAdmin();
-      $memName = $_POST["name"];
-      $memRole = $_POST["role"];
-      $memDesc = $_POST["description"];
+      $memName = htmlspecialchars($_POST["name"]);
+      $memRole = htmlspecialchars($_POST["role"]);
+      $memDesc = htmlspecialchars($_POST["description"]);
       $memImg = $this->uploadImages($_FILES['images'], 'add');
       $memImgJson = json_encode($memImg, JSON_PRETTY_PRINT);
 
@@ -126,9 +126,9 @@ class AdminAbout extends Controller
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
       $this->checkAuthAdmin();
       $Model = $this->model("MemModel");
-      $memName = $_POST["name"];
-      $memRole = $_POST["role"];
-      $memDesc = $_POST["description"];
+      $memName = htmlspecialchars($_POST["name"]);
+      $memRole = htmlspecialchars($_POST["role"]);
+      $memDesc = htmlspecialchars($_POST["description"]);
       $memId = $_GET["id"];
       if (!isImagesEmpty($_FILES['images'])) {
         $memImg = $this->uploadImages($_FILES['images'], 'edit');
@@ -174,7 +174,7 @@ class AdminAbout extends Controller
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
       $this->checkAuthAdmin();
       $Model = $this->model("AboutModel");
-      $title = $_POST['title'];
+      $title = htmlspecialchars($_POST['title']);
       $title = "<h2 class=\"about__section1-title\">" . $title . "</h2>";
       $content = $_POST['content'];
       $content = $this->changeClassTag($content, "about__section1-desc");
@@ -206,7 +206,7 @@ class AdminAbout extends Controller
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
       $this->checkAuthAdmin();
       $Model = $this->model("AboutModel");
-      $title = $_POST['title'];
+      $title = htmlspecialchars($_POST['title']);
       $title = "<h3 class=\"about__section2-story\">" . $title . "</h3>";
       $content = $_POST['content'];
       $content = $this->changeClassTag($content, "about__section2-story-desc");
@@ -261,17 +261,17 @@ class AdminAbout extends Controller
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
       $this->checkAuthAdmin();
       $Model = $this->model("AboutModel");
-      $title = $_POST['title'];
+      $title = htmlspecialchars($_POST['title']);
       $title = "<h3 class=\"about__section4-unique-title\">" . $title . "</h3>";
-      $lTitle = $_POST['left-section-title'];
+      $lTitle = htmlspecialchars($_POST['left-section-title']);
       $lTitle = "<span class=\"about__section4-unique-strong\">" . $lTitle . "</span>";
       $lContent = $_POST['left-section-content'];
       $lContent = $this->changeClassTag($lContent, "about__section4-unique-normal");
-      $mTitle = $_POST['mid-section-title'];
+      $mTitle = htmlspecialchars($_POST['mid-section-title']);
       $mTitle = "<span class=\"about__section4-unique-strong\">" . $mTitle . "</span>";
       $mContent = $_POST['mid-section-content'];
       $mContent = $this->changeClassTag($mContent, "about__section4-unique-normal");
-      $rTitle = $_POST['right-section-title'];
+      $rTitle = htmlspecialchars($_POST['right-section-title']);
       $rTitle = "<span class=\"about__section4-unique-strong\">" . $rTitle . "</span>";
       $rContent = $_POST['right-section-content'];
       $rContent = $this->changeClassTag($rContent, "about__section4-unique-normal");
