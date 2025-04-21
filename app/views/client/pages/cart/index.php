@@ -45,12 +45,12 @@
                     <?php
                     if ($item['ProductQuantity'] > 0) {
                     ?>
-                      <a href="cart/add/<?= $item['ProductID'] ?>?quantity=-1&inCart=true" class="fa-solid fa-minus"></a>
+                      <a href="cart/addCart/<?= $item['ProductID'] ?>?quantity=-1&inCart=true" class="fa-solid fa-minus"></a>
                     <?php } else { ?>
                       <i class="fa-solid fa-minus"></i>
                     <?php } ?>
                     <input min="1" value="<?= $item['ProductQuantity'] ?>" type="number" name="quantity" id="quantity">
-                    <a href="cart/add/<?= $item['ProductID'] ?>?quantity=1&inCart=true" class="fa-solid fa-plus"></a>
+                    <a href="cart/addCart/<?= $item['ProductID'] ?>?quantity=1&inCart=true" class="fa-solid fa-plus"></a>
                   </div>
                 </div>
                 <div class="cart__table-total">

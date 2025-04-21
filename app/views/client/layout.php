@@ -117,7 +117,7 @@
               <li>Gucci</li>
             </ul>
           </div>
-<!-- 
+          <!-- 
           <div class="search__new-product">
             <h3>New Product</h3>
             <div class="search__product-list">
