@@ -118,6 +118,7 @@
                                 </a>
                             </li>
 
+
                             <li class="sidebar-item <?php echo str_contains($data["page"], "about") ?  "active" : "" ?>">
                                 <a href="admin/about" class='sidebar-link'>
                                     <i class="bi bi-info-circle-fill"></i>

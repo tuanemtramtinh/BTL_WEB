@@ -42,14 +42,14 @@
                   <?php if (isset($data['categories'])) foreach ($data['categories'] as $category) { ?>
                     <tr>
                       <td><?= $category['ID'] ?></td>
-                      <td><?= $category['Name'] ?></td>
+                      <td><a href="admin/product/index?category=<?= $category['ID'] ?>"><?= $category['Name'] ?></a></td>
                       <td><?= $category['CreatedAt'] ?></td>
                       <td><?= $category['UpdatedAt'] ?></td>
                       <td><?= $category['Username'] ?></td>
                       <td>
-                        <a href="admin/product/category_detail/<?=$category['ID']?>" class="btn btn-info">Detail</a>
-                        <a href="admin/product/category_edit/<?=$category['ID']?>" class="btn btn-warning">Edit</a>
-                        <a href="admin/product/category_delete/<?=$category['ID']?>" class="btn btn-danger">Delete</a>
+                        <a href="admin/product/category_detail/<?= $category['ID'] ?>" class="btn btn-info">Detail</a>
+                        <a href="admin/product/category_edit/<?= $category['ID'] ?>" class="btn btn-warning">Edit</a>
+                        <a href="admin/product/category_delete/<?= $category['ID'] ?>" class="btn btn-danger">Delete</a>
                       </td>
                     </tr>
                   <?php } ?>

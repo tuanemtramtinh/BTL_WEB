@@ -79,10 +79,73 @@ class ProductModel extends DB
 
   public function getProductList($skip = 0, $limit = 2147483647)
   {
-    $query = "SELECT ID, Image, Name, PriceUnit, CreatedAt, UpdatedAt, Employee.Username, Slug FROM Product INNER JOIN Employee ON Product.SocialNo = Employee.SocialNo ORDER BY ID ASC LIMIT ?, ?";
+    $query = "
+    SELECT
+      Product.ID,
+      Image,
+      Product.`Name`,
+      PriceUnit,
+      Product.CreatedAt,
+      Product.UpdatedAt,
+      Employee.Username,
+      Product.Slug,
+      Brand.`Name` AS Brand,
+      ProductCategory.`Name` AS Category,
+      Product.ID_ProductCategory AS CategoryID 
+    FROM
+      Product
+      INNER JOIN Employee ON Product.SocialNo = Employee.SocialNo
+      INNER JOIN ProductCategory ON Product.ID_ProductCategory = ProductCategory.ID
+      INNER JOIN Brand ON Product.Brand = Brand.`Name` 
+    ORDER BY
+      ID ASC 
+      LIMIT ?,
+      ?
+    ";
 
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("ii", $skip, $limit);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $products = [];
+    while ($row = $result->fetch_assoc()) {
+      $products[] = $row;
+    }
+    $stmt->close();
+    return !empty($products) ? $products : null;
+  }
+
+  public function getProductListClient($category = '', $brand = '', $skip = 0, $limit = 2147483647)
+  {
+    $query = "
+    SELECT
+      Product.ID,
+      Image,
+      Product.`Name`,
+      PriceUnit,
+      Product.CreatedAt,
+      Product.UpdatedAt,
+      Employee.Username,
+      Product.Slug,
+      Brand.`Name` AS Brand,
+      ProductCategory.`Name` AS Category,
+      ProductCategory.Slug AS CategorySlug,
+      Product.ID_ProductCategory AS CategoryID 
+    FROM
+      Product
+      INNER JOIN Employee ON Product.SocialNo = Employee.SocialNo
+      INNER JOIN ProductCategory ON Product.ID_ProductCategory = ProductCategory.ID
+      INNER JOIN Brand ON Product.Brand = Brand.`Name`
+    WHERE
+      (? = '' OR ProductCategory.Slug = ?)
+      AND (? = '' OR Product.Brand = ?)
+    ORDER BY
+      Product.ID ASC
+    LIMIT ?, ?
+    ";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("ssssii", $category, $category, $brand, $brand, $skip, $limit);
     $stmt->execute();
     $result = $stmt->get_result();
     $products = [];
@@ -131,7 +194,7 @@ class ProductModel extends DB
 
   public function findProductById($productId)
   {
-    $query = "SELECT P.ID, P.PriceUnit, P.Inventory, P.`Name`, P.Description, P.Slug, P.Image, P.CreatedAt, P.UpdatedAt, P.Brand, PC.`Name` as CategoryName, P.ID_ProductCategory FROM Product as P INNER JOIN ProductCategory as PC ON P.ID_ProductCategory = PC.ID WHERE P.ID = ?";
+    $query = "SELECT P.ID, P.PriceUnit, P.Inventory, P.`Name`, P.Description, P.Slug, P.Image, P.CreatedAt, P.UpdatedAt, P.Brand, PC.`Name` as CategoryName, PC.Slug as CategorySlug, P.ID_ProductCategory FROM Product as P INNER JOIN ProductCategory as PC ON P.ID_ProductCategory = PC.ID WHERE P.ID = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("i", $productId);
     $stmt->execute();
@@ -146,7 +209,7 @@ class ProductModel extends DB
 
   public function findProductBySlug($productSlug)
   {
-    $query = "SELECT P.ID, P.PriceUnit, P.Inventory, P.`Name`, P.Description, P.Slug, P.Image, P.CreatedAt, P.UpdatedAt, P.Brand, PC.`Name` as CategoryName, P.ID_ProductCategory FROM Product as P INNER JOIN ProductCategory as PC ON P.ID_ProductCategory = PC.ID WHERE P.Slug = ?";
+    $query = "SELECT P.ID, P.PriceUnit, P.Inventory, P.`Name`, P.Description, P.Slug, P.Image, P.CreatedAt, P.UpdatedAt, P.Brand, PC.`Name` as CategoryName, PC.Slug as CategorySlug, P.ID_ProductCategory FROM Product as P INNER JOIN ProductCategory as PC ON P.ID_ProductCategory = PC.ID WHERE P.Slug = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("s", $productSlug);
     $stmt->execute();

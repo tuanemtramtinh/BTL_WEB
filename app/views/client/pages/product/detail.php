@@ -53,12 +53,12 @@
             <div class="product-detail__info-item">
               <strong>Brand</strong>
               <br>
-              <span><?= $data['product']['Brand'] ?></span>
+              <a href="product/index?brand=<?= $data['product']['Brand'] ?>"><?= $data['product']['Brand'] ?></a>
             </div>
             <div class="product-detail__info-item">
               <strong>Category</strong>
               <br>
-              <span><?= $data['product']['CategoryName'] ?></span>
+              <a href="product/index?category=<?= $data['product']['CategorySlug'] ?>"><?= $data['product']['CategoryName'] ?></a>
             </div>
           </div>
           <!-- <p class="product-detail__desc">

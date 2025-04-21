@@ -67,3 +67,85 @@ if (quantityAdjust.length > 0) {
 }
 
 // End Quantity Adjust
+
+//Add to bag Form
+
+const productDetailForm = document.querySelector(".product-detail__form");
+
+if (productDetailForm) {
+  const button = productDetailForm.querySelector("button");
+  const wrapper = document.querySelector(".wrapper");
+  const header = document.querySelector(".header");
+  productDetailForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const oldButton = button.innerHTML;
+    button.disabled = true;
+    button.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Loading...';
+
+    const formData = new FormData(productDetailForm);
+    const queryString = new URLSearchParams(formData).toString();
+    const url = productDetailForm.getAttribute("action") + "?" + queryString;
+    try {
+      const response = await axios.get(url);
+      if (response.status === 200) {
+        button.disabled = false;
+        button.innerHTML = oldButton;
+        const alert = document.createElement("div");
+        alert.classList.add("alert");
+        alert.classList.add("success");
+        alert.innerHTML = `
+        <span class="closebtn">&times;</span>
+        ${response.data.msg}
+        `;
+        wrapper.insertBefore(alert, header);
+        const closeBtn = alert.querySelector(".closebtn");
+        if (closeBtn) {
+          const alertDiv = closeBtn.parentElement;
+          function hideAlert() {
+            if (alertDiv) {
+              alertDiv.style.opacity = "0";
+              alertDiv.style.display = "none";
+              alertDiv.remove();
+            }
+          }
+          if (closeBtn) {
+            closeBtn.addEventListener("click", function () {
+              hideAlert();
+            });
+          }
+          setTimeout(hideAlert, 3000);
+        }
+      }
+    } catch (error) {
+      button.disabled = false;
+      button.innerHTML = oldButton;
+      const alert = document.createElement("div");
+      alert.classList.add("alert");
+      alert.classList.add("error");
+      alert.innerHTML = `
+        <span class="closebtn">&times;</span>
+        ${error.data.msg}
+        `;
+      wrapper.insertBefore(alert, header);
+      const closeBtn = alert.querySelector(".closebtn");
+      if (closeBtn) {
+        const alertDiv = closeBtn.parentElement;
+        function hideAlert() {
+          if (alertDiv) {
+            alertDiv.style.opacity = "0";
+            alertDiv.style.display = "none";
+            alertDiv.remove();
+          }
+        }
+        if (closeBtn) {
+          closeBtn.addEventListener("click", function () {
+            hideAlert();
+          });
+        }
+        setTimeout(hideAlert, 3000);
+      }
+    }
+  });
+}
+
+//End Add to bag Form

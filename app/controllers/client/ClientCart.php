@@ -28,14 +28,19 @@ class ClientCart extends Controller
   {
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
+      header('Content-Type: application/json');
+      http_response_code(200);
+
       if ($productId === '') {
-        header('Location: ../detail');
-        $_SESSION['error_message'] = 'Invalid Product';
+        http_response_code(400);
+        echo json_encode([
+          "status" => "fail",
+          "msg" => "Invalid Product Id"
+        ]);
         exit;
       }
 
       $productQuantity = $_GET['quantity'];
-      $inCart = $_GET['inCart'];
 
       $Product = $this->model("ProductModel");
       $CartItem = $this->model("CartItemModel");
@@ -48,8 +53,11 @@ class ClientCart extends Controller
       $newQuantity = $currentProduct['Inventory'] - $productQuantity;
 
       if ($newQuantity < 0) {
-        $_SESSION['error_message'] = 'Not enough item to add to cart';
-        header("Location: ../../product/detail/" . $currentProduct['Slug']);
+        http_response_code(500);
+        echo json_encode([
+          "status" => "fail",
+          "msg" => "Not enough item to add to cart"
+        ]);
         exit;
       }
 
@@ -60,13 +68,48 @@ class ClientCart extends Controller
       $CartItem->closeConnection();
       $Cart->closeConnection();
 
-      if (isset($inCart)) {
-        $_SESSION['success_message'] = 'Update cart successfully';
-        header("Location: ../cart/index");
-      } else {
-        $_SESSION['success_message'] = 'Add to cart successfully';
-        header("Location: ../../product/detail/" . $currentProduct['Slug']);
-      }
+
+      echo json_encode([
+        "status" => "success",
+        "msg" => "Add to cart successfully"
+      ]);
+      exit;
+      // $_SESSION['success_message'] = 'Add to cart successfully';
+      // header("Location: ../../product/detail/" . $currentProduct['Slug']);
+    }
+  }
+
+  public function addCart($productId = '')
+  {
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+      $productQuantity = $_GET['quantity'];
+
+      $Product = $this->model("ProductModel");
+      $CartItem = $this->model("CartItemModel");
+      $Cart = $this->model("CartModel");
+
+      $currentProduct = $Product->findProductById($productId);
+      $currentCart = $Cart->findCartByUserId($_SESSION['userId']);
+
+      $newTotal = $currentCart['Total'] + ($productQuantity * $currentProduct['PriceUnit']);
+      $newQuantity = $currentProduct['Inventory'] - $productQuantity;
+
+      $CartItem->addItemToCart($_SESSION['user_cart'], $productId, $productQuantity);
+      $Cart->updateCartTotal($currentCart['ID'], $newTotal);
+
+      $Product->closeConnection();
+      $CartItem->closeConnection();
+      $Cart->closeConnection();
+
+      $_SESSION['success_message'] = 'Update cart successfully';
+      header("Location: ../cart/index");
+
+      // if (isset($inCart)) {
+
+      // } else {
+      //   $_SESSION['success_message'] = 'Add to cart successfully';
+      //   header("Location: ../../product/detail/" . $currentProduct['Slug']);
+      // }
     }
   }
 }

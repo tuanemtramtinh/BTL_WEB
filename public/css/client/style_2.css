@@ -1,7 +1,6 @@
 /* About */
 
 .about__section1 {
-  background-image: url("../../images/tt-bg-1.png");
   background-color: rgba(0, 0, 0, 0.9);
   background-blend-mode: darken;
   background-size: cover;
@@ -34,6 +33,12 @@
   font-size: 32px;
   text-align: center;
   color: rgba(171, 87, 45, 1);
+}
+
+.card__avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 }
 
 .section-bonus__team {
@@ -277,6 +282,95 @@
   border-radius: 20px;
   margin-bottom: 40px;
 }
+.question__section1-wrapper {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 16px;
+  max-width: 650px;
+  margin: auto;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.question__header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.question__header-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.question__header-notice {
+  font-size: 15px;
+  color: #ccc;
+  line-height: 1.6;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Form styling */
+.question__form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.question__form input,
+.question__form select {
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.question__form input::placeholder {
+  color: #eee;
+}
+
+.question__form input:focus,
+.question__form select:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Default option text color */
+.question__form select option {
+  color: #111;
+}
+
+.question__body-submit button {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #111;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.question__body-submit button:hover {
+  background-color: white;
+  color: #333;
+  transform: translateY(-2px);
+}
+
 /* End QA */
 
 /*Start user overview*/
@@ -506,6 +600,11 @@ input[type="password"] {
     font-size: 22px;
     font-weight: 700;
   }
+  .card__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 10%;
+  }
   .section-bonus__team {
     margin-top: 20px;
     grid-template-columns: 1fr;
@@ -626,6 +725,40 @@ input[type="password"] {
   }
   .contact__activate {
     display: none;
+  }
+  .question__section1-wrapper {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #111;
+  }
+
+  .question__header-title,
+  .question__header-notice,
+  .question__form label {
+    color: #111;
+  }
+
+  .question__form input,
+  .question__form select {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #111;
+  }
+
+  .question__form input::placeholder {
+    color: #555;
+  }
+
+  .question__form select option {
+    color: white;
+    background-color: #111;
+  }
+
+  .question__body-submit button {
+    background-color: #111;
+    color: #fff;
+  }
+
+  .question__body-submit button:hover {
+    background-color: #333;
   }
   /* End QA */
   /* Start User info */
