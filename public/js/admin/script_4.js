@@ -32,3 +32,18 @@ FilePond.create(document.getElementById('images'), {
 });
 
 
+function copyPostLink() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url)
+        .then(() => {
+            const notify = document.querySelector('.detail__share-notify');
+            notify.style.display = 'inline';
+            setTimeout(() => {
+                notify.style.display = 'none';
+            }, 2000);
+        })
+        .catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+}
+

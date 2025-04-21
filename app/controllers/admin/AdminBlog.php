@@ -45,11 +45,15 @@ class AdminBlog extends Controller
   {
 
     $this->checkAuthAdmin();
+    $Blog = $this->model("BlogModel");
+
+    $blogIntro = $Blog->getBlogIntro(1);
 
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
-      "title" => "Blog's Content",
+      "title" => "Blog introduction",
       "page" => "blog/content",
+      "blogIntro"=> $blogIntro,
       "task" => 4,
       "error" => $message['error'],
       "success" => $message['success']
@@ -131,14 +135,14 @@ class AdminBlog extends Controller
       $title       = $_POST['title'];
       $content     = $_POST['content'];
       $category    = (int)$_POST['category'];
-      $dateCreated = date("Y-m-d H:i:s");
+      // $dateCreated = date("Y-m-d H:i:s");
       $desc        = $_POST['desc'];
   
       $Blog = $this->model("BlogModel");
   
       $error = null;
 
-      if (empty($author) || empty($title) || empty($content) || empty($category) || empty($dateCreated) || empty($blogImagesJson) || empty($desc)){
+      if (empty($author) || empty($title) || empty($content) || empty($category) || empty($blogImagesJson) || empty($desc)){
         $error = 'Fail to create: Fill in all fields!';
       }
 
@@ -148,7 +152,7 @@ class AdminBlog extends Controller
         exit;
       }
 
-      $Blog->createBlog($author, $dateCreated, $title, $content, $category, $blogImagesJson, $desc);
+      $Blog->createBlog($author, $title, $content, $category, $blogImagesJson, $desc);
 
       $_SESSION['success_message'] = 'Add Blog successfully';
       header('Location: index');
@@ -174,15 +178,12 @@ class AdminBlog extends Controller
           $category = (int)$_POST['category'];
           $desc     = trim($_POST['desc']);
 
-          // Nếu có ảnh cũ thì lấy danh sách
           $existingImages = json_decode($_POST['existing_images'], true) ?? [];
 
-          // Nếu có ảnh mới được tải lên
           $uploadedImages = [];
           if (!empty($_FILES['images']['name'][0])) { 
               $uploadedImages = $this->uploadImages($_FILES['images'], 'edit');
 
-              // Xóa ảnh cũ trước đó và chỉ giữ lại ảnh mới
               $finalImages = $uploadedImages;
           } else {
               $finalImages = $existingImages;
@@ -242,6 +243,36 @@ class AdminBlog extends Controller
           header("Location: index");
           exit;
       }
+  }
+
+  public function addPostHead(){
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      $this->checkAuthAdmin();
+
+      $uploadedImages = $this->uploadImages($_FILES['images'], 'blog'); 
+      $imagesArray = !empty($uploadedImages) ? $uploadedImages : json_decode($_POST['existing_images'] ?? '[]', true);
+
+      $content = isset($_POST['content']) ? trim($_POST['content']) : '';
+
+      if (empty($content) || empty($imagesArray)) {
+        $_SESSION["error_message"] = "Please enter text and ensure at least 1 image is available!";
+        header("Location: content");
+        exit;
+    }    
+
+      $BlogModel = $this->model("BlogModel");
+
+      $updateSuccess = $BlogModel->updateBlogIntro($imagesArray, $content);
+
+      if ($updateSuccess) {
+        $_SESSION["success_message"] = "Blog intro has been updated successfully!";
+      } else {
+        $_SESSION["error_message"] = "Update failed!";
+      }
+
+      header("Location: content");
+      exit;
+    }
   }
 
 }
