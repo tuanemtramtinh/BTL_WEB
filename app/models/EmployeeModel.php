@@ -52,7 +52,7 @@ class EmployeeModel extends DB
     $query = "SELECT PhoneNo, Email, FirstName, LastName, Username FROM Employee WHERE Username != 'admin'";
     $stmt = $this->conn->prepare($query);
     $stmt->execute();
-    
+
     $result = $stmt->get_result();
     $users = [];
     while ($row = $result->fetch_assoc()) {

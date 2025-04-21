@@ -1,5 +1,9 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
 class Controller
 {
   public function model($model)
@@ -91,5 +95,34 @@ class Controller
     }
 
     return $uploadedFiles;
+  }
+  public function sendMail($toEmail, $toName, $subject, $body)
+  {
+    $mail = new PHPMailer(true);
+
+    try {
+      $mail->CharSet = 'UTF-8';
+      $mail->Encoding = 'base64';
+      $mail->isSMTP();
+      $mail->Host = 'smtp.gmail.com';
+      $mail->SMTPAuth = true;
+      $mail->Username = 'perfumes.assistance@gmail.com';
+      $mail->Password = 'bxdc enpe kozf fuob';
+      $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+      $mail->Port = 465;
+
+      $mail->setFrom('perfumes.assistance@gmail.com', 'Support');
+      $mail->addAddress($toEmail, $toName);
+
+      $mail->isHTML(true);
+      $mail->Subject = $subject;
+      $mail->Body    = $body;
+
+      $mail->send();
+      return true;
+    } catch (Exception $e) {
+      error_log("Mail error: {$mail->ErrorInfo}");
+      return false;
+    }
   }
 }
