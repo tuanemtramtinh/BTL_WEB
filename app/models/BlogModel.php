@@ -7,7 +7,7 @@ class BlogModel extends DB
                     bc.ID AS CategoryID, bc.Name AS CategoryName, b.Image
                     FROM Blog b
                     JOIN BlogCategory bc ON b.ID_BlogCategory = bc.ID
-                    ORDER BY b.ID ASC
+                    ORDER BY b.ID DESC
                     LIMIT ?, ?
                     ";
         $stmt = $this->conn->prepare($query);
@@ -41,12 +41,12 @@ class BlogModel extends DB
                     bc.ID AS CategoryID, bc.Name AS CategoryName, b.Image
                   FROM Blog b 
                   JOIN BlogCategory bc ON b.ID_BlogCategory = bc.ID
-                  WHERE (b.Title LIKE ?) OR (b.Author LIKE ?)
-                  ORDER BY b.ID ASC
+                  WHERE (b.Title LIKE ?) OR (b.Author LIKE ?) OR (bc.Name LIKE ?)
+                  ORDER BY b.ID DESC
                   LIMIT ?, ?";
         $stmt = $this->conn->prepare($query);
         $pattern = "%" . $searchTerm . "%"; 
-        $stmt->bind_param("ssii", $pattern, $pattern, $offset, $limit);
+        $stmt->bind_param("sssii", $pattern, $pattern, $pattern, $offset, $limit);
         $stmt->execute();
     
         $result = $stmt->get_result();
@@ -73,14 +73,14 @@ class BlogModel extends DB
         return (int)$data['total'];
     }
 
-    public function createBlog($author, $dateCreated, $title, $content, $category, $cover_image, $desc)
+    public function createBlog($author, $title, $content, $category, $cover_image, $desc)
     {
-        $query = "INSERT INTO Blog(Author, DateCreated, Title, Content, ID_BlogCategory, Image, `Desc`)
-                  VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO Blog(Author, Title, Content, ID_BlogCategory, Image, `Desc`)
+                  VALUES (?, ?, ?, ?, ?, ?)";
 
         
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("ssssiss", $author, $dateCreated, $title, $content, $category, $cover_image, $desc);
+        $stmt->bind_param("sssiss", $author, $title, $content, $category, $cover_image, $desc);
         $result = $stmt->execute();
         $stmt->close();
         return $result;
@@ -114,6 +114,17 @@ class BlogModel extends DB
         
         return $result;
     }
+
+    public function updateStatusCMT($status, $Idcmt, $IdCustomer){
+        $query = "UPDATE Comment SET Status = ? WHERE CustomerID = ? AND CommentID = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("iii", $status, $Idcmt, $IdCustomer);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    
 
     public function deleteBlog($blogID)
     {
@@ -180,12 +191,12 @@ class BlogModel extends DB
         }
     
         if (empty($search)) {
-            $query .= " ORDER BY b.ID ASC LIMIT ? OFFSET ?";
+            $query .= " ORDER BY b.ID DESC LIMIT ? OFFSET ?";
             $params[] = $limit;
             $params[] = $offset;
             $types .= "ii";
         } else {
-            $query .= " ORDER BY b.ID ASC";
+            $query .= " ORDER BY b.ID DESC";
         }
     
         $stmt = $this->conn->prepare($query);
@@ -217,12 +228,14 @@ class BlogModel extends DB
         $types = "";
     
         if (!empty($search)) {
-            $query .= " AND (b.Title LIKE ? OR b.Author LIKE ?)";
+            $query .= " AND (b.Title LIKE ? OR b.Author LIKE ? OR bc.Name LIKE ?)";
             $searchTerm = "%" . $search . "%";
             $params[] = $searchTerm;
             $params[] = $searchTerm;
-            $types .= "ss";
+            $params[] = $searchTerm;
+            $types .= "sss";
         }
+        
     
         if (!empty($category)) {
             $query .= " AND bc.ID = ?";
@@ -289,16 +302,26 @@ class BlogModel extends DB
         return $posts;
     }
 
-    public function getComments($blogId) {
-        $query = "SELECT c.*, cu.FirstName, cu.LastName
-                FROM Comment c
-                JOIN Customer cu ON c.ID = cu.ID
-                WHERE c.ID_Blog = ?";
-        $stmt = $this->conn->prepare($query);
+    public function updateBlogIntro($img, $content){
+        $sql = "UPDATE Section SET Images = ?, Content = ? WHERE ID = 1";
+        print($sql);
+        $stmt = $this->conn->prepare($sql);
+        $imagesJson = json_encode($img, JSON_PRETTY_PRINT);
+        $stmt->bind_param("ss", $imagesJson, $content);
+        $result = $stmt->execute();
+        $stmt->close();
+
+        return $result;
+    }
+    public function getBlogIntro($blogId) {
+        $sql = "SELECT ID, Images, Content FROM Section WHERE ID = ?";
+
+        $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $blogId);
         $stmt->execute();
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    }
-
+        $result = $stmt->get_result();
+        $blog = $result->fetch_assoc();
+        return $blog;
+    }  
 }
 ?>
