@@ -36,7 +36,7 @@
                 for ($i = 0; $i < count($data['brands']); $i++) { ?>
                   <tr>
                     <td><?php echo $i + 1 ?></td>
-                    <td><?php echo $data['brands'][$i]['Name'] ?></td>
+                    <td><a href="admin/product/index?brand=<?php echo $data['brands'][$i]['Name'] ?>"><?php echo $data['brands'][$i]['Name'] ?></a></td>
                   </tr>
                 <?php } ?>
               </tbody>

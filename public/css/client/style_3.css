@@ -215,10 +215,14 @@ input[type="number"] {
   font-size: 20px;
 }
 
-.product-detail__info-item span {
+.product-detail__info-item a {
   color: #AB572D;
   font-weight: 700;
   font-style: italic;
+}
+
+.product-detail__info-item a:hover{
+  color: white;
 }
 
 .product-detail__info-item strong {
