@@ -6,30 +6,27 @@ class ClientQuestion extends Controller
 {
   public function index()
   {
-    $QuestionModel = $this->model('QuestionModel');
-    $questionAnswered = $QuestionModel->getQuestionAnswer();
+    $Model = $this->model("QuestionModel");
+    $AllQuestion = $Model->getQuestionFront();
     $message = $this->getSessionMessage();
     $this->view("layout", [
       "title" => "Hỏi/Đáp",
       "page" => "question/index",
       "error" => $message['error'],
       "success" => $message['success'],
-      "answeredQuestion" => $questionAnswered,
-      "task" => 2
+      "task" => 2,
+      "Questions" => $AllQuestion
     ]);
   }
   public function question()
   {
-    $Model = $this->model("QuestionTypeModel");
-    $allType = $Model->takeAllType();
     $message = $this->getSessionMessage();
     $this->view("layout", [
       "title" => "Hỏi",
       "page" => "question/question",
       "error" => $message['error'],
       "success" => $message['success'],
-      "task" => 2,
-      "allType" => $allType
+      "task" => 2
     ]);
   }
   public function sendQuestion()

@@ -1,5 +1,6 @@
 <?php
 $AllQuestionType = $data['QuestionType'];
+$AllQuestions = $data['Questions'];
 ?>
 <section class="section">
     <div class="card">
@@ -67,7 +68,7 @@ $AllQuestionType = $data['QuestionType'];
                     </div>
                 </div>
                 <div class="dataTable-container">
-                    <table class="table table-striped dataTable-table" id="member-table">
+                    <table class="table table-striped dataTable-table" id="question-table">
                         <thead>
                             <tr>
                                 <th data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter">ID</a></th>
@@ -95,6 +96,47 @@ $AllQuestionType = $data['QuestionType'];
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">
+                Question Client
+            </h4>
+        </div>
+        <div class="card-body">
+            <div class="dataTable-container">
+                <a href="admin/question/addQuestionFront" class="w-100 btn btn-success btn-sm py-2 fs-6">
+                    Add Question Client
+                </a>
+                <table class="table table-striped dataTable-table" id="question-front-table">
+                    <thead>
+                        <tr>
+                            <th data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter">ID</a></th>
+                            <th data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter">Question</a></th>
+                            <th data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter">Question Type</a></th>
+                            <th data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter">Answer</a></th>
+                            <th data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter">Action</a></th>
+                        </tr>
+                    </thead>
+                    <tbody id="question-front-table-body">
+                        <?php foreach ($AllQuestions as $Question) { ?>
+                            <tr>
+                                <td data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter"><?= $Question['ID'] ?></a></td>
+                                <td data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter"><?= $Question['Question'] ?></a></td>
+                                <td data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter"><?= $Question['Type'] ?></a></td>
+                                <td data-sortable="" style="width: 10%"><a href="#" class="dataTable-sorter"><?= $Question['Answer'] ?></a></td>
+                                <td data-sortable="" style="width: 10%">
+                                    <a href="admin/question/editAnswer?id=<?= $Question['ID'] ?>" class="btn btn-success">Edit answer</a>
+                                    <a href="admin/question/deleteAnswerFront?id=<?= $Question['ID'] ?>" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa câu hỏi này ?')">Delete</a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

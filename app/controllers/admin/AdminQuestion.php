@@ -6,6 +6,8 @@ class AdminQuestion extends Controller
     //Check if the employee is logged in
     $this->checkAuthAdmin();
     $QType = $this->model("QuestionTypeModel");
+    $Question = $this->model("QuestionModel");
+    $AllQuestion = $Question->getQuestionFront();
     $allQType = $QType->takeAllType();
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
@@ -14,7 +16,8 @@ class AdminQuestion extends Controller
       "error" => $message['error'],
       "success" => $message['success'],
       "task" => 2,
-      "QuestionType" => $allQType
+      "QuestionType" => $allQType,
+      "Questions" => $AllQuestion
     ]);
   }
   public function addType()
@@ -229,6 +232,110 @@ class AdminQuestion extends Controller
         $_SESSION["error_message"] = "Trả lời câu hỏi không thành công!";
         header("Location: answerQuestion?id={$id}");
       }
+    }
+  }
+  public function addQuestionFront()
+  {
+    $this->checkAuthAdmin();
+    $QuestionType = $this->model("QuestionTypeModel");
+    $allType = $QuestionType->takeAllType();
+    $message = $this->getSessionMessage();
+    $this->viewAdmin("layout", [
+      "title" => "Add Question Client",
+      "page" => "question/addQuestionFront",
+      "error" => $message['error'],
+      "success" => $message['success'],
+      "task" => 2,
+      "Types" => $allType
+    ]);
+  }
+  public function addQuestiontoFront()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      $this->checkAuthAdmin();
+      $Model = $this->model("QuestionModel");
+      $question = htmlspecialchars($_POST['question']);
+      $answer = htmlspecialchars($_POST['answer']);
+      $type = $_POST['type'];
+      $error = null;
+      if (empty($question) | empty($answer)) {
+        $error = 'Thiếu trường vui lòng nhập lại !!!';
+      }
+      if (isset($error)) {
+        $_SESSION["error_message"] = $error;
+        header("Location: addQuestionFront");
+        exit;
+      }
+      $result = $Model->addQuestionFront($question, $answer, $type);
+      if ($result) {
+        $_SESSION["success_message"] = "Thêm question vào client thành công ";
+        header("Location: index");
+      } else {
+        $_SESSION["error_message"] = "Thêm question vào client không thành công";
+        header("Location: addQuestionFront");
+      }
+    }
+  }
+  public function editAnswer()
+  {
+    $this->checkAuthAdmin();
+    $id = $_GET['id'];
+    $modelType = $this->model("QuestionTypeModel");
+    $modelQuestion = $this->model("QuestionModel");
+    $AllType = $modelType->takeAllType();
+    $Question = $modelQuestion->getQuestionFrontByID($id);
+    $message = $this->getSessionMessage();
+    $this->viewAdmin("layout", [
+      "title" => "Edit Answer Client",
+      "page" => "question/editAnswerFront",
+      "error" => $message['error'],
+      "success" => $message['success'],
+      "task" => 2,
+      "id" => $id,
+      "Types" => $AllType,
+      "Question" => $Question
+    ]);
+  }
+  public function editAnswerFront()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      $this->checkAuthAdmin();
+      $Model = $this->model("QuestionModel");
+      $id = $_GET['id'];
+      $question = htmlspecialchars($_POST['question']);
+      $answer = htmlspecialchars($_POST['answer']);
+      $type = $_POST['type'];
+      $error = null;
+      if (empty($question) | empty($answer)) {
+        $error = 'Thiếu trường xin nhập lại';
+      }
+      if (isset($error)) {
+        $_SESSION["error_message"] = $error;
+        header("Location: editAnswerFront?id={$id}");
+        exit;
+      }
+      $result = $Model->editQuestionFront($id, $question, $answer, $type);
+      if ($result) {
+        $_SESSION["success_message"] = "Thay đổi question vào client thành công ";
+        header("Location: index");
+      } else {
+        $_SESSION["error_message"] = "Thay đổi question vào client không thành công";
+        header("Location: editAnswerFront?id={$id}");
+      }
+    }
+  }
+  public function deleteAnswerFront()
+  {
+    $this->checkAuthAdmin();
+    $Model = $this->model("QuestionModel");
+    $id = $_GET["id"];
+    $result = $Model->deleteQuestionFront($id);
+    if ($result) {
+      $_SESSION["success_message"] = "Xóa question vào client thành công ";
+      header("Location: index");
+    } else {
+      $_SESSION["error_message"] = "Xóa question vào client không thành công";
+      header("Location: index");
     }
   }
 }

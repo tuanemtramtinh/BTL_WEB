@@ -76,4 +76,47 @@ class QuestionModel extends DB
         $stmt->close();
         return $result;
     }
+    public function getQuestionFront()
+    {
+        $queries = "SELECT * FROM Question_Front";
+        $result = $this->conn->query($queries);
+        return $result;
+    }
+    public function getQuestionFrontByID($id)
+    {
+        $queries = "SELECT * FROM Question_Front WHERE ID = ?";
+        $stmt = $this->conn->prepare($queries);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        return $result->fetch_assoc();
+    }
+    public function addQuestionFront($question, $answer, $questionType)
+    {
+        $queries = "INSERT INTO Question_Front(Question, Answer, `Type`) VALUES (?, ?, ?)";
+        $stmt = $this->conn->prepare($queries);
+        $stmt->bind_param("sss", $question, $answer, $questionType);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+    public function deleteQuestionFront($id)
+    {
+        $queries = "DELETE FROM Question_Front WHERE ID = ?";
+        $stmt = $this->conn->prepare($queries);
+        $stmt->bind_param("i", $id);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+    public function editQuestionFront($id, $question, $answer, $questionType)
+    {
+        $queries = "UPDATE Question_Front SET Question = ?, Answer = ?, `Type` = ? WHERE ID = ?";
+        $stmt = $this->conn->prepare($queries);
+        $stmt->bind_param("sssi", $question, $answer, $questionType, $id);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
 }
