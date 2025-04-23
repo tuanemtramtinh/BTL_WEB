@@ -31,7 +31,7 @@
                 </a>
             </div>
             <div class="section2__right-section">
-                <div class="right-section__password-section">
+                <div class="right-section__password-section" style="margin-top: 0;">
                     <h4 class="section__title">
                         Change Password
                     </h4>

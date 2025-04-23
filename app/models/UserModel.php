@@ -33,4 +33,17 @@ class UserModel extends DB
     }
     return null;
   }
+  public function findUserById($id)
+  {
+    $queries = "SELECT * FROM Customer WHERE ID = ?";
+    $stmt = $this->conn->prepare($queries);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    if ($result->num_rows > 0) {
+      return $result->fetch_assoc();
+    }
+    return null;
+  }
 }

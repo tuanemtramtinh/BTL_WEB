@@ -26,15 +26,55 @@ class QuestionModel extends DB
         $stmt->close();
         return $result;
     }
-    public function getByQuestionType($questionType)
+    public function getByQuestionType($questionType, $limit, $offset, $search = '')
     {
-        $queries = "SELECT * FROM Question WHERE QuestionType = ?";
-        $stmt = $this->conn->prepare($queries);
+        $query = "SELECT * FROM Question WHERE QuestionType = ?";
+        if (!empty($search)) {
+            $query .= " AND (Name LIKE ? OR Email LIKE ? OR Question LIKE ?)";
+        }
+        $query .= " LIMIT ? OFFSET ?";
+
+        if (!empty($search)) {
+            $searchTerm = "%" . $search . "%";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("ssssii", $questionType, $searchTerm, $searchTerm, $searchTerm, $limit, $offset);
+        } else {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("sii", $questionType, $limit, $offset);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $questions = [];
+        while ($row = $result->fetch_assoc()) {
+            $questions[] = $row;
+        }
+        $stmt->close();
+        return $questions;
+    }
+
+    public function countQuestionByType($questionType)
+    {
+        $query = "SELECT COUNT(*) AS total FROM Question WHERE QuestionType = ?";
+        $stmt = $this->conn->prepare($query);
         $stmt->bind_param("s", $questionType);
         $stmt->execute();
         $result = $stmt->get_result();
+        $count = $result->fetch_assoc()['total'] ?? 0;
         $stmt->close();
-        return $result;
+        return $count;
+    }
+
+    public function countQuestionByTypeNotAnswer($questionType)
+    {
+        $query = "SELECT COUNT(*) AS total FROM Question WHERE QuestionType = ? AND Answer IS NULL";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("s", $questionType);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $count = $result->fetch_assoc()['total'] ?? 0;
+        $stmt->close();
+        return $count;
     }
     public function updateAnswer($id, $answer)
     {
@@ -51,16 +91,38 @@ class QuestionModel extends DB
         $result = $this->conn->query($queries);
         return $result;
     }
-    public function getByTypeQuestionNotAnswer($questionType)
+    public function getByTypeQuestionNotAnswer($questionType, $limit, $offset, $search = '')
     {
-        $queries = "SELECT * FROM Question WHERE Answer IS NULL AND QuestionType = ?";
-        $stmt = $this->conn->prepare($queries);
-        $stmt->bind_param("s", $questionType);
+        $query = "SELECT * FROM Question WHERE QuestionType = ? AND Answer IS NULL";
+
+        if (!empty($search)) {
+            $query .= " AND (Name LIKE ? OR Email LIKE ? OR Question LIKE ?)";
+        }
+
+        $query .= " LIMIT ? OFFSET ?";
+
+        if (!empty($search)) {
+            $searchTerm = "%" . $search . "%";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("ssssii", $questionType, $searchTerm, $searchTerm, $searchTerm, $limit, $offset);
+        } else {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("sii", $questionType, $limit, $offset);
+        }
+
         $stmt->execute();
         $result = $stmt->get_result();
+        $questions = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $questions[] = $row;
+        }
+
         $stmt->close();
-        return $result;
+        return $questions;
     }
+
+
     public function getQuestionAnswer()
     {
         $queries = "SELECT * FROM Question WHERE Answer IS NOT NULL";

@@ -147,59 +147,44 @@ class AdminQuestion extends Controller
       header("Location: index");
     }
   }
-  public function filter()
+  public function datatable()
   {
-    $notAnswered = isset($_POST['notAnswered']) && $_POST['notAnswered'] == '1';
-    $type = $_POST['type'];
     $model = $this->model("QuestionModel");
+    $draw = isset($_POST['draw']) ? intval($_POST['draw']) : 1;
+    $start = isset($_POST['start']) ? intval($_POST['start']) : 0;
+    $length = isset($_POST['length']) ? intval($_POST['length']) : 10;
+    $searchValue = isset($_POST['search']['value']) ? htmlspecialchars($_POST['search']['value']) : '';
+    $type = $_POST['type'] ?? '';
+    $notAnswered = isset($_POST['notAnswered']) && $_POST['notAnswered'] == 1;
+
     if ($notAnswered) {
-      $questions = $model->getByTypeQuestionNotAnswer($type);
-      foreach ($questions as $question) {
-        echo "<tr>
-                <td>{$question['ID']}</td>
-                <td>{$question['Name']}</td>
-                <td>{$question['Email']}</td>
-                <td>{$question['Question']}</td>
-                <td>{$question['QuestionType']}</td>
-                <td>{$question['Answer']}</td>
-                <td>
-                    <a href='admin/question/answerQuestion?id={$question['ID']}' class='btn btn-success'>Answer question</a>
-                    <a href='admin/question/deleteQuestion?id={$question['ID']}' class='btn btn-danger' onclick='return confirm(\"Bạn có muốn xóa câu hỏi này ?\")'>Delete</a>
-                </td>
-            </tr>";
-      }
+      $totalCount = $model->countQuestionByTypeNotAnswer($type, $searchValue);
+      $questions = $model->getByTypeQuestionNotAnswer($type, $length, $start, $searchValue);
     } else {
-      $questions = $model->getByQuestionType($type);
-      foreach ($questions as $question) {
-        if (isset($question['Answer'])) {
-          echo "<tr>
-                  <td>{$question['ID']}</td>
-                  <td>{$question['Name']}</td>
-                  <td>{$question['Email']}</td>
-                  <td>{$question['Question']}</td>
-                  <td>{$question['QuestionType']}</td>
-                  <td>{$question['Answer']}</td>
-                  <td>
-                      <a href='admin/question/answerQuestion?id={$question['ID']}' class='btn btn-success'>Edit question</a>
-                      <a href='admin/question/deleteQuestion?id={$question['ID']}' class='btn btn-danger' onclick='return confirm(\"Bạn có muốn xóa câu hỏi này ?\")'>Delete</a>
-                  </td>
-              </tr>";
-        } else {
-          echo "<tr>
-                  <td>{$question['ID']}</td>
-                  <td>{$question['Name']}</td>
-                  <td>{$question['Email']}</td>
-                  <td>{$question['Question']}</td>
-                  <td>{$question['QuestionType']}</td>
-                  <td>{$question['Answer']}</td>
-                  <td>
-                      <a href='admin/question/answerQuestion?id={$question['ID']}' class='btn btn-success'>Answer question</a>
-                      <a href='admin/question/deleteQuestion?id={$question['ID']}' class='btn btn-danger' onclick='return confirm(\"Bạn có muốn xóa câu hỏi này ?\")'>Delete</a>
-                  </td>
-                </tr>";
-        }
-      }
+      $totalCount = $model->countQuestionByType($type, $searchValue);
+      $questions = $model->getByQuestionType($type, $length, $start, $searchValue);
     }
+
+    $data = [];
+    foreach ($questions as $q) {
+      $data[] = [
+        $q['ID'],
+        htmlspecialchars($q['Name']),
+        htmlspecialchars($q['Email']),
+        htmlspecialchars($q['Question']),
+        htmlspecialchars($q['QuestionType']),
+        htmlspecialchars($q['Answer'] ?? 'Chưa có'),
+        "<a href='admin/question/answerQuestion?id={$q['ID']}' class='btn btn-success'>" . ($q['Answer'] ? 'Edit' : 'Answer') . " question</a>
+             <a href='admin/question/deleteQuestion?id={$q['ID']}' class='btn btn-danger' onclick='return confirm(\"Bạn có muốn xóa câu hỏi này ?\")'>Delete</a>"
+      ];
+    }
+    header('Content-Type: application/json');
+    echo json_encode([
+      'draw' => $draw,
+      'recordsTotal' => $totalCount,
+      'recordsFiltered' => $totalCount,
+      'data' => $data
+    ]);
   }
   public function sendQuestion()
   {
