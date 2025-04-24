@@ -82,4 +82,10 @@ class UserModel extends DB
     $stmt->close();
     return $result->fetch_assoc();
   }
+  public function getAllUser()
+  {
+    $queries = "SELECT * FROM Customer";
+    $result = $this->conn->query($queries);
+    return $result;
+  }
 }
