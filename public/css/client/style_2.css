@@ -577,6 +577,73 @@ input[type="password"] {
   margin-top: 25px;
 }
 /*End password*/
+/* Start Avatar */
+.avatar-wrapper {
+  background: #111;
+  color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 40px auto;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.avatar-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #f5703c;
+}
+
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f5703c;
+}
+
+.avatar-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-label {
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+.avatar-input {
+  background-color: #222;
+  border: 1px solid #444;
+  padding: 8px;
+  color: white;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+.avatar-button {
+  padding: 8px 20px;
+  background-color: #b54728;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.avatar-button:hover {
+  background-color: #a03f1c;
+}
+/* End Avatar */
 @media (max-width: 767.98px) {
   /* Start about page */
   .about__section1 {
@@ -915,4 +982,31 @@ input[type="password"] {
     content: url("../../images/tt-option-3.png");
   }
   /* End User info */
+  /* Star avatar */
+  @media screen and (max-width: 767.98px) {
+    .avatar-wrapper {
+      padding: 20px;
+      margin: 0px;
+    }
+
+    .avatar-title {
+      font-size: 20px;
+    }
+
+    .avatar-img {
+      width: 120px;
+      height: 120px;
+    }
+
+    .avatar-input {
+      width: 100%;
+      font-size: 14px;
+    }
+
+    .avatar-button {
+      width: 100%;
+      font-size: 16px;
+    }
+  }
+  /* End avatar */
 }

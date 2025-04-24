@@ -1,14 +1,14 @@
 <?php
 $user = $data['customer'];
-$img = $user['Avatar'] ? json_decode($user['Avatar']) : 'public/images/tt-placeholder-avatar.jpg';
+$img = $user['Avatar'] ? json_decode($user['Avatar'])[0] : 'public/images/tt-placeholder-avatar.jpg';
 ?>
 <div class="user-overview__section1">
     <div class="container">
         <div class="section1__wrapper">
-            <div class="section1__avatar">
+            <a class="section1__avatar" href="user/avatar">
                 <img src="<?= $img ?>" alt="user avatar" class="avatar__user-image">
                 <img src="public/images/tt-avatar-2.png" alt="user avatar decorator" class="avatar__decorator">
-            </div>
+            </a>
             <div class="section1__info">
                 <h3 class="section1__info-name"><?= $user['LastName'] . ' ' . $user['FirstName'] ?></h3>
                 <p class="section1__info-status">Premium Member since 2023</p>
@@ -39,29 +39,29 @@ $img = $user['Avatar'] ? json_decode($user['Avatar']) : 'public/images/tt-placeh
                     <h4 class="section__title">
                         Personal Information
                     </h4>
-                    <form action="" class="info-section__form">
+                    <form action="user/editUser?id=<?= $user['ID'] ?>" class="info-section__form" method="POST" id="user-info">
                         <div class="info-section__form-group">
-                            <label for="name" class="form-group__label">First name</label> <br>
-                            <input type="text" name="name" id="name" class="form-group__input" placeholder="<?= $user['FirstName'] ?>" />
+                            <label for="fname" class="form-group__label">First name</label> <br>
+                            <input type="text" name="fname" id="fname" class="form-group__input" value="<?= $user['FirstName'] ?>" />
                         </div>
                         <div class="info-section__form-group">
-                            <label for="name" class="form-group__label">Last name</label> <br>
-                            <input type="text" name="name" id="name" class="form-group__input" placeholder="<?= $user['LastName'] ?>" />
+                            <label for="lname" class="form-group__label">Last name</label> <br>
+                            <input type="text" name="lname" id="lname" class="form-group__input" value="<?= $user['LastName'] ?>" />
                         </div>
                         <div class="info-section__form-group">
                             <label for="email" class="form-group__label">Email</label> <br>
-                            <input type="email" name="email" id="email" class="form-group__input" placeholder="<?= $user['Email'] ?>" />
+                            <input type="email" name="email" id="email" class="form-group__input" value="<?= $user['Email'] ?>" />
                         </div>
                         <div class="info-section__form-group">
                             <label for="phone" class="form-group__label">Phone</label> <br>
-                            <input type="phone" name="phone" id="phone" class="form-group__input" placeholder="<?= $user['Phone'] ? $user['Phone'] : "Chưa có số điện thoại" ?>" />
+                            <input type="phone" name="phone" id="phone" class="form-group__input" value="<?= $user['Phone'] ? $user['Phone'] : "Chưa có số điện thoại" ?>" />
                         </div>
                         <div class="info-section__form-group">
                             <label for="address" class="form-group__label">Address</label><br>
-                            <input type="text" name="address" id="address" class="form-group__input" placeholder="<?= $user['Address'] ? $user['Address'] : "Chưa có địa chỉ" ?>">
+                            <input type="text" name="address" id="address" class="form-group__input" value="<?= $user['Address'] ? $user['Address'] : "Chưa có địa chỉ" ?>">
                         </div>
                     </form>
-                    <button class="form-submit__btn">
+                    <button class="form-submit__btn" type="submit" form="user-info">
                         Save Changes
                     </button>
                 </div>

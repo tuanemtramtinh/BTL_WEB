@@ -46,4 +46,21 @@ class UserModel extends DB
     }
     return null;
   }
+  public function editUserInfo($id, $firstName, $lastName, $email, $phone, $address)
+  {
+    $queries = "UPDATE Customer SET FirstName = ?, LastName = ?, Email = ?, Phone = ? ,`Address` = ? WHERE ID = ?";
+    $stmt = $this->conn->prepare($queries);
+    $stmt->bind_param("sssssi", $firstName, $lastName, $email, $phone, $address, $id);
+    $stmt->execute();
+    return $stmt->affected_rows > 0;
+  }
+  public function uploadAvatar($id, $avatarImgJson)
+  {
+    $queries = "UPDATE Customer SET Avatar = ? WHERE ID = ?";
+    $stmt = $this->conn->prepare($queries);
+    $stmt->bind_param('si', $avatarImgJson, $id);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+  }
 }
