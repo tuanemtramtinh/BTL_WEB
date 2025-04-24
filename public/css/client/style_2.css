@@ -570,6 +570,41 @@ input[type="password"] {
 .history__section2 {
   margin-top: 25px;
 }
+.dataTables_filter {
+  display: none;
+}
+.dataTables_length {
+  display: block;
+}
+.dataTables_paginate {
+  display: block;
+}
+.dataTables_info {
+  display: block;
+}
+.dataTables_length select {
+  background-color: #f8f9fa;
+  color: #333;
+  border: 1px solid #ced4da;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.dataTables_length select:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.dataTables_length select option {
+  background-color: #ffffff;
+  color: #333;
+}
+
+.dataTables_length select option:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
 /*End history order*/
 
 /*Start password*/
@@ -980,6 +1015,18 @@ input[type="password"] {
   }
   .active__option img[alt*="password"] {
     content: url("../../images/tt-option-3.png");
+  }
+  .dataTables_filter {
+    display: none;
+  }
+  .dataTables_length {
+    display: none;
+  }
+  .dataTables_paginate {
+    display: none;
+  }
+  .dataTables_info {
+    display: none;
   }
   /* End User info */
   /* Star avatar */

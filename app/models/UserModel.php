@@ -63,4 +63,23 @@ class UserModel extends DB
     $stmt->close();
     return $result;
   }
+  public function changePassword($id, $newPassword)
+  {
+    $queries = "UPDATE Customer SET Password = ? WHERE ID = ?";
+    $stmt = $this->conn->prepare($queries);
+    $stmt->bind_param("si", $newPassword, $id);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+  }
+  public function getOldPassword($id)
+  {
+    $queries = "SELECT `Password` FROM Customer WHERE ID = ?";
+    $stmt = $this->conn->prepare($queries);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    return $result->fetch_assoc();
+  }
 }

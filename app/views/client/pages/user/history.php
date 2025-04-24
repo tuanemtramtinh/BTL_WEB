@@ -1,12 +1,17 @@
+<?php
+$user = $data['customer'];
+$img = $user['Avatar'] ? json_decode($user['Avatar'])[0] : 'public/images/tt-placeholder-avatar.jpg';
+$orders = $data['orders'];
+?>
 <div class="history__section1">
     <div class="container">
         <div class="section1__wrapper">
-            <div class="section1__avatar">
-                <img src="public/images/tt-avatar-1.png" alt="user avatar" class="avatar__user-image">
+            <a class="section1__avatar" href="user/avatar">
+                <img src="<?= $img ?>" alt="user avatar" class="avatar__user-image">
                 <img src="public/images/tt-avatar-2.png" alt="user avatar decorator" class="avatar__decorator">
-            </div>
+            </a>
             <div class="section1__info">
-                <h3 class="section1__info-name">Ngô Ngọc Triệu Mẫn</h3>
+                <h3 class="section1__info-name"><?= $user['LastName'] . ' ' . $user['FirstName'] ?></h3>
                 <p class="section1__info-status">Premium Member since 2023</p>
             </div>
         </div>
@@ -46,26 +51,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>#ORD-2025001</td>
-                                <td>Jan 15, 2025</td>
-                                <td>
-                                    Chanel N5 - 2Qty <br>
-                                    Chanel N3 - 31Qty
-                                </td>
-                                <td>$135.00</td>
-                                <td><a href="#">see details</a></td>
-                            </tr>
-                            <tr>
-                                <td>#ORD-2025001</td>
-                                <td>Jan 15, 2025</td>
-                                <td>
-                                    Chanel N5 - 2Qty <br>
-                                    Chanel N3 - 31Qty
-                                </td>
-                                <td>$135.00</td>
-                                <td><a href="#">see details</a></td>
-                            </tr>
+                            <?php foreach ($orders as $orderId => $order): ?>
+                                <tr>
+                                    <td>#ORD-<?= str_pad($orderId, 7, "0", STR_PAD_LEFT) ?></td>
+                                    <td><?= date("M d, Y", strtotime($order['date'])) ?></td>
+                                    <td>
+                                        <?php foreach ($order['items'] as $item): ?>
+                                            <?= $item['product'] ?> - <?= $item['quantity'] ?>Qty<br>
+                                        <?php endforeach; ?>
+                                    </td>
+                                    <td>$<?= number_format($order['total'], 2) ?></td>
+                                    <td><a href="#">see details</a></td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                     <div class="order-section__items-reponsive">
@@ -109,3 +107,49 @@
         </div>
     </div>
 </div>
+<!-- Thêm thư viện DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.order-section__table').DataTable({
+            responsive: true,
+            pageLength: 5,
+            order: [
+                [1, 'desc']
+            ],
+            language: {
+                search: "Tìm kiếm:",
+                lengthMenu: "Hiển thị _MENU_ dòng",
+                info: "Hiển thị _START_ đến _END_ trong _TOTAL_ dòng",
+                paginate: {
+                    first: "Đầu",
+                    last: "Cuối",
+                    next: "→",
+                    previous: "←"
+                },
+                zeroRecords: "Không tìm thấy đơn hàng nào"
+            }
+        });
+    });
+    const tableWrapper = document.querySelector('.order-section__table').closest('.your-container-class');
+
+    const observer = new MutationObserver(() => {
+        if ($(tableWrapper).is(':visible')) {
+            $.fn.dataTable
+                .tables({
+                    visible: true,
+                    api: true
+                })
+                .columns.adjust()
+                .responsive.recalc();
+        }
+    });
+
+    observer.observe(tableWrapper, {
+        attributes: true,
+        attributeFilter: ['style', 'class']
+    });
+</script>

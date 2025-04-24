@@ -8,6 +8,8 @@ class ClientUser extends Controller
   {
     $this->checkAuthClient();
     $CustomerModel = $this->model("UserModel");
+    $OrderModel = $this->model("OrderModel");
+    $Orders = $OrderModel->getOrderByUserId($_SESSION['userId']);
     $CustomerInfo = $CustomerModel->findUserById($_SESSION['userId']);
     $message = $this->getSessionMessage();
     $this->view("layout", [
@@ -17,6 +19,7 @@ class ClientUser extends Controller
       "success" => $message['success'],
       "task" => 2,
       "customer" => $CustomerInfo,
+      "orders" => $Orders
     ]);
   }
 
@@ -40,12 +43,18 @@ class ClientUser extends Controller
   {
     $this->checkAuthClient();
     $message = $this->getSessionMessage();
+    $CustomerModel = $this->model("UserModel");
+    $OrderModel = $this->model("OrderModel");
+    $Orders = $OrderModel->getOrderByUserId($_SESSION['userId']);
+    $CustomerInfo = $CustomerModel->findUserById($_SESSION['userId']);
     $this->view("layout", [
       "title" => "Trang Lịch Sử",
       "page" => "user/history",
       "error" => $message['error'],
       "success" => $message['success'],
-      "task" => 2
+      "task" => 2,
+      "customer" => $CustomerInfo,
+      "orders" => $Orders
     ]);
   }
 
@@ -53,12 +62,15 @@ class ClientUser extends Controller
   {
     $this->checkAuthClient();
     $message = $this->getSessionMessage();
+    $CustomerModel = $this->model("UserModel");
+    $CustomerInfo = $CustomerModel->findUserById($_SESSION['userId']);
     $this->view("layout", [
       "title" => "Trang Đổi Mật Khẩu",
       "page" => "user/password",
       "error" => $message['error'],
       "success" => $message['success'],
-      "task" => 2
+      "task" => 2,
+      "customer" => $CustomerInfo,
     ]);
   }
   public function avatar()
@@ -124,8 +136,8 @@ class ClientUser extends Controller
       $id = $_GET['id'];
       if (
         !isset($_FILES['images']) ||
-        empty($_FILES['images']['name']) || // tên trống
-        $_FILES['images']['error'][0] === UPLOAD_ERR_NO_FILE // lỗi không có file upload
+        empty($_FILES['images']['name']) ||
+        $_FILES['images']['error'][0] === UPLOAD_ERR_NO_FILE
       ) {
         $_SESSION['error_message'] = "Bạn chưa upload ảnh nào.";
         header("Location: " . $_SERVER['HTTP_REFERER']);
@@ -140,6 +152,48 @@ class ClientUser extends Controller
         header("Location: index");
       } else {
         $_SESSION["error_message"] = "Đã xảy ra lỗi khi upload ảnh vui lòng upload lại sau";
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+      }
+    }
+  }
+  public function changePassword()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      $this->checkAuthClient();
+      $model = $this->model("UserModel");
+      $id = $_GET['id'];
+      $currPass = htmlspecialchars($_POST['currPass']);
+      $newPass = htmlspecialchars($_POST['new_password']);
+      $confNewPass = htmlspecialchars($_POST['confirm_new_password']);
+
+      $error = null;
+      $oldPassword = $model->getOldPassword($id);
+      if (empty($currPass) | empty($newPass) | empty($confNewPass)) {
+        $error = 'Bạn chưa nhập đầy đủ thông tin các trường. Vui lòng nhập hết tất cả các trường.';
+      }
+      if (!password_verify($currPass, $oldPassword['Password'])) {
+        $error = 'Bạn nhập chưa đúng password hiện tại của bản thân. Vui lòng nhập lại.';
+      }
+
+      if ($newPass != $confNewPass) {
+        $error = 'Bạn nhập xác nhận password mới đã sai. Vui lòng nhập lại.';
+      }
+
+      if (isset($error)) {
+        $_SESSION["error_message"] = $error;
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+        exit;
+      }
+
+      $options = [
+        'cost' => 12
+      ];
+      $result = $model->changePassword($id, password_hash($newPass, PASSWORD_BCRYPT, $options));
+      if ($result) {
+        $_SESSION["success_message"] = "Thay đổi mật khẩu thành công";
+        header("Location: index");
+      } else {
+        $_SESSION["error_message"] = "Thay đổi mật khẩu không thành công";
         header("Location: " . $_SERVER['HTTP_REFERER']);
       }
     }
