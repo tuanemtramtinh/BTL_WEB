@@ -11,7 +11,7 @@
         </div>
         <div class="card-body">
             <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                <div class="dataTable-top" style="display: flex;justify-content: space-between;">
+                <div class="dataTable-top">
                 <div class="dataTable-dropdown">
                     <select class="dataTable-selector form-select" id="entriesPerPage" onchange="changeEntriesPerPage(this.value)">
                         <option value="5" <?php echo ($data['limit'] == 5) ? 'selected' : '' ;?>>5</option>
@@ -45,7 +45,6 @@
                                 <th data-sortable=""><a href="#" class="dataTable-sorter">Title</a></th>
                                 <th data-sortable=""><a href="#" class="dataTable-sorter">Author</a></th>
                                 <th data-sortable=""><a href="#" class="dataTable-sorter">DateCreated</a></th>
-                                <th data-sortable=""><a href="#" class="dataTable-sorter">Content</a></th>
                                 <th data-sortable=""><a href="#" class="dataTable-sorter">BlogCategory</a></th>
                                 <th data-sortable=""><a href="#" class="dataTable-sorter">Image</a></th>
                                 <th data-sortable=""><a href="#" class="dataTable-sorter">Detail</a></th>
@@ -54,33 +53,35 @@
                         <tbody>
                             <?php if (!empty($data['blogs'])): ;?>
                                 <?php foreach ($data['blogs'] as $blog): ;?>
+                                
                                     <tr>
                                         <td><?php echo $blog['BlogID'] ;?></td>
                                         <td><?php echo $blog['Title'] ;?></td>
                                         <td><?php echo $blog['Author'] ;?></td>
                                         <td>
-                                            <?php echo date('d/m/Y', strtotime($blog['DateCreated'])) ;?>
+                                            <?php echo $blog['DateCreated'] ;?>
                                         </td>
                                         
-                                        <td>
-                                            <!-- <?php echo $blog['Content'] ;?> -->
-                                            
-                                                <?php echo mb_substr($blog['Content'], 0, 50) ;?>
-                                            
-                                        </td>
                                         <td><?php echo $blog['CategoryName'] ;?></td>
                                         <td>
-                                            <?php if (!empty($blog['Image'])): ;?>
-                                                <img src="<?php echo $blog['Image'] ;?>"
+                                            <?php 
+                                            if (!empty($blog['Image'])): 
+                                                $blogImages = json_decode($blog['Image'], true);
+                                                $firstImage = !empty($blogImages) ? $blogImages[0] : 'public/images/bg-1.png';
+                                            ?>
+                                                <img src="<?php echo htmlspecialchars($firstImage); ?>" 
                                                     alt="Blog Image"
-                                                    style="max-width: 100px; max-height: 100px;">
-                                            <?php else: ;?>
-                                                No Image
-                                            <?php endif; ;?>
+                                                    style="aspect-ratio: 1/1; object-fit: contain; width: 150px;"
+                                                    onerror="this.src='public/images/bg-1.png'">
+                                            <?php else: ?>
+                                                <img src="public/images/bg-1.png" 
+                                                    alt="No Image"
+                                                    style="aspect-ratio: 1/1; object-fit: contain; width: 150px;">
+                                            <?php endif; ?>
                                         </td>
-                                        <td>
+                                        <td style="width: 10%;">
                                             <a href="admin/blog/detail?id=<?php echo $blog['BlogID'] ;?>">
-                                                View Full Detail <i class="bi bi-chevron-double-right"></i>
+                                                View <i class="bi bi-chevron-double-right"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -102,7 +103,7 @@
                     $start = ($currentPage - 1) * $limit + 1;
                     $end   = min($start + $limit - 1, $totalBlogs);
                 ;?>
-                <div class="dataTable-bottom" style="display: flex;justify-content: space-between;">
+                <div class="dataTable-bottom">
                     <div class="dataTable-info">
                         Showing <?php echo $start ;?> to <?php echo $end ;?> of <?php echo $totalBlogs ;?> entries
                     </div>
@@ -133,3 +134,7 @@
         </div>
     </div>
 </section>
+<script>
+    const existingImage = undefined;
+
+</script>

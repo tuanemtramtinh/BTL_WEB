@@ -25,7 +25,7 @@
       <div class="alert danger">
           <span class="closebtn">&times;</span>'
         . $data['error'] .
-      '</div>';
+        '</div>';
     }
 
     if (isset($data['success'])) {
@@ -33,7 +33,7 @@
       <div class="alert success">
           <span class="closebtn">&times;</span>'
         . $data['success'] .
-      '</div>';
+        '</div>';
     }
     ?>
 
@@ -58,14 +58,18 @@
           </ul>
           <div class="header__utility">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <i class="fa-solid fa-user"></i>
-            <i class="fa-solid fa-cart-shopping"></i>
             <?php if (isset($_SESSION['userId'])) { ?>
+              <i class="fa-solid fa-user"></i>
+              <i class="fa-solid fa-cart-shopping"></i>
               <form action="auth/logout" method="get">
                 <button type="submit">
                   <i class="fa-solid fa-right-from-bracket"></i>
                 </button>
               </form>
+            <?php } else { ?>
+              <a href="auth/login">
+                Login
+              </a>
             <?php } ?>
           </div>
 
@@ -113,7 +117,7 @@
               <li>Gucci</li>
             </ul>
           </div>
-
+          <!-- 
           <div class="search__new-product">
             <h3>New Product</h3>
             <div class="search__product-list">
@@ -173,7 +177,7 @@
               }
               ?>
             </div>
-          </div>
+          </div> -->
 
           <div class="search__result">
             <h3>Search Result</h3>
@@ -283,6 +287,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="public/js/client/script.js"></script>
   <?php if (isset($data['task'])) echo '<script src="public/js/client/script_' . $data['task'] . '.js"></script>'; ?>
 </body>

@@ -22,7 +22,7 @@
         echo '<link rel="stylesheet" href="public/assets/compiled/css/iconly.css">';
     }
 
-    if ($data['page'] === 'employee/index') {
+    if ($data['page'] === 'blog/index' || $data['page'] === 'comment/index' || $data['page'] === 'employee/index' || $data['page'] === 'product/index' || $data['page'] === 'product/category' || $data['page'] === 'order/index' || $data['page'] === 'order/detail' || $data['page'] === 'cart/index') {
         echo '
         <link rel="stylesheet" href="public/assets/extensions/simple-datatables/style.css">
         <link rel="stylesheet" href="public/assets/compiled/css/table-datatable.css">';
@@ -118,6 +118,7 @@
                                 </a>
                             </li>
 
+
                             <li class="sidebar-item <?php echo str_contains($data["page"], "about") ?  "active" : "" ?>">
                                 <a href="admin/about" class='sidebar-link'>
                                     <i class="bi bi-info-circle-fill"></i>
@@ -141,6 +142,13 @@
                                     </li>
                                 </ul>
 
+                            </li>
+
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "comment") ?  "active" : "" ?>">
+                                <a href="admin/comment" class='sidebar-link'>
+                                    <i class="bi bi-chat-left-dots-fill"></i>
+                                    <span>Comment</span>
+                                </a>
                             </li>
 
                             <li class="sidebar-item <?php echo str_contains($data["page"], "contact") ?  "active" : "" ?>">
@@ -184,6 +192,21 @@
                                 </ul>
 
                             </li>
+
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "order") ?  "active" : "" ?>">
+                                <a href="admin/order" class='sidebar-link'>
+                                    <i class="bi bi-bag-fill"></i>
+                                    <span>Order</span>
+                                </a>
+                            </li>
+
+                            <li class="sidebar-item <?php echo str_contains($data["page"], "cart") ?  "active" : "" ?>">
+                                <a href="admin/cart" class='sidebar-link'>
+                                    <i class="bi bi-cart-fill"></i>
+                                    <span>Cart</span>
+                                </a>
+                            </li>
+
 
                             <!-- <li class="sidebar-item <?php echo str_contains($data["page"], "product") ?  "active" : "" ?>">
                                 <a href="admin/product" class='sidebar-link'>
@@ -342,6 +365,7 @@
     <script src="public/assets/extensions/filepond/filepond.js"></script>
     <script src="public/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
     <script src="public/assets/extensions/tinymce/tinymce.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="public/js/admin/script.js"></script>
     <?php if (isset($data['task'])) echo '<script src="public/js/admin/script_' . $data['task'] . '.js"></script>'; ?>
 </body>

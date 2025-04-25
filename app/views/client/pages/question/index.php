@@ -1,60 +1,30 @@
+<?php
+$Questions = $data['answeredQuestion'];
+?>
+
 <div class="contact__section1">
     <div class="container">
         <div class="contact__section1-wrapper">
             <h2 class="contact__section1-title">Hello, how can Perfumé help you?</h2>
             <div class="contact__section1-content">
                 <div class="contact__section1-accordion">
-                    <div class="contact__section1-item">
-                        <div class="contact__section1-item-header">
-                            <p class="contact__section1-header-question">The expense windows adapted sir. Wrong widen drawn.</p>
-                            <button class="contact__section1-header-button">+</button>
+                    <?php foreach ($Questions as $question) { ?>
+                        <div class="contact__section1-item">
+                            <div class="contact__section1-item-header">
+                                <p class="contact__section1-header-question"><?= $question['Question'] ?> - <?= $question['QuestionType'] ?></p>
+                                <button class="contact__section1-header-button">+</button>
+                            </div>
+                            <div class="contact__section1-item-answer">
+                                <p><?= $question['Answer'] ?></p>
+                            </div>
                         </div>
-                        <div class="contact__section1-item-answer">
-                            <p>Offending belonging promotion provision an be oh consulted ourselves it. Blessing welcomed ladyship she met humoured sir breeding her. </p>
-                        </div>
-                    </div>
-                    <div class="contact__section1-item">
-                        <div class="contact__section1-item-header">
-                            <p class="contact__section1-header-question">Six curiosity day assurance bed necessary?</p>
-                            <button class="contact__section1-header-button"></button>
-                        </div>
-                        <div class="contact__section1-item-answer">
-                            <p>Offending belonging promotion provision an be oh consulted ourselves it. Blessing welcomed ladyship she met humoured sir breeding her. </p>
-                        </div>
-                    </div>
-                    <div class="contact__section1-item">
-                        <div class="contact__section1-item-header">
-                            <p class="contact__section1-header-question">Produce say the ten moments parties?</p>
-                            <button class="contact__section1-header-button"></button>
-                        </div>
-                        <div class="contact__section1-item-answer">
-                            <p>Offending belonging promotion provision an be oh consulted ourselves it. Blessing welcomed ladyship she met humoured sir breeding her. </p>
-                        </div>
-                    </div>
-                    <div class="contact__section1-item">
-                        <div class="contact__section1-item-header">
-                            <p class="contact__section1-header-question">Simple innate summer fat appear basket his desire joy?</p>
-                            <button class="contact__section1-header-button"></button>
-                        </div>
-                        <div class="contact__section1-item-answer">
-                            <p>Offending belonging promotion provision an be oh consulted ourselves it. Blessing welcomed ladyship she met humoured sir breeding her. </p>
-                        </div>
-                    </div>
-                    <div class="contact__section1-item">
-                        <div class="contact__section1-item-header">
-                            <p class="contact__section1-header-question">Outward clothes promise at gravity do excited?</p>
-                            <button class="contact__section1-header-button"></button>
-                        </div>
-                        <div class="contact__section1-item-answer">
-                            <p>Offending belonging promotion provision an be oh consulted ourselves it. Blessing welcomed ladyship she met humoured sir breeding her. </p>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
                 <div class="contact__section1-email">
                     <img src="public/images/tt-icon-1.png" alt="chat box" class="contact__section1-email-icon contact__activate">
                     <p class="contact__section1-email-header">Do you have more questions?</p>
                     <p class="contact__section1-email-detail">End-to-end payments and financial management in a single solution. Meet the right platform to help realize.</p>
-                    <button class="contact__section1-email-button">
+                    <button class="contact__section1-email-button" onclick='location.href="question/question"'>
                         contact now !
                     </button>
                 </div>

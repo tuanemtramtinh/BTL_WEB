@@ -21,66 +21,49 @@
             </h3>
           </div>
           <div class="cart__table-list">
-            <div data-aos="fade-down" data-aos-duration="800" class="cart__table-item">
-              <div class="cart__table-name">
-                <div class="cart__table-image">
-                  <img src="public/images/fragment-1.png" alt="">
-                </div>
-                <div class="cart__table-item-title">
-                  <h4>Luxrious Elixir</h4>
-                  <p class="cart__table-price-mobile">$599</p>
-                </div>
-              </div>
-              <div class="cart__table-price">
-                $559
-              </div>
-              <div class="cart__table-quantity">
-                <div class="quantity-adjust">
-                  <i class="fa-solid fa-minus"></i>
-                  <input min="1" value="1" type="number" name="quantity" id="quantity">
-                  <i class="fa-solid fa-plus"></i>
-                </div>
-              </div>
-              <div class="cart__table-total">
-                $559
-              </div>
-            </div>
             <?php
-            for ($i = 0; $i < 5; $i++) {
-              echo '
-            <div data-aos="fade-down" data-aos-duration="800" data-aos-delay="200" class="cart__table-item">
-              <div class="cart__table-name">
-                <div class="cart__table-image">
-                  <img src="public/images/fragment-1.png" alt="">
-                </div>
-                <div class="cart__table-item-title">
-                  <h4>Luxrious Elixir</h4>
-                  <p class="cart__table-price-mobile">$599</p>
-                </div>
-              </div>
-              <div class="cart__table-price">
-                $559
-              </div>
-              <div class="cart__table-quantity">
-                <div class="quantity-adjust">
-                  <i class="fa-solid fa-minus"></i>
-                  <input min="1" value="1" type="number" name="quantity" id="quantity">
-                  <i class="fa-solid fa-plus"></i>
-                </div>
-              </div>
-              <div class="cart__table-total">
-                $559
-              </div>
-            </div>
-            ';
-            }
+            if (isset($data['items'])) foreach ($data['items'] as $item) {
             ?>
+              <?php
+              $productImage = json_decode($item['ProductImage'])
+              ?>
+              <div data-aos="fade-down" data-aos-duration="800" class="cart__table-item">
+                <div class="cart__table-name">
+                  <div class="cart__table-image">
+                    <img src="<?= $productImage[0] ?>" alt="">
+                  </div>
+                  <div class="cart__table-item-title">
+                    <h4><?= $item['ProductName'] ?></h4>
+                    <p class="cart__table-price-mobile"><?= number_format($item['ProductPrice']) ?> VND</p>
+                  </div>
+                </div>
+                <div class="cart__table-price">
+                  <?= number_format($item['ProductPrice']) ?> VND
+                </div>
+                <div class="cart__table-quantity">
+                  <div class="quantity-adjust">
+                    <?php
+                    if ($item['ProductQuantity'] > 0) {
+                    ?>
+                      <a href="cart/addCart/<?= $item['ProductID'] ?>?quantity=-1&inCart=true" class="fa-solid fa-minus"></a>
+                    <?php } else { ?>
+                      <i class="fa-solid fa-minus"></i>
+                    <?php } ?>
+                    <input min="1" value="<?= $item['ProductQuantity'] ?>" type="number" name="quantity" id="quantity">
+                    <a href="cart/addCart/<?= $item['ProductID'] ?>?quantity=1&inCart=true" class="fa-solid fa-plus"></a>
+                  </div>
+                </div>
+                <div class="cart__table-total">
+                  <?= number_format($item['Total']) ?> VND
+                </div>
+              </div>
+            <?php } ?>
           </div>
         </div>
         <div data-aos="fade-down" data-aos-duration="800" class="cart__summary">
           <div class="cart__subtotal">
             <span>Subtotal</span>
-            <span>$599</span>
+            <span><?= number_format($data['cart']['Total']) ?> VND </span>
           </div>
           <div class="cart__shipping">
             <span>Shipping</span>
@@ -92,9 +75,9 @@
           </div>
         </div>
         <div data-aos="fade-down" data-aos-duration="800" class="cart__submit">
-          <button>
+          <a href="order/<?= $data['cart']['ID'] ?>">
             Proceed to Checkout
-          </button>
+          </a>
         </div>
       </div>
     </div>

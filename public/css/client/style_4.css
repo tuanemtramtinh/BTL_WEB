@@ -1,4 +1,53 @@
 
+.pagination-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 94px;
+}
+
+.loading-spinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+  }
+
+.blog__best br{
+    display: none;
+}
+
+.pagination-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 2px solid #fff;
+    color: #fff;
+    width: 28px;
+    height: 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.pagination-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+.pagination-button.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+.pagination-text {
+    color: #fff;
+    font-size: 16px;
+    padding: 8px 21px;
+    border: #fff solid 1px;
+    border-radius: 8px;
+}
+
 /* Trang Blog */
 .blog__header{
     text-align: center;
@@ -40,16 +89,27 @@
     background: #AB572D;
 }
 
-.blog__best-left-header{
+.blog__best-left-header, .blog__best-left h2{
     font-size: 32px;
-    font-weight: 300;
-    margin-bottom: 43px;                         
+    /* font-weight: 300; */
+    margin-bottom: 43px;      
+    text-align: justify;                   
 }
 
-.blog__best-left-text{
+.blog__best-left-header, .blog__best-left h3{
+    font-size: 20px;
+    /* font-weight: 200; */
+    margin-bottom: 24px;    
+    text-align: justify;                   
+
+}
+
+.blog__best-left-text, .blog__best-left p{
     font-size: 20px;
     font-weight: 200;
     margin-bottom: 24px;
+    text-align: justify;                   
+
 }
 
 .blog__slider{
@@ -135,9 +195,36 @@
 
 .blog__search-list{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     transition: opacity 0.6s ease;
 }
+
+.blog-kococmt{
+    font-size: 24px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.clear-filter {
+    background: #962727;
+    transition: all 0.3s;
+    /* background: transparent; */
+    /* text-decoration: underline; */
+    font-size: 16.5px;
+    border: transparent;
+    /* margin-bottom: -5px; */
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 23px;
+    border-radius: 20px;
+  }
+
+
+  
 
 .blog__search-item{
     color:#fff;
@@ -147,7 +234,14 @@
     margin: 23px 20px 0;
     cursor: pointer;
     transition: opacity 0.6s ease;
+    cursor: pointer;
 }
+
+/* .blog__search-item:last-child{
+    background: #962727;
+    color: #fff;
+    padding: 0;
+} */
 
 .blog__search-label:hover .blog__search-icon {
     animation: shake 0.5s;
@@ -211,7 +305,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 55px;
-    margin-bottom: 167px;
+    margin-bottom: 43px;
 }
 
 .blog__post-img {
@@ -256,7 +350,7 @@
 .blog__post-readmore {
     background: transparent;
     border: 1px #fff solid;
-    padding: 8.5px 35px;
+    padding: 10px 35px;
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
@@ -279,16 +373,52 @@
 
 /* Trang chi tiet blog */
 
+.detail_page-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.detail__share-btn {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+    text-decoration: underline;
+}
+
+.detail__share-btn:hover {
+    background-color: #555;
+}
+
 .detail_info-date, .detail_info-author{
     font-size: 20px;
     font-weight: 200;
     text-align: center;
+    margin-bottom: 13px;
     
+}
+
+.detail_info-cata{
+    font-size: 18px;
+    font-weight: 200;
+    text-align: center;
+    text-decoration: underline;
+    color: rgb(117, 117, 202);
+}
+
+.detail_info-cata a{
+    color: rgb(117, 117, 202);
 }
 
 .detail_info-date{
     margin-top: 73px;
-    margin-bottom: 13px;
+    /* margin-bottom: 13px; */
 }
 
 .detail__header{
@@ -309,6 +439,13 @@
     font-size: 20px;
     font-weight: 200;
     margin-bottom: 56px;
+}
+
+.detail__content img{
+    width: 100%;
+    height: 100%;
+    /* aspect-ratio: 1 / 1; */
+    object-fit: cover;
 }
 
 .detail__control{
@@ -446,6 +583,8 @@
 
 }
 
+
+
 .detail__cmt-react-item i{
     cursor: pointer;
     color: #cccccc86;
@@ -456,16 +595,16 @@
 
 }
 
-.detail__cmt-react-item.clicked i,
+/* .detail__cmt-react-item.clicked i,
 .detail__cmt-react-item.clicked p {
   color: #ccc;
-}
+} */
 
 .react-toggle {
     display: none; 
   }
   
-.react-toggle:checked + .detail__cmt-react-item i,
+/* .react-toggle:checked + .detail__cmt-react-item i,
 .react-toggle:checked + .detail__cmt-react-item p {
 color: #fff;
 }
@@ -473,13 +612,77 @@ color: #fff;
 .react-toggle:checked + .detail__cmt-react-item i,
 .react-toggle:checked + .detail__cmt-react-item p {
 color: #fff; 
-}
+} */
 
 .detail__cmt-react-text{
     margin-left: 8px;
 }
 
+.detail__cmt-react-item.active i, .detail__cmt-react-item.active p{
+    color: #fff !important;
+}
 
+/* lop de goi y */
+/* Overlay toàn màn hình */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Nội dung bên trong overlay */
+  .overlay-content {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    text-align: left;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s ease;
+  }
+  
+  /* Nút đóng */
+  .close-btn {
+    float: right;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Danh sách liên quan */
+  .related-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  .related-list li {
+    margin-bottom: 10px;
+  }
+  
+  .related-list a {
+    text-decoration: none;
+    color: #007BFF;
+  }
+  
+  .related-list a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Animation đơn giản */
+  @keyframes fadeIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  
 
 @media (max-width: 1024px) {
 
@@ -606,6 +809,22 @@ color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .detail_page-info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .detail_page-info .detail_page-info-DEBUG{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+    
+    .detail_page-info .detail_page-info-DEBUG p{
+        margin: 12px 0;
     }
 
     .detail__content{

@@ -2,105 +2,132 @@
     <div class="detail_page">
         <div class="detail_page-header">
             <div class="detail_page-info">
-                <p class="detail_info-date">January 5, 2023</p>
-                <p class="detail_info-author">Perfume Collections</p>
+                <div class="detail_page-info-DEBUG">
+                    <p class="detail_info-date"><?= htmlspecialchars($data['blog']['DateCreated']) ?></p>
+                    <p class="detail_info-author"><?= htmlspecialchars($data['blog']['Author']) ?></p>
+                </div>
+                <p class="detail_info-cata"><a href="javascript:void(0)" 
+                    class="category-link" 
+                    data-category="<?= htmlspecialchars($data['blog']['CategoryName']) ?>">
+                    ##<?= htmlspecialchars($data['blog']['CategoryName']) ?>
+                </a></p>
+                <div class="detail__share">
+                    <button class="detail__share-btn" onclick="copyPostLink()">
+                        <i class="fa-solid fa-link"></i> Copy Link
+                    </button>
+                    <span class="detail__share-notify" style="display: none; color: green; font-size: 14px;">Copied!</span>
+                </div>
             </div>
     
-            <h2 class="detail__header">The Art of Curating a Luxury Perfume Collection: A Symphony of Scents and Stories</h2>
+            <h2 class="detail__header"><?= htmlspecialchars($data['blog']['Title']) ?></h2>
+            
         </div>
-        <img src="public/images/mau 2.png" alt="" class="detail__bg-img">
-        <p class="detail__content">
-Welcome, fragrance aficionados, to an exquisite journey into the captivating world of luxury perfume collections. A symphony of scents awaits as we delve into the art of curating a fragrance collection that reflects your essence, evokes cherished memories, and embraces the finest olfactory masterpieces. Just as a maestro conducts an orchestra, we invite you to become the conductor of your very own perfume symphony.
+        <!-- <img src="public/images/mau 2.png" alt="" class="detail__bg-img"> -->
+        <div class="detail__content">
+            <?= $data['blog']['Content'] ?>
 
-The Perfume Collection: A Personal Overture
-
-A perfume collection is more than an assortment of fragrances; it is a reflection of your personality, your life's chapters, and the emotions that define you. As you embark on this aromatic voyage, consider what scents resonate with your soul, whisking you away to cherished moments and uncharted dreams. Each fragrance in your collection will tell a unique story, narrated by the notes that gracefully dance upon your skin.
-
-The Overture: Discovering Your Signature Scent
-
-The journey to curating a luxury perfume collection begins with finding your signature scent—the one that feels like an olfactory extension of your being. Take time to explore different fragrance families, from opulent florals to mysterious orientals, to discover the notes that harmonize perfectly with your skin chemistry. This will be the foundation upon which you build your enchanting symphony of scents.
-
-Commemorating Milestones
-
-Just as the notes of a melody create beautiful harmonies, certain fragrances can encapsulate significant moments in your life. Whether it's a celebration of love, a momentous achievement, or a cherished memory with a loved one, select perfumes that become olfactory milestones. With each spritz, you'll be transported back in time, reliving the emotions that weave your life's narrative.
-
-Exploring the Fragrance Palette
-
-As you continue composing your collection, it's essential to explore a diverse fragrance palette. Include scents that embody contrasting moods and evoke emotions ranging from serenity to exuberance. From the freshness of citrusy top notes to the warm embrace of rich base notes, each perfume adds a unique hue to your olfactory canvas.
-
-Embracing Niche Gems
-
-Just as a symphony benefits from unique instruments, your collection can be enriched by the discovery of niche perfumes and artisanal creations. Venture beyond the mainstream, and explore the creations of master perfumers who pour their heart and soul into crafting distinctive scents. These hidden gems add an air of exclusivity to your olfactory repertoire.
-
-Perfume as an Art Form
-
-Perfume is not merely a product; it is an art form that captivates the senses and transcends time. Take a moment to appreciate the artistry behind each perfume, the skill of the perfumer in blending notes, and the emotions they convey through fragrance. Embrace the poetry in each bottle, and your collection will become an ode to the beauty of scent.
-
-Displaying Your Symphony of Scents
-
-The grand finale of your perfume symphony lies in the elegant presentation of your collection. A tastefully curated display showcases the artistry of perfume bottles, transforming your collection into an aesthetic marvel. Whether nestled on a vintage vanity or arranged in a custom-made perfume cabinet, your fragrant ensemble becomes an exquisite visual and olfactory experience.
-
-Dear perfume connoisseurs, may this guide inspire you to embark on a journey of curating a luxury perfume collection that harmonizes with your soul. As you add each new fragrance to your symphony, you'll find that your collection becomes more than an assemblage of scents—it becomes a masterpiece of memories, emotions, and the art of perfumery.
-
-Happy curating!
-Kiara Smith
-
-        </p>
+        </div>
         <div class="detail__control">
-            <button class="detail__control-post">
-                <i class="fa-solid fa-chevron-left"></i>
-                Previous Post
-            </button>
-            <button class="detail__control-post">
-                Next Post
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
+            <?php if (!empty($data['previousPost'])): ?>
+                <a href="http://localhost/BTL_WEB/blog/detail?id=<?= htmlspecialchars($data['previousPost']['ID']) ?>" class="detail__control-post">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    Prev
+                </a>
+            <?php endif; ?>
+
+            <?php if (!empty($data['nextPost'])): ?>
+                <a href="http://localhost/BTL_WEB/blog/detail?id=<?= htmlspecialchars($data['nextPost']['ID']) ?>" class="detail__control-post">
+                    Next
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
+            <?php endif; ?>
         </div>
-        <div class="detail__cmt">
-                <p class="detail__cmt-header">Comments</p>
-                <div class="detail__cmt-box">
-                    <textarea  placeholder="Write your comment..." class="detail__cmt-input"></textarea>
+
+
+        <div class="detail__cmt" id="comment">
+            <!-- <div id="flashMessage"></div> -->
+            <div id="flashMessage">
+            </div>
+
+            <p class="detail__cmt-header">Comments</p>
+            
+            <div class="detail__cmt-box">
+                <form id="commentForm" action="http://localhost/BTL_WEB/blog/addComment" method="POST" class="detail__cmt-form">
+                    <textarea name="Content" placeholder="Write your comment..." class="detail__cmt-input" required></textarea>
+                    <input type="hidden" name="ID_Blog" value="<?= htmlspecialchars($data['blog']['BlogID']) ?>">
+                    <input type="hidden" name="Status" value="pending"> 
                     <div class="detail__cmt-btn-post">
-                        <button class="detail__cmt-btn">Post</button>
+                        <button type="submit" class="detail__cmt-btn">Post</button>
                     </div>
-                </div>
-                <div class="detail__cmt-list">
-                    <?php
-                        $nameClassLike= "react-toggle-like";
-                        $nameClassDislike= "react-toggle-dislike";
-                        $nameClass= "like-dislike";
-                        for($i=0; $i < 4; $i++){
-                            echo "<div class=\"detail__cmt-item\">
-                        <img src=\"public/images/mau avt.png\" alt=\"\" class=\"detail__cmt-user-img\">
-                        <div class=\"detail__cmt-content\">
-                            <div class=\"detail__cmt-user-info\">
-                                <p class=\"detail__cmt-user\">John Doe</p>
-                                <p class=\"detail__cmt-time\">2023-01-05 12:00:00</p>
+                </form>
+            </div>
+
+            <div class="detail__cmt-list">
+                <?php if (!empty($data['comments'])): ?>
+                    <?php foreach ($data['comments'] as $comment): ?>
+                        <?php if ($comment['Status'] == 'approved'): ?>
+                            <?php
+                                $statusCMT = null;
+                                if (!empty($data['userCommentStatus'])) {
+                                    foreach ($data['userCommentStatus'] as $status) {
+                                        if ($status['CommentID'] == $comment['ID']) {
+                                            $statusCMT = strval($status['StatusCMT']);
+                                            break;
+                                        }
+                                    }
+                                }
+                            ?>
+                            <div class="detail__cmt-item">
+                                <img src="<?= empty($comment['Avatar']) ? 'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg' : htmlspecialchars($comment['Avatar']) ?>" alt="User Avatar" class="detail__cmt-user-img">
+                                <div class="detail__cmt-content">
+                                    <div class="detail__cmt-user-info">
+                                        <p class="detail__cmt-user"><?= htmlspecialchars($comment['name_Customer'] ?? 'John Doe') ?></p>
+                                        <p class="detail__cmt-time"><?= htmlspecialchars($comment['CreatedAt']) ?></p>
+                                    </div>
+                                    <p class="detail__cmt-text"><?= htmlspecialchars($comment['Content']) ?></p>
+                                    <div class="detail__cmt-react">
+                                        <input type="radio" id="react-toggle-like-<?= htmlspecialchars($comment['ID']) ?>"
+                                            class="react-toggle"
+                                            name="like-dislike-<?= htmlspecialchars($comment['ID']) ?>"
+                                            data-action="like"
+                                            data-id="<?= htmlspecialchars($comment['ID']) ?>" />
+                                        <label for="react-toggle-like-<?= htmlspecialchars($comment['ID']) ?>"
+                                            class="detail__cmt-react-item <?= (strval($statusCMT) === '1') ? 'active' : '' ?>"
+                                            id="like-label-<?= htmlspecialchars($comment['ID']) ?>">
+                                            <i class="fa-regular fa-thumbs-up"></i>
+                                            <p class="detail__cmt-react-text" id="like-count-<?= htmlspecialchars($comment['ID']) ?>">
+                                                <?= htmlspecialchars($comment['Like']) ?>
+                                            </p>
+                                        </label>
+
+                                        <input type="radio" id="react-toggle-dislike-<?= htmlspecialchars($comment['ID']) ?>"
+                                            class="react-toggle"
+                                            name="like-dislike-<?= htmlspecialchars($comment['ID']) ?>"
+                                            data-action="dislike"
+                                            data-id="<?= htmlspecialchars($comment['ID']) ?>" />
+                                        <label for="react-toggle-dislike-<?= htmlspecialchars($comment['ID']) ?>"
+                                            class="detail__cmt-react-item <?= (strval($statusCMT) === '0') ? 'active' : '' ?>"
+                                            id="dislike-label-<?= htmlspecialchars($comment['ID']) ?>">
+                                            <i class="fa-regular fa-thumbs-down"></i>
+                                            <p class="detail__cmt-react-text" id="dislike-count-<?= htmlspecialchars($comment['ID']) ?>">
+                                                <?= htmlspecialchars($comment['Dislike']) ?>
+                                            </p>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                            <p class=\"detail__cmt-text\">This is a great post! Thank you for sharing your knowledge.</p>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="blog-kococmt">No comments yet.</p>
+                <?php endif; ?>
+            </div>
 
-                            <div class=\"detail__cmt-react\">
-                                
-                                <input type=\"radio\" id=\"{$nameClassLike}-{$i}\" class=\"react-toggle\" name=\"{$nameClass}-{$i}\" />
-                                <label for=\"{$nameClassLike}-{$i}\" class=\"detail__cmt-react-item\">
-                                    <i class=\"fa-regular fa-thumbs-up\"></i>
-                                    <p class=\"detail__cmt-react-text\">12</p>
-                                </label>
-                                
-                                <input type=\"radio\" id=\"{$nameClassDislike}-{$i}\" class=\"react-toggle\" name=\"{$nameClass}-{$i}\" />
-                                <label for=\"{$nameClassDislike}-{$i}\" class=\"detail__cmt-react-item\">
-                                    <i class=\"fa-regular fa-thumbs-down\"></i> <!-- Thường là thumbs-down -->
-                                    <p class=\"detail__cmt-react-text\">12</p>
-                                </label>
-                            </div>
 
-                        </div>
-    
-                    </div>";
-                        }
-
-                    ?>
-                </div>
         </div>
+
     </div>
 </div>
+
+
+

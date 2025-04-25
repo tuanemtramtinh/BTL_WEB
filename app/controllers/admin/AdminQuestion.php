@@ -5,14 +5,230 @@ class AdminQuestion extends Controller
   {
     //Check if the employee is logged in
     $this->checkAuthAdmin();
-
+    $QType = $this->model("QuestionTypeModel");
+    $allQType = $QType->takeAllType();
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
       "title" => "Question",
       "page" => "question/index",
       "error" => $message['error'],
       "success" => $message['success'],
+      "task" => 2,
+      "QuestionType" => $allQType
+    ]);
+  }
+  public function addType()
+  {
+    $this->checkAuthAdmin();
+    $message = $this->getSessionMessage();
+    $this->viewAdmin("layout", [
+      "title" => "Add Question Type",
+      "page" => "question/addType",
+      "error" => $message['error'],
+      "success" => $message['success'],
       "task" => 2
     ]);
+  }
+  public function createQuestionType()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      $this->checkAuthAdmin();
+      $Name = htmlspecialchars($_POST['name']);
+      $error = null;
+      if (empty($Name)) {
+        $error = "Thiếu trường vui lòng nhập lại";
+      }
+      $Model = $this->model('QuestionTypeModel');
+      $checkExist = $Model->findByName($Name);
+      if (isset($checkExist)) {
+        $error = "Tên bị trùng vui lòng nhập lại";
+      } else {
+        $result = $Model->addType($Name);
+      }
+      if (isset($error)) {
+        $_SESSION["error_message"] = $error;
+        header("Location: addType");
+        exit;
+      }
+      if ($result) {
+        $_SESSION["success_message"] = "Tạo kiểu câu hỏi thành công";
+        header("Location: index");
+      } else {
+        $_SESSION["error_message"] = "Tạo kiểu câu hỏi không thành công!";
+        header("Location: index");
+      }
+    }
+  }
+  public function deleteQuestionType()
+  {
+    $this->checkAuthAdmin();
+    $id = $_GET['id'];
+    $Model = $this->model('QuestionTypeModel');
+    $result = $Model->deleteType($id);
+    if ($result) {
+      $_SESSION["success_message"] = "Xóa kiểu câu hỏi thành công";
+      header("Location: index");
+    } else {
+      $_SESSION["error_message"] = "Xóa kiểu câu hỏi không thành công!";
+      header("Location: index");
+    }
+  }
+  public function editType()
+  {
+    $this->checkAuthAdmin();
+    $id = $_GET["id"];
+    $Model = $this->model("QuestionTypeModel");
+    $QuestionTypeData = $Model->findById($id);
+    $message = $this->getSessionMessage();
+    $this->viewAdmin("layout", [
+      "title" => "Edit Question Type",
+      "page" => "question/editType",
+      "error" => $message['error'],
+      "success" => $message['success'],
+      "task" => 2,
+      "TypeData" => $QuestionTypeData
+    ]);
+  }
+  public function editQuestionType()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      $this->checkAuthAdmin();
+      $id = $_GET["id"];
+      $name = htmlspecialchars($_POST["name"]);
+      $Model = $this->model("QuestionTypeModel");
+      $result = $Model->editType($id, $name);
+      if ($result) {
+        $_SESSION["success_message"] = "Thay đổi tên chủ đề câu hỏi thành công";
+        header("Location: index");
+      } else {
+        $_SESSION["error_message"] = "Thay đổi tên chủ đề câu hỏi không thành công!";
+        header("Location: editType?id=$id");
+      }
+    }
+  }
+  public function answerQuestion()
+  {
+    $this->checkAuthAdmin();
+    $id = $_GET['id'];
+    $QuestionModel = $this->model('QuestionModel');
+    $Question = $QuestionModel->getById($id);
+    $message = $this->getSessionMessage();
+    $this->viewAdmin("layout", [
+      "title" => $Question['Answer'] ? "Edit Answer" : "Answer Question",
+      "page" => "question/answerQuestion",
+      "error" => $message['error'],
+      "success" => $message['success'],
+      "task" => 2,
+      "question" => $Question
+    ]);
+  }
+  public function deleteQuestion()
+  {
+    $this->checkAuthAdmin();
+    $id = $_GET['id'];
+    $QuestionModel = $this->model('QuestionModel');
+    $Question = $QuestionModel->getById($id);
+    $result = $QuestionModel->deleteQuestion($id);
+    if ($result) {
+      $_SESSION["success_message"] = "Xoá câu hỏi thành công";
+      $this->sendMail(
+        $Question['Email'],
+        $Question['Name'],
+        "Câu hỏi của bạn đã không được duyệt !!!",
+        "<p>Câu hỏi của bạn đã không được duyệt vì đã bị trùng lặp hoặc không liên quan tới chủ đề. Mong bạn thông cảm cho shop.</p>
+        <p>Câu hỏi của bạn về chủ đề {$Question['QuestionType']}: \"{$Question['Question']}\"</p>"
+      );
+      header("Location: index");
+    } else {
+      $_SESSION["error_message"] = "Xoá câu hỏi không thành công!";
+      header("Location: index");
+    }
+  }
+  public function filter()
+  {
+    $notAnswered = isset($_POST['notAnswered']) && $_POST['notAnswered'] == '1';
+    $type = $_POST['type'];
+    $model = $this->model("QuestionModel");
+    if ($notAnswered) {
+      $questions = $model->getByTypeQuestionNotAnswer($type);
+      foreach ($questions as $question) {
+        echo "<tr>
+                <td>{$question['ID']}</td>
+                <td>{$question['Name']}</td>
+                <td>{$question['Email']}</td>
+                <td>{$question['Question']}</td>
+                <td>{$question['QuestionType']}</td>
+                <td>{$question['Answer']}</td>
+                <td>
+                    <a href='admin/question/answerQuestion?id={$question['ID']}' class='btn btn-success'>Answer question</a>
+                    <a href='admin/question/deleteQuestion?id={$question['ID']}' class='btn btn-danger' onclick='return confirm(\"Bạn có muốn xóa câu hỏi này ?\")'>Delete</a>
+                </td>
+            </tr>";
+      }
+    } else {
+      $questions = $model->getByQuestionType($type);
+      foreach ($questions as $question) {
+        if (isset($question['Answer'])) {
+          echo "<tr>
+                  <td>{$question['ID']}</td>
+                  <td>{$question['Name']}</td>
+                  <td>{$question['Email']}</td>
+                  <td>{$question['Question']}</td>
+                  <td>{$question['QuestionType']}</td>
+                  <td>{$question['Answer']}</td>
+                  <td>
+                      <a href='admin/question/answerQuestion?id={$question['ID']}' class='btn btn-success'>Edit question</a>
+                      <a href='admin/question/deleteQuestion?id={$question['ID']}' class='btn btn-danger' onclick='return confirm(\"Bạn có muốn xóa câu hỏi này ?\")'>Delete</a>
+                  </td>
+              </tr>";
+        } else {
+          echo "<tr>
+                  <td>{$question['ID']}</td>
+                  <td>{$question['Name']}</td>
+                  <td>{$question['Email']}</td>
+                  <td>{$question['Question']}</td>
+                  <td>{$question['QuestionType']}</td>
+                  <td>{$question['Answer']}</td>
+                  <td>
+                      <a href='admin/question/answerQuestion?id={$question['ID']}' class='btn btn-success'>Answer question</a>
+                      <a href='admin/question/deleteQuestion?id={$question['ID']}' class='btn btn-danger' onclick='return confirm(\"Bạn có muốn xóa câu hỏi này ?\")'>Delete</a>
+                  </td>
+                </tr>";
+        }
+      }
+    }
+  }
+  public function sendQuestion()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      $id = $_GET['id'];
+      $answer = htmlspecialchars($_POST['answer']);
+      $QuestionModel = $this->model('QuestionModel');
+      $error = null;
+      if (empty($answer)) {
+        $error = "Thiếu câu trả lời vui lòng nhập lại";
+      }
+      if (isset($error)) {
+        $_SESSION["error_message"] = $error;
+        header("Location: answerQuestion?id={$id}");
+        return;
+      }
+      $result = $QuestionModel->updateAnswer($id, $answer);
+      if ($result) {
+        $_SESSION["success_message"] = "Trả lời câu hỏi thành công";
+        $Question = $QuestionModel->getById($id);
+        $this->sendMail(
+          $Question['Email'],
+          $Question['Name'],
+          "Câu hỏi của bạn đã đã được trả lời",
+          "<p>Câu hỏi của bạn: \"{$Question['Question']}\"</p>
+          <p>Câu trả lời của shop: \"{$Question['Answer']}\"</p>"
+        );
+        header("Location: index");
+      } else {
+        $_SESSION["error_message"] = "Trả lời câu hỏi không thành công!";
+        header("Location: answerQuestion?id={$id}");
+      }
+    }
   }
 }
