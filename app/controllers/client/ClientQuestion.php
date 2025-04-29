@@ -21,12 +21,15 @@ class ClientQuestion extends Controller
   public function question()
   {
     $message = $this->getSessionMessage();
+    $Model = $this->model("QuestionTypeModel");
+    $AllTypes = $Model->takeAllType();
     $this->view("layout", [
       "title" => "Hỏi",
       "page" => "question/question",
       "error" => $message['error'],
       "success" => $message['success'],
-      "task" => 2
+      "task" => 2,
+      "allType" => $AllTypes
     ]);
   }
   public function sendQuestion()
