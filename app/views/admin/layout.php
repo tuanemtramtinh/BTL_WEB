@@ -315,10 +315,11 @@
                                     class="form-check-input me-2"
                                     type="checkbox"
                                     value=""
-                                    id="flexCheckDefault" />
+                                    name="remember"
+                                    id="remember" />
                                 <label
                                     class="form-check-label text-gray-600"
-                                    for="flexCheckDefault">
+                                    for="remember">
                                     Keep me logged in
                                 </label>
                             </div>
@@ -326,7 +327,7 @@
                                 Log in
                             </button>
                         </form>
-                        <div class="text-center mt-5 text-lg fs-4">
+                        <!-- <div class="text-center mt-5 text-lg fs-4">
                             <p class="text-gray-600">
                                 Don't have an account?
                                 <a href="auth-register.html" class="font-bold">Sign up</a>.
@@ -334,7 +335,7 @@
                             <p>
                                 <a class="font-bold" href="auth-forgot-password.html">Forgot password?</a>.
                             </p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col-lg-7 d-none d-lg-block">

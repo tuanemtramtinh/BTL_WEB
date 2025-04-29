@@ -23,6 +23,7 @@ class AdminAuth extends Controller
     session_start();
     unset($_SESSION['employeeId']);
     unset($_SESSION['employee_username']);
+    setcookie('remember-admin', "", time() - 3600, "/");
     // session_unset();
     // session_destroy();
     $_SESSION['success_message'] = 'Logout successfully';
@@ -34,6 +35,7 @@ class AdminAuth extends Controller
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $username = $_POST['username'];
       $password = $_POST['password'];
+      $remember = isset($_POST['remember']) ? true : false;
 
       $Employee = $this->model("EmployeeModel");
 
@@ -65,6 +67,11 @@ class AdminAuth extends Controller
 
       $_SESSION['employeeId'] = $existEmployee['SocialNo'];
       $_SESSION['employee_username'] = htmlspecialchars($existEmployee['Username']);
+
+      // Set "remember me" cookie if checked
+      if ($remember) {
+        setcookie('remember-admin', $existEmployee['SocialNo'], time() + (86400 * 30), "/"); // 30 days
+      }
 
       $Employee->closeConnection();
       $_SESSION['success_message'] = 'Login Successfully';

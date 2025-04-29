@@ -13,6 +13,9 @@ class ClientOrder extends Controller
       exit;
     }
 
+    $User = $this->model("UserModel");
+    $existUser = $User->findUserOrderInfoById($_SESSION['userId']);
+
     $CartItem = $this->model("CartItemModel");
     $Cart = $this->model("CartModel");
 
@@ -27,6 +30,7 @@ class ClientOrder extends Controller
       "title" => "Giỏ Hàng",
       "page" => "order/index",
       "task" => 3,
+      "userInfo" => $existUser,
       "success" => $message['success'],
       "error" => $message['error'],
       "cart" => $cart,
@@ -42,6 +46,11 @@ class ClientOrder extends Controller
       exit;
     }
 
+    $fullname = $_POST['fullname'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $email = $_POST['email'];
+
     $Product = $this->model("ProductModel");
 
     $Order = $this->model("OrderModel");
@@ -52,7 +61,7 @@ class ClientOrder extends Controller
 
     $cart = $Cart->findCartByUserId($_SESSION['userId']);
     $items = $CartItem->getCartListByCartId($_SESSION['user_cart']);
-    $order = $Order->createOrder($_SESSION['userId'], $cart['Total']);
+    $order = $Order->createOrder($_SESSION['userId'], $cart['Total'], $fullname, $phone, $address, $email);
 
     foreach ($items as $item) {
       $OrderItem->addItemToOrder($order, $item['ProductID'], $item['ProductQuantity'], $item['ProductName'], $item['ProductPrice'], $item['ProductImage']);
