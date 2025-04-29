@@ -34,7 +34,7 @@ class AdminUser extends Controller
       "user" => $Customer
     ]);
   }
-  public function viewUserOrders()
+  public function viewUserPurchase()
   {
     $this->checkAuthAdmin();
     $id = $_GET['id'];

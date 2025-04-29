@@ -31,7 +31,7 @@
                             <td><?= $user['Address'] ?></td>
                             <td>
                                 <a class="btn btn-sm btn-info " href="admin/user/viewUserInfo?id=<?= $user['ID'] ?>">Info Detail</a>
-                                <a class="btn btn-sm btn-primary  ml-1" href="admin/user/viewUserOrders?id=<?= $user['ID'] ?>">Info Order</a>
+                                <a class="btn btn-sm btn-primary  ml-1" href="admin/user/viewUserPurchase?id=<?= $user['ID'] ?>">Info Order</a>
                             </td>
                         </tr>
                     <?php } ?>
