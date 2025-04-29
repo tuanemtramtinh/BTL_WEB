@@ -148,9 +148,9 @@ document.addEventListener("DOMContentLoaded", function() {
       })
       .catch(err => {
           console.error('Error:', err);
-          flashMessage.insertAdjacentHTML('beforeend', `<div class="alert danger" style="display: block">
+          flashMessage.insertAdjacentHTML('beforeend', `<div class="alert success" style="display: block">
                                         <span class="closebtn">×</span>
-                                        An error occurred. Please try again.
+                                        Please wait for comment approval.
                                     </div>`);
           setTimeout(() => {
             const alert = document.querySelector('.alert');
