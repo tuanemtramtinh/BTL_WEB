@@ -6,6 +6,8 @@ class AdminQuestion extends Controller
     //Check if the employee is logged in
     $this->checkAuthAdmin();
     $QType = $this->model("QuestionTypeModel");
+    $Question = $this->model("QuestionModel");
+    $AllQuestion = $Question->getQuestionFront();
     $allQType = $QType->takeAllType();
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
@@ -14,7 +16,8 @@ class AdminQuestion extends Controller
       "error" => $message['error'],
       "success" => $message['success'],
       "task" => 2,
-      "QuestionType" => $allQType
+      "QuestionType" => $allQType,
+      "Questions" => $AllQuestion
     ]);
   }
   public function addType()
@@ -144,59 +147,44 @@ class AdminQuestion extends Controller
       header("Location: index");
     }
   }
-  public function filter()
+  public function datatable()
   {
-    $notAnswered = isset($_POST['notAnswered']) && $_POST['notAnswered'] == '1';
-    $type = $_POST['type'];
     $model = $this->model("QuestionModel");
+    $draw = isset($_POST['draw']) ? intval($_POST['draw']) : 1;
+    $start = isset($_POST['start']) ? intval($_POST['start']) : 0;
+    $length = isset($_POST['length']) ? intval($_POST['length']) : 10;
+    $searchValue = isset($_POST['search']['value']) ? htmlspecialchars($_POST['search']['value']) : '';
+    $type = $_POST['type'] ?? '';
+    $notAnswered = isset($_POST['notAnswered']) && $_POST['notAnswered'] == 1;
+
     if ($notAnswered) {
-      $questions = $model->getByTypeQuestionNotAnswer($type);
-      foreach ($questions as $question) {
-        echo "<tr>
-                <td>{$question['ID']}</td>
-                <td>{$question['Name']}</td>
-                <td>{$question['Email']}</td>
-                <td>{$question['Question']}</td>
-                <td>{$question['QuestionType']}</td>
-                <td>{$question['Answer']}</td>
-                <td>
-                    <a href='admin/question/answerQuestion?id={$question['ID']}' class='btn btn-success'>Answer question</a>
-                    <a href='admin/question/deleteQuestion?id={$question['ID']}' class='btn btn-danger' onclick='return confirm(\"Bạn có muốn xóa câu hỏi này ?\")'>Delete</a>
-                </td>
-            </tr>";
-      }
+      $totalCount = $model->countQuestionByTypeNotAnswer($type, $searchValue);
+      $questions = $model->getByTypeQuestionNotAnswer($type, $length, $start, $searchValue);
     } else {
-      $questions = $model->getByQuestionType($type);
-      foreach ($questions as $question) {
-        if (isset($question['Answer'])) {
-          echo "<tr>
-                  <td>{$question['ID']}</td>
-                  <td>{$question['Name']}</td>
-                  <td>{$question['Email']}</td>
-                  <td>{$question['Question']}</td>
-                  <td>{$question['QuestionType']}</td>
-                  <td>{$question['Answer']}</td>
-                  <td>
-                      <a href='admin/question/answerQuestion?id={$question['ID']}' class='btn btn-success'>Edit question</a>
-                      <a href='admin/question/deleteQuestion?id={$question['ID']}' class='btn btn-danger' onclick='return confirm(\"Bạn có muốn xóa câu hỏi này ?\")'>Delete</a>
-                  </td>
-              </tr>";
-        } else {
-          echo "<tr>
-                  <td>{$question['ID']}</td>
-                  <td>{$question['Name']}</td>
-                  <td>{$question['Email']}</td>
-                  <td>{$question['Question']}</td>
-                  <td>{$question['QuestionType']}</td>
-                  <td>{$question['Answer']}</td>
-                  <td>
-                      <a href='admin/question/answerQuestion?id={$question['ID']}' class='btn btn-success'>Answer question</a>
-                      <a href='admin/question/deleteQuestion?id={$question['ID']}' class='btn btn-danger' onclick='return confirm(\"Bạn có muốn xóa câu hỏi này ?\")'>Delete</a>
-                  </td>
-                </tr>";
-        }
-      }
+      $totalCount = $model->countQuestionByType($type, $searchValue);
+      $questions = $model->getByQuestionType($type, $length, $start, $searchValue);
     }
+
+    $data = [];
+    foreach ($questions as $q) {
+      $data[] = [
+        $q['ID'],
+        htmlspecialchars($q['Name']),
+        htmlspecialchars($q['Email']),
+        htmlspecialchars($q['Question']),
+        htmlspecialchars($q['QuestionType']),
+        htmlspecialchars($q['Answer'] ?? 'Chưa có'),
+        "<a href='admin/question/answerQuestion?id={$q['ID']}' class='btn btn-success'>" . ($q['Answer'] ? 'Edit' : 'Answer') . " question</a>
+             <a href='admin/question/deleteQuestion?id={$q['ID']}' class='btn btn-danger' onclick='return confirm(\"Bạn có muốn xóa câu hỏi này ?\")'>Delete</a>"
+      ];
+    }
+    header('Content-Type: application/json');
+    echo json_encode([
+      'draw' => $draw,
+      'recordsTotal' => $totalCount,
+      'recordsFiltered' => $totalCount,
+      'data' => $data
+    ]);
   }
   public function sendQuestion()
   {
@@ -229,6 +217,110 @@ class AdminQuestion extends Controller
         $_SESSION["error_message"] = "Trả lời câu hỏi không thành công!";
         header("Location: answerQuestion?id={$id}");
       }
+    }
+  }
+  public function addQuestionFront()
+  {
+    $this->checkAuthAdmin();
+    $QuestionType = $this->model("QuestionTypeModel");
+    $allType = $QuestionType->takeAllType();
+    $message = $this->getSessionMessage();
+    $this->viewAdmin("layout", [
+      "title" => "Add Question Client",
+      "page" => "question/addQuestionFront",
+      "error" => $message['error'],
+      "success" => $message['success'],
+      "task" => 2,
+      "Types" => $allType
+    ]);
+  }
+  public function addQuestiontoFront()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      $this->checkAuthAdmin();
+      $Model = $this->model("QuestionModel");
+      $question = htmlspecialchars($_POST['question']);
+      $answer = htmlspecialchars($_POST['answer']);
+      $type = $_POST['type'];
+      $error = null;
+      if (empty($question) | empty($answer)) {
+        $error = 'Thiếu trường vui lòng nhập lại !!!';
+      }
+      if (isset($error)) {
+        $_SESSION["error_message"] = $error;
+        header("Location: addQuestionFront");
+        exit;
+      }
+      $result = $Model->addQuestionFront($question, $answer, $type);
+      if ($result) {
+        $_SESSION["success_message"] = "Thêm question vào client thành công ";
+        header("Location: index");
+      } else {
+        $_SESSION["error_message"] = "Thêm question vào client không thành công";
+        header("Location: addQuestionFront");
+      }
+    }
+  }
+  public function editAnswer()
+  {
+    $this->checkAuthAdmin();
+    $id = $_GET['id'];
+    $modelType = $this->model("QuestionTypeModel");
+    $modelQuestion = $this->model("QuestionModel");
+    $AllType = $modelType->takeAllType();
+    $Question = $modelQuestion->getQuestionFrontByID($id);
+    $message = $this->getSessionMessage();
+    $this->viewAdmin("layout", [
+      "title" => "Edit Answer Client",
+      "page" => "question/editAnswerFront",
+      "error" => $message['error'],
+      "success" => $message['success'],
+      "task" => 2,
+      "id" => $id,
+      "Types" => $AllType,
+      "Question" => $Question
+    ]);
+  }
+  public function editAnswerFront()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      $this->checkAuthAdmin();
+      $Model = $this->model("QuestionModel");
+      $id = $_GET['id'];
+      $question = htmlspecialchars($_POST['question']);
+      $answer = htmlspecialchars($_POST['answer']);
+      $type = $_POST['type'];
+      $error = null;
+      if (empty($question) | empty($answer)) {
+        $error = 'Thiếu trường xin nhập lại';
+      }
+      if (isset($error)) {
+        $_SESSION["error_message"] = $error;
+        header("Location: editAnswerFront?id={$id}");
+        exit;
+      }
+      $result = $Model->editQuestionFront($id, $question, $answer, $type);
+      if ($result) {
+        $_SESSION["success_message"] = "Thay đổi question vào client thành công ";
+        header("Location: index");
+      } else {
+        $_SESSION["error_message"] = "Thay đổi question vào client không thành công";
+        header("Location: editAnswerFront?id={$id}");
+      }
+    }
+  }
+  public function deleteAnswerFront()
+  {
+    $this->checkAuthAdmin();
+    $Model = $this->model("QuestionModel");
+    $id = $_GET["id"];
+    $result = $Model->deleteQuestionFront($id);
+    if ($result) {
+      $_SESSION["success_message"] = "Xóa question vào client thành công ";
+      header("Location: index");
+    } else {
+      $_SESSION["error_message"] = "Xóa question vào client không thành công";
+      header("Location: index");
     }
   }
 }

@@ -56,4 +56,45 @@ class OrderModel extends DB
     }
     return null;
   }
+  public function getOrderByUserId($userId)
+  {
+    $queries = " SELECT
+      o.ID,
+      o.CreatedAt AS `date`,
+      o.Total AS total,
+      p.Name AS `name`,
+      oi.Quantity AS quantity
+    FROM
+      `Order` o
+    JOIN
+      OrderItem oi ON o.ID = oi.Order_ID
+    JOIN
+      Product p ON oi.Product_ID = p.ID
+    WHERE
+      o.ID_Customer = ?
+    ORDER BY
+      o.CreatedAt DESC;
+    ";
+    $stmt = $this->conn->prepare($queries);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    $orders = [];
+    while ($row = $result->fetch_assoc()) {
+      $orderId = $row['ID'];
+      if (!isset($orders[$orderId])) {
+        $orders[$orderId] = [
+          "date" => $row['date'],
+          "total" => $row['total'],
+          "items" => [],
+        ];
+      }
+      $orders[$orderId]["items"][] = [
+        "product" => $row["name"],
+        "quantity" => $row["quantity"]
+      ];
+    }
+    return $orders;
+  }
 }

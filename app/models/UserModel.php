@@ -33,20 +33,66 @@ class UserModel extends DB
     }
     return null;
   }
-
-  public function findUserById($userId)
+  
+  public function findUserById($id)
   {
-    $query = "SELECT * FROM Customer WHERE ID = ?";
-    $stmt = $this->conn->prepare($query);
-    $stmt->bind_param("s", $userId);
+    $queries = "SELECT * FROM Customer WHERE ID = ?";
+    $stmt = $this->conn->prepare($queries);
+    $stmt->bind_param("i", $id);
     $stmt->execute();
-
     $result = $stmt->get_result();
-    $stmt = null;
+    $stmt->close();
     if ($result->num_rows > 0) {
       return $result->fetch_assoc();
     }
     return null;
+  }
+  
+  public function editUserInfo($id, $firstName, $lastName, $email, $phone, $address)
+  {
+    $queries = "UPDATE Customer SET FirstName = ?, LastName = ?, Email = ?, Phone = ? ,`Address` = ? WHERE ID = ?";
+    $stmt = $this->conn->prepare($queries);
+    $stmt->bind_param("sssssi", $firstName, $lastName, $email, $phone, $address, $id);
+    $stmt->execute();
+    return $stmt->affected_rows > 0;
+  }
+  
+  public function uploadAvatar($id, $avatarImgJson)
+  {
+    $queries = "UPDATE Customer SET Avatar = ? WHERE ID = ?";
+    $stmt = $this->conn->prepare($queries);
+    $stmt->bind_param('si', $avatarImgJson, $id);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+  }
+  
+  public function changePassword($id, $newPassword)
+  {
+    $queries = "UPDATE Customer SET Password = ? WHERE ID = ?";
+    $stmt = $this->conn->prepare($queries);
+    $stmt->bind_param("si", $newPassword, $id);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+  }
+  
+  public function getOldPassword($id)
+  {
+    $queries = "SELECT `Password` FROM Customer WHERE ID = ?";
+    $stmt = $this->conn->prepare($queries);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    return $result->fetch_assoc();
+  }
+  
+  public function getAllUser()
+  {
+    $queries = "SELECT * FROM Customer";
+    $result = $this->conn->query($queries);
+    return $result;
   }
 
   public function findUserOrderInfoById($userId)
