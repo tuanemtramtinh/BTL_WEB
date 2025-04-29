@@ -18,11 +18,11 @@ class OrderModel extends DB
     return !empty($orders) ? $orders : null;
   }
 
-  public function createOrder($userId, $total)
+  public function createOrder($userId, $total, $fullname, $phone, $address, $email)
   {
-    $query = "INSERT INTO `Order` (ID_Customer, Total) VALUES (?, ?)";
+    $query = "INSERT INTO `Order` (ID_Customer, Total, Fullname, PhoneNo, Address, Email) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $this->conn->prepare($query);
-    $stmt->bind_param("ii", $userId, $total);
+    $stmt->bind_param("iissss", $userId, $total, $fullname, $phone, $address, $email);
     $result = $stmt->execute();
     $insertId = $stmt->insert_id;
     $stmt->close();
@@ -43,7 +43,7 @@ class OrderModel extends DB
 
   public function findOrderById($orderId)
   {
-    $query = "SELECT O.ID, O.ID_Customer, O.Total, O.CreatedAt, O.UpdatedAt, O.`Status`, CONCAT(C.LastName, ' ',C.FirstName) as FullName, C.Email FROM `Order` AS O INNER JOIN Customer AS C ON O.ID_Customer = C.ID WHERE O.ID = ?";
+    $query = "SELECT O.ID, O.ID_Customer, O.Total, O.CreatedAt, O.UpdatedAt, O.`Status`, CONCAT(C.LastName, ' ',C.FirstName) as FullName, C.Email AS OrderEmail, O.Fullname AS OrderFullname, O.PhoneNo AS OrderPhone, O.Address AS OrderAddress, O.Email AS OrderEmail FROM `Order` AS O INNER JOIN Customer AS C ON O.ID_Customer = C.ID WHERE O.ID = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("i", $orderId);
     $stmt->execute();

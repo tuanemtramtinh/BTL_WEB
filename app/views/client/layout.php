@@ -59,8 +59,8 @@
           <div class="header__utility">
             <i class="fa-solid fa-magnifying-glass"></i>
             <?php if (isset($_SESSION['userId'])) { ?>
-              <i class="fa-solid fa-user"></i>
-              <i class="fa-solid fa-cart-shopping"></i>
+              <a href="user" class="fa-solid fa-user"></a>
+              <a href="cart" class="fa-solid fa-cart-shopping"></a>
               <form action="auth/logout" method="get">
                 <button type="submit">
                   <i class="fa-solid fa-right-from-bracket"></i>

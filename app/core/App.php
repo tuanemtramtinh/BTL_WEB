@@ -5,12 +5,14 @@ class App
   protected $controller = "ClientHome";
   protected $method = "index";
   protected $params = [];
+  protected $isAdmin = false;
 
   public function __construct()
   {
     $url = $this->parseUrl();
 
     if (isset($url[0]) && $url[0] == 'admin') {
+      $this->isAdmin = true;
       unset($url[0]);
       $url[1] = isset($url[1]) ? ucfirst($url[1]) : 'Dashboard';
       $url[1] = 'Admin' . $url[1];
@@ -43,6 +45,22 @@ class App
 
     // Get the parameters
     $this->params = $url ? array_values($url) : [];
+
+    //HandleRemeberMe
+    if (
+      !$this->isAdmin &&
+      method_exists($this->controller, 'rememberClient') && // Check method existence on the instance
+      !($this->controller instanceof ClientAuth && in_array($this->method, ['login', 'register']))
+    ) {
+      // Call the rememberClient method using call_user_func_array
+      call_user_func_array([$this->controller, 'rememberClient'], []);
+    } else if (
+      $this->isAdmin &&
+      method_exists($this->controller, 'rememberAdmin') &&
+      !($this->controller instanceof AdminAuth && in_array($this->method, ['login', 'register']))
+    ){
+      call_user_func_array([$this->controller, 'rememberAdmin'], []);
+    }
 
     // Call the method with parameters
     call_user_func_array([$this->controller, $this->method], $this->params);
