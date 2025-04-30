@@ -95,9 +95,13 @@ class ClientBlog extends Controller {
 
   public function addComment() {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header("Location: ../client/blog/index");
-        exit;
+      if (empty($_SESSION['userId'])) {
+        http_response_code(401);
+        echo json_encode([
+          'success' => false,
+          'message'=> 'Please login first.'
+        ]);
+          exit();
       }
 
       $Content = $_POST['Content'];
@@ -105,29 +109,29 @@ class ClientBlog extends Controller {
       $ID_Blog = $_POST['ID_Blog'];
       $Status = $_POST['Status']; 
 
-      if (empty($_SESSION['userId'])) {
-        $_SESSION['error_message'] = 'Please login before commenting.';
-        header("Location: ../client/blog/detail?id={$ID_Blog}");
-        exit;
-      }
-
-
-      if ($Content === '') {
-        $_SESSION['error_message'] = 'Please enter comment content.';
-        header("Location: ../client/blog/detail?id={$ID_Blog}");
-        exit;
+      if (empty($Content)) {
+        echo json_encode([
+          'success'=> false,
+          'message'=> 'Please enter comment content.'
+        ]);
+        exit();
       }
 
       $addSuccess = $this->model("CommentModel")->addComment($Content, $ID_Customer, $ID_Blog, $Status);
 
       if (!$addSuccess) {
-        $_SESSION['error_message'] = 'Adding comment failed. Please try again.';
-      } else {
-          $_SESSION['success_message'] = 'Comment has been submitted and is awaiting moderation!';
+        echo json_encode([
+          "success"=> false,
+          "message"=> "Failed to add comment."
+        ]);
       }
-
-        header("Location: ../client/blog/detail?id={$ID_Blog}");
-        exit();
+      else{
+        echo json_encode([
+          'success'=> true,
+          'message'=> 'Comment successfully pending approval!'
+        ]);
+      }
+      exit();
     }
   }
 
