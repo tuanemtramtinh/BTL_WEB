@@ -6,6 +6,7 @@ class ClientCart extends Controller
 {
   public function index()
   {
+    $this->checkAuthClient();
     $CartItem = $this->model("CartItemModel");
     $Cart = $this->model("CartModel");
 
@@ -91,6 +92,9 @@ class ClientCart extends Controller
   public function addCart($productId = '')
   {
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+      $this->checkAuthClient();
+
       $productQuantity = $_GET['quantity'];
 
       $Product = $this->model("ProductModel");
