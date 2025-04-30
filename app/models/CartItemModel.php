@@ -4,7 +4,7 @@ class CartItemModel extends DB
 {
   public function getCartListByCartId($cartId)
   {
-    $query = "SELECT P.ID as ProductID, P.`Name` as ProductName, P.Image as ProductImage, P.PriceUnit as ProductPrice, CI.Quantity as ProductQuantity, (CI.Quantity * P.PriceUnit) AS Total FROM CartItem AS CI INNER JOIN Product P ON CI.ID_Product = P.ID WHERE CI.Cart = ?";
+    $query = "SELECT P.ID as ProductID, P.`Name` as ProductName, P.Image as ProductImage, P.PriceUnit as ProductPrice, P.Slug as ProductSlug, CI.Quantity as ProductQuantity, (CI.Quantity * P.PriceUnit) AS Total FROM CartItem AS CI INNER JOIN Product P ON CI.ID_Product = P.ID WHERE CI.Cart = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param('i', $cartId);
     $stmt->execute();

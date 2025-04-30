@@ -86,7 +86,7 @@ class ClientOrder extends Controller
   {
     if ($orderId === '') {
       $_SESSION['error_message'] = 'Invalid Order';
-      header('../../cart/index');
+      header('Location: ../../cart/index');
       exit;
     }
 
@@ -105,6 +105,37 @@ class ClientOrder extends Controller
       "error" => $message['error'],
       "items" => $items,
       "order" => $order
+    ]);
+  }
+
+  public function history($orderId = '')
+  {
+    $this->checkAuthClient();
+
+    if ($orderId === '') {
+      // echo "hello";
+      $_SESSION['error_message'] = 'Invalid Order';
+      header('Location: ../../user/index');
+      exit;
+    }
+
+    $Order = $this->model("OrderModel");
+    $OrderItem = $this->model("OrderItemModel");
+
+    $order = $Order->findOrderById($orderId);
+    $items = $OrderItem->getOrderListByOrderId($orderId);
+
+    // print_r($order);
+
+    $message = $this->getSessionMessage();
+    $this->view("layout", [
+      "title" => "Chi tiết đơn hàng",
+      "page" => "order/history",
+      "task" => 3,
+      "success" => $message['success'],
+      "error" => $message['error'],
+      "order" => $order,
+      "items" => $items
     ]);
   }
 }
