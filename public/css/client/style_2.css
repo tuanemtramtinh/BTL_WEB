@@ -563,7 +563,78 @@ input[type="password"] {
 .order-section__items-reponsive {
   display: none;
 }
+.verify-container {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  background-color: #111;
+}
 
+.verify-container h2 {
+  margin-bottom: 15px;
+  color: #ff6600;
+  font-size: 24px;
+}
+
+.verify-container p {
+  color: white;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.verify-container input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ff6600;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.verify-container button {
+  padding: 12px;
+  width: 100%;
+  background: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.verify-container button:hover {
+  background: #e65c00;
+}
+
+.error {
+  color: #d93025;
+  background: #fcebea;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.product-scroll {
+  max-height: 20px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.product-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.product-scroll::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
 /*End user profile*/
 
 /*Start history order*/
@@ -1028,32 +1099,70 @@ input[type="password"] {
   .dataTables_info {
     display: none;
   }
+  .verify-container {
+    padding: 30px 20px;
+  }
+
+  .verify-container h2 {
+    font-size: 18px;
+  }
+
+  .verify-container p {
+    font-size: 13px;
+  }
+
+  .verify-container input[type="text"] {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .verify-container button {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .error {
+    font-size: 13px;
+    padding: 8px;
+  }
+  .product-scroll {
+    max-height: 20px;
+    overflow-y: auto;
+    padding-right: 5px;
+  }
+
+  .product-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .product-scroll::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+  }
   /* End User info */
   /* Star avatar */
-  @media screen and (max-width: 767.98px) {
-    .avatar-wrapper {
-      padding: 20px;
-      margin: 0px;
-    }
+  .avatar-wrapper {
+    padding: 20px;
+    margin: 0px;
+  }
 
-    .avatar-title {
-      font-size: 20px;
-    }
+  .avatar-title {
+    font-size: 20px;
+  }
 
-    .avatar-img {
-      width: 120px;
-      height: 120px;
-    }
+  .avatar-img {
+    width: 120px;
+    height: 120px;
+  }
 
-    .avatar-input {
-      width: 100%;
-      font-size: 14px;
-    }
+  .avatar-input {
+    width: 100%;
+    font-size: 14px;
+  }
 
-    .avatar-button {
-      width: 100%;
-      font-size: 16px;
-    }
+  .avatar-button {
+    width: 100%;
+    font-size: 16px;
   }
   /* End avatar */
 }
