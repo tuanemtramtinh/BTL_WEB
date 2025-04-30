@@ -1,7 +1,7 @@
 <div class="cart">
   <div class="container">
     <div class="cart__wrapper">
-      <h2 data-aos="fade-down" data-aos-duration="800" class="cart__title">
+      <h2 class="cart__title">
         Shopping Bag
       </h2>
       <div class="cart__main">
@@ -27,7 +27,7 @@
               <?php
               $productImage = json_decode($item['ProductImage'])
               ?>
-              <div data-aos="fade-down" data-aos-duration="800" class="cart__table-item">
+              <div class="cart__table-item">
                 <div class="cart__table-name">
                   <div class="cart__table-image">
                     <img src="<?= $productImage[0] ?>" alt="">
@@ -60,7 +60,7 @@
             <?php } ?>
           </div>
         </div>
-        <div data-aos="fade-down" data-aos-duration="800" class="cart__summary">
+        <div class="cart__summary">
           <div class="cart__subtotal">
             <span>Subtotal</span>
             <span><?= number_format($data['cart']['Total']) ?> VND </span>
@@ -69,12 +69,8 @@
             <span>Shipping</span>
             <span>Free</span>
           </div>
-          <div class="cart__promo">
-            <label for="promo">Promo Code</label>
-            <input type="text" name="promo" id="promo" placeholder="Write here">
-          </div>
         </div>
-        <div data-aos="fade-down" data-aos-duration="800" class="cart__submit">
+        <div class="cart__submit">
           <a href="order/<?= $data['cart']['ID'] ?>">
             Proceed to Checkout
           </a>

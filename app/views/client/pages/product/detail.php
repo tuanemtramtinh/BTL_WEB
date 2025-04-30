@@ -118,22 +118,43 @@
       <div data-aos="fade-down" data-aos-duration="800" data-aos-delay="300" class="product-discover__list swiper mySwiper3">
         <div class="swiper-wrapper">
           <?php
-          for ($i = 0; $i < 5; $i++) {
-            echo '
-            <a href="#" class="product__item swiper-slide">
-              <div class="product__item-image">
-                <img src="public/images/fragment-1.png" alt="">
-              </div>
-              <h3 class="product__item-title">
-                Luxurious Elixir Rough
-              </h3>
-              <div class="product__item-content">
-                <span class="product__item-price">$ 220.00</span>
-                <span class="product__item-volume">100ml</span>
-              </div>
-            </a>
-            ';
-          }
+          if (isset($data['products'])) foreach ($data['products'] as $product) {
+            $productImagesJson = $product['Image'];
+            $productImages = json_decode($productImagesJson);
+          ?>
+            <div class="product__item-wrapper-discover swiper-slide">
+              <a href="product/detail/<?= $product['Slug'] ?>" class="product__item">
+                <div class="product__item-image">
+                  <img src="<?= $productImages[0] ?>" alt="">
+                </div>
+                <h3 class="product__item-title">
+                  <?= $product['Name'] ?>
+                </h3>
+                <div class="product__item-content">
+                  <span class="product__item-price"><?= number_format($product['PriceUnit']) ?> VND</span>
+                  <!-- <span class="product__item-volume">100ml</span> -->
+                </div>
+              </a>
+            </div>
+          <?php } ?>
+
+          <?php
+          // for ($i = 0; $i < 5; $i++) {
+          //   echo '
+          //   <a href="#" class="product__item swiper-slide">
+          //     <div class="product__item-image">
+          //       <img src="public/images/fragment-1.png" alt="">
+          //     </div>
+          //     <h3 class="product__item-title">
+          //       Luxurious Elixir Rough
+          //     </h3>
+          //     <div class="product__item-content">
+          //       <span class="product__item-price">$ 220.00</span>
+          //       <span class="product__item-volume">100ml</span>
+          //     </div>
+          //   </a>
+          //   ';
+          // }
           ?>
           <!-- <a href="#" class="product__item swiper-slide">
             <div class="product__item-image">

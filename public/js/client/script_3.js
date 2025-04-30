@@ -149,3 +149,50 @@ if (productDetailForm) {
 }
 
 //End Add to bag Form
+
+// Filtering
+
+const filterBrand = document.querySelector(".filter-brand");
+const filterCategory = document.querySelector(".filter-category");
+const filterSort = document.querySelector(".filter-sort");
+
+if (filterBrand) {
+  filterBrand.addEventListener("change", (e) => {
+    const selectedValue = e.target.value;
+    const url = new URL(window.location.href);
+    if (selectedValue === "") {
+      url.searchParams.delete("brand");
+    } else {
+      url.searchParams.set("brand", selectedValue);
+    }
+    window.location.href = url.toString();
+  });
+}
+
+if (filterCategory) {
+  filterCategory.addEventListener("change", (e) => {
+    const selectedValue = e.target.value;
+    const url = new URL(window.location.href);
+    if (selectedValue === "") {
+      url.searchParams.delete("category");
+    } else {
+      url.searchParams.set("category", selectedValue);
+    }
+    window.location.href = url.toString();
+  });
+}
+
+if (filterSort) {
+  filterSort.addEventListener("change", (e) => {
+    const selectedValue = e.target.value;
+    const url = new URL(window.location.href);
+    if (selectedValue === "") {
+      url.searchParams.delete("sort");
+    } else {
+      url.searchParams.set("sort", selectedValue);
+    }
+    window.location.href = url.toString();
+  });
+}
+
+// End Filtering

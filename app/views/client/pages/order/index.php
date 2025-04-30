@@ -93,10 +93,10 @@
               <span>Shipping</span>
               <span>Free</span>
             </div>
-            <div class="cart__promo">
+            <!-- <div class="cart__promo">
               <label for="promo">Promo Code</label>
               <input type="text" name="promo" id="promo" placeholder="Write here">
-            </div>
+            </div> -->
           </div>
           <div data-aos="fade-down" data-aos-duration="800" class="cart__submit">
             <button>Checkout</button>
