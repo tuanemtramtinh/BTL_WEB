@@ -1,6 +1,23 @@
 <?php
 $orders = $data['orders'];
 ?>
+<style>
+    .product-scroll {
+        max-height: 100px;
+        overflow-y: auto;
+        padding-right: 5px;
+    }
+
+    .product-scroll::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .product-scroll::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 3px;
+    }
+</style>
+
 <section class="section">
     <div class="card">
         <div class="card-header">
@@ -25,9 +42,11 @@ $orders = $data['orders'];
                             <td>#ORD-<?= str_pad($orderId, 7, "0", STR_PAD_LEFT) ?></td>
                             <td><?= date("M d, Y", strtotime($order['date'])) ?></td>
                             <td>
-                                <?php foreach ($order['items'] as $item): ?>
-                                    <?= $item['product'] ?> - <?= $item['quantity'] ?>Qty<br>
-                                <?php endforeach; ?>
+                                <div class="product-scroll">
+                                    <?php foreach ($order['items'] as $item): ?>
+                                        <?= $item['product'] ?> - <?= $item['quantity'] ?>Qty<br>
+                                    <?php endforeach; ?>
+                                </div>
                             </td>
                             <td>$<?= number_format($order['total'], 2) ?></td>
                             <td><a href="admin/order/detail/<?= $orderId ?>">see details</a></td>
@@ -112,9 +131,30 @@ $orders = $data['orders'];
                     'cursor': 'pointer'
                 });
             }
+
         });
     });
-    const tableWrapper = document.querySelector('.order-section__table').closest('.your-container-class');
+    const tableWrapper = document.querySelector('.order-section__table')?.closest('.card-body');
+
+    if (tableWrapper) {
+        const observer = new MutationObserver(() => {
+            if ($(tableWrapper).is(':visible')) {
+                $.fn.dataTable
+                    .tables({
+                        visible: true,
+                        api: true
+                    })
+                    .columns.adjust()
+                    .responsive.recalc();
+            }
+        });
+
+        observer.observe(tableWrapper, {
+            attributes: true,
+            attributeFilter: ['style', 'class']
+        });
+    }
+
 
     const observer = new MutationObserver(() => {
         if ($(tableWrapper).is(':visible')) {
