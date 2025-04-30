@@ -21,7 +21,7 @@ if (search) {
 }
 
 const searchInput = search.querySelector(".search__text input");
-console.log(searchInput);
+// console.log(searchInput);
 if (searchInput) {
   searchInput.addEventListener("keyup", () => {
     const searchValue = searchInput.value.toLowerCase();
@@ -31,31 +31,33 @@ if (searchInput) {
     );
 
     if (searchValue === "") {
-      searchProductList.innerHTML =  "";
-    };
+      searchProductList.innerHTML = "";
+    } else {
+      axios.get(`product/search?keyword=${searchValue}`).then((response) => {
+        const productList = response.data;
 
-    axios.get(`product/search?keyword=${searchValue}`).then((response) => {
-      const productList = response.data;
+        searchProductList.innerHTML = ""; // Clear previous results
 
-      searchProductList.innerHTML = ""; // Clear previous results
+        const htmls = productList.map((product) => {
+          const image = JSON.parse(product.Image)[0];
 
-      const htmls = productList.map((product) => {
-        const image = JSON.parse(product.Image)[0];
-
-        return `
-          <a href="product/detail/${product.Slug}" class="search__product-item">
-            <div class="search__product-wrapper">
-              <img src="${image}" alt="${product.Name}" />
-            </div>
-            <div class="search__product-content">
-              <h4>${product.Name}</h4>
-              <p>${product.PriceUnit.toLocaleString()} VND</p>
-            </div>
-          </a>
-        `;
+          return `
+            <a href="product/detail/${
+              product.Slug
+            }" class="search__product-item">
+              <div class="search__product-wrapper">
+                <img src="${image}" alt="${product.Name}" />
+              </div>
+              <div class="search__product-content">
+                <h4>${product.Name}</h4>
+                <p>${product.PriceUnit.toLocaleString()} VND</p>
+              </div>
+            </a>
+          `;
+        });
+        searchProductList.innerHTML = htmls.join("");
       });
-      searchProductList.innerHTML = htmls.join("");
-    });
+    }
   });
 }
 // End Header Search

@@ -16,6 +16,20 @@ class EmployeeModel extends DB
     return null;
   }
 
+  public function findEmployeeById($employeeId) {
+    $query = "SELECT * FROM Employee WHERE SocialNo = ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("s", $employeeId);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $stmt = null;
+    if ($result->num_rows > 0) {
+      return $result->fetch_assoc();
+    }
+    return null;
+  }
+
   public function findEmployeeByUsername($username)
   {
     $query = "SELECT * FROM Employee WHERE Username = ?";

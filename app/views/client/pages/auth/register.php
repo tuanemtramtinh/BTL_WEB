@@ -9,6 +9,8 @@
         <input required type="text" name="firstname" id="firstname" placeholder="First name">
         <input required type="text" name="lastname" id="lastname" placeholder="Last name">
         <input required type="email" name="email" id="email" placeholder="E-mail">
+        <input required type="text" name="phone" id="phone" placeholder="Phone">
+        <input required type="text" name="address" id="address" placeholder="Address">
         <input required type="password" name="password" id="password" placeholder="Password">
         <button type="submit">Sign up</button>
       </form>

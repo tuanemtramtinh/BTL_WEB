@@ -3,15 +3,48 @@
     <div class="product__wrapper">
       <h2 data-aos="fade-down" data-aos-duration="500" class="product__title">Products</h2>
       <div data-aos="fade-left" data-aos-duration="500" class="product__filter">
-        <label for="filter">Sort by</label>
-        <div class="product__filter-wrapper">
-          <select name="filter" id="filter">
-            <option value="">A to Z</option>
-            <option value="">Z to A</option>
-            <option value="">Price Increase</option>
-            <option value="">Price Decrease</option>
-          </select>
-          <i class="fa-solid fa-chevron-down"></i>
+
+        <div class="left">
+          <div>
+            <label for="filter">Brand</label>
+            <div class="product__filter-wrapper">
+              <select name="filter" class="filter-brand" id="filter">
+                <option value="" <?php if ($data['brand'] === '') echo "selected" ?>>All</option>
+                <?php
+                if (isset($data['brands'])) foreach ($data['brands'] as $brand) { ?>
+                  <option value="<?= $brand['Name'] ?>" <?php if ($data['brand'] === $brand['Name']) echo "selected" ?>><?= $brand['Name'] ?></option>
+                <?php } ?>
+              </select>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+
+          <div>
+            <label for="filter">Category</label>
+            <div class="product__filter-wrapper">
+              <select name="filter" class="filter-category" id="filter">
+                <option value="" <?php if ($data['category'] === '') echo "selected" ?>>All</option>
+                <?php
+                if (isset($data['categories'])) foreach ($data['categories'] as $category) { ?>
+                  <option value="<?= $category['Slug'] ?>" <?php if ($category['Slug'] === $data['category']) echo 'selected' ?>><?= $category['Name'] ?></option>
+                <?php } ?>
+              </select>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for="filter">Sort by</label>
+          <div class="product__filter-wrapper">
+            <select name="filter" class="filter-sort" id="filter">
+              <option <?php if ($data['sort'] === '' || $data['sort'] === 'a-to-z') echo "selected"; ?> value="a-to-z">A to Z</option>
+              <option <?php if ($data['sort'] === 'z-to-a') echo "selected"; ?> value="z-to-a">Z to A</option>
+              <option <?php if ($data['sort'] === 'price-inc') echo "selected"; ?> value="price-inc">Price Increase</option>
+              <option <?php if ($data['sort'] === 'price-desc') echo "selected"; ?> value="price-desc">Price Decrease</option>
+            </select>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
         </div>
       </div>
       <div class="product__list">
