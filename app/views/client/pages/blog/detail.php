@@ -29,14 +29,14 @@
         </div>
         <div class="detail__control">
             <?php if (!empty($data['previousPost'])): ?>
-                <a href="http://localhost/BTL_WEB/blog/detail?id=<?= htmlspecialchars($data['previousPost']['ID']) ?>" class="detail__control-post">
+                <a href="blog/detail?id=<?= htmlspecialchars($data['previousPost']['ID']) ?>" class="detail__control-post">
                     <i class="fa-solid fa-chevron-left"></i>
                     Prev
                 </a>
             <?php endif; ?>
 
             <?php if (!empty($data['nextPost'])): ?>
-                <a href="http://localhost/BTL_WEB/blog/detail?id=<?= htmlspecialchars($data['nextPost']['ID']) ?>" class="detail__control-post">
+                <a href="blog/detail?id=<?= htmlspecialchars($data['nextPost']['ID']) ?>" class="detail__control-post">
                     Next
                     <i class="fa-solid fa-chevron-right"></i>
                 </a>
@@ -52,7 +52,7 @@
             <p class="detail__cmt-header">Comments</p>
             
             <div class="detail__cmt-box">
-                <form id="commentForm" action="http://localhost/BTL_WEB/blog/addComment" method="POST" class="detail__cmt-form">
+                <form id="commentForm" action="blog/addComment" method="POST" class="detail__cmt-form">
                     <textarea name="Content" placeholder="Write your comment..." class="detail__cmt-input" required></textarea>
                     <input type="hidden" name="ID_Blog" value="<?= htmlspecialchars($data['blog']['BlogID']) ?>">
                     <input type="hidden" name="Status" value="pending"> 
