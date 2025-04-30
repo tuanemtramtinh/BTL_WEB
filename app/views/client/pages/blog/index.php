@@ -83,7 +83,7 @@
           $imageData = json_decode($blog['Image'], true);
           $imageUrl = !empty($imageData) ? $imageData[0] : ''; 
           ?>
-          <a href="http://localhost/BTL_WEB/blog/detail?id=<?= htmlspecialchars($blog['BlogID']) ?>" class="blog__post-item" data-aos="fade-down" data-aos-duration="300" style="display: flex;flex-direction: column;justify-content: space-around;">
+          <a href="blog/detail?id=<?= htmlspecialchars($blog['BlogID']) ?>" class="blog__post-item" data-aos="fade-down" data-aos-duration="300" style="display: flex;flex-direction: column;justify-content: space-around;">
             <img src="<?= htmlspecialchars($imageUrl) ?>" alt="" class="blog__post-img">
             <p class="blog__post-content"><?= htmlspecialchars($blog['Title']) ?></p>
             <p class="blog__post-note"><?= htmlspecialchars($blog['Desc']) ?></p>

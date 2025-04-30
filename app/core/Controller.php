@@ -34,6 +34,44 @@ class Controller
     ];
   }
 
+  public function rememberClient() {
+    if (!isset($_SESSION['userId']) && isset($_COOKIE['remember'])) {
+      $token = $_COOKIE['remember'];
+
+      $User = $this->model("UserModel");
+      $existUser = $User->findUserById($token);
+
+      if ($existUser) {
+        $_SESSION['userId'] = $existUser['ID'];
+        $_SESSION['user_email'] = htmlspecialchars($existUser['Email']);
+        
+        $Cart = $this->model("CartModel");
+        $existCart = $Cart->findCartByUserId($existUser['ID']);
+        $_SESSION['user_cart'] = $existCart['ID'];
+
+        $Cart->closeConnection();
+      }
+
+      $User->closeConnection();
+    }
+  }
+
+  public function rememberAdmin(){
+    if (!isset($_SESSION['employeeId']) && isset($_COOKIE['remember-admin'])) {
+      $token = $_COOKIE['remember-admin'];
+
+      $Employee = $this->model("EmployeeModel");
+      $existEmployee = $Employee->findEmployeeById($token);
+
+      if ($existEmployee) {
+        $_SESSION['employeeId'] = $existEmployee['SocialNo'];
+        $_SESSION['employee_username'] = htmlspecialchars($existEmployee['Username']);
+      }
+
+      $Employee->closeConnection();
+    }
+  }
+
   public function checkAuthClient()
   {
     if (!isset($_SESSION['userId'])) {

@@ -18,11 +18,11 @@ class OrderModel extends DB
     return !empty($orders) ? $orders : null;
   }
 
-  public function createOrder($userId, $total)
+  public function createOrder($userId, $total, $fullname, $phone, $address, $email)
   {
-    $query = "INSERT INTO `Order` (ID_Customer, Total) VALUES (?, ?)";
+    $query = "INSERT INTO `Order` (ID_Customer, Total, Fullname, PhoneNo, Address, Email) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $this->conn->prepare($query);
-    $stmt->bind_param("ii", $userId, $total);
+    $stmt->bind_param("iissss", $userId, $total, $fullname, $phone, $address, $email);
     $result = $stmt->execute();
     $insertId = $stmt->insert_id;
     $stmt->close();
@@ -43,7 +43,7 @@ class OrderModel extends DB
 
   public function findOrderById($orderId)
   {
-    $query = "SELECT O.ID, O.ID_Customer, O.Total, O.CreatedAt, O.UpdatedAt, O.`Status`, CONCAT(C.LastName, ' ',C.FirstName) as FullName, C.Email FROM `Order` AS O INNER JOIN Customer AS C ON O.ID_Customer = C.ID WHERE O.ID = ?";
+    $query = "SELECT O.ID, O.ID_Customer, O.Total, O.CreatedAt, O.UpdatedAt, O.`Status`, CONCAT(C.LastName, ' ',C.FirstName) as FullName, C.Email AS OrderEmail, O.Fullname AS OrderFullname, O.PhoneNo AS OrderPhone, O.Address AS OrderAddress, O.Email AS OrderEmail FROM `Order` AS O INNER JOIN Customer AS C ON O.ID_Customer = C.ID WHERE O.ID = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("i", $orderId);
     $stmt->execute();
@@ -55,5 +55,46 @@ class OrderModel extends DB
       return $result->fetch_assoc();
     }
     return null;
+  }
+  public function getOrderByUserId($userId)
+  {
+    $queries = " SELECT
+      o.ID,
+      o.CreatedAt AS `date`,
+      o.Total AS total,
+      p.Name AS `name`,
+      oi.Quantity AS quantity
+    FROM
+      `Order` o
+    JOIN
+      OrderItem oi ON o.ID = oi.Order_ID
+    JOIN
+      Product p ON oi.Product_ID = p.ID
+    WHERE
+      o.ID_Customer = ?
+    ORDER BY
+      o.CreatedAt DESC;
+    ";
+    $stmt = $this->conn->prepare($queries);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    $orders = [];
+    while ($row = $result->fetch_assoc()) {
+      $orderId = $row['ID'];
+      if (!isset($orders[$orderId])) {
+        $orders[$orderId] = [
+          "date" => $row['date'],
+          "total" => $row['total'],
+          "items" => [],
+        ];
+      }
+      $orders[$orderId]["items"][] = [
+        "product" => $row["name"],
+        "quantity" => $row["quantity"]
+      ];
+    }
+    return $orders;
   }
 }

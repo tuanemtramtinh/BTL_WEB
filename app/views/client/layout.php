@@ -59,8 +59,8 @@
           <div class="header__utility">
             <i class="fa-solid fa-magnifying-glass"></i>
             <?php if (isset($_SESSION['userId'])) { ?>
-              <i class="fa-solid fa-user"></i>
-              <i class="fa-solid fa-cart-shopping"></i>
+              <a href="user" class="fa-solid fa-user"></a>
+              <a href="cart" class="fa-solid fa-cart-shopping"></a>
               <form action="auth/logout" method="get">
                 <button type="submit">
                   <i class="fa-solid fa-right-from-bracket"></i>
@@ -131,19 +131,19 @@
                 </div>
               </a>
               <?php
-              for ($i = 0; $i < 3; $i++) {
-                echo '
-                  <a href="product/detail" class="search__product-item">
-                    <div class="search__product-wrapper">
-                      <img src="public/images/product.png" alt="">
-                    </div>
-                    <div class="search__product-content">
-                      <h4>Luxurious Perfume</h4>
-                      <p>$599</p>
-                    </div>
-                  </a>
-                  ';
-              }
+              // for ($i = 0; $i < 3; $i++) {
+              //   echo '
+              //     <a href="product/detail" class="search__product-item">
+              //       <div class="search__product-wrapper">
+              //         <img src="public/images/product.png" alt="">
+              //       </div>
+              //       <div class="search__product-content">
+              //         <h4>Luxurious Perfume</h4>
+              //         <p>$599</p>
+              //       </div>
+              //     </a>
+              //     ';
+              // }
               ?>
             </div>
           </div>
@@ -182,7 +182,7 @@
           <div class="search__result">
             <h3>Search Result</h3>
             <div class="search__product-list">
-              <a href="product/detail" class="search__product-item">
+              <!-- <a href="product/detail" class="search__product-item">
                 <div class="search__product-wrapper">
                   <img src="public/images/product.png" alt="">
                 </div>
@@ -206,7 +206,7 @@
                 </a>
                 ';
               }
-              ?>
+              ?> -->
             </div>
           </div>
 

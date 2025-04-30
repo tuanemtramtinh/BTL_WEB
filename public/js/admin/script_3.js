@@ -88,9 +88,7 @@ if (productUpdate) {
 //End Update Quantity
 
 //Update Status
-
 const orderSelects = document.querySelectorAll(".order-select");
-
 if (orderSelects.length > 0) {
   orderSelects.forEach((select) => {
     select.addEventListener("change", async (e) => {
@@ -105,5 +103,35 @@ if (orderSelects.length > 0) {
     });
   });
 }
-
 //End Update Status
+
+//Product Filter
+const brandFilter = document.querySelector("#filter-brand");
+const categoryFilter = document.querySelector("#filter-category");
+
+if (brandFilter) {
+  brandFilter.addEventListener("change", (e) => {
+    const selectedValue = e.target.value;
+    const url = new URL(window.location.href);
+    if (selectedValue === "") {
+      url.searchParams.delete("brand");
+    } else {
+      url.searchParams.set("brand", selectedValue);
+    }
+    window.location.href = url.toString();
+  });
+}
+
+if (categoryFilter) {
+  categoryFilter.addEventListener("change", (e) => {
+    const selectedValue = e.target.value;
+    const url = new URL(window.location.href);
+    if (selectedValue === "") {
+      url.searchParams.delete("category");
+    } else {
+      url.searchParams.set("category", selectedValue);
+    }
+    window.location.href = url.toString();
+  });
+}
+//End Product Filter

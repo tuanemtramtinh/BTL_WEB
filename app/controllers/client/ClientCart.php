@@ -6,6 +6,7 @@ class ClientCart extends Controller
 {
   public function index()
   {
+    $this->checkAuthClient();
     $CartItem = $this->model("CartItemModel");
     $Cart = $this->model("CartModel");
 
@@ -30,6 +31,15 @@ class ClientCart extends Controller
 
       header('Content-Type: application/json');
       http_response_code(200);
+
+      if (!isset($_SESSION['userId'])) {
+        http_response_code(400);
+        echo json_encode([
+          "status" => "fail",
+          "msg" => "Please login to add item to cart"
+        ]);
+        exit;
+      }
 
       if ($productId === '') {
         http_response_code(400);
@@ -82,6 +92,9 @@ class ClientCart extends Controller
   public function addCart($productId = '')
   {
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+      $this->checkAuthClient();
+
       $productQuantity = $_GET['quantity'];
 
       $Product = $this->model("ProductModel");

@@ -1,5 +1,5 @@
 <?php
-$Questions = $data['answeredQuestion'];
+$Questions = $data['Questions'];
 ?>
 
 <div class="contact__section1">
@@ -8,17 +8,21 @@ $Questions = $data['answeredQuestion'];
             <h2 class="contact__section1-title">Hello, how can Perfumé help you?</h2>
             <div class="contact__section1-content">
                 <div class="contact__section1-accordion">
-                    <?php foreach ($Questions as $question) { ?>
-                        <div class="contact__section1-item">
+                    <div class="contact__section1-item">
+                        <?php foreach ($Questions as $question) { ?>
                             <div class="contact__section1-item-header">
-                                <p class="contact__section1-header-question"><?= $question['Question'] ?> - <?= $question['QuestionType'] ?></p>
+                                <p class="contact__section1-header-question">
+                                    <?= $question['Question'] ?>-<strong><?= $question['Type'] ?></strong>
+                                </p>
                                 <button class="contact__section1-header-button">+</button>
                             </div>
                             <div class="contact__section1-item-answer">
-                                <p><?= $question['Answer'] ?></p>
+                                <p>
+                                    <?= $question['Answer'] ?>
+                                </p>
                             </div>
-                        </div>
-                    <?php } ?>
+                        <?php } ?>
+                    </div>
                 </div>
                 <div class="contact__section1-email">
                     <img src="public/images/tt-icon-1.png" alt="chat box" class="contact__section1-email-icon contact__activate">

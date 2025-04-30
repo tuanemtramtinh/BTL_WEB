@@ -13,6 +13,9 @@ class ClientOrder extends Controller
       exit;
     }
 
+    $User = $this->model("UserModel");
+    $existUser = $User->findUserOrderInfoById($_SESSION['userId']);
+
     $CartItem = $this->model("CartItemModel");
     $Cart = $this->model("CartModel");
 
@@ -27,6 +30,7 @@ class ClientOrder extends Controller
       "title" => "Giỏ Hàng",
       "page" => "order/index",
       "task" => 3,
+      "userInfo" => $existUser,
       "success" => $message['success'],
       "error" => $message['error'],
       "cart" => $cart,
@@ -42,6 +46,32 @@ class ClientOrder extends Controller
       exit;
     }
 
+    $fullname = $_POST['fullname'];
+    $fullname = trim($fullname);
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $address = trim($address);
+    $email = $_POST['email'];
+    $email = trim($email);
+
+    if (empty($fullname) || empty($phone) || empty($address) || empty($email)) {
+      $_SESSION['error_message'] = 'Please fill in all fields!';
+      header("Location: ../order/index/" . $cartId);
+      exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $_SESSION['error_message'] = 'Email is invalid!';
+      header("Location: ../order/index/" . $cartId);
+      exit;
+    }
+
+    if (!preg_match('/^[0-9]{10,11}$/', $phone)) {
+      $_SESSION['error_message'] = 'Phone Number is Invalid!';
+      header("Location: ../order/index/" . $cartId);
+      exit;
+    }
+
     $Product = $this->model("ProductModel");
 
     $Order = $this->model("OrderModel");
@@ -52,7 +82,7 @@ class ClientOrder extends Controller
 
     $cart = $Cart->findCartByUserId($_SESSION['userId']);
     $items = $CartItem->getCartListByCartId($_SESSION['user_cart']);
-    $order = $Order->createOrder($_SESSION['userId'], $cart['Total']);
+    $order = $Order->createOrder($_SESSION['userId'], $cart['Total'], $fullname, $phone, $address, $email);
 
     foreach ($items as $item) {
       $OrderItem->addItemToOrder($order, $item['ProductID'], $item['ProductQuantity'], $item['ProductName'], $item['ProductPrice'], $item['ProductImage']);
@@ -77,7 +107,7 @@ class ClientOrder extends Controller
   {
     if ($orderId === '') {
       $_SESSION['error_message'] = 'Invalid Order';
-      header('../../cart/index');
+      header('Location: ../../cart/index');
       exit;
     }
 
@@ -96,6 +126,37 @@ class ClientOrder extends Controller
       "error" => $message['error'],
       "items" => $items,
       "order" => $order
+    ]);
+  }
+
+  public function history($orderId = '')
+  {
+    $this->checkAuthClient();
+
+    if ($orderId === '') {
+      // echo "hello";
+      $_SESSION['error_message'] = 'Invalid Order';
+      header('Location: ../../user/index');
+      exit;
+    }
+
+    $Order = $this->model("OrderModel");
+    $OrderItem = $this->model("OrderItemModel");
+
+    $order = $Order->findOrderById($orderId);
+    $items = $OrderItem->getOrderListByOrderId($orderId);
+
+    // print_r($order);
+
+    $message = $this->getSessionMessage();
+    $this->view("layout", [
+      "title" => "Chi tiết đơn hàng",
+      "page" => "order/history",
+      "task" => 3,
+      "success" => $message['success'],
+      "error" => $message['error'],
+      "order" => $order,
+      "items" => $items
     ]);
   }
 }

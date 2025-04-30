@@ -18,6 +18,48 @@
   </div>
 </div>
 
+<!-- Product Filtering -->
+<div class="section">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Product Filter</h4>
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6 mb-3">
+                <div class="input-group">
+                  <label class="input-group-text" for="filter-brand">Brand</label>
+                  <select class="form-select" id="filter-brand">
+                    <option value="" <?php if ($data['brand'] === '') echo "selected" ?>>All</option>
+                    <?php if (isset($data['brands'])) foreach ($data['brands'] as $brand) { ?>
+                      <option value="<?= $brand['Name'] ?>" <?php if ($data['brand'] === $brand['Name']) echo "selected" ?>><?= $brand['Name'] ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-6 mb-3">
+                <div class="input-group">
+                  <label class="input-group-text" for="filter-category">Category</label>
+                  <select class="form-select" id="filter-category">
+                    <option value="" <?php if ($data['category'] === '') echo "selected" ?>>All</option>
+                    <?php if (isset($data['categories'])) foreach ($data['categories'] as $category) { ?>
+                      <option value="<?= $category['ID'] ?>" <?php if ($data['category'] == $category['ID']) echo "selected" ?>><?= $category['Name'] ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Product List -->
 <section class="section">
   <div class="row">
@@ -62,16 +104,17 @@
                       <a class="btn btn-sm btn-info " href="admin/product/detail/<?= $product['ID'] ?>">Detail</a>
                       <a class="btn btn-sm btn-warning  ml-1" href="admin/product/edit/<?= $product['ID'] ?>">Edit</a>
                       <div class="modal-danger me-1 mb-1 d-inline-block">
-                        <!-- Button trigger for danger theme modal -->
-                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#danger">
+                        <!-- Delete Button -->
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $product['ID'] ?>">
                           Delete
                         </button>
-                        <!--Danger theme Modal -->
-                        <div class="modal fade text-left" id="danger" tabindex="-1" aria-labelledby="myModalLabel120" style="display: none;" aria-hidden="true">
+
+                        <!-- Modal -->
+                        <div class="modal fade text-left" id="deleteModal<?= $product['ID'] ?>" tabindex="-1" aria-labelledby="modalLabel<?= $product['ID'] ?>" style="display: none;" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                             <div class="modal-content">
                               <div class="modal-header bg-danger">
-                                <h5 class="modal-title white" id="myModalLabel120">
+                                <h5 class="modal-title white" id="modalLabel<?= $product['ID'] ?>">
                                   Confirm Product Deletion
                                 </h5>
                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -82,15 +125,13 @@
                                 </button>
                               </div>
                               <div class="modal-body">
-                                Are you sure you want to delete this product <span style="font-weight: 700; font-style: italic;"><?= $product['Name'] ?></span> ? This action cannot be undone.
+                                Are you sure you want to delete the product <span style="font-weight: 700; font-style: italic;"><?= $product['Name'] ?></span>? This action cannot be undone.
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                  <i class="bx bx-x d-block d-sm-none"></i>
                                   <span class="d-none d-sm-block">Cancel</span>
                                 </button>
                                 <a href="admin/product/delete/<?= $product['ID'] ?>" type="button" class="btn btn-danger ms-1">
-                                  <i class="bx bx-check d-block d-sm-none"></i>
                                   <span class="d-none d-sm-block">Delete</span>
                                 </a>
                               </div>
@@ -98,7 +139,6 @@
                           </div>
                         </div>
                       </div>
-                      <!-- <a class="btn btn-danger btn-sm ml-1" href="admin/product/delete/<?= $product['ID'] ?>">Delete</a> -->
                     </td>
                   </tr>
                 <?php } ?>

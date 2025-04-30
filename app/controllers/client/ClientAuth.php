@@ -38,6 +38,7 @@ class ClientAuth extends Controller
     unset($_SESSION['userId']);
     unset($_SESSION['user_email']);
     unset($_SESSION['user_cart']);
+    setcookie('remember', "", time() - 3600, "/");
     // session_unset();
     // session_destroy();
     $_SESSION['success_message'] = 'Logout successfully';
@@ -49,6 +50,7 @@ class ClientAuth extends Controller
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $email = $_POST['email'];
       $password = $_POST['password'];
+      $remember = isset($_POST['remember']) ? true : false;
 
       $User = $this->model("UserModel");
       $Cart = $this->model("CartModel");
@@ -90,6 +92,11 @@ class ClientAuth extends Controller
       $_SESSION['user_email'] = htmlspecialchars($existUser['Email']);
       $_SESSION['user_cart'] = $existCart['ID'];
 
+      // Set "remember me" cookie if checked
+      if ($remember) {
+        setcookie('remember', $existUser['ID'], time() + (86400 * 30), "/"); // 30 days
+      }
+
       $User->closeConnection();
       $Cart->closeConnection();
 
@@ -105,6 +112,8 @@ class ClientAuth extends Controller
       $firstName = $_POST['firstname'];
       $lastName = $_POST['lastname'];
       $email = $_POST['email'];
+      $phone = $_POST['phone'];
+      $address = $_POST['address'];
       $password = $_POST['password'];
 
       $User = $this->model("UserModel");
@@ -114,7 +123,7 @@ class ClientAuth extends Controller
       $error = null;
 
       //Check empty
-      if (empty($firstName) || empty($lastName) || empty($email) || empty($password)) {
+      if (empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($phone) || empty($address)) {
         $error = 'Fail to register: Fill in all fields!';
       }
 
@@ -127,6 +136,11 @@ class ClientAuth extends Controller
       $existUser = $User->findUserByEmail($email);
       if (isset($existUser)) {
         $error = 'Fail to register: Email is already registered!';
+      }
+
+      //Check if phone has length = 10
+      if (!preg_match('/^\d{10}$/', $phone)) {
+        $error = 'Fail to register: Phone Number is not valid!';
       }
 
       if (isset($error)) {

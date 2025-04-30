@@ -13,6 +13,39 @@
 
 <div class="cart">
   <div class="container">
+
+    <div class="order" data-aos="fade-down" data-aos-duration="500">
+      <div class="order__title">Personal Information</div>
+      <table class="order__table">
+        <tbody>
+          <tr>
+            <td>Fullname</td>
+            <td>
+              <input disabled value="<?= $data['order']['OrderFullname'] ?>" type="text" placeholder="Fullname" name="fullname">
+            </td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>
+              <input disabled value="<?= $data['order']['OrderEmail'] ?>" type="email" placeholder="Email" name="email">
+            </td>
+          </tr>
+          <tr>
+            <td>Phone Number</td>
+            <td>
+              <input disabled value="<?= $data['order']['OrderPhone'] ?>" type="text" placeholder="Phone Number" name="phone">
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>
+              <input disabled value="<?= $data['order']['OrderAddress'] ?>" type="text" placeholder="Address" name="address">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="cart__wrapper">
       <h2 data-aos="fade-down" data-aos-duration="800" class="cart__title">
         Order Detail
