@@ -77,6 +77,9 @@ class ClientProduct extends Controller
     $Product = $this->model("ProductModel");
 
     $product = $Product->findProductBySlug($productSlug);
+
+    // print_r($product);
+
     $products = $Product->getProductListClient('', '', 0, 8, '');
     $products = array_filter($products, function ($item) use ($productSlug) {
       return $item['Slug'] !== $productSlug;

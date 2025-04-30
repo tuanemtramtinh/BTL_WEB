@@ -31,6 +31,15 @@ class ClientCart extends Controller
       header('Content-Type: application/json');
       http_response_code(200);
 
+      if (!isset($_SESSION['userId'])) {
+        http_response_code(400);
+        echo json_encode([
+          "status" => "fail",
+          "msg" => "Please login to add item to cart"
+        ]);
+        exit;
+      }
+
       if ($productId === '') {
         http_response_code(400);
         echo json_encode([

@@ -4,7 +4,12 @@ class ProductModel extends DB
 {
   public function createProduct($productName, $productPrice, $productQuantity, $productDesc, $productImage, $productBrand, $productCategory, $employeeId)
   {
-    $slugName = strtolower(str_replace(' ', '-', $productName));
+    $slugName = str_replace(['’', '‘', '“', '”'], ["'", "'", '"', '"'], $productName);
+    $slugName = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $slugName);
+    $slugName = strtolower($slugName);
+    $slugName = preg_replace('/[^a-z0-9]+/', '-', $slugName);
+    $slugName = trim($slugName, '-');
+
 
     $query = 'INSERT INTO Product(Name, PriceUnit, Inventory, Description, Slug, Image, Brand, ID_ProductCategory, SocialNo) VALUES (?,?,?,?,?,?,?,?,?)';
     $stmt = $this->conn->prepare($query);

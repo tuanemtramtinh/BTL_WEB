@@ -5,7 +5,7 @@
         Order Detail
       </h2>
 
-      <form action="order/orderPost/<?= $data['cart']['ID'] ?>" method="POST">
+      <form class="order-form-info" action="order/orderPost/<?= $data['cart']['ID'] ?>" method="POST">
         <div class="order" data-aos="fade-down" data-aos-duration="500">
           <div class="order__title">Personal Information</div>
           <table class="order__table">

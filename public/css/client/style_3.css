@@ -121,6 +121,12 @@ input[type="number"] {
   font-weight: 500;
   margin-bottom: 8px;
   text-align: center;
+  margin: 0 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .product__item-content {

@@ -121,10 +121,10 @@ if (productDetailForm) {
       button.innerHTML = oldButton;
       const alert = document.createElement("div");
       alert.classList.add("alert");
-      alert.classList.add("error");
+      alert.classList.add("danger");
       alert.innerHTML = `
         <span class="closebtn">&times;</span>
-        ${error.data.msg}
+        ${error.response.data.msg}
         `;
       wrapper.insertBefore(alert, header);
       const closeBtn = alert.querySelector(".closebtn");
@@ -151,7 +151,6 @@ if (productDetailForm) {
 //End Add to bag Form
 
 // Filtering
-
 const filterBrand = document.querySelector(".filter-brand");
 const filterCategory = document.querySelector(".filter-category");
 const filterSort = document.querySelector(".filter-sort");
@@ -194,5 +193,18 @@ if (filterSort) {
     window.location.href = url.toString();
   });
 }
-
 // End Filtering
+
+// Check Order Form Information
+
+// const orderFormInfo = document.querySelector(".order-form-info");
+// if (orderFormInfo) {
+//   orderFormInfo.addEventListener("submit", (e) => {
+//     const fullname = e.target.fullname.value;
+//     const email = e.target.email.value;
+//     const phone = e.target.phone.value;
+//     const address = e.target.address.value;
+//   })
+// }
+
+// End Check Order Form Information

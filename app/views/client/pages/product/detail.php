@@ -47,7 +47,7 @@
         </div>
         <div data-aos="fade-down" data-aos-duration="800" class="product-detail__bag">
           <h3 class="product-detail__name">
-            Luxurious Elixir
+            <?= $data['product']['Name'] ?>
           </h3>
           <div class="product-detail__info">
             <div class="product-detail__info-item">
