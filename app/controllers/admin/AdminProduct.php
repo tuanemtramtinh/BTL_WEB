@@ -11,6 +11,11 @@ class AdminProduct extends Controller
     $brand = $_GET['brand'] ?? '';
 
     $Product = $this->model("ProductModel");
+    $Brand = $this->model("BrandModel");
+    $Category = $this->model("CategoryModel");
+
+    $brands = $Brand->getBrandList();
+    $categories = $Category->getCategoryList();
     $products = $Product->getProductList();
 
     if ($category !== '') {
@@ -31,6 +36,10 @@ class AdminProduct extends Controller
       "page" => "product/index",
       "error" => $message['error'],
       "success" => $message['success'],
+      "brands" => $brands,
+      "categories" => $categories,
+      "category" => $category,
+      "brand" => $brand,
       "task" => 3,
       "products" => $products
     ]);
@@ -88,6 +97,7 @@ class AdminProduct extends Controller
       $productImagesJson = json_encode($productImages, JSON_PRETTY_PRINT);
 
       $productName = $_POST['name'];
+      $productName = trim($productName);
       $productCategory = $_POST['category'];
       $productBrand = $_POST['brand'];
       $productDesc = $_POST['description'];

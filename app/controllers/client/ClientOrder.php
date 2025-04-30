@@ -47,9 +47,30 @@ class ClientOrder extends Controller
     }
 
     $fullname = $_POST['fullname'];
+    $fullname = trim($fullname);
     $phone = $_POST['phone'];
     $address = $_POST['address'];
+    $address = trim($address);
     $email = $_POST['email'];
+    $email = trim($email);
+
+    if (empty($fullname) || empty($phone) || empty($address) || empty($email)) {
+      $_SESSION['error_message'] = 'Please fill in all fields!';
+      header("Location: ../order/index/" . $cartId);
+      exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $_SESSION['error_message'] = 'Email is invalid!';
+      header("Location: ../order/index/" . $cartId);
+      exit;
+    }
+
+    if (!preg_match('/^[0-9]{10,11}$/', $phone)) {
+      $_SESSION['error_message'] = 'Phone Number is Invalid!';
+      header("Location: ../order/index/" . $cartId);
+      exit;
+    }
 
     $Product = $this->model("ProductModel");
 
