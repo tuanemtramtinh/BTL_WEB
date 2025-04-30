@@ -101,7 +101,7 @@ $orders = $data['orders'];
                                         <?php endforeach; ?>
                                     </td>
                                     <td>$<?= number_format($order['total'], 2) ?></td>
-                                    <td><a href="#">see details</a></td>
+                                    <td><a href="order/history/<?=$orderId?>">see details</a></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

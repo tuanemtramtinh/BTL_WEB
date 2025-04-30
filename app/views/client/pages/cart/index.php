@@ -33,7 +33,7 @@
                     <img src="<?= $productImage[0] ?>" alt="">
                   </div>
                   <div class="cart__table-item-title">
-                    <h4><?= $item['ProductName'] ?></h4>
+                    <a href="product/detail/<?=$item['ProductSlug']?>"><?= $item['ProductName'] ?></a>
                     <p class="cart__table-price-mobile"><?= number_format($item['ProductPrice']) ?> VND</p>
                   </div>
                 </div>
