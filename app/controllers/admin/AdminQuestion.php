@@ -137,10 +137,30 @@ class AdminQuestion extends Controller
       $this->sendMail(
         $Question['Email'],
         $Question['Name'],
-        "Câu hỏi của bạn đã không được duyệt !!!",
-        "<p>Câu hỏi của bạn đã không được duyệt vì đã bị trùng lặp hoặc không liên quan tới chủ đề. Mong bạn thông cảm cho shop.</p>
-        <p>Câu hỏi của bạn về chủ đề {$Question['QuestionType']}: \"{$Question['Question']}\"</p>"
+        "Câu hỏi của bạn đã không được duyệt",
+        "
+        <div style='font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; color: #333;'>
+          <div style='max-width: 600px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05);'>
+            <h2 style='color: #FF5722;'>Xin chào {$Question['Name']},</h2>
+            <p>Cảm ơn bạn đã gửi câu hỏi tới chúng tôi.</p>
+            <p>Tuy nhiên, sau khi xem xét, chúng tôi rất tiếc phải thông báo rằng câu hỏi của bạn đã không được duyệt vì lý do sau:</p>
+            <ul style='margin: 15px 0; padding-left: 20px;'>
+              <li>Câu hỏi bị trùng lặp hoặc</li>
+              <li>Không liên quan đến nội dung mà hệ thống đang hỗ trợ</li>
+            </ul>
+            <p style='margin-top: 20px;'>Chi tiết câu hỏi của bạn:</p>
+            <blockquote style='margin: 20px 0; padding: 15px; background: #f3f3f3; border-left: 4px solid #FF5722;'>
+              <strong>Chủ đề:</strong> {$Question['QuestionType']}<br>
+              <strong>Nội dung:</strong> <em>\"{$Question['Question']}\"</em>
+            </blockquote>
+            <p>Chúng tôi rất mong bạn thông cảm và hy vọng bạn sẽ tiếp tục đồng hành cùng chúng tôi trong tương lai.</p>
+            <hr style='margin: 30px 0;'>
+            <p style='font-size: 14px; color: #888;'>Trân trọng,<br><strong>Đội ngũ quản trị</strong></p>
+          </div>
+        </div>
+        "
       );
+
       header("Location: index");
     } else {
       $_SESSION["error_message"] = "Xoá câu hỏi không thành công!";
@@ -208,10 +228,32 @@ class AdminQuestion extends Controller
         $this->sendMail(
           $Question['Email'],
           $Question['Name'],
-          "Câu hỏi của bạn đã đã được trả lời",
-          "<p>Câu hỏi của bạn: \"{$Question['Question']}\"</p>
-          <p>Câu trả lời của shop: \"{$Question['Answer']}\"</p>"
+          "Câu hỏi của bạn đã được trả lời",
+          "
+          <div style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; color: #333;'>
+            <div style='max-width: 600px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);'>
+              <h2 style='color: #FF6F00;'>Xin chào {$Question['Name']},</h2>
+              <p>Cảm ơn bạn đã gửi câu hỏi đến hệ thống.</p>
+              <p>Chúng tôi đã xem xét và phản hồi câu hỏi của bạn như sau:</p>
+        
+              <h3 style='margin-top: 20px; color: #222;'>📌 Câu hỏi của bạn:</h3>
+              <blockquote style='margin: 10px 0 20px 0; padding: 15px; background: #f9f9f9; border-left: 4px solid #FF6F00;'>
+                <em>\"{$Question['Question']}\"</em>
+              </blockquote>
+        
+              <h3 style='margin-top: 10px; color: #222;'>✅ Trả lời từ shop:</h3>
+              <div style='margin: 10px 0 30px 0; padding: 15px; background: #e8f5e9; border-left: 4px solid #4CAF50;'>
+                <strong>{$Question['Answer']}</strong>
+              </div>
+        
+              <p>Hy vọng câu trả lời trên sẽ giúp ích cho bạn. Nếu còn thắc mắc khác, đừng ngần ngại gửi thêm câu hỏi cho chúng tôi.</p>
+              <hr style='margin: 30px 0;'>
+              <p style='font-size: 14px; color: #888;'>Trân trọng,<br><strong>Đội ngũ tư vấn</strong></p>
+            </div>
+          </div>
+          "
         );
+
         header("Location: index");
       } else {
         $_SESSION["error_message"] = "Trả lời câu hỏi không thành công!";

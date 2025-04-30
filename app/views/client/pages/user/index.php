@@ -96,12 +96,14 @@ $orders = $data['orders'];
                                     <td>#ORD-<?= str_pad($orderId, 7, "0", STR_PAD_LEFT) ?></td>
                                     <td><?= date("M d, Y", strtotime($order['date'])) ?></td>
                                     <td>
-                                        <?php foreach ($order['items'] as $item): ?>
-                                            <?= $item['product'] ?> - <?= $item['quantity'] ?>Qty<br>
-                                        <?php endforeach; ?>
+                                        <div class="product-scroll">
+                                            <?php foreach ($order['items'] as $item): ?>
+                                                <?= $item['product'] ?> - <?= $item['quantity'] ?>Qty<br>
+                                            <?php endforeach; ?>
+                                        </div>
                                     </td>
                                     <td>$<?= number_format($order['total'], 2) ?></td>
-                                    <td><a href="order/history/<?=$orderId?>">see details</a></td>
+                                    <td><a href="order/history/<?= $orderId ?>">see details</a></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

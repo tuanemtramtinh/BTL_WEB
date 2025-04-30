@@ -7,15 +7,15 @@
                     <span>us</span>
                 </div>
                 <div class="contactPage__left--form">
-                    <form action="#" method="GET">
-                        <input type="text" name="userName" placeholder="Name">
-                        <input type="text" name="userEmail" placeholder="Email">
-                        <textarea name="userMessage" placeholder="Message"></textarea>
+                    <form id="contactForm" method="POST">
+                        <input type="text" name="userName" id="user-Name" placeholder="Name">
+                        <input type="text" name="userEmail" id="user-Email" placeholder="Email">
+                        <textarea name="userMessage" id="user-Message" placeholder="Message"></textarea>
                         <label>
-                            <input type="checkbox" name="agreeButton">
+                            <input type="checkbox" name="agreeButton" id="agree-Button">
                             <span>I would like to receive the newsletter.</span>
                         </label>
-                        <button class="style1_button">
+                        <button type="submit" class="style1_button">
                             Submit
                         </button>
                     </form>
@@ -66,3 +66,5 @@
         </div>
     </div>
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/just-validate@4.2.0/dist/just-validate.production.min.js"></script>
