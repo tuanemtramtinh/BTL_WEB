@@ -30,10 +30,17 @@ input[type="number"] {
   justify-content: flex-end;
   font-size: 20px;
   position: relative;
+  gap: 20px;
+}
+
+.product__filter .left {
+  flex: 1;
+  display: flex;
+  gap: 20px;
 }
 
 .product__filter label {
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .product__filter-wrapper {
@@ -73,6 +80,11 @@ input[type="number"] {
   margin: 75px 0;
 }
 
+.product__item-wrapper-discover {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
 .product__item {
   height: 100%;
   display: block;
@@ -109,6 +121,12 @@ input[type="number"] {
   font-weight: 500;
   margin-bottom: 8px;
   text-align: center;
+  margin: 0 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .product__item-content {
@@ -884,6 +902,10 @@ input[type="number"] {
   width: 100%;
   aspect-ratio: 1/1;
   object-fit: contain;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: #AB572D;
 }
 
 /* End Swiper */

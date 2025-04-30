@@ -17,7 +17,7 @@ class CategoryModel extends DB
 
   public function getCategoryList()
   {
-    $query = "SELECT ProductCategory.ID, ProductCategory.Name, ProductCategory.CreatedAt, ProductCategory.UpdatedAt, Employee.Username FROM ProductCategory INNER JOIN Employee WHERE ProductCategory.SocialNo = Employee.SocialNo ORDER BY ProductCategory.ID ASC";
+    $query = "SELECT ProductCategory.ID, ProductCategory.Name, ProductCategory.CreatedAt, ProductCategory.UpdatedAt, ProductCategory.Slug, Employee.Username FROM ProductCategory INNER JOIN Employee WHERE ProductCategory.SocialNo = Employee.SocialNo ORDER BY ProductCategory.ID ASC";
     $stmt = $this->conn->prepare($query);
     $stmt->execute();
 
@@ -70,6 +70,21 @@ class CategoryModel extends DB
     $query = "SELECT * FROM ProductCategory WHERE ID = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("s", $categoryId);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $stmt = null;
+    if ($result->num_rows > 0) {
+      return $result->fetch_assoc();
+    }
+    return null;
+  }
+
+  public function findCategoryBySlug($categorySlug)
+  {
+    $query = "SELECT * FROM ProductCategory WHERE Slug = ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("s", $categorySlug);
     $stmt->execute();
 
     $result = $stmt->get_result();

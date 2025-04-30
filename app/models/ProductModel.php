@@ -4,7 +4,12 @@ class ProductModel extends DB
 {
   public function createProduct($productName, $productPrice, $productQuantity, $productDesc, $productImage, $productBrand, $productCategory, $employeeId)
   {
-    $slugName = strtolower(str_replace(' ', '-', $productName));
+    $slugName = str_replace(['’', '‘', '“', '”'], ["'", "'", '"', '"'], $productName);
+    $slugName = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $slugName);
+    $slugName = strtolower($slugName);
+    $slugName = preg_replace('/[^a-z0-9]+/', '-', $slugName);
+    $slugName = trim($slugName, '-');
+
 
     $query = 'INSERT INTO Product(Name, PriceUnit, Inventory, Description, Slug, Image, Brand, ID_ProductCategory, SocialNo) VALUES (?,?,?,?,?,?,?,?,?)';
     $stmt = $this->conn->prepare($query);
@@ -64,14 +69,45 @@ class ProductModel extends DB
     return $result;
   }
 
-  public function countProduct()
+  public function countProduct($category = '', $brand = '')
   {
-    $query = "SELECT COUNT(*) AS total FROM Product";
+    // $query = "SELECT COUNT(*) AS total FROM Product ";
+    // $stmt = $this->conn->prepare($query);
+    // $stmt->execute();
+    // $result = $stmt->get_result();
+    // $row = $result->fetch_assoc();
+    // $total = $row['total'];
+    // $stmt->close();
+
+    // return $total;
+
+    $query = "SELECT COUNT(*) AS total FROM Product WHERE 1";
+    $params = [];
+    $types = '';
+
+    if (!empty($category)) {
+      $query .= " AND ID_ProductCategory = ?";
+      $params[] = $category;
+      $types .= 's';
+    }
+
+    if (!empty($brand)) {
+      $query .= " AND Brand = ?";
+      $params[] = $brand;
+      $types .= 's';
+    }
+
     $stmt = $this->conn->prepare($query);
+
+    if (!empty($params)) {
+      $stmt->bind_param($types, ...$params);
+    }
+
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
     $total = $row['total'];
+
     $stmt->close();
 
     return $total;
@@ -115,8 +151,20 @@ class ProductModel extends DB
     return !empty($products) ? $products : null;
   }
 
-  public function getProductListClient($category = '', $brand = '', $skip = 0, $limit = 2147483647)
+  public function getProductListClient($category = '', $brand = '', $skip = 0, $limit = 2147483647, $sort = 'a-to-z')
   {
+    if ($sort === 'a-to-z' || $sort === '') {
+      $orderBy = 'Product.Name ASC';
+    } elseif ($sort === 'z-to-a') {
+      $orderBy = 'Product.Name DESC';
+    } elseif ($sort === 'price-inc') {
+      $orderBy = 'Product.PriceUnit ASC';
+    } elseif ($sort === 'price-desc') {
+      $orderBy = 'Product.PriceUnit DESC';
+    } else {
+      $orderBy = 'Product.ID ASC';
+    }
+
     $query = "
     SELECT
       Product.ID,
@@ -140,7 +188,7 @@ class ProductModel extends DB
       (? = '' OR ProductCategory.Slug = ?)
       AND (? = '' OR Product.Brand = ?)
     ORDER BY
-      Product.ID ASC
+      $orderBy
     LIMIT ?, ?
     ";
 

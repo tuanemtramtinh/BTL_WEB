@@ -16,11 +16,19 @@
           </div>
           <div class="card-text mb-3">
             <strong class="me-3">Email: </strong>
-            <span> <?= $data['order']['Email'] ?> </span>
+            <span> <?= $data['order']['OrderEmail'] ?> </span>
+          </div>
+          <div class="card-text mb-3">
+            <strong class="me-3">Phone: </strong>
+            <span> <?= $data['order']['OrderPhone'] ?> </span>
+          </div>
+          <div class="card-text mb-3">
+            <strong class="me-3">Address: </strong>
+            <span> <?= $data['order']['OrderAddress'] ?> </span>
           </div>
           <div class="card-text">
             <strong class="me-3">Full Name: </strong>
-            <span><?= $data['order']['FullName'] ?></span>
+            <span><?= $data['order']['OrderFullname'] ?></span>
           </div>
         </div>
       </div>

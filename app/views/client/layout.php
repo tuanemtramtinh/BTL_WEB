@@ -131,19 +131,19 @@
                 </div>
               </a>
               <?php
-              for ($i = 0; $i < 3; $i++) {
-                echo '
-                  <a href="product/detail" class="search__product-item">
-                    <div class="search__product-wrapper">
-                      <img src="public/images/product.png" alt="">
-                    </div>
-                    <div class="search__product-content">
-                      <h4>Luxurious Perfume</h4>
-                      <p>$599</p>
-                    </div>
-                  </a>
-                  ';
-              }
+              // for ($i = 0; $i < 3; $i++) {
+              //   echo '
+              //     <a href="product/detail" class="search__product-item">
+              //       <div class="search__product-wrapper">
+              //         <img src="public/images/product.png" alt="">
+              //       </div>
+              //       <div class="search__product-content">
+              //         <h4>Luxurious Perfume</h4>
+              //         <p>$599</p>
+              //       </div>
+              //     </a>
+              //     ';
+              // }
               ?>
             </div>
           </div>
@@ -182,7 +182,7 @@
           <div class="search__result">
             <h3>Search Result</h3>
             <div class="search__product-list">
-              <a href="product/detail" class="search__product-item">
+              <!-- <a href="product/detail" class="search__product-item">
                 <div class="search__product-wrapper">
                   <img src="public/images/product.png" alt="">
                 </div>
@@ -206,7 +206,7 @@
                 </a>
                 ';
               }
-              ?>
+              ?> -->
             </div>
           </div>
 

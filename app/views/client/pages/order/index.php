@@ -5,7 +5,7 @@
         Order Detail
       </h2>
 
-      <form action="order/orderPost/<?= $data['cart']['ID'] ?>" method="POST">
+      <form class="order-form-info" action="order/orderPost/<?= $data['cart']['ID'] ?>" method="POST">
         <div class="order" data-aos="fade-down" data-aos-duration="500">
           <div class="order__title">Personal Information</div>
           <table class="order__table">
@@ -93,10 +93,10 @@
               <span>Shipping</span>
               <span>Free</span>
             </div>
-            <div class="cart__promo">
+            <!-- <div class="cart__promo">
               <label for="promo">Promo Code</label>
               <input type="text" name="promo" id="promo" placeholder="Write here">
-            </div>
+            </div> -->
           </div>
           <div data-aos="fade-down" data-aos-duration="800" class="cart__submit">
             <button>Checkout</button>
