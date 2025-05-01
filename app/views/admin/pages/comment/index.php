@@ -88,7 +88,11 @@
                                 <ul class="list-group">
                                     <li class="list-group-item"><strong>ID:</strong> <?= htmlspecialchars($comment['ID']) ?></li>
                                     <li class="list-group-item"><strong>Content:</strong> <?= htmlspecialchars($comment['Content']) ?></li>
-                                    <li class="list-group-item"><strong>ID Customer:</strong> <?= htmlspecialchars($comment['ID_Customer']) ?></li>
+                                    <li class="list-group-item"><strong>ID Customer:</strong> 
+                                        <a href="admin/user/viewUserInfo?id=<?= htmlspecialchars($comment['ID_Customer']) ?>">
+                                            <?= htmlspecialchars($comment['ID_Customer']) ?>
+                                        </a>
+                                    </li>
                                     <li class="list-group-item"><strong>ID Blog:</strong>
                                         <a href="admin/blog/detail?id=<?= htmlspecialchars($comment['ID_Blog']) ?>">
                                             <?= htmlspecialchars($comment['ID_Blog']) ?>

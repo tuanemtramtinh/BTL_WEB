@@ -77,8 +77,21 @@
                                     }
                                 }
                             ?>
+                            <?php
+                                $defaultAvatar = 'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg';
+                                $avatarPath = $defaultAvatar;
+
+                                if (!empty($comment['Avatar'])) {
+                                    $avatars = json_decode($comment['Avatar'], true);
+                                    if (is_array($avatars) && isset($avatars[0]) && $avatars[0] !== '') {
+                                        $avatarPath = $avatars[0];
+                                    }
+                                }
+                            ?>
                             <div class="detail__cmt-item">
-                                <img src="<?= empty($comment['Avatar']) ? 'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg' : htmlspecialchars($comment['Avatar']) ?>" alt="User Avatar" class="detail__cmt-user-img">
+                                <img src="<?= htmlspecialchars($avatarPath) ?>"
+                                    alt="User Avatar"
+                                    class="detail__cmt-user-img">
                                 <div class="detail__cmt-content">
                                     <div class="detail__cmt-user-info">
                                         <p class="detail__cmt-user"><?= htmlspecialchars($comment['name_Customer'] ?? 'John Doe') ?></p>
