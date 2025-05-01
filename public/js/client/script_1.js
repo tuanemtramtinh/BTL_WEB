@@ -38,12 +38,14 @@ if (contactPageForm) {
             const email = form.querySelector('[name="userEmail"]').value;
             const message = form.querySelector('[name="userMessage"]').value;
             const receive = form.querySelector('[name="agreeButton"]').checked;
+            const status = "notSeen";
         
             const data = {
                 name: name,
                 email: email,
                 message: message,
-                receive: receive
+                receive: receive,
+                status: status
             };
         
             fetch(`contact/addContact`, {

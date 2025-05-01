@@ -1,53 +1,16 @@
-<!-- Section 4 - Bộ lọc -->
-<div class="card mb-4">
-  <div class="card-body d-flex flex-wrap align-items-center">
-    <div class="d-flex align-items-center me-3 mb-2">
-      <i class="fa-solid fa-filter me-2 fs-4"></i> <strong>Bộ lọc</strong>
-    </div>
-
-    <div class="me-3 mb-2">
-      <select class="form-select form-select-sm" style="min-width: 150px;" filter-status="filter-status">
-        <option value="">Trạng thái</option>
-        <option value="notSeen">Chưa xem</option>
-        <option value="seen">Đã xem</option>
-        <option value="responded">Đã phản hồi</option>
-      </select>
-    </div>
-
-    <!-- <div class="me-3 mb-2">
-      <select class="form-select form-select-sm" style="min-width: 150px;" filter-created-by="filter-created-by">
-        <option value="">Người tạo</option>
-        <option value="">Nguyen Van AA</option>
-      </select>
-    </div> -->
-
-    <div class="d-flex align-items-center me-3 mb-2">
-      <input type="date" filter-start-date class="form-control form-control-sm me-1" style="width: 120px;" filter-start-date="filter-start-date">
-      <span class="mx-1">-</span>
-      <input type="date" filter-end-date class="form-control form-control-sm" style="width: 120px;" filter-end-date="filter-end-date">
-    </div>
-
-    <div class="text-danger fw-semibold mb-2" style="cursor: pointer;" filter-reset>
-      <i class="bi bi-arrow-counterclockwise me-1"></i> Xóa bộ lọc
-    </div>
-  </div>
-</div>
-
 <!-- Section 5 - Hành động nhóm / Tìm kiếm / Tạo mới -->
 <div class="card mb-4">
   <div class="card-body d-flex flex-wrap align-items-center gap-3">
 
     <!-- Hành động nhóm -->
     <div class="d-flex align-items-center border rounded-3 overflow-hidden" 
-        change-multi 
-        data-api="admin/contact/changeMulti">
+        change-multi
+        data-api="admin/contact/changeMultiTrash">
       <div class="p-3 border-end">
         <select class="form-select form-select-sm" id="bulk-action">
           <option value="">-- Hành động --</option>
-          <option value="notSeen">Chưa xem</option>
-          <option value="seen">Đã xem</option>
-          <option value="responded">Đã phản hồi</option>
-          <option value="delete">Xoá</option>
+          <option value="restore">Khôi phục</option>
+          <option value="delete">Xóa vĩnh viễn</option>
         </select>
       </div>
       <div class="p-3">
@@ -57,8 +20,8 @@
 
     <!-- Nút xem danh sách xóa -->
     <div>
-      <a href="admin/contact/trash" class="btn btn-primary fw-bold px-4 rounded-3 d-flex align-items-center" style="min-height: 62px;">
-        Các liên hệ đã xóa
+      <a href="admin/contact" class="btn btn-primary fw-bold px-4 rounded-3 d-flex align-items-center" style="min-height: 62px;">
+        Quay lại trang danh sách
       </a>
     </div>
   </div>
@@ -138,23 +101,25 @@
                 </div>
               </div>
 
-              <a href="#" class="btn icon btn-warning">
-                <i class="bi bi-envelope-open"></i>
+              <a href="admin/contact/restore/<?= $contact['ID'] ?>" class="btn icon btn-warning" title="Khôi phục">
+                <i class="bi bi-arrow-counterclockwise"></i>
               </a>
+
               <a 
               href="javascript:;" 
               class="btn icon btn-danger" 
               button-delete 
-              data-api="admin/contact/delete/<?= $contact['ID'] ?>">
+              data-api="admin/contact/deleteDestroy/<?= $contact['ID'] ?>">
                 <i class="bi bi-trash"></i>
               </a>
+
             </td>
           </tr>
         <?php endforeach; ?>
         </tbody>
       </table>
     </div>
-  </div>  
+  </div>
 </div>
 <!-- End Section 6 -->
 
