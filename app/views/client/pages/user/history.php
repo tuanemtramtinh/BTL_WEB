@@ -69,88 +69,76 @@ $orders = $data['orders'];
                         </tbody>
                     </table>
                     <div class="order-section__items-reponsive">
-                        <div class="order-section__item">
-                            <div class="item__basic-info">
-                                <p class="item__id">#ORD-2025001</p>
-                                <p class="item__date">Jan 15, 2025</p>
+                        <?php foreach ($orders as $orderId => $order): ?>
+                            <div class="order-section__item">
+                                <a href="order/history/<?= $orderId ?>">
+                                    <div class="item__basic-info">
+                                        <p class="item__id">#ORD-<?= str_pad($orderId, 7, "0", STR_PAD_LEFT) ?></p>
+                                        <p class="item__date"><?= date("M d, Y", strtotime($order['date'])) ?></p>
+                                    </div>
+                                    <div class="item__product">
+                                        <?php foreach ($order['items'] as $item): ?>
+                                            <p class="product__name">
+                                                <?= $item['product'] ?> - <?= $item['quantity'] ?>Qty
+                                            </p>
+                                        <?php endforeach; ?>
+                                        <!-- <p class="product__name">
+                                        Chanel N5 - 2Qty
+                                    </p> -->
+                                    </div>
+                                    <p class="item__price">
+                                        <?= number_format($order['total']) ?>VND
+                                    </p>
+                                </a>
                             </div>
-                            <div class="item__product">
-                                <p class="product__name">
-                                    Midnight Rose Parfum - 1Qty
-                                </p>
-                                <p class="product__name">
-                                    Chanel N5 - 2Qty
-                                </p>
-                            </div>
-                            <p class="item__price">
-                                $129.99
-                            </p>
-                        </div>
-                        <div class="order-section__item">
-                            <div class="item__basic-info">
-                                <p class="item__id">#ORD-2025001</p>
-                                <p class="item__date">Jan 15, 2025</p>
-                            </div>
-                            <div class="item__product">
-                                <p class="product__name">
-                                    Midnight Rose Parfum - 1Qty
-                                </p>
-                                <p class="product__name">
-                                    Chanel N5 - 2Qty
-                                </p>
-                            </div>
-                            <p class="item__price">
-                                $129.99
-                            </p>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('.order-section__table').DataTable({
-            responsive: true,
-            pageLength: 5,
-            order: [
-                [1, 'desc']
-            ],
-            language: {
-                search: "Tìm kiếm:",
-                lengthMenu: "Hiển thị _MENU_ dòng",
-                info: "Hiển thị _START_ đến _END_ trong _TOTAL_ dòng",
-                paginate: {
-                    first: "Đầu",
-                    last: "Cuối",
-                    next: "→",
-                    previous: "←"
-                },
-                zeroRecords: "Không tìm thấy đơn hàng nào"
+    <script>
+        $(document).ready(function() {
+            $('.order-section__table').DataTable({
+                responsive: true,
+                pageLength: 5,
+                order: [
+                    [1, 'desc']
+                ],
+                language: {
+                    search: "Tìm kiếm:",
+                    lengthMenu: "Hiển thị _MENU_ dòng",
+                    info: "Hiển thị _START_ đến _END_ trong _TOTAL_ dòng",
+                    paginate: {
+                        first: "Đầu",
+                        last: "Cuối",
+                        next: "→",
+                        previous: "←"
+                    },
+                    zeroRecords: "Không tìm thấy đơn hàng nào"
+                }
+            });
+        });
+        const tableWrapper = document.querySelector('.order-section__table').closest('.your-container-class');
+
+        const observer = new MutationObserver(() => {
+            if ($(tableWrapper).is(':visible')) {
+                $.fn.dataTable
+                    .tables({
+                        visible: true,
+                        api: true
+                    })
+                    .columns.adjust()
+                    .responsive.recalc();
             }
         });
-    });
-    const tableWrapper = document.querySelector('.order-section__table').closest('.your-container-class');
 
-    const observer = new MutationObserver(() => {
-        if ($(tableWrapper).is(':visible')) {
-            $.fn.dataTable
-                .tables({
-                    visible: true,
-                    api: true
-                })
-                .columns.adjust()
-                .responsive.recalc();
-        }
-    });
-
-    observer.observe(tableWrapper, {
-        attributes: true,
-        attributeFilter: ['style', 'class']
-    });
-</script>
+        observer.observe(tableWrapper, {
+            attributes: true,
+            attributeFilter: ['style', 'class']
+        });
+    </script>
