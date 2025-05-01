@@ -146,6 +146,16 @@ ul {
   flex: 1;
 }
 
+.header__logo a {
+  display: block;
+  width: 100%;
+}
+
+.header__logo img {
+  width: 80%;
+  height: auto;
+}
+
 .header__nav {
   display: flex;
   flex: 3;
@@ -336,6 +346,7 @@ ul {
 }
 
 .search__text button {
+  display: none;
   background-color: transparent;
   border: 0;
 }
@@ -377,41 +388,57 @@ ul {
   margin-bottom: 20px;
 }
 
-.search__product-list{
+/* .search__product-list{
+  max-width: 100%;
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+} */
+
+.search__product-list{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
   gap: 10px;
 }
 
 .search__product-item{
-  padding: 15px;
+  padding: 25px;
   color: black;
   background: linear-gradient(to bottom, gray, black);
   display: block;
+  width: calc(25% - 30px/4);
   aspect-ratio: 1/1;
-  overflow: hidden;
-  position: relative;
 }
 
 .search__product-wrapper{
   display: flex;
-  align-items: flex-start;
   justify-content: center;
   width: 100%;
   height: 100%;
+  margin-bottom: 15px;
 }
 
 .search__product-item img {
-  width: 80%;
-  aspect-ratio: 1/1;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: center;
 }
 
 .search__product-content{
-  position: absolute;
+  /* position: absolute;
   bottom: 10px;
-  left: 20px;
+  left: 20px; */
+}
+
+.search__product-content h4{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
 }
 
 .search__product-content p {
@@ -452,14 +479,24 @@ ul {
 }
 
 @media (max-width: 991.98px) {
-  .search__product-list{
+  
+  /* .search__product-list{
     grid-template-columns: repeat(2, 1fr);
+  } */
+
+  .search__product-item{
+    width: calc(50% - 10px/2);
   }
 }
 
 @media (max-width: 767.98px) {
-  .search__product-list{
+  /* .search__product-list{
     grid-template-columns: repeat(2, 1fr);
+  } */
+
+  .search__product-item{
+    padding: 20px;
+    width: calc(50% - 10px/2);
   }
 }
 
@@ -472,8 +509,13 @@ ul {
     width: 50%;
   }
 
-  .search__product-list{
+  /* .search__product-list{
     grid-template-columns: repeat(2, 1fr);
+  } */
+
+  .search__product-item{
+    padding: 10px;
+    width: calc(50% - 10px/2);
   }
 
   .search__popular{
@@ -483,6 +525,10 @@ ul {
     justify-content: center;
     align-items: center;
     gap: 10px;
+  }
+
+  .search__product-content {
+    font-size: 14px;
   }
 
   .search__popular h3{
@@ -582,7 +628,9 @@ ul {
 }
 
 @media (max-width: 767.98px) {
-
+  .auth__form input {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 575.98px) {
