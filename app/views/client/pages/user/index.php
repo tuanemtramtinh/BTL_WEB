@@ -102,7 +102,7 @@ $orders = $data['orders'];
                                             <?php endforeach; ?>
                                         </div>
                                     </td>
-                                    <td>$<?= number_format($order['total'], 2) ?></td>
+                                    <td><?= number_format($order['total']) ?>VND</td>
                                     <td><a href="order/history/<?= $orderId ?>">see details</a></td>
                                 </tr>
                             <?php endforeach; ?>
@@ -126,7 +126,7 @@ $orders = $data['orders'];
                                     </p> -->
                                 </div>
                                 <p class="item__price">
-                                    $<?= number_format($order['total'], 2) ?>
+                                    <?= number_format($order['total']) ?>VND
                                 </p>
                             </div>
                         <?php endforeach; ?>
