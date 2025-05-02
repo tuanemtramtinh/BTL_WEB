@@ -120,7 +120,7 @@ class AdminContact extends Controller
         $message = $this->getSessionMessage();
 
         $this->viewAdmin("layout", [
-            "title" => "Thùng rác",
+            "title" => "Removed Contact",
             "page" => "contact/trash", // tạo view contact/trash.php nếu cần
             "contacts" => $contacts,
             "error" => $message['error'],
@@ -191,6 +191,61 @@ class AdminContact extends Controller
         }
 
         echo json_encode(["code" => "success"]);
+        exit();
+    }
+
+    public function sendReply()
+    {
+        $this->checkAuthAdmin();
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $_SESSION['error_message'] = "Phương thức không hợp lệ!";
+            header("Location: " . $_SERVER["HTTP_REFERER"]);
+            exit();
+        }
+
+        $email = $_POST['email'] ?? '';
+        $message = $_POST['message'] ?? '';
+        $name = $_POST['name'] ?? 'Người dùng';
+        $id = $_POST['contact_id'] ?? null;
+
+        if (!$email || !$message) {
+            $_SESSION['error_message'] = "Thiếu email hoặc nội dung phản hồi.";
+            header("Location: " . $_SERVER["HTTP_REFERER"]);
+            exit();
+        }
+
+        // Làm sạch và chuẩn bị nội dung HTML cho email
+        $message = nl2br(htmlspecialchars($message));
+        $htmlBody = "
+            <div style='font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; color: #333;'>
+                <div style='max-width: 600px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05);'>
+                    <h2 style='color: #FF6600;'>Xin chào {$name},</h2>
+                    <p>Chúng tôi đã nhận được liên hệ từ bạn và phản hồi như sau:</p>
+                    <blockquote style='margin: 20px 0; padding: 15px; background: #f3f3f3; border-left: 4px solid #FF6600;'>
+                        {$message}
+                    </blockquote>
+                    <p>Nếu bạn có thêm thắc mắc hoặc câu hỏi khác, vui lòng liên hệ lại với chúng tôi bất cứ lúc nào.</p>
+                    <hr style='margin: 30px 0;'>
+                    <p style='font-size: 14px; color: #888;'>Trân trọng,<br><strong>Đội ngũ hỗ trợ</strong></p>
+                </div>
+            </div>
+        ";
+
+        $success = $this->sendMail($email, $name, "Phản hồi liên hệ", $htmlBody);
+
+        if ($success) {
+            if ($id) {
+                require_once './app/models/ContactModel.php';
+                $contactModel = new ContactModel();
+                $contactModel->updateStatusById((int)$id, 'responded');
+            }
+            $_SESSION['success_message'] = "Gửi phản hồi thành công!";
+        } else {
+            $_SESSION['error_message'] = "Gửi phản hồi thất bại! Vui lòng kiểm tra lại cấu hình gửi mail.";
+        }
+
+        header("Location: " . $_SERVER["HTTP_REFERER"]);
         exit();
     }
 }

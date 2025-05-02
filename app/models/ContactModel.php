@@ -166,4 +166,12 @@ class ContactModel extends DB {
         $stmt->bind_param($types, ...$ids);
         return $stmt->execute();
     }
+    
+    public function updateStatusById($id, $status)
+    {
+        $sql = "UPDATE Contact SET Status = ? WHERE ID = ?";
+        $stmt = $this->getConnection()->prepare($sql);
+        $stmt->bind_param("si", $status, $id);
+        return $stmt->execute();
+    }
 }

@@ -138,9 +138,41 @@
                 </div>
               </div>
 
-              <a href="#" class="btn icon btn-warning">
+              <!-- Nút mở modal trả lời -->
+              <a href="#" class="btn icon btn-warning" data-bs-toggle="modal" data-bs-target="#replyModal-<?= $contact["ID"] ?>">
                 <i class="bi bi-envelope-open"></i>
               </a>
+
+              <!-- Modal trả lời -->
+              <div class="modal fade" id="replyModal-<?= $contact["ID"] ?>" tabindex="-1" aria-labelledby="replyModalLabel-<?= $contact["ID"] ?>" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+                  <div class="modal-content">
+                    <form method="POST" action="<?= BASE_URL ?>/admin/contact/sendReply">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="replyModalLabel-<?= $contact["ID"] ?>">Phản hồi đến: <?= htmlspecialchars($contact["Email"]) ?></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p><strong>Email người nhận:</strong> <?= htmlspecialchars($contact["Email"]) ?></p>
+                        <div class="mb-3">
+                          <label for="replyTextarea-<?= $contact["ID"] ?>" class="form-label">Nội dung phản hồi</label>
+                          <textarea class="form-control" name="message" id="replyTextarea-<?= $contact["ID"] ?>" rows="5" placeholder="Nhập nội dung phản hồi..." required></textarea>
+                        </div>
+
+                        <!-- Hidden fields (không cần thêm input text cho người dùng thấy) -->
+                        <input type="hidden" name="email" value="<?= htmlspecialchars($contact["Email"]) ?>">
+                        <input type="hidden" name="contact_id" value="<?= $contact["ID"] ?>">
+                        <input type="hidden" name="name" value="<?= htmlspecialchars($contact["Name"] ?? 'Người dùng') ?>">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Gửi phản hồi</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
               <a 
               href="javascript:;" 
               class="btn icon btn-danger" 
