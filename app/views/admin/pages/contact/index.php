@@ -55,6 +55,12 @@
       </div>
     </div>
 
+    <!-- Tìm kiếm -->
+    <div class="d-flex justify-content-center align-items-center bg-blue border rounded-3 px-3 py-2" style="min-height: 62px; width: 366px; max-width: 100%;">
+      <i class="bi bi-search me-2 fs-5 text-muted" style="padding-bottom: 30px;"></i>
+      <input type="text" class="form-control border-0 p-0 fw-bold" placeholder="Tìm kiếm" search style="box-shadow: none; margin-left: 10px;">
+    </div>
+
     <!-- Nút xem danh sách xóa -->
     <div>
       <a href="admin/contact/trash" class="btn btn-primary fw-bold px-4 rounded-3 d-flex align-items-center" style="min-height: 62px;">

@@ -174,4 +174,10 @@ class ContactModel extends DB {
         $stmt->bind_param("si", $status, $id);
         return $stmt->execute();
     }
+
+    // public function updateAfterReply($contactId, $employeeId)
+    // {
+    //     $stmt = $this->conn->prepare("UPDATE contacts SET status = 1, reply_by = ?, reply_at = NOW() WHERE ID = ?");
+    //     return $stmt->execute([$employeeId, $contactId]);
+    // }
 }

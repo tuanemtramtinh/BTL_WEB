@@ -2,7 +2,7 @@
 class AdminContact extends Controller
 {
     public function index()
-    {
+    {   
         $this->checkAuthAdmin();
 
         $status = $_GET['status'] ?? null;
@@ -52,7 +52,7 @@ class AdminContact extends Controller
         $success = $contactModel->softDelete($id, $_SESSION['admin']['id'] ?? null);
 
         if ($success) {
-            $_SESSION["success"] = "Xóa liên hệ thành công!";
+            $_SESSION['success_message'] = "Lưu trữ liên hệ thành công!";
             echo json_encode(["code" => "success"]);
         } else {
             echo json_encode(["code" => "error", "message" => "Không thể xóa liên hệ!"]);
@@ -71,6 +71,7 @@ class AdminContact extends Controller
         header('Content-Type: application/json');
 
         if (!$option || empty($ids)) {
+            $_SESSION['error_message'] = "Vui lòng chọn hành động và bản ghi!";
             echo json_encode([
                 "code" => "error",
                 "message" => "Vui lòng chọn hành động và bản ghi!"
@@ -82,13 +83,23 @@ class AdminContact extends Controller
 
         switch ($option) {
             case "notSeen":
+                $contactModel->updateStatusMulti($ids, $option);
+                $_SESSION['success_message'] = "Đã chuyển trạng thái thành 'Chưa xem'!";
+                echo json_encode(["code" => "success"]);
+                break;
             case "seen":
+                $contactModel->updateStatusMulti($ids, $option);
+                $_SESSION['success_message'] = "Đã chuyển trạng thái thành 'Đã xem'!";
+                echo json_encode(["code" => "success"]);
+                break;
             case "responded":
                 $contactModel->updateStatusMulti($ids, $option);
+                $_SESSION['success_message'] = "Đã chuyển trạng thái thành 'Đã phản hồi'!";
                 echo json_encode(["code" => "success"]);
                 break;
             case "delete":
                 $contactModel->deleteMulti($ids);
+                $_SESSION['success_message'] = "Đã lưu trữ các liên hệ được chọn!";
                 echo json_encode(["code" => "success"]);
                 break;
             default:
@@ -147,6 +158,7 @@ class AdminContact extends Controller
         $result = $model->deletePermanently($id);
 
         if ($result) {
+            $_SESSION['success_message'] = "Xóa vĩnh viễn thành công!";
             echo json_encode(["code" => "success"]);
         } else {
             echo json_encode(["code" => "error", "message" => "Xóa vĩnh viễn thất bại."]);
@@ -165,6 +177,8 @@ class AdminContact extends Controller
         $option = $data["option"] ?? null;
         $ids = $data["ids"] ?? [];
 
+        header('Content-Type: application/json');
+
         if (!$option || empty($ids)) {
             echo json_encode([
                 "code" => "error",
@@ -178,9 +192,11 @@ class AdminContact extends Controller
         switch ($option) {
             case "restore":
                 $model->restoreByIds($ids);
+                $_SESSION['success_message'] = "Khôi phục liên hệ thành công!";
                 break;
             case "delete":
                 $model->deletePermanentlyByIds($ids);
+                $_SESSION['success_message'] = "Xóa vĩnh viễn liên hệ thành công!";
                 break;
             default:
                 echo json_encode([
@@ -208,6 +224,7 @@ class AdminContact extends Controller
         $message = $_POST['message'] ?? '';
         $name = $_POST['name'] ?? 'Người dùng';
         $id = $_POST['contact_id'] ?? null;
+        // $employeeId = $_SESSION['employeeId'] ?? null;
 
         if (!$email || !$message) {
             $_SESSION['error_message'] = "Thiếu email hoặc nội dung phản hồi.";
@@ -239,6 +256,7 @@ class AdminContact extends Controller
                 require_once './app/models/ContactModel.php';
                 $contactModel = new ContactModel();
                 $contactModel->updateStatusById((int)$id, 'responded');
+                // $contactModel->updateAfterReply($contactId, $employeeId);
             }
             $_SESSION['success_message'] = "Gửi phản hồi thành công!";
         } else {
