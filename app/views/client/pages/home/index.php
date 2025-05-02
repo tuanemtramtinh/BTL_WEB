@@ -65,6 +65,7 @@
         <div class="homePage__section4__left">
           <img src="public/images/leftArrow-sec4.png" alt="leftArrow"/>
         </div>
+        <div class="homePage__section4__scroll-wrapper">
         <div class="homePage__section4__list">
           <div class="homePage__section4__list--element">
             <div class="homePage__section4__list--element-img">
@@ -139,6 +140,7 @@
             </div>
           </div>
         </div>
+        </div>
         <div class="homePage__section4__right">
           <img src="public/images/rightArrow-sec4.png" alt="rightArrow"/>
         </div>
@@ -178,6 +180,7 @@
         <div class="homePage__section6__left">
           <img src="public/images/leftArrow-sec4.png" alt="leftAr"/>
         </div>
+        <div class="homePage__section6__scroll-wrapper">
         <div class="homePage__section6__list">
           <div class="homePage__section6__element">
             <div class="homePage__section6__element-img">
@@ -221,6 +224,7 @@
               Read More
             </div>
           </div>
+        </div>
         </div>
         <div class="homePage__section6__right">
           <img src="public/images/rightArrow-sec4.png" alt="rightAr"/>
