@@ -27,6 +27,7 @@ class ClientContact extends Controller {
     $name = trim($data['name'] ?? '');
     $email = trim($data['email'] ?? '');
     $message = trim($data['message'] ?? '');
+    $status = trim($data['status']);  // Lấy giá trị status từ request, nếu không có thì mặc định là 'notSeen'
 
     if (empty($name) || empty($email) || empty($message)) {
         echo json_encode([
@@ -58,8 +59,7 @@ class ClientContact extends Controller {
         return;
     }
 
-    $status = "pending"; // trạng thái mặc định
-    $stmt->bind_param("ssss", $name, $email, $status, $message);
+    $stmt->bind_param("ssss", $name, $email, $status, $message); // Bind status vào câu truy vấn
 
     if ($stmt->execute()) {
         $_SESSION['success_message'] = "Gửi liên hệ thành công!";
