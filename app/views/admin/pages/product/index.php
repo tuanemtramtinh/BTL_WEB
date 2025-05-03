@@ -95,8 +95,8 @@
                     <td><img style="aspect-ratio: 1/1; object-fit: contain; width: 100px;" src="<?= $productImage ?>" alt=""></td>
                     <td><?= $product['Name'] ?></td>
                     <td><?= number_format($product['PriceUnit']) ?> VND</td>
-                    <td><?= $product['Brand'] ?></td>
-                    <td><?= $product['Category'] ?></td>
+                    <td><a href="admin/product/index?category=<?=$product['CategoryID']?>"><?= $product['Category'] ?></a></td>
+                    <td><a href="admin/product/index?brand=<?= $product['Brand'] ?>"><?= $product['Brand'] ?></a></td>
                     <td><?= $product['CreatedAt'] ?></td>
                     <td><?= $product['UpdatedAt'] ?></td>
                     <td><?= $product['Username'] ?></td>

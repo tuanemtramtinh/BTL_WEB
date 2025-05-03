@@ -437,6 +437,33 @@ class AdminProduct extends Controller
     ]);
   }
 
+  public function brand_delete()
+  {
+
+    //Check if the employee is logged in
+    $this->checkAuthAdmin();
+
+    $brandName = $_GET['brand'] ?? '';
+
+    if ($brandName === '') {
+      header('Location: brand');
+      $_SESSION['error_message'] = 'Invalid brand name';
+      exit;
+    }
+
+    $Brand = $this->model("BrandModel");
+    $status = $Brand->deleteBrand($brandName);
+    $Brand->closeConnection();
+
+    if ($status) {
+      $_SESSION['success_message'] = 'Delete Brand Successfully';
+      header('Location: brand');
+      exit;
+    }
+
+    $_SESSION['error_message'] = 'Error on deleting Brand';
+    header('Location: brand');
+  }
   public function brand_add()
   {
     //Check if the employee is logged in
