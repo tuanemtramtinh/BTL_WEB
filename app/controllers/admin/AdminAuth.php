@@ -9,6 +9,11 @@ class AdminAuth extends Controller
 
   public function login()
   {
+    if (isset($_SESSION['employeeId'])) {
+      header('Location: ../dashboard/index');
+      exit;
+    }
+
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
       "page" => "auth/login",

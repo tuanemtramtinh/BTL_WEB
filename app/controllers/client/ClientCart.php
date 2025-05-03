@@ -104,10 +104,16 @@ class ClientCart extends Controller
       $currentProduct = $Product->findProductById($productId);
       $currentCart = $Cart->findCartByUserId($_SESSION['userId']);
 
-      $newTotal = $currentCart['Total'] + ($productQuantity * $currentProduct['PriceUnit']);
+      $newTotal = $currentCart['Total'] + $productQuantity * $currentProduct['PriceUnit'];
       $newQuantity = $currentProduct['Inventory'] - $productQuantity;
 
       $CartItem->addItemToCart($_SESSION['user_cart'], $productId, $productQuantity);
+
+      $currentCartItem = $CartItem->findCartItemByProductIdAndCartId($productId, $_SESSION['user_cart']);
+      if ($currentCartItem['Quantity'] < 1) {
+        $CartItem->deleteCartItem($productId, $_SESSION['user_cart']);
+      }
+
       $Cart->updateCartTotal($currentCart['ID'], $newTotal);
 
       $Product->closeConnection();
