@@ -111,23 +111,25 @@ $orders = $data['orders'];
                     <div class="order-section__items-reponsive">
                         <?php foreach ($orders as $orderId => $order): ?>
                             <div class="order-section__item">
-                                <div class="item__basic-info">
-                                    <p class="item__id">#ORD-<?= str_pad($orderId, 7, "0", STR_PAD_LEFT) ?></p>
-                                    <p class="item__date"><?= date("M d, Y", strtotime($order['date'])) ?></p>
-                                </div>
-                                <div class="item__product">
-                                    <?php foreach ($order['items'] as $item): ?>
-                                        <p class="product__name">
-                                            <?= $item['product'] ?> - <?= $item['quantity'] ?>Qty
-                                        </p>
-                                    <?php endforeach; ?>
-                                    <!-- <p class="product__name">
+                                <a href="order/history/<?= $orderId ?>">
+                                    <div class="item__basic-info">
+                                        <p class="item__id">#ORD-<?= str_pad($orderId, 7, "0", STR_PAD_LEFT) ?></p>
+                                        <p class="item__date"><?= date("M d, Y", strtotime($order['date'])) ?></p>
+                                    </div>
+                                    <div class="item__product">
+                                        <?php foreach ($order['items'] as $item): ?>
+                                            <p class="product__name">
+                                                <?= $item['product'] ?> - <?= $item['quantity'] ?>Qty
+                                            </p>
+                                        <?php endforeach; ?>
+                                        <!-- <p class="product__name">
                                         Chanel N5 - 2Qty
                                     </p> -->
-                                </div>
-                                <p class="item__price">
-                                    <?= number_format($order['total']) ?>VND
-                                </p>
+                                    </div>
+                                    <p class="item__price">
+                                        <?= number_format($order['total']) ?>VND
+                                    </p>
+                                </a>
                             </div>
                         <?php endforeach; ?>
                         <!-- <div class="order-section__item">
