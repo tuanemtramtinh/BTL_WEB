@@ -12,6 +12,16 @@ class BrandModel extends DB
     return $result;
   }
 
+  public function deleteBrand($brandName)
+  {
+    $query = "DELETE FROM Brand WHERE Name = ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("s", $brandName);
+    $result = $stmt->execute();
+    $stmt = null;
+    return $result;
+  }
+
   public function getBrandList()
   {
     $query = "SELECT * FROM Brand";
@@ -26,7 +36,7 @@ class BrandModel extends DB
     $stmt->close();
     return !empty($brands) ? $brands : null;
   }
-  
+
   public function findBrandByName($brandName)
   {
     $query = "SELECT * FROM Brand WHERE Name = ?";

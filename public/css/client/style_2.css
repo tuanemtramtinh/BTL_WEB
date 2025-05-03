@@ -414,6 +414,7 @@
 
 .user-overview__section2 {
   margin-top: 25px;
+  margin-bottom: 50px;
 }
 .section2__wrapper {
   display: flex;
@@ -1046,6 +1047,8 @@ input[type="password"] {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    overflow-y: scroll;
+    max-height: 50px;
   }
 
   .product__name {
@@ -1126,7 +1129,7 @@ input[type="password"] {
     padding: 8px;
   }
   .product-scroll {
-    max-height: 20px;
+    max-height: 80px;
     overflow-y: auto;
     padding-right: 5px;
   }
