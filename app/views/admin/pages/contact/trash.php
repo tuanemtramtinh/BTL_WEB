@@ -1,53 +1,16 @@
-<!-- Section 4 - Bộ lọc -->
-<div class="card mb-4">
-  <div class="card-body d-flex flex-wrap align-items-center">
-    <div class="d-flex align-items-center me-3 mb-2">
-      <i class="fa-solid fa-filter me-2 fs-4"></i> <strong>Bộ lọc</strong>
-    </div>
-
-    <div class="me-3 mb-2">
-      <select class="form-select form-select-sm" style="min-width: 150px;" filter-status="filter-status">
-        <option value="">Trạng thái</option>
-        <option value="notSeen">Chưa xem</option>
-        <option value="seen">Đã xem</option>
-        <option value="responded">Đã phản hồi</option>
-      </select>
-    </div>
-
-    <!-- <div class="me-3 mb-2">
-      <select class="form-select form-select-sm" style="min-width: 150px;" filter-created-by="filter-created-by">
-        <option value="">Người tạo</option>
-        <option value="">Nguyen Van AA</option>
-      </select>
-    </div> -->
-
-    <div class="d-flex align-items-center me-3 mb-2">
-      <input type="date" filter-start-date class="form-control form-control-sm me-1" style="width: 120px;" filter-start-date="filter-start-date">
-      <span class="mx-1">-</span>
-      <input type="date" filter-end-date class="form-control form-control-sm" style="width: 120px;" filter-end-date="filter-end-date">
-    </div>
-
-    <div class="text-danger fw-semibold mb-2" style="cursor: pointer;" filter-reset>
-      <i class="bi bi-arrow-counterclockwise me-1"></i> Xóa bộ lọc
-    </div>
-  </div>
-</div>
-
 <!-- Section 5 - Hành động nhóm / Tìm kiếm / Tạo mới -->
 <div class="card mb-4">
   <div class="card-body d-flex flex-wrap align-items-center gap-3">
 
     <!-- Hành động nhóm -->
     <div class="d-flex align-items-center border rounded-3 overflow-hidden" 
-        change-multi 
-        data-api="admin/contact/changeMulti">
+        change-multi
+        data-api="admin/contact/changeMultiTrash">
       <div class="p-3 border-end">
         <select class="form-select form-select-sm" id="bulk-action">
           <option value="">-- Hành động --</option>
-          <option value="notSeen">Chưa xem</option>
-          <option value="seen">Đã xem</option>
-          <option value="responded">Đã phản hồi</option>
-          <option value="delete">Xoá</option>
+          <option value="restore">Khôi phục</option>
+          <option value="delete">Xóa vĩnh viễn</option>
         </select>
       </div>
       <div class="p-3">
@@ -55,16 +18,10 @@
       </div>
     </div>
 
-    <!-- Tìm kiếm -->
-    <div class="d-flex justify-content-center align-items-center bg-blue border rounded-3 px-3 py-2" style="min-height: 62px; width: 366px; max-width: 100%;">
-      <i class="bi bi-search me-2 fs-5 text-muted" style="padding-bottom: 30px;"></i>
-      <input type="text" class="form-control border-0 p-0 fw-bold" placeholder="Tìm kiếm" search style="box-shadow: none; margin-left: 10px;">
-    </div>
-
     <!-- Nút xem danh sách xóa -->
     <div>
-      <a href="admin/contact/trash" class="btn btn-primary fw-bold px-4 rounded-3 d-flex align-items-center" style="min-height: 62px;">
-        Các liên hệ đã xóa
+      <a href="admin/contact" class="btn btn-primary fw-bold px-4 rounded-3 d-flex align-items-center" style="min-height: 62px;">
+        Quay lại trang danh sách
       </a>
     </div>
   </div>
@@ -144,55 +101,25 @@
                 </div>
               </div>
 
-              <!-- Nút mở modal trả lời -->
-              <a href="#" class="btn icon btn-warning" data-bs-toggle="modal" data-bs-target="#replyModal-<?= $contact["ID"] ?>">
-                <i class="bi bi-envelope-open"></i>
+              <a href="admin/contact/restore/<?= $contact['ID'] ?>" class="btn icon btn-warning" title="Khôi phục">
+                <i class="bi bi-arrow-counterclockwise"></i>
               </a>
-
-              <!-- Modal trả lời -->
-              <div class="modal fade" id="replyModal-<?= $contact["ID"] ?>" tabindex="-1" aria-labelledby="replyModalLabel-<?= $contact["ID"] ?>" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-                  <div class="modal-content">
-                    <form method="POST" action="<?= BASE_URL ?>/admin/contact/sendReply">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="replyModalLabel-<?= $contact["ID"] ?>">Phản hồi đến: <?= htmlspecialchars($contact["Email"]) ?></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-                      </div>
-                      <div class="modal-body">
-                        <p><strong>Email người nhận:</strong> <?= htmlspecialchars($contact["Email"]) ?></p>
-                        <div class="mb-3">
-                          <label for="replyTextarea-<?= $contact["ID"] ?>" class="form-label">Nội dung phản hồi</label>
-                          <textarea class="form-control" name="message" id="replyTextarea-<?= $contact["ID"] ?>" rows="5" placeholder="Nhập nội dung phản hồi..." required></textarea>
-                        </div>
-
-                        <!-- Hidden fields (không cần thêm input text cho người dùng thấy) -->
-                        <input type="hidden" name="email" value="<?= htmlspecialchars($contact["Email"]) ?>">
-                        <input type="hidden" name="contact_id" value="<?= $contact["ID"] ?>">
-                        <input type="hidden" name="name" value="<?= htmlspecialchars($contact["Name"] ?? 'Người dùng') ?>">
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="submit" class="btn btn-primary">Gửi phản hồi</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
 
               <a 
               href="javascript:;" 
               class="btn icon btn-danger" 
               button-delete 
-              data-api="admin/contact/delete/<?= $contact['ID'] ?>">
+              data-api="admin/contact/deleteDestroy/<?= $contact['ID'] ?>">
                 <i class="bi bi-trash"></i>
               </a>
+
             </td>
           </tr>
         <?php endforeach; ?>
         </tbody>
       </table>
     </div>
-  </div>  
+  </div>
 </div>
 <!-- End Section 6 -->
 

@@ -28,11 +28,10 @@
     <div class="homePage__section2__wrapper">
       <div class="homePage__section2__content">
         <div class="homePage__section2__content--title">
-          Welcome to Local Face
+          <?= $data['data']['intro2_title']?>
         </div>
         <div class="homePage__section2__content--main">
-         Welcome to Local Face Perfumes, where the spirit of victory and triumph come alive through scents that empower and inspire. Our curated collection, aptly named "Victory Scented," is a celebration of success and elegance, designed to unleash your victorious essence. Indulge in the sweet taste of triumph with captivating fragrances that tell the tale of your achievements. At Local Face, we believe that every victory deserves a signature scent, and we are dedicated to providing unforgettable fragrances that elevate your spirit and empower your journey.
-        </div>
+          <?= $data['data']['intro2_content']?>
       </div>
     </div>
   </div>
@@ -46,13 +45,10 @@
     <div class="homePage__section3__content">
       <div class="homePage__section3__subcontent">
         <div class="homePage__section3__content--title">
-          Our values
+          <?= $data['data']['intro3_title']?>
         </div>
         <p class="homePage__section3__content--main">
-          At Local Face, our perfume retail store is built on a foundation of passion and authenticity. We believe in celebrating the individuality of every customer, providing a diverse collection of scents that resonate with their unique personality and style. Our dedicated team of fragrance enthusiasts is committed to creating a welcoming and inclusive environment, where connections are forged, and inspiration thrives. 
-        </p>
-        <p class="homePage__section3__content--submain">
-          Embracing sustainability and continuous learning, Local Face strives to be more than just a shopping destination; we are a community that inspires and empowers individuals on their fragrance journey.
+          <?= $data['data']['intro3_content']?>
         </p>
       </div>
     </div>
@@ -69,6 +65,7 @@
         <div class="homePage__section4__left">
           <img src="public/images/leftArrow-sec4.png" alt="leftArrow"/>
         </div>
+        <div class="homePage__section4__scroll-wrapper">
         <div class="homePage__section4__list">
           <div class="homePage__section4__list--element">
             <div class="homePage__section4__list--element-img">
@@ -143,6 +140,7 @@
             </div>
           </div>
         </div>
+        </div>
         <div class="homePage__section4__right">
           <img src="public/images/rightArrow-sec4.png" alt="rightArrow"/>
         </div>
@@ -159,10 +157,10 @@
       </div>
       <div class="homePage__section5__main">
         <div class="homePage__section5__main--content">
-          Perfume Year-End Sale! Up to 50% OFF
+          Perfume <?= $data['data']['sale_title']?> Sale! Up to <?= $data['data']['saleoff']?>% OFF
         </div>
         <div class="homePage__section5__main--subcontent">
-          Discover an exquisite collection of premium perfumes at unbelievable prices during our exclusive Perfume Sale!
+          <?= $data['data']['sale_content']?>
         </div>
         <div class="homePage__section5__main--button style1_button">
           Know More
@@ -182,6 +180,7 @@
         <div class="homePage__section6__left">
           <img src="public/images/leftArrow-sec4.png" alt="leftAr"/>
         </div>
+        <div class="homePage__section6__scroll-wrapper">
         <div class="homePage__section6__list">
           <div class="homePage__section6__element">
             <div class="homePage__section6__element-img">
@@ -225,6 +224,7 @@
               Read More
             </div>
           </div>
+        </div>
         </div>
         <div class="homePage__section6__right">
           <img src="public/images/rightArrow-sec4.png" alt="rightAr"/>
