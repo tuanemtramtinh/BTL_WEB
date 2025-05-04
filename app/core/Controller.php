@@ -134,6 +134,15 @@ class Controller
 
     return $uploadedFiles;
   }
+
+  public function getGeneral() {
+    $General = $this->model("GeneralModel");
+    $general = $General->getAll();
+    $GLOBALS['general'] = $general ? $general : null;
+    // print_r($general);
+    $General->closeConnection();
+  }
+
   public function sendMail($toEmail, $toName, $subject, $body)
   {
     $mail = new PHPMailer(true);

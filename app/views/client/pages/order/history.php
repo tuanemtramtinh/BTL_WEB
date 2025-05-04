@@ -7,6 +7,10 @@
         <div style="overflow-x: auto;">
           <table class="order__info-table">
             <tr>
+              <td>Status:</td>
+              <td><?= $data['order']['Status'] ?? '' ?></td>
+            </tr>
+            <tr>
               <td>Fullname:</td>
               <td><?= $data['order']['OrderFullname'] ?? '' ?></td>
             </tr>

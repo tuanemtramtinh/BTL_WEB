@@ -16,7 +16,8 @@ class EmployeeModel extends DB
     return null;
   }
 
-  public function findEmployeeById($employeeId) {
+  public function findEmployeeById($employeeId)
+  {
     $query = "SELECT * FROM Employee WHERE SocialNo = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("s", $employeeId);
@@ -75,4 +76,17 @@ class EmployeeModel extends DB
     $stmt->close();
     return !empty($users) ? $users : null;
   }
+
+  // public function countEmployee()
+  // {
+  //   $query = "SELECT COUNT(*) as count FROM Employee WHERE Username != 'admin'";
+  //   $stmt = $this->conn->prepare($query);
+  //   $stmt->execute();
+  //   $result = $stmt->get_result();
+  //   $stmt = null;
+  //   if ($result->num_rows > 0) {
+  //     return $result->fetch_assoc()['count'];
+  //   }
+  //   return null;
+  // }
 }
