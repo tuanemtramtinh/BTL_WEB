@@ -149,11 +149,13 @@ ul {
 .header__logo a {
   display: block;
   width: 100%;
+  height: 50px;
 }
 
 .header__logo img {
   width: 80%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
 }
 
 .header__nav {
@@ -259,6 +261,11 @@ ul {
   .header__menu-bar{
     display: block;
     margin-right: 20px;
+  }
+
+  .header__logo a {
+    width: 100%;
+    height: 40px;
   }
 }
 
@@ -776,6 +783,20 @@ ul {
   text-align: center;
 }
 
+
+
+.footer__logo a {
+  display: block;
+  width: 75%;
+  height: 50px;
+}
+
+.footer__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 @media (max-width: 1199.98px) {
   .footer__info{
     gap: 200px;
@@ -808,6 +829,12 @@ ul {
 
   .footer__mobile{
     display: block;
+  }
+
+  .footer__logo{
+    display: flex;
+    justify-content: center;
+    /* margin-bottom: 30px; */
   }
 }
 
