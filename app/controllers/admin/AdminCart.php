@@ -8,10 +8,25 @@ class AdminCart extends Controller
     $this->checkAuthAdmin();
 
     $Cart = $this->model("CartModel");
+    $CartItem = $this->model("CartItemModel");
 
     $carts = $Cart->getCartList();
 
+    foreach ($carts as &$cart) {
+      $items = $CartItem->getCartListByCartId($cart['ID']);
+      $total = 0;
+      if (!empty($items)) {
+        foreach ($items as $item) {
+          $total += $item['ProductPrice'] * $item['ProductQuantity'];
+        }
+      }
+      $cart['Total'] = $total;
+    }
+
+    unset($cart); // Unset the reference to avoid issues later
+
     $Cart->closeConnection();
+    $CartItem->closeConnection();
 
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
@@ -40,6 +55,14 @@ class AdminCart extends Controller
 
     $cart = $Cart->findCartById($cartId);
     $items = $CartItem->getCartListByCartId($cartId);
+
+    $total = 0;
+
+    if (!empty($items)) {
+      foreach ($items as $item) {
+        $total += $item['ProductPrice'] * $item['ProductQuantity'];
+      }
+    }
 
     $Cart->closeConnection();
     $CartItem->closeConnection();

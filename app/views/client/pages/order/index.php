@@ -6,6 +6,7 @@
       </h2>
 
       <form class="order-form-info" action="order/orderPost/<?= $data['cart']['ID'] ?>" method="POST">
+        <input type="hidden" name="total" value="<?= $data['total'] ?>">
         <div class="order" data-aos="fade-down" data-aos-duration="500">
           <div class="order__title">Personal Information</div>
           <table class="order__table">
@@ -87,7 +88,7 @@
           <div data-aos="fade-down" data-aos-duration="800" class="cart__summary">
             <div class="cart__subtotal">
               <span>Subtotal</span>
-              <span><?= number_format($data['cart']['Total']) ?> VND </span>
+              <span><?= number_format($data['total']) ?> VND </span>
             </div>
             <div class="cart__shipping">
               <span>Shipping</span>
@@ -100,9 +101,6 @@
           </div>
           <div data-aos="fade-down" data-aos-duration="800" class="cart__submit">
             <button>Checkout</button>
-            <!-- <a href="order/orderPost/<?= $data['cart']['ID'] ?>">
-              Checkout
-            </a> -->
           </div>
         </div>
       </form>

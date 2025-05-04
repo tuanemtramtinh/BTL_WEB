@@ -63,7 +63,7 @@
         <div class="cart__summary">
           <div class="cart__subtotal">
             <span>Subtotal</span>
-            <span><?= number_format($data['cart']['Total']) ?> VND </span>
+            <span><?= number_format($data['total']) ?> VND </span>
           </div>
           <div class="cart__shipping">
             <span>Shipping</span>
