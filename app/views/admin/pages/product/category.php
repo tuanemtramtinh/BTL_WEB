@@ -47,9 +47,44 @@
                       <td><?= $category['UpdatedAt'] ?></td>
                       <td><?= $category['Username'] ?></td>
                       <td>
-                        <a href="admin/product/category_detail/<?= $category['ID'] ?>" class="btn btn-info">Detail</a>
-                        <a href="admin/product/category_edit/<?= $category['ID'] ?>" class="btn btn-warning">Edit</a>
-                        <a href="admin/product/category_delete/<?= $category['ID'] ?>" class="btn btn-danger">Delete</a>
+                        <a href="admin/product/category_detail/<?= $category['ID'] ?>" class="btn btn-sm btn-info">Detail</a>
+                        <a href="admin/product/category_edit/<?= $category['ID'] ?>" class="btn btn-sm btn-warning">Edit</a>
+                        <div class="modal-danger me-1 mb-1 d-inline-block">
+                          <!-- Delete Button -->
+                          <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $category['ID'] ?>">
+                            Delete
+                          </button>
+
+                          <!-- Modal -->
+                          <div class="modal fade text-left" id="deleteModal<?= $category['ID'] ?>" tabindex="-1" aria-labelledby="modalLabel<?= $category['ID'] ?>" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header bg-danger">
+                                  <h5 class="modal-title white" id="modalLabel<?= $category['ID'] ?>">
+                                    Confirm Product Deletion
+                                  </h5>
+                                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  Are you sure you want to delete the product <span style="font-weight: 700; font-style: italic;"><?= $category['Name'] ?></span>? This action cannot be undone.
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                    <span class="d-none d-sm-block">Cancel</span>
+                                  </button>
+                                  <a href="admin/product/category_delete/<?= $category['ID'] ?>" type="button" class="btn btn-danger ms-1">
+                                    <span class="d-none d-sm-block">Delete</span>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </td>
                     </tr>
                   <?php } ?>
