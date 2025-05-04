@@ -2,19 +2,20 @@
 class AdminContact extends Controller
 {
     public function index()
-    {   
+    {
         $this->checkAuthAdmin();
 
         $status = $_GET['status'] ?? null;
         $startDate = $_GET['startDate'] ?? null;
         $endDate = $_GET['endDate'] ?? null;
+        $keyword = $_GET['keyword'] ?? null;
 
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $perPage = 5;
         $offset = ($currentPage - 1) * $perPage;
 
         $contactModel = $this->model("ContactModel");
-        $result = $contactModel->getContactsFiltered($startDate, $endDate, $status, $perPage, $offset);
+        $result = $contactModel->getContactsFiltered($startDate, $endDate, $status, $perPage, $offset, $keyword);
 
         $totalContacts = $result['total'];
         $totalPages = ceil($totalContacts / $perPage);
@@ -30,7 +31,11 @@ class AdminContact extends Controller
             "success" => $message['success'],
             "task" => 1,
             "currentPage" => $currentPage,
-            "totalPages" => $totalPages
+            "totalPages" => $totalPages,
+            "keyword" => $keyword, // truyền xuống view để giữ lại input
+            "status" => $status,
+            "startDate" => $startDate,
+            "endDate" => $endDate
         ]);
     }
 
@@ -224,23 +229,23 @@ class AdminContact extends Controller
         $message = $_POST['message'] ?? '';
         $name = $_POST['name'] ?? 'Người dùng';
         $id = $_POST['contact_id'] ?? null;
-        // $employeeId = $_SESSION['employeeId'] ?? null;
+        $employeeUsername = $_SESSION['employee_username'] ?? null;
 
-        if (!$email || !$message) {
-            $_SESSION['error_message'] = "Thiếu email hoặc nội dung phản hồi.";
+        if (!$email || !$message || !$id || !$employeeUsername) {
+            $_SESSION['error_message'] = "Thiếu thông tin cần thiết để gửi phản hồi.";
             header("Location: " . $_SERVER["HTTP_REFERER"]);
             exit();
         }
 
-        // Làm sạch và chuẩn bị nội dung HTML cho email
-        $message = nl2br(htmlspecialchars($message));
+        // Làm sạch và định dạng nội dung HTML
+        $cleanMessage = nl2br(htmlspecialchars($message));
         $htmlBody = "
             <div style='font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; color: #333;'>
                 <div style='max-width: 600px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05);'>
                     <h2 style='color: #FF6600;'>Xin chào {$name},</h2>
                     <p>Chúng tôi đã nhận được liên hệ từ bạn và phản hồi như sau:</p>
                     <blockquote style='margin: 20px 0; padding: 15px; background: #f3f3f3; border-left: 4px solid #FF6600;'>
-                        {$message}
+                        {$cleanMessage}
                     </blockquote>
                     <p>Nếu bạn có thêm thắc mắc hoặc câu hỏi khác, vui lòng liên hệ lại với chúng tôi bất cứ lúc nào.</p>
                     <hr style='margin: 30px 0;'>
@@ -252,12 +257,13 @@ class AdminContact extends Controller
         $success = $this->sendMail($email, $name, "Phản hồi liên hệ", $htmlBody);
 
         if ($success) {
-            if ($id) {
+            if ($id && $employeeUsername) {
                 require_once './app/models/ContactModel.php';
                 $contactModel = new ContactModel();
                 $contactModel->updateStatusById((int)$id, 'responded');
-                // $contactModel->updateAfterReply($contactId, $employeeId);
+                $contactModel->updateAfterReply((int)$id, $employeeUsername);
             }
+            
             $_SESSION['success_message'] = "Gửi phản hồi thành công!";
         } else {
             $_SESSION['error_message'] = "Gửi phản hồi thất bại! Vui lòng kiểm tra lại cấu hình gửi mail.";

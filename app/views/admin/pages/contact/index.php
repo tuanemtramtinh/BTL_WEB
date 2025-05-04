@@ -56,10 +56,10 @@
     </div>
 
     <!-- Tìm kiếm -->
-    <div class="d-flex justify-content-center align-items-center bg-blue border rounded-3 px-3 py-2" style="min-height: 62px; width: 366px; max-width: 100%;">
+    <form method="GET" action="" class="d-flex justify-content-center align-items-center bg-blue border rounded-3 px-3 py-2" style="min-height: 62px; width: 366px; max-width: 100%;">
       <i class="bi bi-search me-2 fs-5 text-muted" style="padding-bottom: 30px;"></i>
-      <input type="text" class="form-control border-0 p-0 fw-bold" placeholder="Tìm kiếm" search style="box-shadow: none; margin-left: 10px;">
-    </div>
+      <input type="text" name="keyword" class="form-control border-0 p-0 fw-bold" placeholder="Tìm kiếm" value="<?= htmlspecialchars($_GET['keyword'] ?? '') ?>" style="box-shadow: none; margin-left: 10px;">
+    </form>
 
     <!-- Nút xem danh sách xóa -->
     <div>
@@ -81,6 +81,7 @@
               <input type="checkbox" class="form-check-input" check-all/>
             </th>
             <th>Tên người liên hệ</th>
+            <th>Email</th>
             <th class="text-center">Ngày gửi</th>
             <th class="text-center">Trạng thái</th>
             <th class="text-center">Phản hồi bởi</th>
@@ -94,6 +95,7 @@
               <input type="checkbox" class="form-check-input" check-item="<?= $contact['ID'] ?>"/>
             </td>
             <td><?= htmlspecialchars($contact["Name"]) ?></td>
+            <td><?= htmlspecialchars($contact["Email"]) ?></td>
             <td class="text-center"><?= date("d-m-Y", strtotime($contact["created_at"])) ?></td>
             <td class="text-center">
               <?php
@@ -115,12 +117,18 @@
                 <?= $statusMap[$status] ?? "Không rõ" ?>
               </span>
             </td>
+
             <td class="text-center">
-              <div><?= $contact["reply_by"] ?? "Chưa phản hồi" ?></div>
-              <div class="text-muted small">
-                <?= $contact["reply_at"] ? date("d/m/Y", strtotime($contact["reply_at"])) : "" ?>
-              </div>
+                <?php if (!empty($contact["reply_by"])): ?>
+                    <div><strong><?= htmlspecialchars($contact["reply_by"]) ?></strong></div>
+                    <div class="text-muted small">
+                        <?= !empty($contact["reply_at"]) ? date("d/m/Y H:i", strtotime($contact["reply_at"])) : "" ?>
+                    </div>
+                <?php else: ?>
+                    <div>Chưa phản hồi</div>
+                <?php endif; ?>
             </td>
+
             <td class="text-center">
               <!-- Nút xem modal -->
               <a href="#" class="btn icon btn-info" data-bs-toggle="modal" data-bs-target="#viewModal-<?= $contact["ID"] ?>">

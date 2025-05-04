@@ -9,48 +9,57 @@ class ContactModel extends DB {
         return $stmt->bind_param("i", $id) && $stmt->execute();
     }
 
-    public function getContactsFiltered($startDate = null, $endDate = null, $status = null, $limit = 10, $offset = 0) 
+    public function getContactsFiltered($startDate = null, $endDate = null, $status = null, $limit = 10, $offset = 0, $keyword = null) 
     {
         $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM Contact WHERE deleted = FALSE";
         $params = [];
         $types = "";
-    
+
         if ($startDate) {
             $sql .= " AND created_at >= ?";
             $params[] = $startDate . " 00:00:00";
             $types .= "s";
         }
-    
+
         if ($endDate) {
             $sql .= " AND created_at <= ?";
             $params[] = $endDate . " 23:59:59";
             $types .= "s";
         }
-    
+
         if ($status) {
             $sql .= " AND Status = ?";
             $params[] = $status;
             $types .= "s";
         }
-    
+
+        if ($keyword) {
+            $sql .= " AND (name LIKE ? OR email LIKE ? OR message LIKE ?)";
+            $kw = '%' . $keyword . '%';
+            $params[] = $kw;
+            $params[] = $kw;
+            $params[] = $kw;
+            $types .= "sss";
+        }
+
         $sql .= " ORDER BY created_at DESC LIMIT ? OFFSET ?";
         $params[] = $limit;
         $params[] = $offset;
         $types .= "ii";
-    
+
         $stmt = $this->getConnection()->prepare($sql);
         $stmt->bind_param($types, ...$params);
         $stmt->execute();
         $result = $stmt->get_result();
-    
+
         $contacts = [];
         while ($row = $result->fetch_assoc()) {
             $contacts[] = $row;
         }
-    
+
         $totalResult = $this->getConnection()->query("SELECT FOUND_ROWS() AS total");
         $total = $totalResult->fetch_assoc()['total'];
-    
+
         return [
             "contacts" => $contacts,
             "total" => $total
@@ -175,9 +184,13 @@ class ContactModel extends DB {
         return $stmt->execute();
     }
 
-    // public function updateAfterReply($contactId, $employeeId)
-    // {
-    //     $stmt = $this->conn->prepare("UPDATE contacts SET status = 1, reply_by = ?, reply_at = NOW() WHERE ID = ?");
-    //     return $stmt->execute([$employeeId, $contactId]);
-    // }
+    public function updateAfterReply($contactId, $employeeUsername)
+    {
+        $sql = "UPDATE Contact SET Status = 'responded', reply_by = ?, reply_at = NOW() WHERE ID = ?";
+        $stmt = $this->getConnection()->prepare($sql);
+        if (!$stmt) return false;
+
+        $stmt->bind_param("si", $employeeUsername, $contactId);
+        return $stmt->execute();
+    }
 }
