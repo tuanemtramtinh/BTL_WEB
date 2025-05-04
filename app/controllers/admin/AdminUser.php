@@ -43,7 +43,7 @@ class AdminUser extends Controller
     $message = $this->getSessionMessage();
     $this->viewAdmin("layout", [
       "title" => "User's Order Info",
-      "page" => "user/order-detail",
+      "page" => "user/purchase-detail",
       "error" => $message['error'],
       "success" => $message['success'],
       "task" => 2,
