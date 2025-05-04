@@ -46,19 +46,22 @@ class App
     // Get the parameters
     $this->params = $url ? array_values($url) : [];
 
+    // Update General
+    call_user_func_array([$this->controller, 'getGeneral'], []);
+
     //HandleRemeberMe
     if (
       !$this->isAdmin &&
-      method_exists($this->controller, 'rememberClient') && // Check method existence on the instance
-      !($this->controller instanceof ClientAuth && in_array($this->method, ['login', 'register']))
+      method_exists($this->controller, 'rememberClient') // Check method existence on the instance
+      // !($this->controller instanceof ClientAuth && in_array($this->method, ['login', 'register']))
     ) {
       // Call the rememberClient method using call_user_func_array
       call_user_func_array([$this->controller, 'rememberClient'], []);
     } else if (
       $this->isAdmin &&
-      method_exists($this->controller, 'rememberAdmin') &&
-      !($this->controller instanceof AdminAuth && in_array($this->method, ['login', 'register']))
-    ){
+      method_exists($this->controller, 'rememberAdmin') //&&
+      // !($this->controller instanceof AdminAuth && in_array($this->method, ['login', 'register']))
+    ) {
       call_user_func_array([$this->controller, 'rememberAdmin'], []);
     }
 

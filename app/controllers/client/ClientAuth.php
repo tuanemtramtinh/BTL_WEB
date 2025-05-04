@@ -11,6 +11,11 @@ class ClientAuth extends Controller
 
   public function login()
   {
+    if (isset($_SESSION['userId'])) {
+      header('Location: ../home/index');
+      exit;
+    }
+
     $message = $this->getSessionMessage();
     $this->view("layout", [
       "title" => "Đăng Nhập",
@@ -22,6 +27,11 @@ class ClientAuth extends Controller
 
   public function register()
   {
+    if (isset($_SESSION['userId'])) {
+      header('Location: ../home/index');
+      exit;
+    }
+
     $message = $this->getSessionMessage();
 
     $this->view("layout", [
