@@ -8,8 +8,8 @@ $Questions = $data['Questions'];
             <h2 class="contact__section1-title">Hello, how can Perfumé help you?</h2>
             <div class="contact__section1-content">
                 <div class="contact__section1-accordion">
-                    <div class="contact__section1-item">
-                        <?php foreach ($Questions as $question) { ?>
+                    <?php foreach ($Questions as $question) { ?>
+                        <div class="contact__section1-item">
                             <div class="contact__section1-item-header">
                                 <p class="contact__section1-header-question">
                                     <?= $question['Question'] ?>-<strong><?= $question['Type'] ?></strong>
@@ -21,8 +21,8 @@ $Questions = $data['Questions'];
                                     <?= $question['Answer'] ?>
                                 </p>
                             </div>
-                        <?php } ?>
-                    </div>
+                        </div>
+                    <?php } ?>
                 </div>
                 <div class="contact__section1-email">
                     <img src="public/images/tt-icon-1.png" alt="chat box" class="contact__section1-email-icon contact__activate">
@@ -40,6 +40,7 @@ $Questions = $data['Questions'];
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var items = document.querySelectorAll(".contact__section1-item");
+        console.log(items);
 
         function getIcons() {
             return window.innerWidth > 768 ? {
