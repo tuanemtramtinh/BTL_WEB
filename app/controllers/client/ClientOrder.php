@@ -8,12 +8,6 @@ class ClientOrder extends Controller
   {
     $this->checkAuthClient();
 
-    // if ($cartId === '') {
-    //   $_SESSION['error_message'] = 'Invalid Cart';
-    //   header("Location: cart/index");
-    //   exit;
-    // }
-
     $User = $this->model("UserModel");
     $existUser = $User->findUserOrderInfoById($_SESSION['userId']);
 
@@ -23,9 +17,17 @@ class ClientOrder extends Controller
     $cart = $Cart->findCartByUserId($_SESSION['userId']);
     $items = $CartItem->getCartListByCartId($_SESSION['user_cart']);
 
+    if (empty($items)) {
+      $_SESSION['error_message'] = 'Empty Cart!';
+      header("Location: ../cart/index");
+      $CartItem->closeConnection();
+      $Cart->closeConnection();
+      exit;
+    }
+    
     $CartItem->closeConnection();
     $Cart->closeConnection();
-
+    
     $message = $this->getSessionMessage();
     $this->view("layout", [
       "title" => "Giỏ Hàng",
@@ -123,8 +125,13 @@ class ClientOrder extends Controller
     if (!isset($order)) {
       $_SESSION['error_message'] = 'Invalid Order';
       header('Location: ../../cart/index');
+      $OrderItem->closeConnection();
+      $Order->closeConnection();
       exit;
     }
+
+    $OrderItem->closeConnection();
+    $Order->closeConnection();
 
     $message = $this->getSessionMessage();
     $this->view("layout", [
@@ -157,12 +164,15 @@ class ClientOrder extends Controller
     if (!isset($order)) {
       $_SESSION['error_message'] = 'Invalid Order';
       header('Location: ../../user');
+      $OrderItem->closeConnection();
+      $Order->closeConnection();
       exit;
     }
 
     $items = $OrderItem->getOrderListByOrderId($orderId);
 
-    // print_r($order);
+    $OrderItem->closeConnection();
+    $Order->closeConnection();
 
     $message = $this->getSessionMessage();
     $this->view("layout", [
