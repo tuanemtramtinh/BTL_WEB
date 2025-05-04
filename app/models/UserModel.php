@@ -33,7 +33,7 @@ class UserModel extends DB
     }
     return null;
   }
-  
+
   public function findUserById($id)
   {
     $queries = "SELECT * FROM Customer WHERE ID = ?";
@@ -47,7 +47,7 @@ class UserModel extends DB
     }
     return null;
   }
-  
+
   public function editUserInfo($id, $firstName, $lastName, $email, $phone, $address)
   {
     $queries = "UPDATE Customer SET FirstName = ?, LastName = ?, Email = ?, Phone = ? ,`Address` = ? WHERE ID = ?";
@@ -56,7 +56,7 @@ class UserModel extends DB
     $stmt->execute();
     return $stmt->affected_rows > 0;
   }
-  
+
   public function uploadAvatar($id, $avatarImgJson)
   {
     $queries = "UPDATE Customer SET Avatar = ? WHERE ID = ?";
@@ -66,7 +66,7 @@ class UserModel extends DB
     $stmt->close();
     return $result;
   }
-  
+
   public function changePassword($id, $newPassword)
   {
     $queries = "UPDATE Customer SET Password = ? WHERE ID = ?";
@@ -76,7 +76,7 @@ class UserModel extends DB
     $stmt->close();
     return $result;
   }
-  
+
   public function getOldPassword($id)
   {
     $queries = "SELECT `Password` FROM Customer WHERE ID = ?";
@@ -87,7 +87,7 @@ class UserModel extends DB
     $stmt->close();
     return $result->fetch_assoc();
   }
-  
+
   public function getAllUser()
   {
     $queries = "SELECT * FROM Customer";
@@ -109,4 +109,14 @@ class UserModel extends DB
     }
     return null;
   }
+
+  // public function countUser()
+  // {
+  //   $query = "SELECT COUNT(*) as count FROM Customer";
+  //   $stmt = $this->conn->prepare($query);
+  //   $stmt->execute();
+  //   $result = $stmt->get_result();
+  //   $stmt->close();
+  //   return $result->fetch_assoc()['count'];
+  // }
 }
