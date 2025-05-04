@@ -94,4 +94,14 @@ class CategoryModel extends DB
     }
     return null;
   }
+
+  public function deleteCategoryById($categoryId)
+  {
+    $query = "DELETE FROM ProductCategory WHERE ID = ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("s", $categoryId);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+  }
 }
