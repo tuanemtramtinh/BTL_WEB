@@ -45,7 +45,7 @@
           <input hidden type="checkbox" name="nav" id="header__nav-mobile-input" class="header__nav-input">
           <div class="header__logo">
             <a href="home">
-              <img src="public/images/logo.svg" alt="">
+              <img src="<?= isset($GLOBALS['general']['Logo']) ? $GLOBALS['general']['Logo'] : 'public/images/logo.svg' ?>" alt="">
             </a>
           </div>
           <ul class="header__nav">
@@ -226,7 +226,7 @@
             <div class="footer__contact">
               <div class="footer__logo">
                 <a href="home">
-                  <img src="./public/images/logo.svg" alt="">
+                  <img src="<?= isset($GLOBALS['general']['Logo']) ? $GLOBALS['general']['Logo'] : 'public/images/logo.svg' ?>" alt="">
                 </a>
               </div>
               <div class="footer__subscribe">
