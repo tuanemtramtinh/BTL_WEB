@@ -10,6 +10,13 @@
   cursor: pointer;
 }
 
+.style1_button:hover{
+  transform: scale(1.05);
+  background-color: #c76a35;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+}
+
 @media (max-width: 575.98px) {
   .style1_button {
     width: 100px;
@@ -19,6 +26,59 @@
     font-weight: 700;
   }
 }
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Animaiton Section-1 */
+
+.homePage__section1__wrapper--left,
+.homePage__section1__wrapper--right {
+  animation: fadeInUp 1s ease-out;
+  animation-fill-mode: both;
+}
+
+.homePage__section1__wrapper--right-img img {
+  transition: transform 0.5s ease;
+}
+
+.homePage__section1__wrapper--right-img img:hover {
+  transform: scale(1.05);
+}
+
+.homePage__section1__wrapper--left-content-title,
+.homePage__section1__wrapper--left-content-subtitle {
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.homePage__section1__wrapper--left-content-title {
+  animation-delay: 0.2s;
+}
+
+.homePage__section1__wrapper--left-content-subtitle {
+  animation-delay: 0.5s;
+}
+
+/* End Animaiton Section-1 */
 
 .homePage__section1 {
   background: radial-gradient(
@@ -156,6 +216,38 @@
   }
 }
 
+/* Animation Section 2 */
+.homePage__section2__content {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease;
+}
+
+.homePage__section2__content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.homePage__section2__content--title,
+.homePage__section2__content--main {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease;
+}
+
+.homePage__section2__content.visible .homePage__section2__content--title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+
+.homePage__section2__content.visible .homePage__section2__content--main {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.6s;
+}
+/* End Animation Section 2 */
+
 .homePage__section2 {
   height: 564px;
   background: url("../../images/homePage-bg-2.png") no-repeat center center /
@@ -220,6 +312,49 @@
   }
 }
 
+/* Animation Section 3 */
+.homePage__section3__content {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease;
+}
+
+.homePage__section3__content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.homePage__section3__content--title,
+.homePage__section3__content--main {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease;
+}
+
+.homePage__section3__content.visible .homePage__section3__content--title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+
+.homePage__section3__content.visible .homePage__section3__content--main {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.6s;
+}
+
+.homePage__section3__image {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: all 1s ease;
+}
+
+.homePage__section3__image.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+/* End Animation Section 3 */
+
 .homePage__section3 {
   height: 575px;
 }
@@ -261,6 +396,7 @@
   font-weight: 500;
   text-align: center;
   padding-bottom: 32px;
+  color: #ab572d;
 }
 
 .homePage__section3__content--main {
@@ -298,6 +434,47 @@
     display: none;
   }
 }
+
+/* Animation Section 4 */
+
+.homePage__section4__title {
+  opacity: 0;
+  transform: scale(0.95) translateY(20px);
+  transition: all 0.6s ease;
+}
+
+/* Khi visible */
+.homePage__section4__title.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  animation: fadeZoomIn 1s ease forwards;
+}
+
+/* Sản phẩm base trạng thái */  
+.homePage__section4__list--element {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.6s ease;
+}
+
+/* Khi visible */
+.homePage__section4__list--element.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.homePage__section4__list--element:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(146, 145, 145, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.homePage__section4__list--element:hover .homePage__section4__list--element-sub-price {
+  color: #ff8b55;
+  transition: color 0.3s ease;
+}
+
+/* End Animation Section 4 */
 
 .homePage__section4 {
   margin-top: 100px;
@@ -338,20 +515,6 @@
   position: relative;
 }
 
-/* .homePage__section4__list {
-  overflow-x: auto;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  gap: 20px;
-  padding-bottom: 10px;
-  scroll-snap-type: x mandatory;
-}
-
-.homePage__section4__list--element {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-} */
-
 .homePage__section4__list--element-img img {
   width: 250px;
   height: 360px;
@@ -376,6 +539,7 @@
   color: #ab572d;
   font-size: 16px;
   font-weight: 700;
+  margin-bottom: 20px;
 }
 
 .homePage__section4__list--element-sub-volume {
@@ -459,6 +623,55 @@
   }
 }
 
+/* Animation section 5 */
+
+/* Mặc định phần tử không hiển thị */
+.homePage__section5,
+.homePage__section6 {
+  opacity: 0;
+  transform: translateY(50px); /* Dịch chuyển nhẹ phần tử */
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Khi phần tử vào viewport (class 'visible' được thêm vào) */
+.homePage__section5.visible,
+.homePage__section6.visible {
+  opacity: 1;
+  transform: translateY(0); /* Quay lại vị trí ban đầu */
+}
+
+/* Cập nhật hiệu ứng cho button trong section5 */
+.homePage__section5__main--button.visible {
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+
+.homePage__section5__title {
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.homePage__section5__main--content {
+  opacity: 0;
+  animation: fadeInUp 1.2s ease forwards;
+  animation-delay: 0.6s;
+}
+
+.homePage__section5__main--subcontent {
+  opacity: 0;
+  animation: fadeInUp 1.4s ease forwards;
+  animation-delay: 0.9s;
+}
+
+.homePage__section5__main--button {
+  opacity: 0;
+  animation: fadeInUp 1.6s ease forwards;
+  animation-delay: 1.2s;
+}
+/* End Animation section 5 */
+
 .homePage__section5 {
   height: 698px;
   margin-bottom: 70px;
@@ -506,6 +719,80 @@
     display: none;
   }
 }
+
+/* Animation section6 */
+.homePage__section6__title {
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.homePage__section6__element {
+  opacity: 0;
+  animation: fadeInUp 1.2s ease forwards;
+  animation-delay: 0.6s;
+  position: relative;
+  z-index: 1;
+}
+
+.homePage__section6__element-button {
+  opacity: 0;
+  animation: fadeInUp 1.4s ease forwards;
+  animation-delay: 0.9s;
+}
+
+.homePage__section6__element-button:hover {
+  cursor: pointer;
+  background-color: #fff;
+  color: #ab572d;
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.593);
+  transform: scale(1.05);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover effect cho elements */
+.homePage__section6__element:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10;
+}
+
+.homePage__section6__element-content {
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.homePage__section6__element:hover .homePage__section6__element-content {
+  color: #ab572d;
+}
+
+/* Hover effect cho hình ảnh */
+.homePage__section6__element-img img {
+  transition: transform 0.3s ease;
+}
+
+.homePage__section6__element:hover .homePage__section6__element-img img {
+  transform: scale(1.1);
+  z-index: 20;
+}
+
+.homePage__section6__element-subcontent {
+  color: #888;
+  transition: color 0.3s ease;
+}
+
+.homePage__section6__element:hover .homePage__section6__element-subcontent {
+  color: #fff; /* Màu trắng */
+}
+
+/* Animation cho scroll-wrapper */
+.homePage__section6__scroll-wrapper {
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 1.2s;
+}
+/* End Animation section6 */
 
 .homePage__section6 {
   width: 100%;
@@ -943,6 +1230,51 @@
     top: -520px;
   }
 }
+
+/* Animation Contact Page */
+.contactPage__wrapper {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInUpContact 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.contactPage__left,
+.contactPage__right {
+  opacity: 0;
+  transform: translateY(60px);
+  animation: fadeInUpContact 1s ease forwards;
+}
+
+.contactPage__left {
+  animation-delay: 0.3s;
+}
+
+.contactPage__right {
+  animation-delay: 0.6s;
+}
+
+.contactPage__right--maps {
+  opacity: 0;
+  transform: scale(0.95);
+  animation: zoomInMap 0.8s ease forwards;
+  animation-delay: 0.8s;
+}
+
+@keyframes fadeInUpContact {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomInMap {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* End Animation Contact Page */
 
 .homePage__section4__scroll-wrapper::-webkit-scrollbar,
 .homePage__section6__scroll-wrapper::-webkit-scrollbar {
