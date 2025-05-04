@@ -159,7 +159,7 @@ class ClientAuth extends Controller
         exit;
       }
 
-      $userId = $User->createUser($firstName, $lastName, $email, $password);
+      $userId = $User->createUser($firstName, $lastName, $email, $phone, $address, $password);
       $Cart->createCart($userId);
 
       $User->closeConnection();
