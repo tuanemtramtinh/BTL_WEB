@@ -1018,6 +1018,8 @@ input[type="password"] {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    max-height: 500px;
+    overflow-y: scroll;
   }
   .order-section__item {
     background-color: rgba(255, 255, 255, 0.05);

@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="cart__submit">
-          <a href="order/<?= $data['cart']['ID'] ?>">
+          <a href="order/index">
             Proceed to Checkout
           </a>
         </div>
