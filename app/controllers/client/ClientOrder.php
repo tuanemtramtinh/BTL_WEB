@@ -4,14 +4,15 @@
 
 class ClientOrder extends Controller
 {
-  public function index($cartId = '')
+  public function index()
   {
+    $this->checkAuthClient();
 
-    if ($cartId === '') {
-      $_SESSION['error_message'] = 'Invalid Cart';
-      header("Location: ../../cart/index");
-      exit;
-    }
+    // if ($cartId === '') {
+    //   $_SESSION['error_message'] = 'Invalid Cart';
+    //   header("Location: cart/index");
+    //   exit;
+    // }
 
     $User = $this->model("UserModel");
     $existUser = $User->findUserOrderInfoById($_SESSION['userId']);
@@ -38,13 +39,13 @@ class ClientOrder extends Controller
     ]);
   }
 
-  public function orderPost($cartId = '')
+  public function orderPost()
   {
-    if ($cartId === '') {
-      $_SESSION['error_message'] = 'Invalid Cart';
-      header("Location: ../../cart/index");
-      exit;
-    }
+    // if ($cartId === '') {
+    //   $_SESSION['error_message'] = 'Invalid Cart';
+    //   header("Location: ../../cart/index");
+    //   exit;
+    // }
 
     $fullname = $_POST['fullname'];
     $fullname = trim($fullname);
@@ -56,19 +57,19 @@ class ClientOrder extends Controller
 
     if (empty($fullname) || empty($phone) || empty($address) || empty($email)) {
       $_SESSION['error_message'] = 'Please fill in all fields!';
-      header("Location: ../order/index/" . $cartId);
+      header("Location: ../order/index");
       exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $_SESSION['error_message'] = 'Email is invalid!';
-      header("Location: ../order/index/" . $cartId);
+      header("Location: ../order/index");
       exit;
     }
 
     if (!preg_match('/^[0-9]{10,11}$/', $phone)) {
       $_SESSION['error_message'] = 'Phone Number is Invalid!';
-      header("Location: ../order/index/" . $cartId);
+      header("Location: ../order/index");
       exit;
     }
 
@@ -105,9 +106,11 @@ class ClientOrder extends Controller
 
   public function success($orderId = '')
   {
+    $this->checkAuthClient();
+
     if ($orderId === '') {
       $_SESSION['error_message'] = 'Invalid Order';
-      header('Location: ../../cart/index');
+      header('Location: cart/index');
       exit;
     }
 
@@ -116,6 +119,12 @@ class ClientOrder extends Controller
 
     $items = $OrderItem->getOrderListByOrderId($orderId);
     $order = $Order->findOrderById($orderId);
+
+    if (!isset($order)) {
+      $_SESSION['error_message'] = 'Invalid Order';
+      header('Location: ../../cart/index');
+      exit;
+    }
 
     $message = $this->getSessionMessage();
     $this->view("layout", [
@@ -136,7 +145,7 @@ class ClientOrder extends Controller
     if ($orderId === '') {
       // echo "hello";
       $_SESSION['error_message'] = 'Invalid Order';
-      header('Location: ../../user/index');
+      header('Location: user/index');
       exit;
     }
 
@@ -144,6 +153,13 @@ class ClientOrder extends Controller
     $OrderItem = $this->model("OrderItemModel");
 
     $order = $Order->findOrderById($orderId);
+
+    if (!isset($order)) {
+      $_SESSION['error_message'] = 'Invalid Order';
+      header('Location: ../../user');
+      exit;
+    }
+
     $items = $OrderItem->getOrderListByOrderId($orderId);
 
     // print_r($order);
