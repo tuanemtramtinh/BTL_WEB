@@ -381,6 +381,25 @@ class AdminProduct extends Controller
     ]);
   }
 
+  public function category_delete($categoryId = '')
+  {
+    //Check if the employee is logged in
+    $this->checkAuthAdmin();
+
+    if ($categoryId === '') {
+      $_SESSION['error_message'] = 'Invalid category Id';
+      header('Location: ../category');
+      exit;
+    }
+
+    $Category = $this->model("CategoryModel");
+    $Category->deleteCategoryById($categoryId);
+    $Category->closeConnection();
+    $_SESSION['success_message'] = 'Delete Category Successfully';
+    header('Location: ../category');
+    exit;
+  }
+
   public function category_addPost()
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
