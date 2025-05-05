@@ -10,7 +10,7 @@
             Shop now and embrace the sweet smell of victory with Local Face.
           </div>
         </div>
-        <a href="/BTL_WEB/product" class="homePage__section1__wrapper--left-button style1_button">
+        <a href="product" class="homePage__section1__wrapper--left-button style1_button">
           Shop Now
         </a>
       </div>
@@ -162,7 +162,7 @@
         <div class="homePage__section5__main--subcontent">
           <?= $data['data']['sale_content']?>
         </div>
-        <a href="/BTL_WEB/blog" class="homePage__section5__main--button style1_button">
+        <a href="blog" class="homePage__section5__main--button style1_button">
           Know More
         </a>
       </div>
@@ -192,7 +192,7 @@
             <div class="homePage__section6__element-subcontent">
               Lavender, with its enchanting aroma and rich history, has been cherished for centuries as a symbol of relaxation, healing, and timeless beauty. In the world of perfumery, lavender plays a key role in creating captivating fragrances loved by many.
             </div>
-            <a href="/BTL_WEB/blog" class="homePage__section6__element-button">
+            <a href="blog" class="homePage__section6__element-button">
               Read More
             </a>
           </div>
@@ -206,7 +206,7 @@
             <div class="homePage__section6__element-subcontent">
               A luxury perfume collection is not just an assortment of fragrances; it is a reflection of one's taste, personality, and experiences. Each bottle holds a unique olfactory journey, crafted with the finest ingredients and artistic mastery.
             </div>
-            <a href="/BTL_WEB/blog" class="homePage__section6__element-button">
+            <a href="blog" class="homePage__section6__element-button">
               Read More
             </a>
           </div>
@@ -220,7 +220,7 @@
             <div class="homePage__section6__element-subcontent">
               Rose, often referred to as the "Queen of Flowers," has held a special place in human culture and history for centuries. Beyond its captivating beauty, this iconic bloom has also inspired perfumers to create some of the most timeless and exquisite fragrances in the world.
             </div>
-            <a href="/BTL_WEB/blog" class="homePage__section6__element-button">
+            <a href="blog" class="homePage__section6__element-button">
               Read More
             </a>
           </div>
