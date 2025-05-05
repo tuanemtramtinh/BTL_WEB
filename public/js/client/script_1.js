@@ -58,13 +58,13 @@ if (contactPageForm) {
             .then(res => res.json())
             .then(data => {
                 if (data.code === "error") {
-                    alert(data.message);
+                    // alert(data.message);
                     // reload lại trang để lấy $message từ session
                     window.location.reload(); 
                 }
             
                 if (data.code === "success") {
-                    alert(data.message);
+                    // alert(data.message);
                     // cũng reload hoặc redirect nếu muốn
                     window.location.reload();
                 }
