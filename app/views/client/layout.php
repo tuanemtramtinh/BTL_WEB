@@ -11,6 +11,7 @@
     href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="public/images/logo.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="public/css/client/style.css">
   <?php if (isset($data['task'])) echo '<link rel="stylesheet" href="public/css/client/style_' . $data['task'] . '.css">'; ?>
