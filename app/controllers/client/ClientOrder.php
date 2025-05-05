@@ -24,10 +24,16 @@ class ClientOrder extends Controller
       $Cart->closeConnection();
       exit;
     }
-    
+
+    $total = 0;
+
+    foreach ($items as $item) {
+      $total += $item['ProductPrice'] * $item['ProductQuantity'];
+    }
+
     $CartItem->closeConnection();
     $Cart->closeConnection();
-    
+
     $message = $this->getSessionMessage();
     $this->view("layout", [
       "title" => "Giỏ Hàng",
@@ -37,7 +43,8 @@ class ClientOrder extends Controller
       "success" => $message['success'],
       "error" => $message['error'],
       "cart" => $cart,
-      "items" => $items
+      "items" => $items,
+      "total" => $total
     ]);
   }
 
@@ -56,6 +63,7 @@ class ClientOrder extends Controller
     $address = trim($address);
     $email = $_POST['email'];
     $email = trim($email);
+    $total = $_POST['total'];
 
     if (empty($fullname) || empty($phone) || empty($address) || empty($email)) {
       $_SESSION['error_message'] = 'Please fill in all fields!';
@@ -85,7 +93,7 @@ class ClientOrder extends Controller
 
     $cart = $Cart->findCartByUserId($_SESSION['userId']);
     $items = $CartItem->getCartListByCartId($_SESSION['user_cart']);
-    $order = $Order->createOrder($_SESSION['userId'], $cart['Total'], $fullname, $phone, $address, $email);
+    $order = $Order->createOrder($_SESSION['userId'], $total, $fullname, $phone, $address, $email);
 
     foreach ($items as $item) {
       $OrderItem->addItemToOrder($order, $item['ProductID'], $item['ProductQuantity'], $item['ProductName'], $item['ProductPrice'], $item['ProductImage']);

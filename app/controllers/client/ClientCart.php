@@ -12,7 +12,14 @@ class ClientCart extends Controller
 
     $cart = $Cart->findCartByUserId($_SESSION['userId']);
     $items = $CartItem->getCartListByCartId($_SESSION['user_cart']);
+    $total = 0;
 
+    if (!empty($items)) {
+      foreach ($items as $item) {
+        $total += $item['ProductPrice'] * $item['ProductQuantity'];
+      }
+    }
+    
     $message = $this->getSessionMessage();
     $this->view("layout", [
       "title" => "Giỏ Hàng",
@@ -21,7 +28,8 @@ class ClientCart extends Controller
       "success" => $message['success'],
       "error" => $message['error'],
       "cart" => $cart,
-      "items" => $items
+      "items" => $items,
+      "total" => $total
     ]);
   }
 
