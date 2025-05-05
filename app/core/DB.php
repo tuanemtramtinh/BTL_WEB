@@ -8,6 +8,13 @@ class DB{
   protected $username = 'tuanemtramtinh';
   protected $password = 'Anh2004@nh';
 
+
+  // Uncomment the following lines to use local database connection
+  // protected $host = 'localhost';
+  // protected $dbname = 'PERFUME';
+  // protected $username = 'root';
+  // protected $password = '';
+
   public function __construct(){
     $this->conn = new mysqli($this->host, $this->username, $this->password, $this->dbname);
 
